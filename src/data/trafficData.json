@@ -1,0 +1,1442 @@
+{
+  "fetchedAt": "2026-01-03T21:44:54.945Z",
+  "companies": {
+    "Nuance DAX": {
+      "domain": "nuance.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 643685,
+      "globalRank": 87524,
+      "usRank": 77641,
+      "categoryRank": "211",
+      "categoryName": "computers_electronics_and_technology/computer_security",
+      "bounceRate": 0.5114031533794132,
+      "pagesPerVisit": 1.913901898010496,
+      "avgVisitDuration": 41.90008682693901,
+      "trafficSources": {
+        "Social": 0.021564370743291757,
+        "Paid Referrals": 0.008346774781949055,
+        "Mail": 0.0014703697715431536,
+        "Referrals": 0.07291852450897547,
+        "Search": 0.42600439153542724,
+        "Direct": 0.46866468845694964
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.3074804609848226
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.07638647220202652
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.0636396675919965
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.02719048316214191
+        },
+        {
+          "Country": 380,
+          "CountryCode": "IT",
+          "Value": 0.02330796426189004
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 397118,
+        "2025-10-01": 603068,
+        "2025-11-01": 643685
+      },
+      "description": "Transform workflows, boost productivity, and drive results more effectively than ever, thanks to industry-leading AI, security, and infrastructure. Learn more.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Abridge": {
+      "domain": "abridge.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 150424,
+      "globalRank": 248591,
+      "usRank": 65113,
+      "categoryRank": "149",
+      "categoryName": "health/health_conditions_and_concerns",
+      "bounceRate": 0.42148653264204433,
+      "pagesPerVisit": 2.756411969175092,
+      "avgVisitDuration": 158.58562104077308,
+      "trafficSources": {
+        "Social": 0.011349531594040603,
+        "Paid Referrals": 0.006518356237878675,
+        "Mail": 0.0009481244086770242,
+        "Referrals": 0.04999193061687521,
+        "Search": 0.37298778137144945,
+        "Direct": 0.5582042757694968
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.799016303999575
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.038397956425563866
+        },
+        {
+          "Country": 566,
+          "CountryCode": "NG",
+          "Value": 0.03481670739363191
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.009720969113640962
+        },
+        {
+          "Country": 704,
+          "CountryCode": "VN",
+          "Value": 0.009449636644348693
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 201362,
+        "2025-10-01": 198761,
+        "2025-11-01": 150424
+      },
+      "description": "Discover how Abridge transforms documentation for clinical conversations powered by generative AI, enhancing healthcare understanding and improving patient care.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Ambience Healthcare": {
+      "domain": "ambiencehealthcare.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 51321,
+      "globalRank": 678073,
+      "usRank": 181072,
+      "categoryRank": "3407",
+      "categoryName": "health/health",
+      "bounceRate": 0.5658464512394326,
+      "pagesPerVisit": 1.8626535059263194,
+      "avgVisitDuration": 92.09875987752314,
+      "trafficSources": {
+        "Social": 0.02250843810013369,
+        "Paid Referrals": 0.004453245771243192,
+        "Mail": 0.0007666312808269932,
+        "Referrals": 0.047193504881029046,
+        "Search": 0.40604106695155456,
+        "Direct": 0.5188861805467165
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.8770381998103605
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.03758281473299974
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.017574558780975007
+        },
+        {
+          "Country": 528,
+          "CountryCode": "NL",
+          "Value": 0.012218164693083964
+        },
+        {
+          "Country": 380,
+          "CountryCode": "IT",
+          "Value": 0.009936083295034483
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 54310,
+        "2025-10-01": 46547,
+        "2025-11-01": 51321
+      },
+      "description": "The AI Platform Clinicians Choose for Documentation and Coding",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "SmarterDx": {
+      "domain": "smarterdx.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 9312,
+      "globalRank": 2517226,
+      "usRank": 632017,
+      "categoryRank": "4002",
+      "categoryName": "health/medicine",
+      "bounceRate": 0.706468632621139,
+      "pagesPerVisit": 1.2988065922567207,
+      "avgVisitDuration": 23.810002103894558,
+      "trafficSources": {
+        "Social": 0.05784238551800878,
+        "Paid Referrals": 0.013906218060485358,
+        "Mail": 0.0009173075057378756,
+        "Referrals": 0.04864489208081808,
+        "Search": 0.373687807478543,
+        "Direct": 0.5050013893564069
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 1
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 10277,
+        "2025-10-01": 17554,
+        "2025-11-01": 9312
+      },
+      "description": "We’re a rapidly growing health tech company, backed by some of the nation's top investors. Check out our open positions and join us!",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "OpenEvidence": {
+      "domain": "openevidence.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 7228848,
+      "globalRank": 8404,
+      "usRank": 2610,
+      "categoryRank": "141",
+      "categoryName": "news_and_media",
+      "bounceRate": 0.28031867447960496,
+      "pagesPerVisit": 3.9282614924172874,
+      "avgVisitDuration": 430.5701601767493,
+      "trafficSources": {
+        "Social": 0.004393363394618537,
+        "Paid Referrals": 0.0018583328756650338,
+        "Mail": 0.00040031134889477774,
+        "Referrals": 0.023793920841702083,
+        "Search": 0.28868312460644113,
+        "Direct": 0.6808709469326784
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.6869227434593659
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.060079313704997965
+        },
+        {
+          "Country": 724,
+          "CountryCode": "ES",
+          "Value": 0.028604847916757808
+        },
+        {
+          "Country": 76,
+          "CountryCode": "BR",
+          "Value": 0.021108078066794857
+        },
+        {
+          "Country": 702,
+          "CountryCode": "SG",
+          "Value": 0.01785584582381643
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 6683375,
+        "2025-10-01": 7292583,
+        "2025-11-01": 7228848
+      },
+      "description": "The leading medical information platform.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Silna Health": {
+      "domain": "silnahealth.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 13016,
+      "globalRank": 1309721,
+      "usRank": 302366,
+      "categoryRank": "3308",
+      "categoryName": "finance/finance",
+      "bounceRate": 0.3827724297269502,
+      "pagesPerVisit": 4.1892745030047704,
+      "avgVisitDuration": 233.61135329196634,
+      "trafficSources": {
+        "Social": 0.06861688621363682,
+        "Paid Referrals": 0.011135371332881758,
+        "Mail": 0.0007820850424744723,
+        "Referrals": 0.06784982951720943,
+        "Search": 0.3148075927237507,
+        "Direct": 0.5368082351700469
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 1
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 13259,
+        "2025-10-01": 28821,
+        "2025-11-01": 13016
+      },
+      "description": "Discover how CMS rules, the CMS WISeR Model & AI Prior Authorization automation will streamline prior authorization in 2025, leading to faster approvals, fewer denials, and healthier revenue.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Regard": {
+      "domain": "withregard.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 406,
+      "globalRank": 9186473,
+      "usRank": null,
+      "categoryRank": null,
+      "categoryName": "jobs_and_career/human_resources",
+      "bounceRate": 0.45021046344109894,
+      "pagesPerVisit": 2.2169938074113813,
+      "avgVisitDuration": 53.05189353302054,
+      "trafficSources": {
+        "Social": 0.07396578777347033,
+        "Paid Referrals": 0.01420137912441711,
+        "Mail": 0.0014117711602144995,
+        "Referrals": 0.2028912553603809,
+        "Search": 0.2770629241449153,
+        "Direct": 0.42504796037509934
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.6097921805015448
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.3902078194984554
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 1177,
+        "2025-10-01": 1413,
+        "2025-11-01": 406
+      },
+      "description": "Download the case study to discover how Penn Highlands Healthcare boosted revenue by $3 million, enhanced patient care, and empowered physicians with Regard. Key Results include: “Doctors usually needed to look through all parts of the record to make a diagnosis. Just toggling between the screens took time. With Regard, all of that information is curated into a single view…",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Heidi Health": {
+      "domain": "heidihealth.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 1478574,
+      "globalRank": 27529,
+      "usRank": 1209,
+      "categoryRank": "18",
+      "categoryName": "health/health",
+      "bounceRate": 0.14949905198519378,
+      "pagesPerVisit": 9.872319587044288,
+      "avgVisitDuration": 980.7820745116343,
+      "trafficSources": {
+        "Social": 0.00515775966816839,
+        "Paid Referrals": 0.00520024861028197,
+        "Mail": 0.0006657021939503421,
+        "Referrals": 0.03376229344664571,
+        "Search": 0.28988988757273504,
+        "Direct": 0.665324108507886
+      },
+      "topCountries": [
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.3750631056227346
+        },
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.21095362105766688
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.19581158684988773
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.09025202328815274
+        },
+        {
+          "Country": 710,
+          "CountryCode": "ZA",
+          "Value": 0.055145120200971794
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 1316562,
+        "2025-10-01": 1680425,
+        "2025-11-01": 1478574
+      },
+      "description": "Heidi Health AU, fill documents and dictate letters with a safe, ISO-compliant medical AI scribe. Never write clinical notes again. It's free forever.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Qualio": {
+      "domain": "qualio.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 161104,
+      "globalRank": 148483,
+      "usRank": 44235,
+      "categoryRank": "911",
+      "categoryName": "computers_electronics_and_technology/programming_and_developer_software",
+      "bounceRate": 0.3380455022367166,
+      "pagesPerVisit": 11.717443471011268,
+      "avgVisitDuration": 435.20289464578434,
+      "trafficSources": {
+        "Social": 0.006800374650532169,
+        "Paid Referrals": 0.006306773011916454,
+        "Mail": 0.0004942362282210559,
+        "Referrals": 0.041241219306673405,
+        "Search": 0.34120539674060874,
+        "Direct": 0.6039520000076392
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.7170826792897135
+        },
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.06460325377118058
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.03579670873687335
+        },
+        {
+          "Country": 372,
+          "CountryCode": "IE",
+          "Value": 0.033194969856641394
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.014801728369481777
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 256940,
+        "2025-10-01": 224327,
+        "2025-11-01": 161104
+      },
+      "description": "Discover inspiring stories from those on the front lines of life sciences. Episodes published weekly on all major podcast players.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Chai Discovery": {
+      "domain": "chaidiscovery.com",
+      "category": "healthcare",
+      "color": "#10b981",
+      "monthlyVisits": 14073,
+      "globalRank": 1584589,
+      "usRank": 592241,
+      "categoryRank": "1273",
+      "categoryName": "science_and_education/biology",
+      "bounceRate": 0.45060987278409653,
+      "pagesPerVisit": 2.149295944310219,
+      "avgVisitDuration": 63.97062901072577,
+      "trafficSources": {
+        "Social": 0.05005863201310987,
+        "Paid Referrals": 0.010603124154508878,
+        "Mail": 0.000997620328645274,
+        "Referrals": 0.0657371367785078,
+        "Search": 0.36336353793282516,
+        "Direct": 0.5070930108588411
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.6706849122429217
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.0953009465688974
+        },
+        {
+          "Country": 76,
+          "CountryCode": "BR",
+          "Value": 0.0793321442020388
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.04539320127849924
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.04195406918814368
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 28652,
+        "2025-10-01": 15981,
+        "2025-11-01": 14073
+      },
+      "description": "Building frontier artificial intelligence to predict and reprogram the interactions between biochemical molecules.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Harvey": {
+      "domain": "harvey.ai",
+      "category": "legal",
+      "color": "#6366f1",
+      "monthlyVisits": 393703,
+      "globalRank": 117920,
+      "usRank": 53090,
+      "categoryRank": "35",
+      "categoryName": "ai_chatbots_and_tools",
+      "bounceRate": 0.4792474426248496,
+      "pagesPerVisit": 2.782276179454719,
+      "avgVisitDuration": 160.73738885771394,
+      "trafficSources": {
+        "Social": 0.022427794293106065,
+        "Paid Referrals": 0.007548512242331532,
+        "Mail": 0.004710866294275292,
+        "Referrals": 0.057907191873050906,
+        "Search": 0.39022851503355843,
+        "Direct": 0.5171771202631511
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.49268242861244466
+        },
+        {
+          "Country": 76,
+          "CountryCode": "BR",
+          "Value": 0.08058107104645991
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.06451661032680747
+        },
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.05012599871236948
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.03130735488877383
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 387971,
+        "2025-10-01": 434604,
+        "2025-11-01": 393703
+      },
+      "description": "Discover how leading organizations work with Harvey to innovate and drive success.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "EvenUp": {
+      "domain": "evenuplaw.com",
+      "category": "legal",
+      "color": "#6366f1",
+      "monthlyVisits": 58528,
+      "globalRank": 609735,
+      "usRank": 160022,
+      "categoryRank": "1932",
+      "categoryName": "finance/finance",
+      "bounceRate": 0.6422019891172724,
+      "pagesPerVisit": 1.5644689889788044,
+      "avgVisitDuration": 76.43550569805596,
+      "trafficSources": {
+        "Social": 0.012348009793873202,
+        "Paid Referrals": 0.008678233540923863,
+        "Mail": 0.001005007577019758,
+        "Referrals": 0.05823937375952665,
+        "Search": 0.41205261530619985,
+        "Direct": 0.5076564427897656
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.8032170114991225
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.08287884455272637
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.062182414099585574
+        },
+        {
+          "Country": 724,
+          "CountryCode": "ES",
+          "Value": 0.020560354812074813
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.016930739952226
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 67331,
+        "2025-10-01": 82349,
+        "2025-11-01": 58528
+      },
+      "description": "Powered by millions of records, EvenUp’s Claims Intelligence Platform™ unlocks insights for peak performance across every stage of the case lifecycle.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Spellbook": {
+      "domain": "spellbook.legal",
+      "category": "legal",
+      "color": "#6366f1",
+      "monthlyVisits": 281003,
+      "globalRank": 175447,
+      "usRank": 61375,
+      "categoryRank": "438",
+      "categoryName": "computers_electronics_and_technology/graphics_multimedia_and_web_design",
+      "bounceRate": 0.5786562961519961,
+      "pagesPerVisit": 1.7300256110738128,
+      "avgVisitDuration": 67.3408154888739,
+      "trafficSources": {
+        "Social": 0.049335521737194694,
+        "Paid Referrals": 0.016189528479389537,
+        "Mail": 0.001018554457196247,
+        "Referrals": 0.06979026298023708,
+        "Search": 0.4859200011652769,
+        "Direct": 0.37774613118029643
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.4397887991878627
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.16251593107982287
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.08806953528743898
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.031516833313913056
+        },
+        {
+          "Country": 792,
+          "CountryCode": "TR",
+          "Value": 0.021244760426753828
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 282039,
+        "2025-10-01": 257523,
+        "2025-11-01": 281003
+      },
+      "description": "Spellbook is the #1 Legal AI for for transactional lawyers. Using GPT-4o and other large language models to review and suggest language for your contracts, right in Microsoft Word.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Legora": {
+      "domain": "legora.ai",
+      "category": "legal",
+      "color": "#6366f1",
+      "monthlyVisits": 0,
+      "globalRank": null,
+      "usRank": null,
+      "categoryRank": null,
+      "categoryName": null,
+      "bounceRate": null,
+      "pagesPerVisit": null,
+      "avgVisitDuration": null,
+      "trafficSources": {
+        "Social": 0,
+        "Paid Referrals": 0,
+        "Mail": 0,
+        "Referrals": 0,
+        "Search": 0,
+        "Direct": 0
+      },
+      "topCountries": [],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 323,
+        "2025-10-01": 85,
+        "2025-11-01": 0
+      },
+      "description": "",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Crosby": {
+      "domain": "crosbyai.com",
+      "category": "legal",
+      "color": "#6366f1",
+      "monthlyVisits": 0,
+      "globalRank": null,
+      "usRank": null,
+      "categoryRank": null,
+      "categoryName": null,
+      "bounceRate": null,
+      "pagesPerVisit": null,
+      "avgVisitDuration": null,
+      "trafficSources": {
+        "Social": 0,
+        "Paid Referrals": 0,
+        "Mail": 0,
+        "Referrals": 0,
+        "Search": 0,
+        "Direct": 0
+      },
+      "topCountries": [],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 0,
+        "2025-10-01": 0,
+        "2025-11-01": 0
+      },
+      "description": "",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Solve Intelligence": {
+      "domain": "solveintelligence.com",
+      "category": "legal",
+      "color": "#6366f1",
+      "monthlyVisits": 15837,
+      "globalRank": 1505040,
+      "usRank": 870567,
+      "categoryRank": "12653",
+      "categoryName": "computers_electronics_and_technology/computers_electronics_and_technology",
+      "bounceRate": 0.4448685932776331,
+      "pagesPerVisit": 1.9713564735211975,
+      "avgVisitDuration": 18.78874420480966,
+      "trafficSources": {
+        "Social": 0.05298818021287256,
+        "Paid Referrals": 0.011710280416803064,
+        "Mail": 0.0008799309820001041,
+        "Referrals": 0.08307108850318232,
+        "Search": 0.38306055392510857,
+        "Direct": 0.4680268613807655
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.3573801710058639
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.2084977047810036
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.17907729081120696
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.11287887937244732
+        },
+        {
+          "Country": 380,
+          "CountryCode": "IT",
+          "Value": 0.05227123203122711
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 18266,
+        "2025-10-01": 21387,
+        "2025-11-01": 15837
+      },
+      "description": "Enhance your patent drafting expertise with our blog. Explore insights on AI-driven patent writing, industry trends, and best practices.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Hebbia": {
+      "domain": "hebbia.ai",
+      "category": "finance",
+      "color": "#f59e0b",
+      "monthlyVisits": 10964,
+      "globalRank": 1658348,
+      "usRank": 414031,
+      "categoryRank": "7134",
+      "categoryName": "computers_electronics_and_technology/programming_and_developer_software",
+      "bounceRate": 0.28184113257897464,
+      "pagesPerVisit": 3.7490949770191437,
+      "avgVisitDuration": 155.89056615457756,
+      "trafficSources": {
+        "Social": 0.02343492612207393,
+        "Paid Referrals": 0.015095717077356565,
+        "Mail": 0.0009949997555329267,
+        "Referrals": 0.04854986389136389,
+        "Search": 0.30305198164092945,
+        "Direct": 0.6087992040150815
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.9886518335646887
+        },
+        {
+          "Country": 392,
+          "CountryCode": "JP",
+          "Value": 0.007162857883586252
+        },
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.004185308551725086
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 18572,
+        "2025-10-01": 20079,
+        "2025-11-01": 10964
+      },
+      "description": "Hebbia Blog",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Rogo": {
+      "domain": "rogodata.com",
+      "category": "finance",
+      "color": "#f59e0b",
+      "monthlyVisits": 0,
+      "globalRank": null,
+      "usRank": null,
+      "categoryRank": null,
+      "categoryName": "finance/investing",
+      "bounceRate": null,
+      "pagesPerVisit": null,
+      "avgVisitDuration": null,
+      "trafficSources": {
+        "Social": 0,
+        "Paid Referrals": 0,
+        "Mail": 0,
+        "Referrals": 0,
+        "Search": 0,
+        "Direct": 0
+      },
+      "topCountries": [],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 0,
+        "2025-10-01": 0,
+        "2025-11-01": 0
+      },
+      "description": "Rogo is the secure generative AI platform built for elite financial institutions. Save time, unlock insights and automate workflows in days.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Trove": {
+      "domain": "trove.ai",
+      "category": "finance",
+      "color": "#f59e0b",
+      "monthlyVisits": 700,
+      "globalRank": null,
+      "usRank": null,
+      "categoryRank": null,
+      "categoryName": null,
+      "bounceRate": 0.6228625858186554,
+      "pagesPerVisit": 1.0606756784937101,
+      "avgVisitDuration": null,
+      "trafficSources": {
+        "Social": null,
+        "Paid Referrals": null,
+        "Mail": null,
+        "Referrals": null,
+        "Search": 0,
+        "Direct": 1
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 1
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 0,
+        "2025-10-01": 116,
+        "2025-11-01": 700
+      },
+      "description": "",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Accordance": {
+      "domain": "accordanceai.com",
+      "category": "finance",
+      "color": "#f59e0b",
+      "monthlyVisits": 403,
+      "globalRank": null,
+      "usRank": null,
+      "categoryRank": null,
+      "categoryName": null,
+      "bounceRate": 0.5391815333669967,
+      "pagesPerVisit": 2.333789006523787,
+      "avgVisitDuration": 79.81789954196647,
+      "trafficSources": {
+        "Social": 0.09896163802394797,
+        "Paid Referrals": 0.016436332804935463,
+        "Mail": 0.0019788494913639725,
+        "Referrals": 0.1278474077108736,
+        "Search": 0.32883097277413326,
+        "Direct": 0.41717913981487553
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 1
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 986,
+        "2025-10-01": 50,
+        "2025-11-01": 403
+      },
+      "description": "",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Avoca": {
+      "domain": "avoca.ai",
+      "category": "home_services",
+      "color": "#ef4444",
+      "monthlyVisits": 36569,
+      "globalRank": 822108,
+      "usRank": 248929,
+      "categoryRank": "4546",
+      "categoryName": "computers_electronics_and_technology/computers_electronics_and_technology",
+      "bounceRate": 0.6419040305204102,
+      "pagesPerVisit": 1.9549285773351923,
+      "avgVisitDuration": 60.645321877394395,
+      "trafficSources": {
+        "Social": 0.03857271412463761,
+        "Paid Referrals": 0.01419058785148923,
+        "Mail": 0.0009326054098692579,
+        "Referrals": 0.09588918719227711,
+        "Search": 0.2880418000802169,
+        "Direct": 0.5623321795648931
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.7282031673608398
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.1874102320523337
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.03920763251777944
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.019304921054158514
+        },
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.014861047052911379
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 21987,
+        "2025-10-01": 36230,
+        "2025-11-01": 36569
+      },
+      "description": "24/7 AI customer reps that answer, support, and convert — so you never miss a lead or opportunity.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Rilla Voice": {
+      "domain": "rillavoice.com",
+      "category": "home_services",
+      "color": "#ef4444",
+      "monthlyVisits": 62163,
+      "globalRank": 266421,
+      "usRank": 54346,
+      "categoryRank": "759",
+      "categoryName": "business_and_consumer_services/business_services",
+      "bounceRate": 0.11598152797542159,
+      "pagesPerVisit": 25.516526588119966,
+      "avgVisitDuration": 609.6275575673271,
+      "trafficSources": {
+        "Social": 0.003406518378422317,
+        "Paid Referrals": 0.0037137078454712825,
+        "Mail": 0.0004187306316113073,
+        "Referrals": 0.0435126787503488,
+        "Search": 0.19914995670063018,
+        "Direct": 0.7497164324592079
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.9944588103912402
+        },
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.0055411896087600235
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 30256,
+        "2025-10-01": 52626,
+        "2025-11-01": 62163
+      },
+      "description": "making offline commerce as searchable and easy to understand as the internet.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Topline Pro": {
+      "domain": "toplinepro.com",
+      "category": "home_services",
+      "color": "#ef4444",
+      "monthlyVisits": 23707,
+      "globalRank": 1200967,
+      "usRank": 405272,
+      "categoryRank": "4516",
+      "categoryName": "business_and_consumer_services/business_services",
+      "bounceRate": 0.48522220670497773,
+      "pagesPerVisit": 1.833660211614836,
+      "avgVisitDuration": 62.09585677162576,
+      "trafficSources": {
+        "Social": 0.013387833753038697,
+        "Paid Referrals": 0.011663415446812441,
+        "Mail": 0.0013751706604290738,
+        "Referrals": 0.05866970121300789,
+        "Search": 0.3760246986803341,
+        "Direct": 0.5383899167146005
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.6394656077214816
+        },
+        {
+          "Country": 512,
+          "CountryCode": "OM",
+          "Value": 0.1630532687703735
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.05452712125257972
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.04954051323095188
+        },
+        {
+          "Country": 250,
+          "CountryCode": "FR",
+          "Value": 0.025471532397178136
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 23836,
+        "2025-10-01": 27036,
+        "2025-11-01": 23707
+      },
+      "description": "Reach more customers with Topline Pro’s digital advertising for home service pros. Run targeted Google and social ads that drive leads, boost bookings, and grow your business.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Siro": {
+      "domain": "siro.ai",
+      "category": "home_services",
+      "color": "#ef4444",
+      "monthlyVisits": 23189,
+      "globalRank": 1149094,
+      "usRank": 278099,
+      "categoryRank": "3403",
+      "categoryName": "business_and_consumer_services/business_services",
+      "bounceRate": 0.6832193378583299,
+      "pagesPerVisit": 2.134879924007904,
+      "avgVisitDuration": 105.85712391779904,
+      "trafficSources": {
+        "Social": 0.048055476606725135,
+        "Paid Referrals": 0.008970419035027995,
+        "Mail": 0.0008336158024443315,
+        "Referrals": 0.04384346989165127,
+        "Search": 0.3278805154061247,
+        "Direct": 0.5703229752629874
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.9776397070532717
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.00767968412234604
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.005473506918444969
+        },
+        {
+          "Country": 250,
+          "CountryCode": "FR",
+          "Value": 0.005258615731518629
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.0030763631151626784
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 28108,
+        "2025-10-01": 29765,
+        "2025-11-01": 23189
+      },
+      "description": "Review Siro’s Terms of Service outlining the rules and conditions for using our platform.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Netic": {
+      "domain": "netic.ai",
+      "category": "home_services",
+      "color": "#ef4444",
+      "monthlyVisits": 21094,
+      "globalRank": 880242,
+      "usRank": 213714,
+      "categoryRank": "2477",
+      "categoryName": "finance/finance",
+      "bounceRate": 0.463806879269038,
+      "pagesPerVisit": 5.648276845772707,
+      "avgVisitDuration": 267.878259707206,
+      "trafficSources": {
+        "Social": 0.03678470337037569,
+        "Paid Referrals": 0.0075925161680827115,
+        "Mail": 0.0005786819139432351,
+        "Referrals": 0.04979898671314055,
+        "Search": 0.2628976243521449,
+        "Direct": 0.6420485112583731
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.9284431774896081
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.019873344596624227
+        },
+        {
+          "Country": 208,
+          "CountryCode": "DK",
+          "Value": 0.01607649648412061
+        },
+        {
+          "Country": 484,
+          "CountryCode": "MX",
+          "Value": 0.011725983008727082
+        },
+        {
+          "Country": 250,
+          "CountryCode": "FR",
+          "Value": 0.009470398859778885
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 26736,
+        "2025-10-01": 16832,
+        "2025-11-01": 21094
+      },
+      "description": "Netic’s AI-driven platform helps service enterprises boost revenue, engage customers, and scale growth with intelligent automation. See how our multi-channel engine empowers your business.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Elise AI": {
+      "domain": "eliseai.com",
+      "category": "other",
+      "color": "#8b5cf6",
+      "monthlyVisits": 386788,
+      "globalRank": 126312,
+      "usRank": 28123,
+      "categoryRank": "283",
+      "categoryName": "business_and_consumer_services/real_estate",
+      "bounceRate": 0.4855935602914421,
+      "pagesPerVisit": 2.182931687401039,
+      "avgVisitDuration": 134.58022821598905,
+      "trafficSources": {
+        "Social": 0.018563007555372487,
+        "Paid Referrals": 0.006595418181511362,
+        "Mail": 0.0013126032588497646,
+        "Referrals": 0.06507294101649384,
+        "Search": 0.3604589483115569,
+        "Direct": 0.5476889520955325
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.7420144897360693
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.028501441933955318
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.0207906347093697
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.020451902024806155
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.014170009828416253
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 413992,
+        "2025-10-01": 491313,
+        "2025-11-01": 386788
+      },
+      "description": "All Leads Answered, More Leases Signed. Elise automatically engages leads 24/7 across all channels, answering questions, matching ideal properties, scheduling tours, screening prospects, and automating follow-ups to maximize conversions.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Sixfold": {
+      "domain": "sixfold.ai",
+      "category": "other",
+      "color": "#8b5cf6",
+      "monthlyVisits": 6830,
+      "globalRank": 2796492,
+      "usRank": 874361,
+      "categoryRank": "6768",
+      "categoryName": "finance/finance",
+      "bounceRate": 0.4521052707820064,
+      "pagesPerVisit": 1.7847905281513772,
+      "avgVisitDuration": 106.54432648221933,
+      "trafficSources": {
+        "Social": 0.06725916636926982,
+        "Paid Referrals": 0.013399331561171221,
+        "Mail": 0.0008024640355978648,
+        "Referrals": 0.09389738857272444,
+        "Search": 0.27032600372863425,
+        "Direct": 0.5536933411731735
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.8886887012486966
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.04883776528683834
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.04089035479578152
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.021583178668683586
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 6954,
+        "2025-10-01": 7457,
+        "2025-11-01": 6830
+      },
+      "description": "Revolutionize insurance underwriting with our purpose-built AI co-pilot. Automate tedious tasks and conquer the toughest challenges effortlessly!",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Comulate": {
+      "domain": "comulate.com",
+      "category": "other",
+      "color": "#8b5cf6",
+      "monthlyVisits": 10050,
+      "globalRank": 2022372,
+      "usRank": 661219,
+      "categoryRank": "5650",
+      "categoryName": "finance/finance",
+      "bounceRate": 0.37815810200457733,
+      "pagesPerVisit": 2.1242163311873576,
+      "avgVisitDuration": 27.953812111422067,
+      "trafficSources": {
+        "Social": 0.05929177948529454,
+        "Paid Referrals": 0.01456365719102092,
+        "Mail": 0.0008200454737208125,
+        "Referrals": 0.06499952404422212,
+        "Search": 0.28024697971226925,
+        "Direct": 0.5800555218715284
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.8762861580251252
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.05114982601942867
+        },
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.03657333124397873
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.02205953615828862
+        },
+        {
+          "Country": 360,
+          "CountryCode": "ID",
+          "Value": 0.013931148553178955
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 21399,
+        "2025-10-01": 14245,
+        "2025-11-01": 10050
+      },
+      "description": "BOND & Workday back Comulate's Series B. Comulate's record growth pace, reaching 8-figures revenues in less than three years since founding, make it among the fastest growing vertical SaaS companies in history.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Strala": {
+      "domain": "strala.ai",
+      "category": "other",
+      "color": "#8b5cf6",
+      "monthlyVisits": 5963,
+      "globalRank": 3015311,
+      "usRank": 1441119,
+      "categoryRank": null,
+      "categoryName": null,
+      "bounceRate": 0.5331566574907312,
+      "pagesPerVisit": 1.985039115703636,
+      "avgVisitDuration": 31.798253035326635,
+      "trafficSources": {
+        "Social": 0.10965800508140205,
+        "Paid Referrals": 0.015034053404355324,
+        "Mail": 0.0010054961332043018,
+        "Referrals": 0.0628931489291266,
+        "Search": 0.43802812139694364,
+        "Direct": 0.373381175054968
+      },
+      "topCountries": [
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.6028539182962742
+        },
+        {
+          "Country": 276,
+          "CountryCode": "DE",
+          "Value": 0.24064293292907585
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.15650314877464971
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 11029,
+        "2025-10-01": 12491,
+        "2025-11-01": 5963
+      },
+      "description": "Through AI-automation, expert claim handlers and statistical optimization, Strala transforms insurance claims processing - cutting operational and indemnity costs while improving customer experience.",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    },
+    "Pace": {
+      "domain": "paceai.co",
+      "category": "other",
+      "color": "#8b5cf6",
+      "monthlyVisits": 6090,
+      "globalRank": 3097708,
+      "usRank": 1704789,
+      "categoryRank": null,
+      "categoryName": null,
+      "bounceRate": 0.3578342806039298,
+      "pagesPerVisit": 1.6817367184758543,
+      "avgVisitDuration": 28.31373811303842,
+      "trafficSources": {
+        "Social": 0.11638615251912104,
+        "Paid Referrals": 0.01488857650077292,
+        "Mail": 0.00112132973759124,
+        "Referrals": 0.08275362691639611,
+        "Search": 0.3914908280357511,
+        "Direct": 0.38941454550327964
+      },
+      "topCountries": [
+        {
+          "Country": 356,
+          "CountryCode": "IN",
+          "Value": 0.33342514203074264
+        },
+        {
+          "Country": 840,
+          "CountryCode": "US",
+          "Value": 0.3321847992234156
+        },
+        {
+          "Country": 826,
+          "CountryCode": "GB",
+          "Value": 0.1285649050788694
+        },
+        {
+          "Country": 124,
+          "CountryCode": "CA",
+          "Value": 0.0715499222371877
+        },
+        {
+          "Country": 36,
+          "CountryCode": "AU",
+          "Value": 0.05877287259364022
+        }
+      ],
+      "estimatedMonthlyVisits": {
+        "2025-09-01": 14279,
+        "2025-10-01": 11816,
+        "2025-11-01": 6090
+      },
+      "description": "Description",
+      "snapshotDate": "2025-11-01T00:00:00+00:00"
+    }
+  }
+}
