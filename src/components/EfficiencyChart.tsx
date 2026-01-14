@@ -384,7 +384,7 @@ export function EfficiencyChart() {
         {/* Top Performers */}
         <div className="hot-companies">
           <div className="hot-companies-header">
-            <span className="hot-title">Top Performers</span>
+            <span className="hot-title">Top Performers (ARR/FTE)</span>
           </div>
           <div className="hot-companies-list">
             {topCompanies.map((company) => (
