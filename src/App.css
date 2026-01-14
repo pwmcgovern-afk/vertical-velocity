@@ -902,12 +902,21 @@ body {
   cursor: pointer;
   transition: var(--transition-fast);
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
 }
 
-.category-btn:hover {
-  border-color: var(--border-strong);
-  color: var(--text-primary);
-  background: var(--bg-muted);
+@media (hover: hover) {
+  .category-btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+    background: var(--bg-muted);
+  }
+}
+
+.category-btn:active {
+  transform: scale(0.97);
 }
 
 .category-btn.active {
