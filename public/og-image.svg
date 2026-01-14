@@ -16,9 +16,9 @@
   <!-- VV Logo Box -->
   <rect x="100" y="215" width="200" height="200" rx="32" fill="url(#vv-gradient)"/>
 
-  <!-- VV Letters -->
-  <path d="M144 265l34 105h6l34-105h-16l-21 62-21-62h-16z" fill="white"/>
-  <path d="M206 265l34 105h6l34-105h-16l-21 62-21-62h-16z" fill="white"/>
+  <!-- VV Letters with spacing -->
+  <path d="M138 265l32 105h6l32-105h-15l-20 62-20-62h-15z" fill="white"/>
+  <path d="M218 265l32 105h6l32-105h-15l-20 62-20-62h-15z" fill="white"/>
 
   <!-- Text -->
   <text x="340" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="white">Vertical Velocity</text>
