@@ -577,7 +577,7 @@ export function EfficiencyChart() {
               </div>
               <span className="footer-attribution">logos by <a href="https://logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a></span>
             </div>
-            <span>Methodology: Revenue figures sourced from public mentions in tech press (TechCrunch, Forbes, Bloomberg, etc.), research firms (Sacra, CB Insights), SEC filings, and press releases. Headcount cross-referenced against LinkedIn and media reports. These numbers are for illustrative purposes only—treat them as directional estimates, not audited financials. To update company data, use the Submit Company button above.</span>
+            <span>Disclaimer: Revenue figures sourced from public mentions in tech press (TechCrunch, Forbes, Bloomberg, etc.), research firms (Sacra, CB Insights), SEC filings, and press releases. Headcount cross-referenced against LinkedIn and media reports. Companies where we couldn't find sufficient data to calculate ARR/FTE were not included. These numbers are for illustrative purposes only—treat them as directional estimates, not audited financials. To update company data, use the Submit Company button above.</span>
           </footer>
         </div>
       </div>
