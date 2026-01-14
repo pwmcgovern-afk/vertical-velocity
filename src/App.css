@@ -1756,8 +1756,9 @@ body {
   .hot-companies,
   .recent-raises {
     width: 100%;
-    height: auto;
-    min-height: 160px;
+    height: 160px;
+    min-height: unset;
+    max-height: 160px;
   }
 
   .chart-footer-top {
