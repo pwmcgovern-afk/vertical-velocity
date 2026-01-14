@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="vv-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+
+  <!-- VV Logo Box -->
+  <rect x="100" y="215" width="200" height="200" rx="32" fill="url(#vv-gradient)"/>
+
+  <!-- VV Letters -->
+  <path d="M144 265l34 105h6l34-105h-16l-21 62-21-62h-16z" fill="white"/>
+  <path d="M206 265l34 105h6l34-105h-16l-21 62-21-62h-16z" fill="white"/>
+
+  <!-- Text -->
+  <text x="340" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="white">Vertical Velocity</text>
+  <text x="340" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#94a3b8">ARR per Employee Rankings for Vertical AI</text>
+
+  <!-- Tagline -->
+  <text x="600" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="500" fill="#64748b" text-anchor="middle">Healthcare | Legal | Finance | Defense | and more</text>
+</svg>
