@@ -114,7 +114,7 @@ export function EfficiencyChart() {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('vv-dark-mode');
     if (saved !== null) return saved === 'true';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return true;
   });
   const [foundedFilter, setFoundedFilter] = useState<string>('all');
   const [stageFilter, setStageFilter] = useState<StageFilter>('all');
