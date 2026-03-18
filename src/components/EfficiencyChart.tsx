@@ -268,12 +268,12 @@ export function EfficiencyChart() {
     return Math.round(companiesWithARR.reduce((sum, c) => sum + (c.arrPerEmployee || 0), 0) / companiesWithARR.length);
   }, [filteredCompanies]);
 
-  // Top 3 companies by ARR/Employee for leaderboard (based on filtered companies)
+  // Top 10 companies by ARR/Employee for leaderboard (based on filtered companies)
   const topCompanies = useMemo(() => {
     return [...filteredCompanies]
       .filter(c => c.arr !== null)
       .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0))
-      .slice(0, 3);
+      .slice(0, 10);
   }, [filteredCompanies]);
 
   // Recent raises (last 6 months) - parse lastFunding field
@@ -635,18 +635,20 @@ export function EfficiencyChart() {
               <div className="hot-companies-header">
                 <span className="hot-title">Top Performers (ARR/FTE)</span>
               </div>
-              <div className="hot-companies-list">
-                {topCompanies.map((company) => (
-                  <div key={company.name} className="hot-company-row">
-                    <div className="hot-company-info">
-                      <span className="hot-company-name">{company.name}</span>
-                      <span className="hot-company-category">
-                        {categories.find(c => c.id === company.category)?.name}
-                      </span>
+              <div className="hot-companies-ticker">
+                <div className="hot-companies-ticker-track">
+                  {[...topCompanies, ...topCompanies].map((company, i) => (
+                    <div key={`${company.name}-${i}`} className="hot-company-row">
+                      <div className="hot-company-info">
+                        <span className="hot-company-name">{company.name}</span>
+                        <span className="hot-company-category">
+                          {categories.find(c => c.id === company.category)?.name}
+                        </span>
+                      </div>
+                      <span className="hot-company-arr">{formatARRPerEmployee(company.arrPerEmployee || 0)}</span>
                     </div>
-                    <span className="hot-company-arr">{formatARRPerEmployee(company.arrPerEmployee || 0)}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
