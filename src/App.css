@@ -2813,14 +2813,30 @@ body {
   margin-bottom: 32px;
 }
 
+.cp-logo-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
 .cp-logo {
   width: 72px;
   height: 72px;
   border-radius: var(--radius-lg);
   background: #fff;
   object-fit: contain;
-  flex-shrink: 0;
   padding: 6px;
+}
+
+.cp-logo-wrapper .cp-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cp-logo.loading {
+  opacity: 0;
 }
 
 .cp-logo.fallback {

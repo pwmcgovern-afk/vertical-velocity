@@ -43,24 +43,33 @@ function getFundingStage(lastFunding: string): string {
 }
 
 function CompanyLogo({ domain, name, color }: { domain: string; name: string; color: string }) {
+  const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
-  const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const initials = name.split(' ').filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase();
 
-  if (error) {
-    return (
-      <div className="cp-logo fallback" style={{ background: `${color}30`, color }}>
-        {initials}
-      </div>
-    );
-  }
+  // Reset state when company changes
+  useEffect(() => {
+    setLoaded(false);
+    setError(false);
+  }, [domain]);
 
   return (
-    <img
-      src={`https://img.logo.dev/${domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=128`}
-      alt={name}
-      className="cp-logo"
-      onError={() => setError(true)}
-    />
+    <div className="cp-logo-wrapper">
+      {(!loaded || error) && (
+        <div className="cp-logo fallback" style={{ background: `${color}30`, color }}>
+          {initials}
+        </div>
+      )}
+      {!error && (
+        <img
+          src={`https://img.logo.dev/${domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=128`}
+          alt={name}
+          className={`cp-logo${loaded ? '' : ' loading'}`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setError(true)}
+        />
+      )}
+    </div>
   );
 }
 
