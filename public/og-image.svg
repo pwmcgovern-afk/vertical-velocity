@@ -5,7 +5,7 @@
       <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
     <linearGradient id="vv-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="0%" stop-color="#3b82f6"/>
       <stop offset="100%" stop-color="#1d4ed8"/>
     </linearGradient>
   </defs>
@@ -16,9 +16,11 @@
   <!-- VV Logo Box -->
   <rect x="100" y="215" width="200" height="200" rx="32" fill="url(#vv-gradient)"/>
 
-  <!-- VV Letters with spacing -->
-  <path d="M138 265l32 105h6l32-105h-15l-20 62-20-62h-15z" fill="white"/>
-  <path d="M218 265l32 105h6l32-105h-15l-20 62-20-62h-15z" fill="white"/>
+  <!-- VV Letters — scaled from favicon.svg polygon geometry, spaced for clarity -->
+  <g fill="white">
+    <polygon points="125,275 150,275 165,335 180,275 195,275 172.5,355 157.5,355" opacity="0.8"/>
+    <polygon points="205,275 230,275 245,335 260,275 275,275 252.5,355 237.5,355"/>
+  </g>
 
   <!-- Text -->
   <text x="340" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="white">Vertical Velocity</text>

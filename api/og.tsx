@@ -152,8 +152,20 @@ export default async function handler(req: Request) {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '28px', height: '28px', borderRadius: '6px', background: '#1e3a5f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 700 }}>V</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <svg width="30" height="30" viewBox="0 0 32 32">
+              <defs>
+                <linearGradient id="vv-g" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3b82f6"/>
+                  <stop offset="100%" stopColor="#1d4ed8"/>
+                </linearGradient>
+              </defs>
+              <rect width="32" height="32" rx="7" fill="url(#vv-g)"/>
+              <g fill="white">
+                <polygon points="3,8 8,8 11,20 14,8 17,8 12.5,24 9.5,24" opacity="0.8"/>
+                <polygon points="15,8 20,8 23,20 26,8 29,8 24.5,24 21.5,24"/>
+              </g>
+            </svg>
             <span style={{ fontSize: '18px', fontWeight: 700, color: '#e0e7ff' }}>Vertical Velocity</span>
           </div>
           <span style={{ fontSize: '16px', color: '#71717a' }}>verticalvelocity.co</span>
