@@ -393,7 +393,8 @@ body {
 
 /* Filters Box - matches stat card styling */
 .filters-box {
-  height: 200px;
+  height: auto;
+  min-height: 200px;
   padding: 16px 20px;
   background: var(--bg);
   border: 1px solid var(--border);
