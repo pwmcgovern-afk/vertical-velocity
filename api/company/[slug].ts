@@ -1,9 +1,9 @@
-// Edge function that serves OG meta tags to social crawlers for /company/:slug routes
-// Regular browsers get redirected to the SPA
+// Serverless function that serves OG meta tags to social crawlers for /company/:slug routes
+// Regular browsers get served the SPA index.html
 
-export const config = {
-  runtime: 'edge',
-};
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const SOCIAL_CRAWLERS = [
   'Twitterbot',
@@ -26,28 +26,41 @@ function formatName(slug: string): string {
     .join(' ');
 }
 
-export default async function handler(req: Request) {
-  const userAgent = req.headers.get('user-agent') || '';
-  const url = new URL(req.url);
-
-  // Extract slug from the path - Vercel passes it as /api/company/[slug]
-  const pathParts = url.pathname.split('/');
-  const slug = pathParts[pathParts.length - 1];
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  const userAgent = req.headers['user-agent'] || '';
+  const slug = req.query.slug as string;
 
   if (!slug) {
-    // Pass through to SPA
-    return fetch(new URL('/index.html', url.origin));
+    // Serve SPA
+    const indexPath = join(process.cwd(), 'dist', 'index.html');
+    try {
+      const html = readFileSync(indexPath, 'utf-8');
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(html);
+    } catch {
+      return res.redirect('/');
+    }
   }
 
   // For regular browsers, serve the SPA
   if (!isSocialCrawler(userAgent)) {
-    return fetch(new URL('/index.html', url.origin));
+    const indexPath = join(process.cwd(), 'dist', 'index.html');
+    try {
+      const html = readFileSync(indexPath, 'utf-8');
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(html);
+    } catch {
+      return res.redirect('/');
+    }
   }
 
   // For crawlers, serve OG meta tags
   const companyName = formatName(slug);
-  const ogImageUrl = `${url.origin}/api/og?slug=${slug}`;
-  const pageUrl = `${url.origin}/company/${slug}`;
+  const protocol = req.headers['x-forwarded-proto'] || 'https';
+  const host = req.headers['x-forwarded-host'] || req.headers.host || 'verticalvelocity.co';
+  const origin = `${protocol}://${host}`;
+  const ogImageUrl = `${origin}/api/og?slug=${slug}`;
+  const pageUrl = `${origin}/company/${slug}`;
 
   const html = `<!DOCTYPE html>
 <html>
@@ -65,16 +78,11 @@ export default async function handler(req: Request) {
   <meta name="twitter:description" content="See how ${companyName} ranks among 95+ vertical AI companies on ARR per employee efficiency." />
   <meta name="twitter:image" content="${ogImageUrl}" />
   <meta name="twitter:site" content="@pw_mcgovern" />
-  <meta http-equiv="refresh" content="0;url=${pageUrl}" />
 </head>
 <body></body>
 </html>`;
 
-  return new Response(html, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-    },
-  });
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=86400');
+  return res.send(html);
 }
