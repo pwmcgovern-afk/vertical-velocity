@@ -1080,8 +1080,9 @@ body {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-md);
-  background: var(--bg-muted);
+  background: #fff;
   object-fit: contain;
+  padding: 3px;
 }
 
 .company-logo.fallback {
