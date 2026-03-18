@@ -191,31 +191,59 @@ export function CompanyPage() {
         <div className="cp-box">
           <h3>Company History</h3>
           <div className="cp-timeline">
-            <div className="cp-timeline-item">
-              <div className="cp-timeline-dot" />
-              <div className="cp-timeline-content">
-                <span className="cp-timeline-year">{company.founded}</span>
-                <span className="cp-timeline-text">Founded by {company.founders.join(' & ')} in {company.headquarters}</span>
-              </div>
-            </div>
-            <div className="cp-timeline-item">
-              <div className="cp-timeline-dot" />
-              <div className="cp-timeline-content">
-                <span className="cp-timeline-year">{company.lastFunding.match(/\(([^)]+)\)/)?.[1] || 'Latest'}</span>
-                <span className="cp-timeline-text">{company.lastFunding.replace(/\s*\([^)]+\)/, '')}</span>
-              </div>
-            </div>
-            {company.arr && (
-              <div className="cp-timeline-item">
-                <div className="cp-timeline-dot current" />
-                <div className="cp-timeline-content">
-                  <span className="cp-timeline-year">Today</span>
-                  <span className="cp-timeline-text">
-                    {formatARR(company.arr)} ARR, {company.headcount.toLocaleString()} employees
-                    {company.valuation ? `, valued at ${formatValuation(company.valuation)}` : ''}
-                  </span>
+            {company.milestones && company.milestones.length > 0 ? (
+              <>
+                {company.milestones.map((m, i) => (
+                  <div className="cp-timeline-item" key={i}>
+                    <div className={`cp-timeline-dot${i === company.milestones!.length - 1 ? ' current' : ''}`} />
+                    <div className="cp-timeline-content">
+                      <span className="cp-timeline-year">{m.year}</span>
+                      <span className="cp-timeline-text">{m.text}</span>
+                    </div>
+                  </div>
+                ))}
+                {company.arr && (
+                  <div className="cp-timeline-item">
+                    <div className="cp-timeline-dot current" />
+                    <div className="cp-timeline-content">
+                      <span className="cp-timeline-year">Today</span>
+                      <span className="cp-timeline-text">
+                        {formatARR(company.arr)} ARR, {company.headcount.toLocaleString()} employees
+                        {company.valuation ? `, valued at ${formatValuation(company.valuation)}` : ''}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="cp-timeline-item">
+                  <div className="cp-timeline-dot" />
+                  <div className="cp-timeline-content">
+                    <span className="cp-timeline-year">{company.founded}</span>
+                    <span className="cp-timeline-text">Founded by {company.founders.join(' & ')} in {company.headquarters}</span>
+                  </div>
                 </div>
-              </div>
+                <div className="cp-timeline-item">
+                  <div className="cp-timeline-dot" />
+                  <div className="cp-timeline-content">
+                    <span className="cp-timeline-year">{company.lastFunding.match(/\(([^)]+)\)/)?.[1] || 'Latest'}</span>
+                    <span className="cp-timeline-text">{company.lastFunding.replace(/\s*\([^)]+\)/, '')}</span>
+                  </div>
+                </div>
+                {company.arr && (
+                  <div className="cp-timeline-item">
+                    <div className="cp-timeline-dot current" />
+                    <div className="cp-timeline-content">
+                      <span className="cp-timeline-year">Today</span>
+                      <span className="cp-timeline-text">
+                        {formatARR(company.arr)} ARR, {company.headcount.toLocaleString()} employees
+                        {company.valuation ? `, valued at ${formatValuation(company.valuation)}` : ''}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

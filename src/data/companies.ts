@@ -1,3 +1,8 @@
+export interface Milestone {
+  year: string;
+  text: string;
+}
+
 export interface Company {
   name: string;
   domain: string;
@@ -14,6 +19,7 @@ export interface Company {
   website: string;
   headquarters: string;
   description?: string;
+  milestones?: Milestone[];
 }
 
 export const categories = [
@@ -51,6 +57,16 @@ export const companies: Company[] = [
     website: 'https://www.abridge.com',
     headquarters: 'Pittsburgh, PA',
     description: 'Abridge is an AI-powered clinical documentation platform that automatically generates structured medical notes from patient-doctor conversations in real time. The platform is used by physicians, nurses, and other clinicians across major health systems to reduce the hours spent on documentation after patient visits. Abridge\'s models are trained specifically on medical dialogue, enabling high-accuracy capture of diagnoses, treatment plans, and follow-up instructions. The company has partnered with health systems including UPMC and Epic to integrate directly into EHR workflows, positioning itself as a core infrastructure layer for clinical AI.',
+    milestones: [
+      { year: '2018', text: 'Founded by Dr. Shiv Rao in Pittsburgh' },
+      { year: '2019', text: 'Raised ~$5M Seed led by Union Square Ventures' },
+      { year: '2020', text: 'Raised $15M Series A' },
+      { year: 'Oct 2023', text: 'Raised $30M Series B led by Spark Capital' },
+      { year: 'Nov 2023', text: 'Became Epic\'s first "Pal" in Partners and Pals program' },
+      { year: 'Feb 2024', text: 'Raised $150M Series C led by Lightspeed and Redpoint' },
+      { year: 'Feb 2025', text: 'Raised $250M Series D at $2.75B valuation' },
+      { year: 'Jun 2025', text: 'Raised $300M Series E at $5.3B valuation' },
+    ],
   },
   {
     name: 'OpenEvidence',
@@ -68,6 +84,14 @@ export const companies: Company[] = [
     website: 'https://www.openevidence.com',
     headquarters: 'Miami, FL',
     description: 'OpenEvidence is an AI platform providing evidence-based clinical decision support for physicians at the point of care. The system synthesizes medical literature, clinical guidelines, and real-world patient data to deliver real-time treatment recommendations tailored to specific patient scenarios. It is used by clinicians across specialties to quickly surface the most relevant research and consensus guidelines during consultations. OpenEvidence differentiates through its emphasis on cited, verifiable medical evidence rather than generalized AI outputs, making it a trusted resource for clinical decision-making at scale.',
+    milestones: [
+      { year: '2021', text: 'Founded by Daniel Nadler and Zack Ziegler' },
+      { year: '2024', text: 'Partnered with New England Journal of Medicine for 30 years of archives' },
+      { year: 'Feb 2025', text: 'Raised $75M Series A led by Sequoia at $1B valuation' },
+      { year: 'Jul 2025', text: 'Raised $210M Series B co-led by GV and Kleiner Perkins at $3.5B' },
+      { year: 'Oct 2025', text: 'Raised $200M Series C at $6B valuation' },
+      { year: 'Jan 2026', text: 'Raised $250M Series D at $12B valuation' },
+    ],
   },
   {
     name: 'Hippocratic AI',
@@ -85,6 +109,12 @@ export const companies: Company[] = [
     website: 'https://www.hippocraticai.com',
     headquarters: 'Palo Alto, CA',
     description: 'Hippocratic AI builds AI-powered voice agents designed specifically for non-diagnostic healthcare staffing tasks such as patient outreach, appointment scheduling, pre-visit navigation, and post-discharge follow-up. The platform targets health systems and payer organizations struggling with chronic staffing shortages in administrative and care coordination roles. Hippocratic\'s models are safety-tuned for healthcare through extensive clinician testing and benchmarking, ensuring they operate within strict guardrails for patient-facing communication. The company focuses exclusively on low-risk, high-volume operational workflows rather than clinical diagnosis, differentiating it from clinical AI documentation tools.',
+    milestones: [
+      { year: 'May 2023', text: 'Founded by Munjal Shah; launched with $50M Seed co-led by General Catalyst and a16z' },
+      { year: 'Mar 2024', text: 'Raised $53M Series A at $500M valuation' },
+      { year: 'Jan 2025', text: 'Raised $141M Series B at $1.64B valuation (unicorn)' },
+      { year: 'Nov 2025', text: 'Raised $126M Series C at $3.5B valuation' },
+    ],
   },
   {
     name: 'Ambience',
@@ -102,6 +132,13 @@ export const companies: Company[] = [
     website: 'https://www.ambiencehealthcare.com',
     headquarters: 'San Francisco, CA',
     description: 'Ambience Healthcare provides an AI-powered ambient clinical documentation platform that passively listens to patient-provider encounters and generates complete medical notes, referral letters, and clinical orders in real time. The platform is designed for physicians and clinical staff across specialties in both hospital and ambulatory settings. Ambience integrates directly into EHR systems to eliminate manual documentation, enabling clinicians to focus on patient interaction rather than screen time. The company\'s approach combines ambient listening with structured clinical output, reducing documentation time by hours per day for adopting providers.',
+    milestones: [
+      { year: '2020', text: 'Founded by Mike Ng and Nikhil Buduma in San Francisco' },
+      { year: 'Apr 2022', text: 'Raised $30M Series A led by Andreessen Horowitz' },
+      { year: 'Feb 2023', text: 'Launched AutoScribe, fully automated AI medical scribe' },
+      { year: 'Feb 2024', text: 'Raised $70M Series B co-led by Kleiner Perkins and OpenAI Startup Fund' },
+      { year: 'Jul 2025', text: 'Raised $243M Series C at $1.25B valuation' },
+    ],
   },
   {
     name: 'Tennr',
@@ -119,6 +156,13 @@ export const companies: Company[] = [
     website: 'https://www.tennr.com',
     headquarters: 'New York, NY',
     description: 'Tennr is an AI-powered healthcare referral and fax processing platform that automates intake workflows by extracting, structuring, and routing patient data from unstructured documents like faxes, referrals, and prior authorizations. The platform serves specialty practices, health systems, and large provider groups that process thousands of inbound referral documents daily. Tennr uses document AI and NLP to parse handwritten and typed medical records, automatically populating EHR fields and reducing manual data entry. By digitizing one of healthcare\'s most analog bottlenecks, the company helps practices accelerate patient onboarding and reduce referral leakage.',
+    milestones: [
+      { year: '2021', text: 'Founded by Diego Baugh, Trey Holterman, and Tyler Johnson in New York' },
+      { year: '2023', text: 'Graduated from Y Combinator (W23 batch)' },
+      { year: 'Mar 2024', text: 'Raised $18M Series A led by a16z' },
+      { year: 'Oct 2024', text: 'Raised $37M Series B led by Lightspeed Venture Partners' },
+      { year: '2025', text: 'Raised $101M Series C led by IVP at $605M valuation' },
+    ],
   },
   {
     name: 'Freed',
@@ -136,6 +180,11 @@ export const companies: Company[] = [
     website: 'https://www.getfreed.ai',
     headquarters: 'Santa Rosa, CA',
     description: 'Freed is an AI medical scribe designed for independent practices and small clinics that automatically generates clinical notes from patient-provider conversations. The platform listens during patient encounters and produces structured SOAP notes, visit summaries, and follow-up instructions without requiring manual input from the clinician. Freed targets solo practitioners and small group practices that lack the resources for dedicated medical scribes or expensive enterprise documentation systems. Its lightweight, consumer-friendly design and rapid onboarding differentiate it from enterprise-focused competitors in the ambient documentation space.',
+    milestones: [
+      { year: '2023', text: 'Founded by Erez Druk and Andrey Bannikov; launched AI scribe product' },
+      { year: 'Mar 2024', text: 'Raised $7.5M Seed led by Sorin Investments' },
+      { year: 'Mar 2025', text: 'Raised $30M Series A led by Sequoia; 17,000+ paying clinicians' },
+    ],
   },
 {
     name: 'Nabla',
@@ -153,6 +202,12 @@ export const companies: Company[] = [
     website: 'https://www.nabla.com',
     headquarters: 'Paris, France',
     description: 'Nabla is an AI copilot for healthcare documentation that generates clinical notes and handles administrative tasks such as letter drafting and coding suggestions, enabling physicians to spend more time with patients. The platform is designed for clinicians across primary care and specialty settings in both the US and European markets. Nabla differentiates through its multilingual capabilities and compliance with EU healthcare data regulations, making it one of the few ambient documentation platforms with strong European traction. The company was founded by former Facebook AI researchers and applies proprietary medical language models trained on clinical dialogue.',
+    milestones: [
+      { year: '2018', text: 'Founded by Alexandre Lebrun (prev. Wit.ai/Facebook AI) in Paris' },
+      { year: '2021', text: 'Raised ~\u20AC17M from firstminute capital and Xavier Niel' },
+      { year: 'Jan 2024', text: 'Raised $24M Series B led by Cathay Innovation at $180M valuation' },
+      { year: 'Jun 2025', text: 'Raised $70M Series C with Highland Europe and DST Global' },
+    ],
   },
   {
     name: 'Eleos Health',
@@ -170,6 +225,13 @@ export const companies: Company[] = [
     website: 'https://www.eleos.health',
     headquarters: 'Cambridge, MA',
     description: 'Eleos Health is an AI platform purpose-built for behavioral health that automates clinical documentation, tracks patient progress over time, and surfaces actionable insights from therapy sessions. The platform serves behavioral health providers, community mental health centers, and large payer-provider organizations looking to improve outcomes measurement and reduce therapist administrative burden. Eleos uses session analysis to generate structured notes and identify clinical trends such as symptom changes and treatment adherence. Its focus exclusively on behavioral health distinguishes it from general clinical documentation tools and allows for deeper domain-specific modeling.',
+    milestones: [
+      { year: '2020', text: 'Founded in Tel Aviv' },
+      { year: '2021', text: 'Raised $6M Seed led by aMoon Fund' },
+      { year: 'Apr 2022', text: 'Raised $20M Series A co-led by F-Prime Capital and Eight Roads' },
+      { year: 'Sep 2023', text: 'Raised $40M Series B led by Menlo Ventures' },
+      { year: 'Jan 2025', text: 'Raised $60M Series C led by Greenfield Partners' },
+    ],
   },
   {
     name: 'Commure',
@@ -187,6 +249,13 @@ export const companies: Company[] = [
     website: 'https://www.commure.com',
     headquarters: 'San Francisco, CA',
     description: 'Commure is a healthcare operating system that connects clinical and operational data across fragmented health system IT environments into a unified platform. The company serves large hospital systems and provider networks, offering tools for interoperability, workflow automation, and AI-powered documentation. Through its acquisition of Athelas, Commure combines ambient clinical documentation with device-level patient monitoring including remote vital sign tracking and automated lab diagnostics. This integrated approach positions Commure as a broad infrastructure layer for health system digital transformation, spanning both software and connected hardware.',
+    milestones: [
+      { year: '2017', text: 'Founded by General Catalyst; Y Combinator S17 batch' },
+      { year: '2021', text: 'Raised ~$500M across Series C and D at $3.5B valuation' },
+      { year: 'Oct 2023', text: 'Merged with Athelas in $6B combined deal' },
+      { year: '2024', text: 'Acquired Augmedix for $139M; reached $105M ARR' },
+      { year: 'Jun 2025', text: 'Raised $200M from General Catalyst\'s Customer Value Fund' },
+    ],
   },
 
   // Legal
@@ -206,6 +275,16 @@ export const companies: Company[] = [
     website: 'https://www.ironcladapp.com',
     headquarters: 'San Francisco, CA',
     description: 'Ironclad is a digital contracting platform that helps legal and business teams create, negotiate, manage, and store contracts with AI-powered workflow automation and analytics. The platform is used by in-house legal departments at mid-market and enterprise companies to standardize contract processes and reduce cycle times. Ironclad integrates with tools like Salesforce and DocuSign to embed contract workflows into existing business processes. Its AI capabilities include clause detection, risk flagging, and automated metadata extraction, enabling legal teams to move from reactive contract review to proactive contract intelligence.',
+    milestones: [
+      { year: '2014', text: 'Founded by Jason Boehmig and Cai GoGwilt in San Francisco' },
+      { year: '2015', text: 'Joined Y Combinator Summer 2015 batch' },
+      { year: '2017', text: 'Raised $8M Series A led by Accel' },
+      { year: '2018', text: 'Raised $23M Series B led by Sequoia Capital' },
+      { year: '2019', text: 'Raised $50M Series C led by Y Combinator Continuity' },
+      { year: '2021', text: 'Raised $100M Series D led by BOND' },
+      { year: 'Jan 2022', text: 'Raised $150M Series E at $3.2B valuation' },
+      { year: '2025', text: 'Surpassed $200M ARR' },
+    ],
   },
   {
     name: 'Harvey',
@@ -223,6 +302,16 @@ export const companies: Company[] = [
     website: 'https://www.harvey.ai',
     headquarters: 'San Francisco, CA',
     description: 'Harvey is an AI assistant for legal professionals that handles research, drafting, document review, and analysis across litigation, corporate, and regulatory practice areas. The platform is primarily adopted by Am Law 100 and Global 100 law firms seeking to augment attorney productivity on complex legal work. Harvey\'s models are fine-tuned on legal data and integrated with firm-specific knowledge bases, enabling accurate, context-aware outputs grounded in relevant precedent and statutes. The company has secured partnerships with firms including Allen & Overy and PwC, establishing itself as one of the highest-valued AI legal platforms.',
+    milestones: [
+      { year: '2022', text: 'Founded by Winston Weinberg and Gabriel Pereyra in San Francisco' },
+      { year: 'Nov 2022', text: 'Raised $5M Seed from OpenAI Startup Fund (OpenAI\'s first investment)' },
+      { year: 'Apr 2023', text: 'Raised $21M Series A led by Sequoia Capital' },
+      { year: 'Dec 2023', text: 'Raised $80M Series B led by Kleiner Perkins at $715M; hit $10M ARR' },
+      { year: 'Jul 2024', text: 'Raised $100M Series C led by GV at $1.5B valuation' },
+      { year: 'Feb 2025', text: 'Raised $300M Series D led by Sequoia at $3B valuation' },
+      { year: 'Jun 2025', text: 'Raised $300M Series E at $5B valuation' },
+      { year: 'Dec 2025', text: 'Raised $160M Series F at $8B valuation; $195M ARR' },
+    ],
   },
   {
     name: 'Clio',
@@ -240,6 +329,14 @@ export const companies: Company[] = [
     website: 'https://www.clio.com',
     headquarters: 'Burnaby, Canada',
     description: 'Clio is a cloud-based legal practice management platform serving law firms of all sizes, from solo practitioners to mid-size firms, covering case management, time tracking, billing, payments, and client intake. The platform has become the operating system for tens of thousands of law firms, with deep integrations across legal research, document management, and accounting tools. Clio has expanded into AI-powered features including document drafting and workflow automation to help attorneys reduce administrative overhead. Its scale and data network across the legal industry give it a unique advantage in building AI features trained on real firm usage patterns.',
+    milestones: [
+      { year: '2008', text: 'Founded by Jack Newton and Rian Gauvreau in Vancouver' },
+      { year: '2014', text: 'Raised $20M Series C led by Bessemer Venture Partners' },
+      { year: 'Sep 2019', text: 'Raised $250M Series D led by TCV and JMI Equity' },
+      { year: 'Apr 2021', text: 'Raised $110M Series E at $1.6B valuation' },
+      { year: 'Jul 2023', text: 'Raised $900M Series F led by NEA at $3B valuation' },
+      { year: 'Nov 2025', text: 'Acquired vLex for $1B; raised $500M Series G at $5B valuation' },
+    ],
   },
   {
     name: 'Luminance',
@@ -257,6 +354,12 @@ export const companies: Company[] = [
     website: 'https://www.luminance.com',
     headquarters: 'London, UK',
     description: 'Luminance is an AI platform for contract review, negotiation, and lifecycle management that reads and understands legal documents to accelerate deal execution. The platform is used by corporate legal teams and law firms to automate due diligence, redlining, and contract analysis across M&A, procurement, and commercial transactions. Luminance\'s proprietary legal AI models are trained on hundreds of millions of legal documents, enabling the system to identify non-standard clauses, flag risks, and suggest edits autonomously. The London-based company has expanded globally with particular strength in European and APAC markets.',
+    milestones: [
+      { year: '2015', text: 'Founded by Adam Guthrie and Dr. Graham Sills in London' },
+      { year: '2016', text: 'Launched with seed funding from Invoke Capital' },
+      { year: 'Apr 2024', text: 'Raised $40M Series B led by March Capital' },
+      { year: 'Feb 2025', text: 'Raised $75M Series C led by Point72 Private Investments' },
+    ],
   },
   {
     name: 'Eudia',
@@ -274,6 +377,10 @@ export const companies: Company[] = [
     website: 'https://www.eudia.ai',
     headquarters: 'Palo Alto, CA',
     description: 'Eudia is an AI research and analysis platform for law firms that automates deep legal research, document review, and knowledge synthesis across large case files and deal rooms. The platform targets Am Law firms and elite litigation practices that need to process thousands of documents for complex matters. Eudia\'s AI agents can perform multi-step legal analysis, cross-referencing case law, statutes, and internal firm precedent to produce attorney-ready work product. The company raised one of the largest Series A rounds in legal AI, reflecting demand for tools that go beyond basic search to deliver substantive legal reasoning.',
+    milestones: [
+      { year: '2023', text: 'Founded by Omar Haroun in Palo Alto; entered stealth' },
+      { year: 'Feb 2025', text: 'Emerged from stealth; raised up to $105M Series A led by General Catalyst' },
+    ],
   },
   {
     name: 'Eve',
@@ -291,6 +398,12 @@ export const companies: Company[] = [
     website: 'https://www.eve.legal',
     headquarters: 'San Mateo, CA',
     description: 'Eve is an AI-powered legal research and drafting platform that helps attorneys find relevant case law, statutes, and regulations and generate legal documents faster. The platform serves litigation and transactional attorneys at law firms and corporate legal departments who need to produce briefs, motions, and memos under time pressure. Eve combines natural language search with generative AI drafting capabilities, enabling attorneys to move from research to finished document in a fraction of the traditional time. The company has focused on accuracy and citation verification to address the hallucination concerns that have limited legal AI adoption.',
+    milestones: [
+      { year: '2023', text: 'Founded by Jay Madheswaran, Matt Noe, and David Zeng' },
+      { year: 'Oct 2023', text: 'Launched with $14M seed from Lightspeed and Menlo Ventures' },
+      { year: 'Jan 2025', text: 'Raised $47M Series A led by Andreessen Horowitz' },
+      { year: 'Sep 2025', text: 'Raised $103M Series B led by Spark Capital at $1B+ valuation' },
+    ],
   },
   {
     name: 'EvenUp',
@@ -308,6 +421,12 @@ export const companies: Company[] = [
     website: 'https://www.evenuplaw.com',
     headquarters: 'San Francisco, CA',
     description: 'EvenUp is an AI platform that generates demand packages for personal injury attorneys by synthesizing medical records, billing data, and case details into comprehensive settlement documents. The platform serves plaintiff-side personal injury law firms that typically spend hours manually assembling demand letters for insurance negotiations. EvenUp\'s AI ingests and organizes medical records, calculates damages, and produces attorney-reviewed demand packages that are ready for submission to insurance adjusters. The company has processed hundreds of thousands of cases and built proprietary models trained on settlement outcomes, giving it a data advantage in predicting case valuations.',
+    milestones: [
+      { year: '2019', text: 'Founded by Rami Karabibar, Raymond Mieszaniec, and Saam Mashhad' },
+      { year: 'Jun 2023', text: 'Raised $50.5M Series B led by Bessemer Venture Partners' },
+      { year: 'Oct 2024', text: 'Raised $135M Series D at $1B+ valuation' },
+      { year: 'Oct 2025', text: 'Raised $150M Series E at $2B+ valuation' },
+    ],
   },
   {
     name: 'Norm AI',
@@ -325,6 +444,13 @@ export const companies: Company[] = [
     website: 'https://www.norm.ai',
     headquarters: 'New York, NY',
     description: 'Norm AI is a regulatory compliance platform that uses AI to automate the monitoring and enforcement of rules, policies, and regulations across financial services and other regulated industries. The platform serves compliance teams at banks, insurance companies, and asset managers that must continuously track evolving regulatory requirements. Norm AI translates complex regulatory text into machine-readable rules that can be automatically checked against company policies and operations. This approach reduces the manual effort of regulatory mapping and helps organizations identify compliance gaps before they become enforcement issues.',
+    milestones: [
+      { year: '2023', text: 'Founded by John J. Nay in New York City' },
+      { year: 'Jan 2024', text: 'Emerged from stealth with $11.1M Seed led by Coatue' },
+      { year: '2024', text: 'Raised $27M Series A led by Coatue with Bain Capital Ventures' },
+      { year: 'Mar 2025', text: 'Raised $48M Series B led by Coatue' },
+      { year: 'Nov 2025', text: 'Raised $50M Series C led by Blackstone' },
+    ],
   },
   {
     name: 'Legora',
@@ -342,6 +468,14 @@ export const companies: Company[] = [
     website: 'https://www.legora.com',
     headquarters: 'New York, NY',
     description: 'Legora is an AI legal research platform that enables attorneys to search case law, statutes, and regulations using natural language queries and receive cited, verifiable results. The platform targets law firms and corporate legal departments seeking faster alternatives to traditional legal databases like Westlaw and LexisNexis. Legora emphasizes citation accuracy and source transparency, allowing attorneys to verify every claim the AI makes against original legal documents. The company has grown rapidly to a multi-billion dollar valuation, reflecting strong demand for AI-native legal research tools that combine speed with the reliability standards the legal profession demands.',
+    milestones: [
+      { year: '2023', text: 'Founded by Max Junestrand, Sigge Labor, and August Ers\u00E9us in Stockholm' },
+      { year: 'Apr 2024', text: 'Y Combinator; raised $10.5M Seed led by Benchmark' },
+      { year: 'Jul 2024', text: 'Raised $25M Series A from Benchmark and Redpoint' },
+      { year: 'May 2025', text: 'Raised $80M Series B led by ICONIQ and General Catalyst' },
+      { year: 'Oct 2025', text: 'Raised $150M Series C at $1.8B valuation' },
+      { year: 'Mar 2026', text: 'Raised $550M Series D at $5.55B valuation' },
+    ],
   },
   {
     name: 'Spellbook',
@@ -359,6 +493,12 @@ export const companies: Company[] = [
     website: 'https://www.spellbook.legal',
     headquarters: 'Toronto, Canada',
     description: 'Spellbook is an AI contract drafting assistant for lawyers that reviews, suggests edits, and generates contract language directly inside Microsoft Word where attorneys already work. The platform is used by transactional lawyers at firms and in-house legal teams to accelerate contract creation, identify missing clauses, and flag unusual terms. Spellbook\'s models are trained on millions of legal agreements, enabling it to suggest contextually relevant language based on deal type, jurisdiction, and negotiation position. The company\'s Microsoft Word-native approach reduces adoption friction compared to platforms that require lawyers to switch to a separate interface.',
+    milestones: [
+      { year: '2019', text: 'Founded as Rally in Toronto' },
+      { year: 'May 2023', text: 'Raised $10.9M Seed; rebranded to Spellbook' },
+      { year: 'Jan 2024', text: 'Raised $20M Series A led by Inovia Capital; 10x revenue growth' },
+      { year: 'Oct 2025', text: 'Raised $50M Series B led by Khosla Ventures at $350M' },
+    ],
   },
   {
     name: 'Solve Intelligence',
@@ -376,6 +516,12 @@ export const companies: Company[] = [
     website: 'https://www.solveintelligence.com',
     headquarters: 'London, UK',
     description: 'Solve Intelligence is an AI patent drafting platform that helps patent attorneys and agents write and prosecute patent applications faster through automated claim generation, specification drafting, and prior art analysis. The platform targets patent law firms and corporate IP departments that handle high volumes of patent filings across technical domains. Solve Intelligence\'s models understand patent-specific language structures and USPTO formatting requirements, producing prosecution-ready drafts that reduce attorney drafting time significantly. The London-based company addresses a niche but high-value segment of legal AI where domain expertise and technical precision are critical.',
+    milestones: [
+      { year: '2023', text: 'Founded by Dr. Chris Parsonson in London; Y Combinator S23' },
+      { year: 'Oct 2023', text: 'Raised $3M Seed led by Y Combinator' },
+      { year: 'Apr 2025', text: 'Raised $12M Series A led by 20VC with Microsoft M12' },
+      { year: 'Dec 2025', text: 'Raised $40M Series B co-led by Visionaries Club and 20VC' },
+    ],
   },
 
   // Finance
@@ -395,6 +541,16 @@ export const companies: Company[] = [
     website: 'https://www.ramp.com',
     headquarters: 'New York, NY',
     description: 'Ramp is a corporate card and spend management platform that uses AI to automate expense reporting, bill payments, procurement, and financial controls for businesses of all sizes. The platform serves finance teams at companies ranging from startups to enterprises, providing real-time visibility into spending and automated policy enforcement. Ramp\'s AI capabilities include automatic receipt matching, duplicate payment detection, and vendor price benchmarking that proactively identifies cost-saving opportunities. The company has grown rapidly by combining the corporate card revenue model with a software platform that replaces multiple point solutions across accounts payable and expense management.',
+    milestones: [
+      { year: '2019', text: 'Founded by Eric Glyman and Karim Atiyeh in New York' },
+      { year: 'Feb 2020', text: 'Raised $15M Series A led by Founders Fund' },
+      { year: 'Apr 2021', text: 'Raised $115M Series B at $1.6B valuation' },
+      { year: 'Aug 2021', text: 'Raised $300M Series C at $3.9B valuation' },
+      { year: 'Mar 2022', text: 'Raised $200M at $8.1B; reached ~$100M annualized revenue' },
+      { year: 'Aug 2023', text: 'Raised $300M Series D at $5.8B; reached $300M annualized revenue' },
+      { year: 'Apr 2024', text: 'Raised $150M Series D-2 at $7.65B valuation' },
+      { year: 'Nov 2025', text: 'Raised $300M at $32B valuation' },
+    ],
   },
   {
     name: 'Hebbia',
@@ -412,6 +568,12 @@ export const companies: Company[] = [
     website: 'https://www.hebbia.com',
     headquarters: 'New York, NY',
     description: 'Hebbia is an AI-powered knowledge work platform for finance that enables analysts to search, synthesize, and analyze large document sets for due diligence, deal sourcing, and investment research. The platform serves investment banks, private equity firms, asset managers, and law firms that routinely process hundreds of documents per deal. Hebbia\'s Matrix product allows users to run structured queries across entire document collections simultaneously, extracting and comparing data points at a scale impossible through manual review. The company\'s approach to multi-document reasoning differentiates it from simpler search tools by enabling complex analytical workflows natively within the platform.',
+    milestones: [
+      { year: '2020', text: 'Founded by George Sivulka while a PhD student at Stanford' },
+      { year: '2022', text: 'Raised $30M Series A led by Index Ventures' },
+      { year: 'Jul 2024', text: 'Raised $130M Series B led by a16z at $700M; $13M ARR and profitable' },
+      { year: '2025', text: 'Serves 40%+ of largest asset managers by AUM' },
+    ],
   },
   {
     name: 'Rogo',
@@ -429,6 +591,13 @@ export const companies: Company[] = [
     website: 'https://www.rogo.ai',
     headquarters: 'New York, NY',
     description: 'Rogo is an AI research assistant for investment professionals that automates financial analysis, data gathering, and report generation across investment banking and asset management. The platform is used by analysts and associates at bulge bracket banks and buy-side firms to accelerate tasks like comparable company analysis, market sizing, and earnings summaries. Rogo connects to financial data sources including SEC filings, earnings transcripts, and market databases to produce structured, sourced research outputs. The company positions itself as an AI copilot for junior finance professionals, targeting the most time-intensive analytical workflows in capital markets.',
+    milestones: [
+      { year: '2022', text: 'Founded by Gabriel Stengel, John Willett, and Tumas Rackaitis' },
+      { year: 'Feb 2024', text: 'Raised $7M Seed led by AlleyCorp' },
+      { year: 'Oct 2024', text: 'Raised $18.5M Series A led by Khosla Ventures' },
+      { year: 'Apr 2025', text: 'Raised $50M Series B led by Thrive Capital at $350M' },
+      { year: 'Jan 2026', text: 'Raised Series C led by Sequoia; $165M total funding' },
+    ],
   },
   {
     name: '9fin',
@@ -446,6 +615,12 @@ export const companies: Company[] = [
     website: 'https://www.9fin.com',
     headquarters: 'London, UK',
     description: '9fin is an AI-powered debt capital markets intelligence platform that provides leveraged finance, high-yield bond, and private credit data, analytics, and news for credit professionals. The platform serves buy-side and sell-side credit analysts, distressed debt investors, and CLO managers who need real-time insight into leveraged lending markets. 9fin uses AI to parse and structure complex credit documents including indentures, credit agreements, and offering memoranda, making covenant and structural details instantly searchable. The company has built a strong editorial team alongside its technology, combining human-curated market intelligence with automated document analysis.',
+    milestones: [
+      { year: '2016', text: 'Founded by Steven Hunter (ex-JPMorgan) and Huss El-Sheikh (ex-Deutsche Bank) in London' },
+      { year: '2017', text: 'Raised pre-seed from Seedcamp and 500 Global' },
+      { year: 'Dec 2022', text: 'Raised $23M Series A+ led by Spark Capital' },
+      { year: 'Dec 2024', text: 'Raised $50M Series B led by Highland Europe' },
+    ],
   },
   {
     name: 'Brightwave',
@@ -463,6 +638,11 @@ export const companies: Company[] = [
     website: 'https://www.brightwave.io',
     headquarters: 'Boulder, CO',
     description: 'Brightwave is an AI investment research platform that synthesizes financial documents, earnings calls, SEC filings, and market data to generate analyst-grade research reports and investment insights. The platform targets asset managers, hedge funds, and equity research teams that need to process large volumes of financial information to identify investment signals. Brightwave\'s AI can analyze hundreds of documents simultaneously and produce structured research memos with sourced citations, significantly reducing the time analysts spend on information gathering. The company was founded by a former ML engineer and focuses on depth of financial reasoning rather than general-purpose AI capabilities.',
+    milestones: [
+      { year: '2024', text: 'Founded by Mike Conover (ex-Databricks) and Brandon Kotara (ex-LedgerX)' },
+      { year: 'Jun 2024', text: 'Raised $6M Seed led by Decibel Partners with Point72 Ventures' },
+      { year: 'Oct 2024', text: 'Raised $15M Series A led by Decibel with OMERS Ventures' },
+    ],
   },
   {
     name: 'Zest AI',
@@ -480,6 +660,12 @@ export const companies: Company[] = [
     website: 'https://www.zest.ai',
     headquarters: 'Burbank, CA',
     description: 'Zest AI is a credit underwriting platform that uses machine learning models to help lenders make more accurate, fair, and inclusive lending decisions. The platform serves banks, credit unions, and auto lenders seeking to expand credit access while maintaining or improving default rates. Zest AI\'s models incorporate thousands of data features beyond traditional credit scores to assess borrower risk, enabling lenders to approve more applicants without increasing portfolio losses. The company has a strong focus on model explainability and fair lending compliance, providing tools that help lenders demonstrate regulatory adherence for their AI-driven underwriting decisions.',
+    milestones: [
+      { year: '2009', text: 'Founded as ZestFinance by Douglas Merrill (ex-Google CIO) in Los Angeles' },
+      { year: '2013', text: 'Raised $20M Series C' },
+      { year: 'Oct 2019', text: 'Rebranded from ZestFinance to Zest AI' },
+      { year: 'Dec 2024', text: 'Raised $200M Series D led by Insight Partners' },
+    ],
   },
 
   // Other - HR
@@ -499,6 +685,12 @@ export const companies: Company[] = [
     website: 'https://www.eightfold.ai',
     headquarters: 'Santa Clara, CA',
     description: 'Eightfold is an AI talent intelligence platform that helps enterprises recruit, retain, and develop talent using deep learning models applied to workforce data and skills graphs. The platform serves large enterprise HR departments seeking to optimize hiring pipelines, internal mobility, and workforce planning. Eightfold\'s AI maps employee and candidate skills to create a talent graph that identifies qualified candidates, predicts attrition risk, and recommends career development paths. The company\'s data advantage comes from processing billions of talent data points across its customer base, improving model accuracy for skills matching and talent market insights.',
+    milestones: [
+      { year: '2016', text: 'Founded by Ashutosh Garg and Varun Kacholia in Santa Clara' },
+      { year: '2019', text: 'Raised $28M Series C led by IVP and Lightspeed' },
+      { year: 'Oct 2020', text: 'Raised $125M Series D at $1B valuation' },
+      { year: 'Jun 2021', text: 'Raised $220M Series E led by SoftBank at $2.1B' },
+    ],
   },
 
   // Other - Security
@@ -517,7 +709,13 @@ export const companies: Company[] = [
     founders: ['Hitesh Sheth', 'Mark Abene'],
     website: 'https://www.vectra.ai',
     headquarters: 'San Jose, CA',
-    description: 'AI-powered cybersecurity platform that detects and responds to network threats in real time using behavioral analysis across cloud, data center, and IoT environments.',
+    description: 'Vectra AI is a cybersecurity platform that uses AI-driven behavioral analysis to detect and respond to network threats in real time across cloud, data center, SaaS, and IoT environments. The platform serves enterprise security operations teams that need to identify sophisticated attackers who have bypassed perimeter defenses. Vectra\'s AI models analyze network traffic patterns and user behavior to surface active threats like lateral movement, data exfiltration, and command-and-control communications without relying on signatures or rules. The company\'s Attack Signal Intelligence technology prioritizes the most critical threats, reducing alert fatigue for SOC analysts.',
+    milestones: [
+      { year: '2011', text: 'Founded by Hitesh Sheth in San Jose' },
+      { year: '2014', text: 'Raised Series C with Accel joining as investor' },
+      { year: 'Jun 2019', text: 'Raised $100M Series E led by TCV' },
+      { year: 'Apr 2021', text: 'Raised $130M Series F at $1.2B valuation' },
+    ],
   },
   {
     name: 'Abnormal',
@@ -534,7 +732,14 @@ export const companies: Company[] = [
     founders: ['Evan Reiser', 'Sanjay Jeyakumar'],
     website: 'https://www.abnormal.ai',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered email security platform that detects and prevents socially engineered attacks like phishing, business email compromise, and account takeovers.',
+    description: 'Abnormal Security is an AI-powered email security platform that detects and prevents socially engineered attacks including phishing, business email compromise, vendor fraud, and account takeovers. The platform serves enterprise security teams at organizations where email remains the primary vector for sophisticated cyberattacks. Abnormal\'s AI builds behavioral profiles of every employee, vendor, and partner to identify anomalous communications that deviate from established patterns, catching attacks that traditional email gateways miss. The company integrates via API with Microsoft 365 and Google Workspace, enabling rapid deployment without changes to existing mail infrastructure.',
+    milestones: [
+      { year: '2018', text: 'Founded by Evan Reiser and Sanjay Jeyakumar, incubated at Greylock' },
+      { year: 'Nov 2019', text: 'Raised $24M Series A led by Greylock Partners' },
+      { year: 'Oct 2020', text: 'Raised $50M Series B led by Menlo Ventures' },
+      { year: 'May 2022', text: 'Raised $210M Series C at $4B valuation' },
+      { year: 'Aug 2024', text: 'Raised $250M Series D at $5.1B valuation' },
+    ],
   },
 
   // Other - Support
@@ -553,7 +758,13 @@ export const companies: Company[] = [
     founders: ['Bret Taylor', 'Clay Bavor'],
     website: 'https://www.sierra.ai',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered customer experience agents that handle conversations across voice, chat, and digital channels for consumer brands.',
+    description: 'Sierra builds AI-powered customer experience agents that handle conversations across voice, chat, and digital channels for consumer-facing brands. The platform serves large consumer companies in retail, telecom, and financial services that need to deliver personalized, always-on customer support at scale. Sierra\'s agents are designed to go beyond scripted chatbots by understanding nuanced customer intent and taking actions like processing returns, updating accounts, and resolving billing issues autonomously. Founded by former Salesforce CEO Bret Taylor and former Google executive Clay Bavor, the company has rapidly scaled to a $10B valuation.',
+    milestones: [
+      { year: '2023', text: 'Founded by Bret Taylor (fmr Salesforce co-CEO) and Clay Bavor (fmr Google VP)' },
+      { year: 'Feb 2024', text: 'Raised $110M Seed at $1B from Sequoia and Benchmark' },
+      { year: 'Oct 2024', text: 'Raised $175M Series A at $4.5B valuation' },
+      { year: 'Sep 2025', text: 'Raised $350M Series B at $10B valuation' },
+    ],
   },
   {
     name: 'Decagon',
@@ -570,7 +781,14 @@ export const companies: Company[] = [
     founders: ['Jesse Zhang', 'Ashwin Sreenivas'],
     website: 'https://www.decagon.ai',
     headquarters: 'San Francisco, CA',
-    description: 'AI customer support agents for enterprises that autonomously resolve complex tickets across chat, email, and voice with full context awareness.',
+    description: 'Decagon builds AI customer support agents for enterprises that autonomously resolve complex tickets across chat, email, and voice with full context awareness of customer history and account data. The platform targets mid-market and enterprise companies looking to automate tier-1 and tier-2 support interactions without sacrificing resolution quality. Decagon\'s agents integrate with internal systems like CRMs, billing platforms, and knowledge bases to take real actions on behalf of customers, not just provide informational responses. The company differentiates through its focus on end-to-end ticket resolution rather than deflection, aiming to replace agent headcount rather than supplement it.',
+    milestones: [
+      { year: '2023', text: 'Founded by Jesse Zhang and Ashwin Sreenivas in San Francisco' },
+      { year: 'Jun 2024', text: 'Emerged from stealth with $35M (a16z Seed + Accel Series A)' },
+      { year: 'Oct 2024', text: 'Raised $65M Series B at $650M valuation' },
+      { year: 'Jun 2025', text: 'Raised $131M Series C at $1.5B valuation' },
+      { year: 'Jan 2026', text: 'Raised $250M Series D at $4.5B valuation' },
+    ],
   },
   {
     name: 'Cresta',
@@ -587,7 +805,14 @@ export const companies: Company[] = [
     founders: ['Zayd Enam', 'Tim Shi', 'Sebastian Thrun'],
     website: 'https://www.cresta.com',
     headquarters: 'Palo Alto, CA',
-    description: 'AI platform for contact center performance optimization that provides real-time coaching, quality management, and conversation intelligence for agents and managers.',
+    description: 'Cresta is an AI platform for contact center performance optimization that provides real-time coaching, quality management, and conversation intelligence for agents and managers. The platform serves large enterprises with hundreds or thousands of contact center agents who handle sales, service, and retention calls. Cresta listens to live conversations and surfaces real-time prompts, suggested responses, and compliance reminders to agents during calls, while giving managers visibility into team performance trends. Co-founded by Sebastian Thrun of Stanford AI Lab and Google X fame, the company applies reinforcement learning to continuously improve agent behavior based on outcome data.',
+    milestones: [
+      { year: '2017', text: 'Founded by Zayd Enam, Tim Shi, and Sebastian Thrun (Stanford AI Lab)' },
+      { year: 'Feb 2020', text: 'Launched from stealth with $21M from Greylock and a16z' },
+      { year: 'Mar 2021', text: 'Raised $50M Series B led by Sequoia Capital' },
+      { year: 'Mar 2022', text: 'Raised $80M Series C at $1.6B valuation' },
+      { year: 'Nov 2024', text: 'Raised $125M Series D' },
+    ],
   },
   {
     name: 'Forethought',
@@ -604,7 +829,13 @@ export const companies: Company[] = [
     founders: ['Deon Nicholas', 'Sami Ghoche'],
     website: 'https://www.forethought.ai',
     headquarters: 'San Francisco, CA',
-    description: 'AI customer support automation platform that triages, prioritizes, and resolves support tickets using natural language understanding.',
+    description: 'Forethought is an AI customer support automation platform that triages, prioritizes, and resolves support tickets using natural language understanding and generative AI. The platform serves mid-market and enterprise support organizations that handle high ticket volumes across email, chat, and web channels. Forethought\'s AI can automatically categorize incoming requests, route them to the right team, and resolve common issues without human intervention. The company differentiates through its SupportGPT product line, which fine-tunes large language models on each customer\'s historical ticket data to deliver increasingly accurate and personalized automated responses over time.',
+    milestones: [
+      { year: '2017', text: 'Founded by Deon Nicholas and Sami Ghoche in San Francisco' },
+      { year: 'Dec 2018', text: 'Raised $9M Series A after winning TechCrunch Disrupt Battlefield' },
+      { year: 'Oct 2020', text: 'Raised $17M Series B led by NEA' },
+      { year: 'Dec 2021', text: 'Raised $65M Series C led by Steadfast Capital' },
+    ],
   },
   {
     name: 'Observe.AI',
@@ -621,7 +852,14 @@ export const companies: Company[] = [
     founders: ['Swapnil Jain', 'Akash Singh'],
     website: 'https://www.observe.ai',
     headquarters: 'Redwood City, CA',
-    description: 'AI-powered contact center intelligence platform that analyzes customer interactions to surface insights, automate QA, and improve agent performance.',
+    description: 'Observe.AI is a contact center intelligence platform that uses AI to analyze customer interactions across voice and text channels, surfacing insights, automating quality assurance, and improving agent performance. The platform serves enterprise contact centers that need to evaluate agent effectiveness at scale without relying on manual call sampling. Observe.AI transcribes and analyzes 100% of conversations to identify coaching opportunities, compliance risks, and customer sentiment trends. The company combines speech analytics with generative AI to automate post-call summaries and deliver targeted feedback to agents and supervisors in real time.',
+    milestones: [
+      { year: '2017', text: 'Founded by Swapnil Jain and team' },
+      { year: '2018', text: 'Y Combinator W18 batch' },
+      { year: 'Dec 2019', text: 'Raised $26M Series A led by Scale Venture Partners' },
+      { year: 'Sep 2020', text: 'Raised $54M Series B led by Menlo Ventures' },
+      { year: 'Apr 2022', text: 'Raised $125M Series C led by SoftBank with Zoom participating' },
+    ],
   },
   {
     name: 'Uniphore',
@@ -638,7 +876,14 @@ export const companies: Company[] = [
     founders: ['Umesh Sachdev', 'Ravi Saraogi'],
     website: 'https://www.uniphore.com',
     headquarters: 'Palo Alto, CA',
-    description: 'Conversational AI and automation platform for enterprises that combines speech recognition, NLP, and emotion AI to transform customer and employee experiences.',
+    description: 'Uniphore is a conversational AI and automation platform for enterprises that combines speech recognition, natural language processing, and emotion AI to transform customer and employee experiences. The platform serves large global enterprises across financial services, insurance, healthcare, and telecom that operate complex multi-channel contact centers. Uniphore\'s technology stack includes real-time agent assist, after-call work automation, and video-based emotion and sentiment analysis that goes beyond text and voice. The company has expanded through acquisitions including Emotion Research Lab and Red Box, building an end-to-end conversational intelligence suite with particular strength in multilingual and non-English markets.',
+    milestones: [
+      { year: '2008', text: 'Founded by Umesh Sachdev and Ravi Saraogi in India' },
+      { year: 'Aug 2019', text: 'Raised $51M Series C led by March Capital' },
+      { year: 'Mar 2021', text: 'Raised $140M Series D led by Sorenson Capital' },
+      { year: 'Feb 2022', text: 'Raised $400M Series E led by NEA at $2.5B valuation' },
+      { year: 'Oct 2025', text: 'Raised $260M Series F with NVIDIA and AMD' },
+    ],
   },
 
   // Enterprise
@@ -657,7 +902,14 @@ export const companies: Company[] = [
     founders: ['Arvind Jain', 'T.R. Vishwanath', 'Tony Gentilcore'],
     website: 'https://www.glean.com',
     headquarters: 'Palo Alto, CA',
-    description: 'AI-powered enterprise search and knowledge management platform that connects all company data sources into a single searchable interface with generative AI answers.',
+    description: 'Glean is an AI-powered enterprise search and knowledge management platform that connects all company data sources into a single searchable interface with generative AI-powered answers. The platform serves mid-market and enterprise organizations that struggle with information fragmentation across dozens of SaaS tools, internal wikis, and file storage systems. Glean indexes content from over 100 enterprise applications and uses AI to deliver personalized search results based on each employee\'s role, team, and activity patterns. The company has expanded beyond search into an enterprise AI assistant platform, enabling organizations to build custom AI agents that leverage their proprietary company knowledge.',
+    milestones: [
+      { year: '2019', text: 'Founded by Arvind Jain and team in Palo Alto' },
+      { year: 'May 2022', text: 'Raised $100M Series C led by Sequoia at $1B valuation' },
+      { year: 'Feb 2024', text: 'Raised $200M Series D at $2.2B valuation' },
+      { year: 'Sep 2024', text: 'Raised $260M Series E at $4.6B valuation' },
+      { year: 'Jun 2025', text: 'Raised $150M Series F at $7.2B valuation' },
+    ],
   },
   {
     name: 'Cohere',
@@ -674,7 +926,14 @@ export const companies: Company[] = [
     founders: ['Aidan Gomez', 'Ivan Zhang', 'Nick Frosst'],
     website: 'https://www.cohere.com',
     headquarters: 'Toronto, Canada',
-    description: 'Enterprise AI platform providing large language models optimized for business applications, with a focus on data privacy, security, and deployment flexibility.',
+    description: 'Cohere is an enterprise AI platform that provides large language models optimized for business applications, with a focus on data privacy, security, and deployment flexibility. The platform serves enterprises that need to deploy AI in private cloud, on-premises, or air-gapped environments where data cannot leave the customer\'s infrastructure. Cohere\'s models are designed for core enterprise use cases including search, summarization, content generation, and conversational AI with support for over 100 languages. The company differentiates from consumer-focused AI labs through its enterprise-first approach, offering dedicated deployments, fine-tuning capabilities, and compliance certifications required by regulated industries.',
+    milestones: [
+      { year: '2019', text: 'Founded by Aidan Gomez, Ivan Zhang, and Nick Frosst in Toronto' },
+      { year: 'Sep 2021', text: 'Raised $40M Series A led by Index Ventures' },
+      { year: 'Feb 2022', text: 'Raised $125M Series B led by Tiger Global' },
+      { year: 'Jun 2023', text: 'Raised $270M Series C from Inovia, Oracle, Salesforce, NVIDIA at $2.2B' },
+      { year: 'Jul 2024', text: 'Raised $500M Series D at $5.5B valuation' },
+    ],
   },
   {
     name: 'Writer',
@@ -691,7 +950,13 @@ export const companies: Company[] = [
     founders: ['May Habib', 'Waseem AlShikh'],
     website: 'https://www.writer.com',
     headquarters: 'San Francisco, CA',
-    description: 'Enterprise AI platform for content generation and governance that helps teams produce on-brand marketing, sales, and HR content at scale.',
+    description: 'Writer is an enterprise AI platform for content generation and governance that helps marketing, sales, HR, and operations teams produce on-brand content at scale while maintaining compliance with company guidelines. The platform serves large enterprises that need to control how AI is used across the organization, ensuring outputs align with brand voice, regulatory requirements, and internal policies. Writer offers its own proprietary LLMs alongside tools for building custom AI applications, knowledge graphs, and content workflows without requiring engineering resources. The company positions itself as a full-stack enterprise AI platform rather than a single-purpose writing tool, competing on governance and customizability.',
+    milestones: [
+      { year: '2020', text: 'Founded by May Habib and Waseem AlShikh in San Francisco' },
+      { year: '2021', text: 'Raised $21M Series A led by Insight Partners' },
+      { year: 'Sep 2023', text: 'Raised $100M Series B led by ICONIQ Growth' },
+      { year: 'Nov 2024', text: 'Raised $200M Series C at $1.9B valuation' },
+    ],
   },
   {
     name: 'Instabase',
@@ -708,7 +973,14 @@ export const companies: Company[] = [
     founders: ['Anant Bhardwaj'],
     website: 'https://www.instabase.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI platform for automating complex document workflows that extracts, classifies, and processes unstructured data from documents at enterprise scale.',
+    description: 'Instabase is an AI platform for automating complex document workflows that extracts, classifies, and processes unstructured data from documents at enterprise scale. The platform serves financial institutions, insurance companies, and government agencies that process millions of documents including applications, claims, invoices, and regulatory filings. Instabase uses a combination of computer vision, NLP, and large language models to understand document structure and extract relevant data points with high accuracy across diverse formats. The company\'s app-building framework allows enterprises to create custom document processing pipelines without extensive ML expertise, reducing dependence on manual data entry teams.',
+    milestones: [
+      { year: '2015', text: 'Founded by Anant Bhardwaj in New York' },
+      { year: 'Jun 2017', text: 'Raised $23M Series A led by Andreessen Horowitz' },
+      { year: 'Oct 2019', text: 'Raised $105M Series B led by Index Ventures at $1B+' },
+      { year: 'Jun 2023', text: 'Raised $45M Series C at $2B valuation' },
+      { year: 'Jan 2025', text: 'Raised $100M Series D at $1.24B (down round)' },
+    ],
   },
   // Sales
   {
@@ -726,7 +998,15 @@ export const companies: Company[] = [
     founders: ['Amit Bendov', 'Eilon Reshef'],
     website: 'https://www.gong.io',
     headquarters: 'San Francisco, CA',
-    description: 'Revenue intelligence platform that uses AI to record, transcribe, and analyze sales conversations, surfacing deal insights and coaching opportunities.',
+    description: 'Gong is a revenue intelligence platform that uses AI to record, transcribe, and analyze sales conversations across calls, emails, and web conferences, surfacing deal insights and coaching opportunities for sales teams. The platform serves B2B sales organizations from mid-market to enterprise that want data-driven visibility into pipeline health and rep performance. Gong\'s AI identifies patterns in winning deals, flags at-risk opportunities, and provides managers with actionable coaching recommendations based on actual conversation data. The company has expanded from conversation intelligence into a broader revenue AI platform covering forecasting, deal management, and buyer engagement analytics.',
+    milestones: [
+      { year: '2015', text: 'Founded by Amit Bendov and Eilon Reshef in San Francisco' },
+      { year: 'Jun 2016', text: 'Raised $6M Series A from Norwest Venture Partners' },
+      { year: 'Feb 2019', text: 'Raised $40M Series B led by Battery Ventures' },
+      { year: 'Dec 2019', text: 'Raised $65M Series C led by Sequoia at $750M valuation' },
+      { year: 'Aug 2020', text: 'Raised $200M Series D at $2.2B valuation (unicorn)' },
+      { year: 'Jun 2021', text: 'Raised $250M Series E at $7.25B valuation' },
+    ],
   },
   {
     name: 'People.ai',
@@ -743,7 +1023,14 @@ export const companies: Company[] = [
     founders: ['Oleg Rogynskyy'],
     website: 'https://www.people.ai',
     headquarters: 'San Francisco, CA',
-    description: 'AI revenue operations platform that automatically captures sales activity data and matches it to CRM records to improve pipeline visibility and forecasting.',
+    description: 'People.ai is a revenue operations platform that uses AI to automatically capture sales activity data from emails, calls, and meetings, matching it to CRM records to improve pipeline visibility and forecasting accuracy. The platform serves enterprise sales organizations that struggle with incomplete CRM data and inaccurate pipeline reporting. People.ai\'s technology creates a comprehensive activity graph that maps every interaction between sellers and buyers, giving revenue leaders a true picture of deal engagement and account penetration. The company focuses on data automation and analytics rather than conversation intelligence, positioning itself as the data foundation layer for revenue operations teams.',
+    milestones: [
+      { year: '2016', text: 'Founded in San Francisco; Y Combinator' },
+      { year: 'May 2017', text: 'Raised $7M Series A led by Lightspeed Venture Partners' },
+      { year: 'Oct 2018', text: 'Raised $30M Series B led by Andreessen Horowitz' },
+      { year: 'May 2019', text: 'Raised $60M Series C led by ICONIQ Capital' },
+      { year: 'Aug 2021', text: 'Raised $100M Series D at $1.1B valuation (unicorn)' },
+    ],
   },
   {
     name: 'Clari',
@@ -760,7 +1047,15 @@ export const companies: Company[] = [
     founders: ['Andy Byrne', 'Venkat Rangan'],
     website: 'https://www.clari.com',
     headquarters: 'Sunnyvale, CA',
-    description: 'AI-powered revenue operations and forecasting platform that provides full pipeline visibility. Acquired Salesloft to combine revenue intelligence with sales engagement.',
+    description: 'Clari is an AI-powered revenue operations and forecasting platform that provides full pipeline visibility, deal inspection, and forecast accuracy for B2B sales organizations. The platform serves CROs, VP Sales, and revenue operations leaders at mid-market and enterprise companies who need to predict quarterly revenue outcomes with confidence. Clari analyzes signals from CRM, email, calendar, and conversation data to identify pipeline risk and forecast revenue with greater precision than manual methods. The company\'s acquisition of Salesloft combined its revenue intelligence capabilities with sales engagement and cadencing tools, creating a unified platform spanning the entire revenue workflow.',
+    milestones: [
+      { year: '2012', text: 'Founded by Andy Byrne and Venkat Rangan in Sunnyvale' },
+      { year: 'Jun 2014', text: 'Raised $20M Series B led by Bain Capital Ventures' },
+      { year: 'Mar 2018', text: 'Raised $35M Series C led by Tenaya Capital' },
+      { year: 'Oct 2019', text: 'Raised $60M Series D led by Sapphire Ventures' },
+      { year: 'Mar 2021', text: 'Raised $150M Series E led by Silver Lake at $1.6B' },
+      { year: 'Jan 2022', text: 'Raised $225M Series F at $2.6B valuation' },
+    ],
   },
   {
     name: 'Highspot',
@@ -777,7 +1072,15 @@ export const companies: Company[] = [
     founders: ['Robert Wahbe', 'Oliver Sharp', 'David Wortendyke'],
     website: 'https://www.highspot.com',
     headquarters: 'Seattle, WA',
-    description: 'AI-powered sales enablement platform that helps reps find the right content, training, and guidance to engage buyers and close deals more effectively.',
+    description: 'Highspot is an AI-powered sales enablement platform that helps sales reps find the right content, training, and guidance to engage buyers and close deals more effectively. The platform serves enterprise sales and marketing organizations that need to manage large libraries of sales collateral and ensure reps are using the most current and relevant materials. Highspot uses AI to recommend content based on deal stage, buyer persona, and engagement patterns, while providing analytics on which content drives revenue. The company combines content management, training, and coaching into a unified platform, giving enablement leaders a complete view of how their programs impact seller behavior and deal outcomes.',
+    milestones: [
+      { year: '2012', text: 'Founded by Robert Wahbe and Oliver Sharp in Seattle' },
+      { year: 'Nov 2014', text: 'Raised $9.6M Series A led by Madrona Venture Group' },
+      { year: '2018', text: 'Raised $35M Series C' },
+      { year: 'Jun 2019', text: 'Raised $60M Series D led by ICONIQ Capital' },
+      { year: 'Feb 2021', text: 'Raised $200M Series E led by Tiger Global at $2.3B' },
+      { year: 'Jan 2022', text: 'Raised $248M Series F at $3.5B valuation' },
+    ],
   },
 
   // Travel
@@ -796,7 +1099,14 @@ export const companies: Company[] = [
     founders: ['Ariel Cohen', 'Ilan Twig'],
     website: 'https://www.navan.com',
     headquarters: 'Palo Alto, CA',
-    description: 'AI-powered corporate travel and expense management platform that combines booking, payments, and spend control into a single automated system.',
+    description: 'Navan is an AI-powered corporate travel and expense management platform that combines booking, payments, and spend control into a single automated system for businesses. The platform serves finance and travel teams at companies ranging from mid-market to large enterprises that want to consolidate travel booking, expense reporting, and corporate card management. Navan\'s AI automates expense categorization, policy enforcement, and receipt matching while providing real-time visibility into travel spend across the organization. The company went public in 2025 and differentiates through its consumer-grade booking experience paired with enterprise-grade controls, driving high employee adoption rates that reduce out-of-policy spending.',
+    milestones: [
+      { year: '2015', text: 'Founded by Ariel Cohen and Ilan Twig as TripActions' },
+      { year: 'Nov 2018', text: 'Raised $154M Series C led by a16z at $1B+ valuation' },
+      { year: 'Oct 2021', text: 'Raised $275M Series F at $7.25B valuation' },
+      { year: 'Feb 2023', text: 'Rebranded from TripActions to Navan' },
+      { year: 'Oct 2025', text: 'IPO on Nasdaq (NAVN), raised $923M' },
+    ],
   },
   {
     name: 'Spotnana',
@@ -813,7 +1123,13 @@ export const companies: Company[] = [
     founders: ['Sarosh Waghmar', 'Steve Singh'],
     website: 'https://www.spotnana.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered travel management platform built on modern infrastructure that provides booking, policy compliance, and reporting for corporations and TMCs.',
+    description: 'Spotnana is an AI-powered travel management platform built on modern cloud-native infrastructure that provides booking, policy compliance, and reporting for corporations and travel management companies (TMCs). The platform targets enterprises and TMCs that are frustrated with legacy travel technology built on decades-old GDS infrastructure. Spotnana\'s open platform approach enables direct connections to airlines, hotels, and ground transportation providers, often delivering better pricing and availability than legacy systems. The company also offers its technology as a white-label solution for TMCs, positioning itself as both a direct corporate travel platform and the infrastructure layer for the broader travel management industry.',
+    milestones: [
+      { year: '2020', text: 'Founded by Sarosh Waghmar and Shikhar Agarwal in New York' },
+      { year: 'Sep 2021', text: 'Raised $34M Series A co-led by ICONIQ and Madrona' },
+      { year: 'Jul 2022', text: 'Raised $75M Series B led by Durable Capital Partners' },
+      { year: 'Oct 2025', text: 'Raised $75M Series C at $1.2B valuation' },
+    ],
   },
 
   // Real Estate
@@ -832,7 +1148,14 @@ export const companies: Company[] = [
     founders: ['Minna Song', 'Tony Yun'],
     website: 'https://www.eliseai.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered leasing and property management assistant for multifamily real estate that automates prospect communication, scheduling, and resident services across channels.',
+    description: 'EliseAI is an AI-powered leasing and property management assistant for multifamily real estate that automates prospect communication, tour scheduling, application follow-up, and resident services across email, text, chat, and voice. The platform serves property management companies and multifamily owners that manage hundreds or thousands of units and struggle with leasing team staffing and response times. EliseAI\'s conversational AI handles the full leasing funnel from initial inquiry to signed lease, operating 24/7 and responding to prospects in seconds rather than hours. The company has expanded beyond leasing into resident services, maintenance coordination, and collections, aiming to become the AI operating layer for multifamily property management.',
+    milestones: [
+      { year: '2017', text: 'Founded by Minna Song and Tony Stoyanov in New York' },
+      { year: 'Jul 2020', text: 'Raised $6.5M Series A led by Navitas Capital' },
+      { year: '2023', text: 'Raised $35M Series C led by Point72 Private Investments' },
+      { year: 'Aug 2024', text: 'Raised $75M Series D at $1B+ valuation (unicorn)' },
+      { year: 'Aug 2025', text: 'Raised $250M Series E at $2.2B valuation' },
+    ],
   },
   {
     name: 'Lessen',
@@ -849,7 +1172,13 @@ export const companies: Company[] = [
     founders: ['Jay McKee', 'John Bryant'],
     website: 'https://www.lessen.com',
     headquarters: 'Scottsdale, AZ',
-    description: 'AI-powered property maintenance and renovation management platform that connects property owners with vetted service providers for turns, repairs, and capital projects.',
+    description: 'Lessen is an AI-powered property maintenance and renovation management platform that connects institutional property owners with a vetted network of service providers for unit turns, repairs, and capital improvement projects. The platform serves single-family rental operators, multifamily owners, and commercial property managers who need to coordinate high volumes of maintenance work across geographically dispersed portfolios. Lessen uses AI to optimize vendor matching, job scheduling, and quality control, reducing turn times and maintenance costs for property owners. The company\'s marketplace model aggregates demand across thousands of properties, giving it leverage to negotiate better pricing and ensure consistent service quality from its provider network.',
+    milestones: [
+      { year: '2019', text: 'Founded by Jay McKee in Scottsdale, AZ' },
+      { year: 'Jun 2021', text: 'Raised $35M Series A led by Fifth Wall' },
+      { year: 'Nov 2021', text: 'Raised $170M Series B at $1B+ valuation' },
+      { year: 'Jan 2023', text: 'Acquired SMS Assist for $950M' },
+    ],
   },
   {
     name: 'Opendoor',
@@ -866,7 +1195,14 @@ export const companies: Company[] = [
     founders: ['Eric Wu', 'Ian Wong', 'JD Ross', 'Keith Rabois'],
     website: 'https://www.opendoor.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered iBuying platform for residential real estate that uses machine learning to make instant cash offers on homes, simplifying the selling process.',
+    description: 'Opendoor is an AI-powered iBuying platform for residential real estate that uses machine learning models to make instant cash offers on homes, simplifying and accelerating the home-selling process. The platform targets homeowners who want the certainty and speed of a cash sale without the uncertainty of traditional listing, showings, and negotiations. Opendoor\'s pricing models analyze hundreds of data points including comparable sales, neighborhood trends, and property condition to generate competitive offers within minutes. As a publicly traded company, Opendoor operates in dozens of US markets and has expanded into adjacent services including home loans and title insurance to capture more of the real estate transaction.',
+    milestones: [
+      { year: '2014', text: 'Founded by Eric Wu and Keith Rabois in San Francisco' },
+      { year: 'Nov 2016', text: 'Raised $210M Series D from Norwest, NEA, and Khosla' },
+      { year: 'Jun 2018', text: 'Raised $325M Series E co-led by General Atlantic' },
+      { year: '2019', text: 'Raised $300M led by General Atlantic at $3.8B valuation' },
+      { year: 'Dec 2020', text: 'Went public via SPAC at $4.8B enterprise value' },
+    ],
   },
 
   // Insurance
@@ -885,7 +1221,14 @@ export const companies: Company[] = [
     founders: ['Jason Xi', 'Suresh Agrawal'],
     website: 'https://www.nirvanatech.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered commercial trucking insurance that uses telematics and driver behavior data to price risk more accurately and reward safer fleets.',
+    description: 'Nirvana Insurance is an AI-powered commercial trucking insurance provider that uses telematics and driver behavior data to price risk more accurately and reward safer fleets with lower premiums. The platform targets trucking companies and fleet operators in a commercial auto market plagued by rising loss ratios and blunt pricing based on limited data. Nirvana installs telematics devices or integrates with existing ELD systems to continuously monitor driving behavior, using AI models to assess individual driver and fleet-level risk in real time. This data-driven underwriting approach allows Nirvana to offer competitive pricing to safe operators while avoiding the adverse selection that burdens traditional trucking insurers.',
+    milestones: [
+      { year: '2019', text: 'Founded by Rushil Goel, Alex Carges, and Abhay Mitra' },
+      { year: 'Feb 2022', text: 'Raised $22M Series A led by Lightspeed' },
+      { year: 'Oct 2023', text: 'Raised $57M Series B led by Lightspeed' },
+      { year: 'Mar 2025', text: 'Raised $80M Series C at $830M valuation' },
+      { year: 'Dec 2025', text: 'Raised $100M Series D at $1.5B valuation' },
+    ],
   },
   {
     name: 'Tractable',
@@ -902,7 +1245,14 @@ export const companies: Company[] = [
     founders: ['Alex Dalyac', 'Razvan Ranca', 'Adrien Cohen'],
     website: 'https://www.tractable.ai',
     headquarters: 'London, UK',
-    description: 'AI for auto insurance claims processing that uses computer vision to assess vehicle damage from photos, speeding up appraisals and settlements.',
+    description: 'Tractable is an AI platform for auto insurance claims processing that uses computer vision to assess vehicle damage from photos, speeding up appraisals and settlements for carriers and body shops. The platform serves property and casualty insurers, auto claims adjusters, and collision repair networks that need to estimate repair costs quickly and consistently. Tractable\'s models are trained on millions of vehicle damage images, enabling instant damage assessment that matches or exceeds the accuracy of human appraisers. The company has expanded beyond auto into property insurance and disaster response, applying its visual AI to assess damage from natural catastrophes like hurricanes and floods.',
+    milestones: [
+      { year: '2014', text: 'Founded by Alex Dalyac and Razvan Ranca in London' },
+      { year: 'Jan 2017', text: 'Raised $8M Series A led by Ignition Partners' },
+      { year: '2018', text: 'Raised $25M Series B led by Insight Partners' },
+      { year: 'Jun 2021', text: 'Raised $60M Series D at $1B valuation (unicorn)' },
+      { year: 'Jul 2023', text: 'Raised $65M Series E led by SoftBank Vision Fund 2' },
+    ],
   },
 
   // Other - Media
@@ -921,7 +1271,15 @@ export const companies: Company[] = [
     founders: ['Victor Riparbelli', 'Steffen Tjerrild', 'Matthias Niessner', 'Lourdes Agapito'],
     website: 'https://www.synthesia.io',
     headquarters: 'London, UK',
-    description: 'AI video generation platform that creates professional videos from text using AI avatars and voiceovers, used for corporate training, marketing, and internal communications.',
+    description: 'Synthesia is an AI video generation platform that creates professional-quality videos from text scripts using photorealistic AI avatars and voiceovers in over 120 languages. The platform is used by enterprise L&D teams, marketing departments, and internal communications groups that need to produce video content at scale without the cost and logistics of traditional video production. Synthesia eliminates the need for cameras, studios, and actors by generating on-screen presenters entirely through AI, enabling companies to update training videos in minutes rather than weeks. The company has become a category leader in enterprise AI video with over 50,000 business customers and a focus on trust, safety, and content authenticity.',
+    milestones: [
+      { year: '2017', text: 'Founded by Victor Riparbelli and Steffen Tjerrild in London' },
+      { year: 'Apr 2021', text: 'Raised $12.5M Series A with FirstMark and MMC Ventures' },
+      { year: 'Dec 2021', text: 'Raised $50M Series B led by Kleiner Perkins and GV' },
+      { year: 'Jun 2023', text: 'Raised $90M Series C at $1B valuation (unicorn)' },
+      { year: 'Jan 2025', text: 'Raised $180M Series D at $2.1B valuation' },
+      { year: 'Oct 2025', text: 'Raised $200M Series E at $4B valuation' },
+    ],
   },
 
   // Other - Accounting
@@ -940,7 +1298,12 @@ export const companies: Company[] = [
     founders: ['Parker Gilbert', 'Arjun Ravi'],
     website: 'https://www.numeric.io',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered accounting close and reconciliation platform that automates month-end workflows, flux analysis, and financial reporting for accounting teams.',
+    description: 'Numeric is an AI-powered accounting close and reconciliation platform that automates month-end workflows, flux analysis, journal entry review, and financial reporting for accounting teams. The platform serves mid-market and enterprise accounting departments that spend days or weeks each month on repetitive close tasks and manual reconciliations. Numeric integrates with ERP systems and GL data to provide real-time close progress tracking, automated variance explanations, and AI-generated review commentary. The company addresses a historically underserved segment of finance software, bringing modern AI automation to accounting close processes that have largely been managed through spreadsheets and legacy tools.',
+    milestones: [
+      { year: '2021', text: 'Founded by Parker Gilbert, Andrew Bihl, and Anthony Alvernaz' },
+      { year: 'May 2024', text: 'Raised $10M Seed from Founders Fund and Menlo Ventures' },
+      { year: 'Oct 2024', text: 'Raised $28M Series A led by Menlo Ventures with IVP' },
+    ],
   },
 
   // Other - Marketing
@@ -959,7 +1322,11 @@ export const companies: Company[] = [
     founders: ['Dave Rogenmoser', 'John Philip Morgan', 'Chris Hull'],
     website: 'https://www.jasper.ai',
     headquarters: 'Austin, TX',
-    description: 'AI content creation platform for marketing teams that generates on-brand copy, images, and campaigns across channels using custom brand voice models.',
+    description: 'Jasper is an AI content creation platform for marketing teams that generates on-brand copy, images, and campaign assets across channels using custom brand voice models and style guides. The platform serves enterprise marketing organizations that need to produce high volumes of content for blogs, social media, ads, email campaigns, and product pages while maintaining brand consistency. Jasper allows teams to train the AI on their brand guidelines, tone of voice, and product knowledge to ensure outputs align with company standards. The company was an early mover in generative AI for marketing and has evolved from a simple copywriting tool into a broader marketing AI platform with workflow, collaboration, and analytics features.',
+    milestones: [
+      { year: '2021', text: 'Founded by Dave Rogenmoser and team in Austin as Conversion.ai' },
+      { year: 'Oct 2022', text: 'Raised $125M Series A led by Insight Partners at $1.5B valuation' },
+    ],
   },
 
   // Defense
@@ -978,7 +1345,14 @@ export const companies: Company[] = [
     founders: ['Brandon Tseng', 'Ryan Tseng', 'Andrew Reiter'],
     website: 'https://www.shield.ai',
     headquarters: 'San Diego, CA',
-    description: 'Autonomous AI systems for defense that develops AI pilots for drones and fighter jets, enabling autonomous flight in GPS-denied and contested environments.',
+    description: 'Shield AI develops autonomous AI systems for defense, building AI pilots for drones and fighter jets that enable autonomous flight in GPS-denied and contested environments without remote operators. The company serves the US Department of Defense and allied militaries that need unmanned systems capable of operating independently in communications-degraded battlefields. Shield AI\'s Hivemind autonomy stack powers multiple aircraft platforms including the V-BAT vertical takeoff drone and is being adapted for fighter aircraft through its Mosaic AI pilot program. The company has become one of the highest-valued defense AI startups, competing for contracts in the Pentagon\'s push toward autonomous drone swarms and collaborative combat aircraft.',
+    milestones: [
+      { year: '2015', text: 'Founded by Brandon Tseng and Ryan Tseng in San Diego' },
+      { year: 'Feb 2021', text: 'Raised $90M Series C led by Point72 Ventures' },
+      { year: 'Aug 2021', text: 'Raised $210M Series D' },
+      { year: 'Oct 2023', text: 'Raised $200M Series F at $2.7B valuation' },
+      { year: 'Mar 2025', text: 'Raised $240M Series F-1 at $5.3B with L3Harris and Hanwha' },
+    ],
   },
   {
     name: 'Anduril',
@@ -995,7 +1369,15 @@ export const companies: Company[] = [
     founders: ['Palmer Luckey', 'Trae Stephens', 'Brian Schimpf', 'Matt Grimm'],
     website: 'https://www.anduril.com',
     headquarters: 'Costa Mesa, CA',
-    description: 'AI-powered defense technology company building autonomous systems, sensors, and software for national security including counter-drone, surveillance, and command-and-control platforms.',
+    description: 'Anduril is a defense technology company that builds AI-powered autonomous systems, sensor networks, and command-and-control software for national security missions including border surveillance, counter-drone operations, and undersea warfare. The company serves the US Department of Defense, intelligence community, and allied governments seeking modern, software-defined alternatives to legacy defense platforms. Anduril\'s Lattice OS provides a common operating system that fuses sensor data from across the battlefield to enable real-time situational awareness and autonomous threat response. Founded by Oculus creator Palmer Luckey, the company has rapidly scaled to become one of the largest venture-backed defense primes, with a manufacturing facility for its autonomous systems.',
+    milestones: [
+      { year: '2017', text: 'Founded by Palmer Luckey (Oculus co-founder) in Costa Mesa, CA' },
+      { year: 'Jun 2018', text: 'Raised $41M Series A led by Founders Fund' },
+      { year: 'Jun 2021', text: 'Raised $450M Series D at $4.6B valuation' },
+      { year: 'Dec 2022', text: 'Raised $1.48B Series E at $8.5B valuation' },
+      { year: 'Aug 2024', text: 'Raised $1.5B Series F at $14B valuation' },
+      { year: 'Jun 2025', text: 'Raised $2.5B Series G at $30.5B valuation' },
+    ],
   },
   {
     name: 'Palantir',
@@ -1012,7 +1394,15 @@ export const companies: Company[] = [
     founders: ['Peter Thiel', 'Alex Karp', 'Joe Lonsdale', 'Stephen Cohen', 'Nathan Gettings'],
     website: 'https://www.palantir.com',
     headquarters: 'Miami, FL',
-    description: 'Data analytics and AI platform serving defense and intelligence agencies as well as commercial enterprises, with products for data integration, operational planning, and decision-making.',
+    description: 'Palantir is a data analytics and AI platform serving defense, intelligence agencies, and commercial enterprises with products for data integration, operational planning, and AI-assisted decision-making. The company\'s government platforms (Gotham and Apollo) are used by the US military and intelligence community for mission planning, threat analysis, and logistics optimization. Palantir\'s commercial platform (Foundry) and its newer AIP product bring the same data integration and AI capabilities to enterprises in healthcare, energy, manufacturing, and financial services. As a publicly traded company valued at over $150B, Palantir has become the benchmark for enterprise AI deployment in high-stakes, data-complex environments.',
+    milestones: [
+      { year: '2003', text: 'Founded by Peter Thiel, Alex Karp, and team' },
+      { year: '2005', text: 'Received ~$2M from In-Q-Tel (CIA venture arm)' },
+      { year: '2015', text: 'Raised $880M at $20B valuation' },
+      { year: 'Sep 2020', text: 'Direct listing on NYSE under ticker PLTR' },
+      { year: 'Feb 2023', text: 'First quarter of positive GAAP net income' },
+      { year: 'Sep 2024', text: 'Added to S&P 500 index' },
+    ],
   },
 
   // Other - Voice/Media
@@ -1031,7 +1421,14 @@ export const companies: Company[] = [
     founders: ['Piotr Dabkowski', 'Mati Staniszewski'],
     website: 'https://www.elevenlabs.io',
     headquarters: 'London, UK',
-    description: 'AI voice synthesis and audio generation platform that creates ultra-realistic speech, sound effects, and voice clones for media, gaming, and enterprise applications.',
+    description: 'ElevenLabs is an AI voice synthesis and audio generation platform that creates ultra-realistic speech, sound effects, and voice clones for media, gaming, publishing, and enterprise applications. The platform serves content creators, media companies, game studios, and enterprises that need high-quality synthetic voice generation in dozens of languages and voice styles. ElevenLabs\' technology produces speech that is virtually indistinguishable from human recordings, enabling applications from audiobook narration to real-time voice dubbing and conversational AI agents. The company has grown rapidly to become the market leader in AI voice generation, with its API powering voice capabilities in thousands of applications and a growing focus on safety measures to prevent misuse.',
+    milestones: [
+      { year: '2022', text: 'Founded by Piotr Dabkowski (ex-Google) and Mati Staniszewski (ex-Palantir)' },
+      { year: 'Jun 2023', text: 'Raised $19M Series A at $100M co-led by a16z and Nat Friedman' },
+      { year: 'Jan 2024', text: 'Raised $80M Series B at $1.1B valuation' },
+      { year: 'Jan 2025', text: 'Raised $180M Series C at $3.3B valuation' },
+      { year: 'Feb 2026', text: 'Raised $500M Series D at $11B valuation' },
+    ],
   },
   {
     name: 'Runway',
@@ -1048,7 +1445,14 @@ export const companies: Company[] = [
     founders: ['Cristóbal Valenzuela', 'Alejandro Matamala', 'Anastasis Germanidis'],
     website: 'https://www.runwayml.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered video editing and generation platform that enables creators to produce and manipulate video content using generative AI models.',
+    description: 'Runway is an AI-powered video editing and generation platform that enables creators and studios to produce and manipulate video content using state-of-the-art generative AI models. The platform serves filmmakers, advertising agencies, media companies, and individual creators who need to generate, edit, and transform video without traditional production infrastructure. Runway\'s Gen series of models can create video from text prompts, extend existing footage, remove or replace objects, and apply cinematic effects through a browser-based interface. The company has positioned itself at the intersection of AI research and creative tools, partnering with major entertainment studios and winning an Emmy for its contributions to visual effects technology.',
+    milestones: [
+      { year: '2018', text: 'Founded by Cristobal Valenzuela and team at NYU Tisch' },
+      { year: 'Dec 2021', text: 'Raised $35M Series B' },
+      { year: 'Jun 2023', text: 'Raised $141M Series C extension at $1.5B from Google and Nvidia' },
+      { year: 'Apr 2025', text: 'Raised $308M Series D at $3B+ valuation' },
+      { year: 'Feb 2026', text: 'Raised $315M Series E at $5.3B valuation' },
+    ],
   },
 
   // Construction
@@ -1067,7 +1471,14 @@ export const companies: Company[] = [
     founders: ['Tooey Courtemanche'],
     website: 'https://www.procore.com',
     headquarters: 'Carpinteria, CA',
-    description: 'Cloud-based construction management software for project planning, scheduling, financials, and field collaboration used by general contractors and owners.',
+    description: 'Procore is a cloud-based construction management platform covering project planning, scheduling, financials, quality and safety management, and field collaboration for general contractors, specialty contractors, and owners. The platform serves construction companies of all sizes that need a unified system to manage projects from preconstruction through closeout. Procore connects office and field teams on a single platform with tools for RFIs, submittals, daily logs, change orders, and budget tracking, reducing the reliance on spreadsheets and disconnected point solutions. As the largest publicly traded construction technology company, Procore has built a data network spanning hundreds of billions of dollars in construction volume, which it is increasingly leveraging for AI-powered insights and automation.',
+    milestones: [
+      { year: '2002', text: 'Founded by Tooey Courtemanche in Carpinteria, CA' },
+      { year: '2014', text: 'Raised $15M led by Bessemer \u2014 first institutional round after 12 years bootstrapped' },
+      { year: '2016', text: 'Raised $50M led by ICONIQ, reaching $1B valuation' },
+      { year: 'Apr 2020', text: 'Raised $150M at $5B valuation' },
+      { year: 'May 2021', text: 'IPO on NYSE (PCOR), raising $634.5M' },
+    ],
   },
   {
     name: 'Trunk Tools',
@@ -1084,7 +1495,13 @@ export const companies: Company[] = [
     founders: ['Eddie Dixon', 'Shahriar Malek'],
     website: 'https://www.trunktools.com',
     headquarters: 'New York, NY',
-    description: 'AI assistant for construction project management that helps general contractors find answers across project documents, RFIs, submittals, and specs.',
+    description: 'Trunk Tools is an AI assistant for construction project management that helps general contractors and project teams instantly find answers across project documents including RFIs, submittals, specifications, drawings, and contracts. The platform serves superintendents, project managers, and project engineers at commercial construction firms who spend hours each day searching through document sets to answer field questions. Trunk Tools uses AI trained on construction-specific language and document formats to understand the nuances of building plans and project documentation. The company integrates with existing project management platforms like Procore and Autodesk, acting as an AI layer on top of a contractor\'s existing document ecosystem.',
+    milestones: [
+      { year: '2021', text: 'Founded by Dr. Sarah Buchner in New York' },
+      { year: 'Jul 2023', text: 'Raised Seed led by Innovation Endeavors and Fifth Wall' },
+      { year: 'Aug 2024', text: 'Raised $20M Series A led by Redpoint Ventures' },
+      { year: 'Jul 2025', text: 'Raised $40M Series B led by Insight Partners' },
+    ],
   },
   {
     name: 'PermitFlow',
@@ -1101,7 +1518,13 @@ export const companies: Company[] = [
     founders: ['Clem Jalonen', 'Francis Dinha'],
     website: 'https://www.permitflow.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered building permit management platform that automates permit applications, jurisdiction research, and approval tracking for construction projects.',
+    description: 'PermitFlow is an AI-powered building permit management platform that automates permit applications, jurisdiction research, document preparation, and approval tracking for construction projects. The platform serves general contractors, developers, and architects who spend weeks navigating complex and inconsistent permitting requirements across thousands of US jurisdictions. PermitFlow\'s AI maps local building codes and permit requirements, auto-generates application packages, and tracks submission status through approval, replacing a process that has traditionally relied on manual research and in-person filings. The company addresses a massive pain point in construction where permitting delays routinely add weeks or months to project timelines and significant cost overruns.',
+    milestones: [
+      { year: '2022', text: 'Founded in New York; Y Combinator' },
+      { year: '2022', text: 'Raised $5.5M Seed led by Initialized Capital' },
+      { year: 'Feb 2024', text: 'Raised $31M Series A led by Kleiner Perkins' },
+      { year: '2025', text: 'Raised $54M Series B led by Accel' },
+    ],
   },
   {
     name: 'Buildr',
@@ -1118,7 +1541,12 @@ export const companies: Company[] = [
     founders: ['David Mitchell'],
     website: 'https://www.buildr.com',
     headquarters: 'Long Beach, CA',
-    description: 'AI-powered preconstruction and bid management platform that helps general contractors manage relationships, track opportunities, and streamline the bidding process.',
+    description: 'Buildr is an AI-powered preconstruction and bid management platform that helps general contractors manage client relationships, track project opportunities, and streamline the bidding and pursuit process. The platform targets business development and preconstruction teams at commercial GCs who manage dozens of active pursuits and need to coordinate proposals, subcontractor outreach, and qualification submissions. Buildr combines CRM functionality with AI-driven bid analysis and go/no-go decision support, helping contractors focus on the opportunities most likely to convert. The company fills a gap in construction technology by focusing on the revenue-generating front end of the project lifecycle rather than the execution phase that most construction software addresses.',
+    milestones: [
+      { year: '2018', text: 'Founded by Edward Gonzalez and Michael Stock (both ex-Procore)' },
+      { year: '2022', text: 'Launched construction CRM platform' },
+      { year: '2024', text: 'Raised $10M Series A' },
+    ],
   },
 
   // Other - Restaurant/Hospitality
@@ -1137,7 +1565,15 @@ export const companies: Company[] = [
     founders: ['Steve Fredette', 'Aman Narang', 'Jonathan Grimm'],
     website: 'https://www.toasttab.com',
     headquarters: 'Boston, MA',
-    description: 'All-in-one restaurant management and POS platform covering ordering, payments, payroll, marketing, and operations for food service businesses.',
+    description: 'Toast is an all-in-one restaurant management and point-of-sale platform covering ordering, payments, payroll, marketing, inventory, and back-office operations for food service businesses of all sizes. The platform serves restaurants, cafes, bars, and food trucks that need an integrated technology stack purpose-built for the hospitality industry rather than generic retail POS systems. Toast combines hardware terminals with cloud-based software to manage the full restaurant operation from front-of-house ordering to kitchen display systems and employee management. As a publicly traded company, Toast has become the dominant vertical SaaS platform in restaurants, processing tens of billions of dollars in gross payment volume annually and expanding into adjacent services like supply chain and lending.',
+    milestones: [
+      { year: '2011', text: 'Founded by Aman Narang, Steve Fredette, and Jonathan Grimm in Boston' },
+      { year: '2017', text: 'Raised $101M Series C' },
+      { year: '2018', text: 'Raised $115M Series D led by T. Rowe Price' },
+      { year: '2019', text: 'Raised $250M Series E from TCV and T. Rowe Price' },
+      { year: 'Feb 2020', text: 'Raised $400M Series F at $4.9B valuation' },
+      { year: 'Sep 2021', text: 'IPO on NYSE (TOST), raising $870M' },
+    ],
   },
 
   // Home Services
@@ -1156,7 +1592,16 @@ export const companies: Company[] = [
     founders: ['Ara Mahdessian', 'Vahe Kuzoyan'],
     website: 'https://www.servicetitan.com',
     headquarters: 'Glendale, CA',
-    description: 'End-to-end software platform for home and commercial service businesses covering dispatch, scheduling, invoicing, marketing, and customer management.',
+    description: 'ServiceTitan is an end-to-end software platform for home and commercial service businesses covering dispatch, scheduling, invoicing, marketing, payroll, and customer management. The platform serves HVAC, plumbing, electrical, garage door, and other trades contractors ranging from small shops to large multi-location enterprises. ServiceTitan replaces fragmented paper-based and spreadsheet workflows with a unified system that manages the entire service lifecycle from marketing and booking through job completion and payment. As a recently public company, ServiceTitan has become the operating system for the trades industry, with its platform processing billions in managed revenue and expanding into AI features for pricing optimization and demand forecasting.',
+    milestones: [
+      { year: '2012', text: 'Founded by Ara Mahdessian and Vahe Kuzoyan in Glendale, CA' },
+      { year: 'Jun 2015', text: 'Raised $18M Series A led by Bessemer Venture Partners' },
+      { year: 'Mar 2017', text: 'Raised $80M Series B led by ICONIQ Capital' },
+      { year: 'Nov 2018', text: 'Raised $165M Series D with Index Ventures' },
+      { year: 'Mar 2021', text: 'Raised $500M Series F led by Tiger Global and Sequoia' },
+      { year: 'Oct 2022', text: 'Raised $250M Series H at $7.4B from Coatue' },
+      { year: 'Dec 2024', text: 'IPO on Nasdaq (TTAN) at $71/share; closed at $101' },
+    ],
   },
   {
     name: 'Siro',
@@ -1173,7 +1618,12 @@ export const companies: Company[] = [
     founders: ['Jake Darmody', 'Stuart Macgregor'],
     website: 'https://www.siro.ai',
     headquarters: 'New York, NY',
-    description: 'AI sales coaching platform for field service teams that records in-home sales conversations and provides actionable feedback to improve close rates.',
+    description: 'Siro is an AI sales coaching platform for field service teams that records in-home sales conversations and provides actionable feedback to improve close rates and average ticket sizes. The platform serves home services companies in HVAC, plumbing, roofing, and solar whose revenue depends heavily on the performance of field technicians and sales reps during in-home visits. Siro\'s AI analyzes recorded conversations to identify the specific moments, phrases, and techniques that distinguish top performers from average reps, then delivers targeted coaching insights. The company addresses a unique gap in sales intelligence by focusing on in-person, field-based selling environments that traditional conversation intelligence tools designed for phone and video calls cannot capture.',
+    milestones: [
+      { year: '2020', text: 'Founded to build AI coaching for field sales teams' },
+      { year: 'Oct 2023', text: 'Raised ~$14M Series A led by CRV and Fika Ventures' },
+      { year: 'May 2025', text: 'Raised $50M Series B led by SignalFire' },
+    ],
   },
   {
     name: 'Topline Pro',
@@ -1190,7 +1640,13 @@ export const companies: Company[] = [
     founders: ['Nick Meitz', 'Shannon Quinn'],
     website: 'https://www.toplinepro.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered marketing platform for home service businesses that automates website creation, review management, and lead generation.',
+    description: 'Topline Pro is an AI-powered marketing platform for home service businesses that automates website creation, review management, social media posting, and lead generation. The platform targets small and mid-size contractors in HVAC, landscaping, cleaning, and other trades who lack the time, expertise, or budget to manage their own digital marketing. Topline Pro uses AI to generate professional websites, automatically request and respond to customer reviews, and create social content from job photos, helping contractors build online presence with minimal effort. The company addresses the massive SMB home services market where most businesses still rely on word-of-mouth and have little to no digital marketing infrastructure.',
+    milestones: [
+      { year: '2020', text: 'Founded in New York' },
+      { year: 'Oct 2022', text: 'Raised $5M Seed led by Bonfire Ventures' },
+      { year: 'Jul 2023', text: 'Raised $12M Series A led by Forerunner Ventures' },
+      { year: 'Aug 2025', text: 'Raised $27M Series B led by Northzone' },
+    ],
   },
   {
     name: 'Rilla',
@@ -1207,7 +1663,13 @@ export const companies: Company[] = [
     founders: ['Sebastian Gabler'],
     website: 'https://www.rilla.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered virtual ride-along platform for home service sales reps that records field visits and provides coaching insights to boost conversion rates.',
+    description: 'Rilla is an AI-powered virtual ride-along platform for home service sales reps that records field visits and provides coaching insights to boost conversion rates and revenue per job. The platform serves home services companies in HVAC, pest control, roofing, and other trades where managers cannot physically accompany every technician on every sales call. Rilla\'s AI transcribes and analyzes in-home conversations, scoring each interaction against proven sales frameworks and flagging missed upsell opportunities or objection-handling gaps. The company pioneered the concept of virtual ride-alongs in field services, giving sales managers visibility into rep performance that was previously impossible without being physically present at the job site.',
+    milestones: [
+      { year: '2019', text: 'Founded by Sebastian Jimenez and team in New York' },
+      { year: 'Dec 2022', text: 'Raised $3.7M Seed led by Crew Capital' },
+      { year: 'Dec 2024', text: 'Raised Series A backed by GV and HubSpot Ventures' },
+      { year: '2024', text: 'Reached $14M ARR with 58-person team' },
+    ],
   },
   {
     name: 'Avoca',
@@ -1224,7 +1686,12 @@ export const companies: Company[] = [
     founders: ['Quinn Purcell', 'Jared Burns'],
     website: 'https://www.avoca.ai',
     headquarters: 'New York, NY',
-    description: 'AI receptionist and call handling platform for home service businesses that answers calls, books appointments, and dispatches technicians automatically.',
+    description: 'Avoca is an AI receptionist and call handling platform for home service businesses that answers inbound calls, books appointments, dispatches technicians, and follows up with customers automatically. The platform serves HVAC, plumbing, electrical, and other trades businesses that miss a significant percentage of inbound calls due to limited CSR staffing, especially during peak demand and after hours. Avoca\'s AI voice agents handle calls naturally and integrate with field service management platforms like ServiceTitan to book jobs directly into existing scheduling systems. The Y Combinator-backed company targets one of the highest-impact revenue levers for service contractors: ensuring every inbound call from a potential customer is answered and converted.',
+    milestones: [
+      { year: '2022', text: 'Founded by Tyson Chen and Apurva Shrivastava' },
+      { year: 'Apr 2023', text: 'Y Combinator; Seed from Pioneer Fund and Soma Capital' },
+      { year: 'Jun 2025', text: 'Raised $37M Series A' },
+    ],
   },
 
   // Insurance
@@ -1243,7 +1710,13 @@ export const companies: Company[] = [
     founders: ['Diego May', 'Jorge Barro'],
     website: 'https://www.sixfold.ai',
     headquarters: 'New York, NY',
-    description: 'AI-powered commercial insurance underwriting platform that automates submission intake, risk assessment, and quote generation for carriers.',
+    description: 'Sixfold is an AI-powered commercial insurance underwriting platform that automates submission intake, risk assessment, and quote generation for property and casualty carriers. The platform serves commercial lines underwriters and operations teams at insurance carriers that process thousands of submissions manually, often with slow turnaround times and inconsistent risk evaluation. Sixfold\'s AI extracts data from broker submissions including applications, loss runs, and supplemental documents, then applies carrier-specific underwriting guidelines to generate risk assessments and pricing recommendations. The company helps carriers increase submission throughput and underwriting consistency while reducing the time from submission to quote from days to minutes.',
+    milestones: [
+      { year: '2023', text: 'Founded to automate commercial insurance underwriting' },
+      { year: 'May 2023', text: 'Raised $6.5M Seed from Bessemer and Crystal Venture Partners' },
+      { year: 'Apr 2024', text: 'Raised $15M Series A led by Salesforce Ventures' },
+      { year: 'Jan 2026', text: 'Raised $30M Series B led by Brewer Lane' },
+    ],
   },
   {
     name: 'Comulate',
@@ -1260,7 +1733,12 @@ export const companies: Company[] = [
     founders: ['Colby Tunick', 'Madeline Bess'],
     website: 'https://www.comulate.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered insurance commission reconciliation platform that automates the matching of commission statements to policies for brokerages and agencies.',
+    description: 'Comulate is an AI-powered insurance commission reconciliation platform that automates the matching of commission statements to individual policies for insurance brokerages and agencies. The platform targets insurance brokers, agencies, and MGAs that receive commission payments from dozens of carriers in inconsistent formats, requiring hours of manual spreadsheet work to verify accuracy. Comulate\'s AI ingests commission statements, matches them against policy records, and identifies discrepancies and underpayments that would otherwise go undetected. The company addresses a critical back-office pain point in insurance distribution where billions of dollars in commissions flow through opaque, error-prone reconciliation processes each year.',
+    milestones: [
+      { year: '2022', text: 'Founded by Michael Mattheakis and Jordan Katz in San Francisco' },
+      { year: '2023', text: 'Raised ~$5M Seed from Spark Capital and Neo' },
+      { year: 'Feb 2025', text: 'Raised $20M Series B led by BOND; reached 8-figure ARR in under 3 years' },
+    ],
   },
   {
     name: 'Strala',
@@ -1277,7 +1755,11 @@ export const companies: Company[] = [
     founders: ['Jeff Chen'],
     website: 'https://www.strala.io',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered insurance policy analysis platform that extracts and compares coverage details across policies to help brokers identify gaps and optimize placements.',
+    description: 'Strala is an AI-powered insurance policy analysis platform that extracts and compares coverage details across policies to help brokers identify gaps, benchmark terms, and optimize placements for commercial clients. The platform serves commercial insurance brokers who manually review lengthy policy documents to assess coverage adequacy and compare renewal terms against expiring policies. Strala\'s AI reads and structures policy language, enabling side-by-side comparison of limits, exclusions, endorsements, and conditions across carriers. As an early-stage company, Strala targets a high-frequency, high-value workflow in commercial brokerage where policy review accuracy directly impacts client satisfaction and E&O risk.',
+    milestones: [
+      { year: '2024', text: 'Founded by Timon Gregg and Armando Schmid' },
+      { year: 'Mar 2025', text: 'Raised ~$4M Seed backed by Founders Fund and Emergence' },
+    ],
   },
 
   // Manufacturing
@@ -1296,7 +1778,14 @@ export const companies: Company[] = [
     founders: ['Saar Yoskovitz', 'Gal Shaul'],
     website: 'https://www.augury.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered predictive maintenance platform for manufacturing equipment that uses vibration and temperature sensors to detect machine failures before they happen.',
+    description: 'Augury is an AI-powered predictive maintenance platform for manufacturing and industrial equipment that uses vibration, temperature, and magnetic sensors to detect machine failures before they happen. The platform serves plant managers and maintenance teams at large manufacturers, food and beverage companies, and data centers that cannot afford unplanned downtime on critical equipment. Augury\'s AI models analyze continuous sensor data streams to identify early signs of mechanical degradation, predicting failures days or weeks in advance and recommending specific maintenance actions. The company has built one of the largest datasets of industrial machine health data, giving its models a compounding accuracy advantage as more equipment is connected to the platform.',
+    milestones: [
+      { year: '2011', text: 'Founded by Saar Yoskovitz and Gal Shaul in Tel Aviv' },
+      { year: 'Jan 2019', text: 'Raised Series C led by Insight Partners' },
+      { year: 'Oct 2020', text: 'Raised $55M Series D led by Qumra Capital' },
+      { year: 'Oct 2021', text: 'Raised $180M Series E led by Baker Hughes' },
+      { year: 'Feb 2025', text: 'Raised $75M Series F at $1B+ valuation' },
+    ],
   },
   {
     name: 'Instrumental',
@@ -1313,7 +1802,12 @@ export const companies: Company[] = [
     founders: ['Anna-Katrina Shedletsky'],
     website: 'https://www.instrumental.com',
     headquarters: 'Palo Alto, CA',
-    description: 'AI-powered visual quality inspection platform for manufacturing that uses computer vision to detect product defects on assembly lines in real time.',
+    description: 'Instrumental is an AI-powered visual quality inspection platform for manufacturing that uses computer vision to detect product defects on assembly lines in real time. The platform serves hardware manufacturers and electronics OEMs producing high-volume consumer products where even small defect rates can result in costly recalls and brand damage. Instrumental\'s cameras and AI models inspect products at line speed, identifying cosmetic defects, assembly errors, and component misalignments that human inspectors frequently miss. The company focuses on the new product introduction phase where defect rates are highest, helping manufacturing engineers identify root causes of quality issues before they scale into full production.',
+    milestones: [
+      { year: '2015', text: 'Founded by Anna-Katrina Shedletsky (ex-Apple) in Palo Alto' },
+      { year: 'Jul 2020', text: 'Raised $20M Series B led by Canaan' },
+      { year: 'Feb 2022', text: 'Raised $50M Series C' },
+    ],
   },
   {
     name: 'Landing AI',
@@ -1330,7 +1824,12 @@ export const companies: Company[] = [
     founders: ['Andrew Ng'],
     website: 'https://www.landing.ai',
     headquarters: 'Palo Alto, CA',
-    description: 'AI visual inspection platform for manufacturing founded by Andrew Ng that enables factories to build and deploy computer vision models with small datasets.',
+    description: 'Landing AI is a visual inspection platform for manufacturing, founded by Andrew Ng, that enables factories to build and deploy computer vision models with small datasets using a data-centric AI approach. The platform serves manufacturers across automotive, electronics, food, and pharmaceutical industries that need to automate quality inspection but lack the large labeled datasets typically required to train accurate vision models. Landing AI\'s Visual Prompting technology allows manufacturing engineers to create inspection models by simply highlighting defects on a few sample images, dramatically lowering the barrier to deploying computer vision on the factory floor. The company\'s approach reflects Andrew Ng\'s data-centric AI philosophy, focusing on improving data quality rather than model complexity to achieve production-grade accuracy.',
+    milestones: [
+      { year: '2017', text: 'Founded by Andrew Ng (ex-Google Brain, ex-Baidu) in Palo Alto' },
+      { year: 'Nov 2021', text: 'Raised $57M Series A led by McRock Capital with Insight and Intel' },
+      { year: '2024', text: 'Raised Series B with Snowflake and Pure Storage investing' },
+    ],
   },
 
   // Other - Education
@@ -1349,7 +1848,12 @@ export const companies: Company[] = [
     founders: ['Adeel Khan', 'David Kennedy'],
     website: 'https://www.magicschool.ai',
     headquarters: 'Denver, CO',
-    description: 'AI teaching assistant platform for K-12 educators that helps teachers generate lesson plans, assessments, rubrics, and differentiated learning materials.',
+    description: 'MagicSchool is an AI teaching assistant platform for K-12 educators that helps teachers generate lesson plans, assessments, rubrics, IEP drafts, and differentiated learning materials in minutes rather than hours. The platform serves teachers, instructional coaches, and school administrators across public and private K-12 districts who face heavy workloads in lesson preparation and student documentation. MagicSchool provides dozens of purpose-built AI tools aligned to educational standards and pedagogical best practices, with guardrails designed specifically for the school environment. The company has achieved rapid adoption across thousands of school districts by offering a free tier for individual teachers and district-level licensing for institutional deployment.',
+    milestones: [
+      { year: 'Mar 2023', text: 'Founded by Adeel Khan in Denver' },
+      { year: 'Jul 2024', text: 'Raised $15M Series A led by Bain Capital Ventures' },
+      { year: 'Jan 2025', text: 'Raised $45M Series B led by Valor Equity; 5.5M educators on platform' },
+    ],
   },
   {
     name: 'Preply',
@@ -1366,7 +1870,13 @@ export const companies: Company[] = [
     founders: ['Kirill Bigai', 'Dmytro Voloshyn', 'Serge Lukyanov'],
     website: 'https://www.preply.com',
     headquarters: 'Brookline, MA',
-    description: 'AI-powered online language tutoring marketplace that connects learners with human tutors, enhanced by AI-driven lesson personalization and practice tools.',
+    description: 'Preply is an AI-powered online language tutoring marketplace that connects learners with human tutors worldwide, enhanced by AI-driven lesson personalization, practice exercises, and progress tracking. The platform serves individual learners and corporate clients in over 175 countries who want to learn a new language through live one-on-one instruction supplemented by AI practice tools. Preply\'s AI matches learners with tutors based on learning goals, proficiency level, and scheduling preferences, then uses session data to personalize homework and vocabulary review between lessons. The company differentiates from fully automated language learning apps by combining the effectiveness of human instruction with AI-powered practice, targeting learners who need conversational fluency for professional or personal goals.',
+    milestones: [
+      { year: '2012', text: 'Founded by Kirill Bigai, Serge Lukianov, and Dmytro Voloshyn in Kyiv' },
+      { year: 'Mar 2021', text: 'Raised $35M Series B co-led by Full In Partners and Owl Ventures' },
+      { year: 'Jul 2022', text: 'Raised $50M Series C led by Owl Ventures' },
+      { year: '2025', text: 'Raised $150M Series D at $1.2B valuation; became EBITDA positive' },
+    ],
   },
 
   // Logistics
@@ -1385,7 +1895,15 @@ export const companies: Company[] = [
     founders: ['Ryan Petersen', 'David Petersen'],
     website: 'https://www.flexport.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered global freight forwarding and logistics platform that combines technology with supply chain operations to manage ocean, air, trucking, and rail shipments.',
+    description: 'Flexport is an AI-powered global freight forwarding and logistics platform that combines technology with supply chain operations to manage ocean, air, trucking, and rail shipments for businesses worldwide. The platform serves importers, exporters, and manufacturers ranging from emerging brands to Fortune 500 companies that need end-to-end visibility and control over their international supply chains. Flexport\'s technology stack provides real-time shipment tracking, customs brokerage, trade finance, and supply chain analytics, replacing the fragmented communication and manual processes that characterize traditional freight forwarding. The company operates its own warehousing and fulfillment network alongside its digital platform, offering a vertically integrated logistics solution that combines software intelligence with physical operations.',
+    milestones: [
+      { year: '2013', text: 'Founded by Ryan Petersen in San Francisco' },
+      { year: 'Sep 2016', text: 'Raised $65M Series B led by Founders Fund' },
+      { year: 'Sep 2017', text: 'Raised $110M Series C led by DST Global' },
+      { year: 'Feb 2019', text: 'Raised $1B Series D led by SoftBank Vision Fund at $3.2B' },
+      { year: 'Feb 2022', text: 'Raised $935M Series E at $8B valuation' },
+      { year: 'Jan 2024', text: 'Raised $260M from Shopify' },
+    ],
   },
   {
     name: 'FourKites',
@@ -1402,7 +1920,13 @@ export const companies: Company[] = [
     founders: ['Mathew Elenjickal'],
     website: 'https://www.fourkites.com',
     headquarters: 'Chicago, IL',
-    description: 'AI-powered supply chain visibility platform that provides real-time tracking of shipments across road, rail, ocean, and air for shippers and logistics providers.',
+    description: 'FourKites is an AI-powered supply chain visibility platform that provides real-time tracking of shipments across road, rail, ocean, and air for shippers, carriers, and third-party logistics providers. The platform serves large enterprise shippers and retailers that manage complex, multi-modal supply chains and need end-to-end visibility from origin to final delivery. FourKites uses machine learning to generate predictive ETAs, detect exceptions, and recommend corrective actions before delays impact downstream operations. The company tracks millions of shipments daily across a network of carriers spanning over 170 countries, creating a data flywheel that continuously improves its prediction accuracy and supply chain intelligence capabilities.',
+    milestones: [
+      { year: '2014', text: 'Founded by Mathew Elenjickal in Chicago' },
+      { year: '2018', text: 'Raised $35M Series B led by August Capital' },
+      { year: '2019', text: 'Raised $50M Series C' },
+      { year: 'Mar 2021', text: 'Raised $100M Series D led by Thomas H. Lee Partners' },
+    ],
   },
   {
     name: 'project44',
@@ -1419,7 +1943,14 @@ export const companies: Company[] = [
     founders: ['Jett McCandless', 'Tommy Barnes'],
     website: 'https://www.project44.com',
     headquarters: 'Chicago, IL',
-    description: 'AI-powered supply chain visibility and tracking platform that connects shippers, carriers, and LSPs with predictive ETAs and exception management.',
+    description: 'project44 is an AI-powered supply chain visibility and tracking platform that connects shippers, carriers, and logistics service providers with predictive ETAs, exception management, and real-time shipment intelligence. The platform serves global shippers, retailers, and 3PLs that need a single pane of glass for tracking freight across all modes and geographies. project44\'s network integrates data from over 1,300 carriers and covers over 175 countries, using machine learning to predict delivery times and surface shipment anomalies before they cause disruptions. The company competes directly with FourKites in the supply chain visibility market and has expanded into ocean and last-mile tracking to provide true end-to-end supply chain coverage.',
+    milestones: [
+      { year: '2014', text: 'Founded by Jett McCandless in Chicago' },
+      { year: 'Jul 2020', text: 'Raised $51.7M Series C' },
+      { year: 'Jun 2021', text: 'Raised $202M Series E at $1.2B valuation' },
+      { year: 'Jan 2022', text: 'Raised $420M Series F at $2.2B valuation' },
+      { year: 'Nov 2022', text: 'Raised $80M Series G at $2.7B valuation' },
+    ],
   },
   {
     name: 'Pallet',
@@ -1436,7 +1967,12 @@ export const companies: Company[] = [
     founders: ['Sushanth Raman', 'Andrew Spencer'],
     website: 'https://www.pallet.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered warehouse automation platform for food distribution that uses robotics and software to optimize order fulfillment and reduce labor costs.',
+    description: 'Pallet is an AI-powered warehouse automation platform for food distribution that uses robotics and intelligent software to optimize order fulfillment, palletizing, and inventory management while reducing labor costs. The platform serves food distributors, produce wholesalers, and cold chain operators that face chronic labor shortages and thin margins in a physically demanding warehouse environment. Pallet\'s robotic systems work alongside human workers to handle the heavy lifting of building mixed-SKU pallets, a task that is particularly complex in food distribution where product sizes, weights, and fragility vary widely. The company combines hardware automation with AI-driven warehouse management software, targeting the massive food distribution industry that has been slow to adopt automation due to the variability and complexity of its operations.',
+    milestones: [
+      { year: '2019', text: 'Founded by Sushanth Raman and Andrew Spencer' },
+      { year: 'Oct 2024', text: 'Raised $21M Series A led by Bain Capital Ventures' },
+      { year: 'May 2025', text: 'Raised $27M Series B led by General Catalyst' },
+    ],
   },
 
   // Other - Public Safety
@@ -1455,7 +1991,15 @@ export const companies: Company[] = [
     founders: ['Gabriel Mays'],
     website: 'https://www.prepared911.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered platform for 911 dispatch centers that provides real-time transcription, translation, and situational awareness tools to help dispatchers respond faster.',
+    description: 'Prepared is an AI-powered platform for 911 dispatch centers that provides real-time transcription, translation, caller location intelligence, and situational awareness tools to help dispatchers respond faster and more effectively to emergencies. The platform serves public safety answering points (PSAPs) and emergency communication centers across the United States that handle millions of 911 calls with outdated technology and limited staffing. Prepared\'s AI processes incoming calls in real time, transcribing speech, translating non-English callers, and surfacing relevant contextual information to dispatchers during the call. The company was acquired by Axon in 2025, integrating its dispatch AI capabilities into Axon\'s broader public safety technology ecosystem alongside body cameras, tasers, and records management systems.',
+    milestones: [
+      { year: '2019', text: 'Founded by Michael Chime, Dylan Gleicher, and Neal Soni' },
+      { year: '2020', text: 'Founders drop out of Yale; build 911 dispatch app in three weeks' },
+      { year: '2022', text: 'Raised $9.8M Seed from M13 and Google Gradient Ventures' },
+      { year: '2023', text: 'Raised $16M Series A led by Andreessen Horowitz' },
+      { year: 'Sep 2024', text: 'Raised $27M Series B led by a16z' },
+      { year: '2025', text: 'Raised $80M Series C; acquired by Axon' },
+    ],
   },
 ];
 
