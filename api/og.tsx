@@ -1,48 +1,9 @@
 import { ImageResponse } from '@vercel/og';
+import { companies, categories } from '../src/data/companies';
 
 export const config = {
   runtime: 'edge',
 };
-
-// Minimal company data for OG image generation
-// This is a subset of src/data/companies.ts — kept separate to avoid bundling issues in edge runtime
-interface OgCompany {
-  name: string;
-  domain: string;
-  category: string;
-  categoryName: string;
-  categoryColor: string;
-  headcount: number;
-  arr: number | null;
-  arrPerEmployee: number | null;
-  valuation: number | null;
-  headquarters: string;
-  founded: number;
-}
-
-// We'll dynamically import company data from a generated JSON endpoint
-// For now, fetch from the main site data
-async function getCompanyData(): Promise<OgCompany[]> {
-  // Import companies data inline — Vercel edge functions bundle this at deploy time
-  const { companies, categories } = await import('../src/data/companies');
-
-  return companies.map(c => {
-    const cat = categories.find(cat => cat.id === c.category);
-    return {
-      name: c.name,
-      domain: c.domain,
-      category: c.category,
-      categoryName: cat?.name || 'Other',
-      categoryColor: cat?.color || '#71717a',
-      headcount: c.headcount,
-      arr: c.arr,
-      arrPerEmployee: c.arrPerEmployee,
-      valuation: c.valuation,
-      headquarters: c.headquarters,
-      founded: c.founded,
-    };
-  });
-}
 
 function getSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -69,6 +30,15 @@ function getEfficiencyColor(value: number): string {
   return '#71717a';
 }
 
+// Pre-compute ranked list and company lookup
+const ranked = [...companies]
+  .filter(c => c.arr !== null)
+  .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0));
+
+const companyBySlug = new Map(
+  companies.map(c => [getSlug(c.name), c])
+);
+
 export default async function handler(req: Request) {
   const { searchParams } = new URL(req.url);
   const slug = searchParams.get('slug');
@@ -77,25 +47,15 @@ export default async function handler(req: Request) {
     return new Response('Missing slug parameter', { status: 400 });
   }
 
-  let allCompanies: OgCompany[];
-  try {
-    allCompanies = await getCompanyData();
-  } catch {
-    return new Response('Failed to load company data', { status: 500 });
-  }
-
-  const company = allCompanies.find(c => getSlug(c.name) === slug);
-
+  const company = companyBySlug.get(slug);
   if (!company) {
     return new Response('Company not found', { status: 404 });
   }
 
-  // Calculate rank
-  const ranked = [...allCompanies]
-    .filter(c => c.arr !== null)
-    .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0));
+  const cat = categories.find(cat => cat.id === company.category);
+  const categoryName = cat?.name || 'Other';
+  const categoryColor = cat?.color || '#71717a';
   const rank = ranked.findIndex(c => c.name === company.name) + 1;
-
   const effColor = getEfficiencyColor(company.arrPerEmployee || 0);
 
   return new ImageResponse(
@@ -114,7 +74,6 @@ export default async function handler(req: Request) {
       >
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '40px' }}>
-          {/* Logo */}
           <img
             src={`https://img.logo.dev/${company.domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=128`}
             width={72}
@@ -122,11 +81,9 @@ export default async function handler(req: Request) {
             style={{
               borderRadius: '14px',
               background: '#fff',
-              objectFit: 'contain',
-              padding: '6px',
             }}
           />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: '1' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <span style={{ fontSize: '40px', fontWeight: 800, letterSpacing: '-0.02em' }}>
                 {company.name}
@@ -136,7 +93,6 @@ export default async function handler(req: Request) {
                   fontSize: '28px',
                   fontWeight: 700,
                   color: effColor,
-                  fontFamily: 'monospace',
                 }}
               >
                 #{rank}
@@ -147,33 +103,27 @@ export default async function handler(req: Request) {
                 style={{
                   padding: '4px 12px',
                   borderRadius: '6px',
-                  background: `${company.categoryColor}30`,
-                  color: company.categoryColor,
+                  background: `${categoryColor}30`,
+                  color: categoryColor,
                   fontSize: '16px',
                   fontWeight: 600,
                 }}
               >
-                {company.categoryName}
+                {categoryName}
               </span>
               <span style={{ color: '#a1a1aa', fontSize: '16px' }}>
-                {company.headquarters} &middot; Founded {company.founded}
+                {company.headquarters} · Founded {company.founded}
               </span>
             </div>
           </div>
         </div>
 
         {/* Metrics */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '16px',
-            flex: 1,
-          }}
-        >
+        <div style={{ display: 'flex', gap: '16px', flex: '1' }}>
           {/* ARR/Emp - Hero */}
           <div
             style={{
-              flex: 1,
+              flex: '1',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -189,7 +139,6 @@ export default async function handler(req: Request) {
                 fontSize: '52px',
                 fontWeight: 800,
                 color: effColor,
-                fontFamily: 'monospace',
                 letterSpacing: '-0.02em',
               }}
             >
@@ -203,7 +152,7 @@ export default async function handler(req: Request) {
           {/* ARR */}
           <div
             style={{
-              flex: 1,
+              flex: '1',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -214,13 +163,7 @@ export default async function handler(req: Request) {
               padding: '24px',
             }}
           >
-            <span
-              style={{
-                fontSize: '44px',
-                fontWeight: 700,
-                fontFamily: 'monospace',
-              }}
-            >
+            <span style={{ fontSize: '44px', fontWeight: 700 }}>
               {company.arr ? formatARR(company.arr) : '—'}
             </span>
             <span style={{ fontSize: '16px', color: '#71717a', fontWeight: 500, marginTop: '4px' }}>
@@ -231,7 +174,7 @@ export default async function handler(req: Request) {
           {/* Headcount */}
           <div
             style={{
-              flex: 1,
+              flex: '1',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -242,13 +185,7 @@ export default async function handler(req: Request) {
               padding: '24px',
             }}
           >
-            <span
-              style={{
-                fontSize: '44px',
-                fontWeight: 700,
-                fontFamily: 'monospace',
-              }}
-            >
+            <span style={{ fontSize: '44px', fontWeight: 700 }}>
               {company.headcount.toLocaleString()}
             </span>
             <span style={{ fontSize: '16px', color: '#71717a', fontWeight: 500, marginTop: '4px' }}>
@@ -259,7 +196,7 @@ export default async function handler(req: Request) {
           {/* Valuation */}
           <div
             style={{
-              flex: 1,
+              flex: '1',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -270,13 +207,7 @@ export default async function handler(req: Request) {
               padding: '24px',
             }}
           >
-            <span
-              style={{
-                fontSize: '44px',
-                fontWeight: 700,
-                fontFamily: 'monospace',
-              }}
-            >
+            <span style={{ fontSize: '44px', fontWeight: 700 }}>
               {company.valuation ? formatValuation(company.valuation) : '—'}
             </span>
             <span style={{ fontSize: '16px', color: '#71717a', fontWeight: 500, marginTop: '4px' }}>

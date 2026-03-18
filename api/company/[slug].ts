@@ -1,8 +1,8 @@
-// Vercel Edge Middleware for serving OG meta tags to social crawlers
-// For Vite (non-Next.js) projects, middleware uses the Web API directly
+// Edge function that serves OG meta tags to social crawlers for /company/:slug routes
+// Regular browsers get redirected to the SPA
 
 export const config = {
-  matcher: '/company/(.*)',
+  runtime: 'edge',
 };
 
 const SOCIAL_CRAWLERS = [
@@ -19,11 +19,6 @@ function isSocialCrawler(userAgent: string): boolean {
   return SOCIAL_CRAWLERS.some(bot => userAgent.includes(bot));
 }
 
-function getSlugFromPath(path: string): string | null {
-  const match = path.match(/^\/company\/([^/]+)/);
-  return match ? match[1] : null;
-}
-
 function formatName(slug: string): string {
   return slug
     .split('-')
@@ -31,23 +26,28 @@ function formatName(slug: string): string {
     .join(' ');
 }
 
-export default function middleware(request: Request) {
-  const userAgent = request.headers.get('user-agent') || '';
+export default async function handler(req: Request) {
+  const userAgent = req.headers.get('user-agent') || '';
+  const url = new URL(req.url);
 
-  if (!isSocialCrawler(userAgent)) {
-    return; // Pass through to SPA
-  }
+  // Extract slug from the path - Vercel passes it as /api/company/[slug]
+  const pathParts = url.pathname.split('/');
+  const slug = pathParts[pathParts.length - 1];
 
-  const url = new URL(request.url);
-  const slug = getSlugFromPath(url.pathname);
   if (!slug) {
-    return;
+    // Pass through to SPA
+    return fetch(new URL('/index.html', url.origin));
   }
 
+  // For regular browsers, serve the SPA
+  if (!isSocialCrawler(userAgent)) {
+    return fetch(new URL('/index.html', url.origin));
+  }
+
+  // For crawlers, serve OG meta tags
   const companyName = formatName(slug);
-  const origin = url.origin;
-  const ogImageUrl = `${origin}/api/og?slug=${slug}`;
-  const pageUrl = `${origin}/company/${slug}`;
+  const ogImageUrl = `${url.origin}/api/og?slug=${slug}`;
+  const pageUrl = `${url.origin}/company/${slug}`;
 
   const html = `<!DOCTYPE html>
 <html>
@@ -73,7 +73,7 @@ export default function middleware(request: Request) {
   return new Response(html, {
     status: 200,
     headers: {
-      'Content-Type': 'text/html',
+      'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',
     },
   });
