@@ -706,7 +706,7 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
                     return (
                       <motion.div
                         key={company.name}
-                        className={`company-card ${isExpanded ? 'expanded' : ''}`}
+                        className={`company-card ${isExpanded ? 'expanded' : ''}${index < 3 ? ` rank-${index + 1}` : ''}${index < 10 ? ' top-10' : ''}`}
                         layout
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -721,7 +721,7 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
                           onClick={() => toggleExpand(company.name)}
                         >
                           <div className="company-card-left">
-                            <span className="company-card-rank">{index + 1}</span>
+                            <span className={`company-card-rank${index < 10 ? ' rank-badge' : ''}`}>{index + 1}</span>
                             <CompanyLogo domain={company.domain} name={company.name} color={barColor} />
                             <div className="company-card-info">
                               <span className="company-card-name">{company.name}</span>
@@ -733,7 +733,7 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
                             <motion.div
                               className="company-card-bar-fill"
                               style={{
-                                background: barColor,
+                                background: `linear-gradient(90deg, ${barColor}99, ${barColor})`,
                               }}
                               initial={{ width: 0 }}
                               animate={{ width: `${(getBarValue(company) / maxValue) * 100}%` }}

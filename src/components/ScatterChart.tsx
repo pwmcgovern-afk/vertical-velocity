@@ -133,6 +133,24 @@ export function ScatterChart() {
           viewBox={`0 0 ${width} ${height}`}
           className="scatter-svg"
         >
+          {/* SVG Defs for glow effects */}
+          <defs>
+            <filter id="bubble-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="bubble-glow-strong" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
           {/* Grid lines */}
           {xTicks.map(tick => (
             <line
@@ -237,10 +255,11 @@ export function ScatterChart() {
                   cy={cy}
                   r={isHovered ? r + 3 : r}
                   fill={company.color}
-                  fillOpacity={isHovered ? 0.9 : 0.6}
+                  fillOpacity={isHovered ? 0.9 : 0.7}
                   stroke={isHovered ? company.color : 'transparent'}
                   strokeWidth={2}
                   className="scatter-dot"
+                  filter={(company.arrPerEmployee || 0) >= 300 ? (isHovered ? 'url(#bubble-glow-strong)' : 'url(#bubble-glow)') : undefined}
                   onMouseEnter={() => handleMouseEnter(company, cx, cy)}
                   onMouseLeave={() => setHoveredCompany(null)}
                   onClick={() => navigate(`/company/${getCompanySlug(company.name)}`)}
@@ -282,6 +301,7 @@ export function ScatterChart() {
             style={{
               left: tooltipPos.x,
               top: tooltipPos.y,
+              borderTop: `3px solid ${hoveredCompany.color}`,
             }}
           >
             <div className="scatter-tooltip-name">{hoveredCompany.name}</div>

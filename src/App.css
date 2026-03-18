@@ -504,11 +504,26 @@ body {
   padding: 24px 40px;
   background: var(--bg);
   border: 1px solid var(--border);
+  border-top: 3px solid var(--border-strong);
   border-radius: var(--radius-lg);
   min-width: 160px;
   flex: 1;
   max-width: 200px;
   transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  border-radius: inherit;
 }
 
 .chart-stat:hover {
@@ -519,8 +534,8 @@ body {
 
 .chart-stat-value {
   font-family: 'Geist Mono', monospace;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 32px;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-primary);
 }
@@ -528,6 +543,14 @@ body {
 .chart-stat-value.green { color: var(--success); }
 .chart-stat-value.amber { color: var(--warning); }
 .chart-stat-value.blue { color: #1e3a5f; }
+
+/* Stat card colored top borders */
+.chart-stat:has(.chart-stat-value.green) { border-top-color: var(--success); }
+.chart-stat:has(.chart-stat-value.green)::before { background: var(--success); }
+.chart-stat:has(.chart-stat-value.amber) { border-top-color: var(--warning); }
+.chart-stat:has(.chart-stat-value.amber)::before { background: var(--warning); }
+.chart-stat:has(.chart-stat-value.blue) { border-top-color: #1e3a5f; }
+.chart-stat:has(.chart-stat-value.blue)::before { background: #1e3a5f; }
 
 .chart-stat-label {
   font-size: 11px;
@@ -1045,6 +1068,48 @@ body {
   border-color: var(--border-strong);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
+  border-left: 3px solid var(--border-strong);
+}
+
+/* Top 3 company cards - gold/silver/bronze */
+.company-card.rank-1 {
+  border-left: 3px solid #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.03) 0%, var(--bg) 20%);
+}
+.company-card.rank-2 {
+  border-left: 3px solid #94a3b8;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.03) 0%, var(--bg) 20%);
+}
+.company-card.rank-3 {
+  border-left: 3px solid #cd7f32;
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.03) 0%, var(--bg) 20%);
+}
+
+/* Rank badge styling for top 10 */
+.company-card-rank.rank-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-muted);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.company-card.rank-1 .company-card-rank.rank-badge {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #fff;
+}
+.company-card.rank-2 .company-card-rank.rank-badge {
+  background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+  color: #fff;
+}
+.company-card.rank-3 .company-card-rank.rank-badge {
+  background: linear-gradient(135deg, #d4a574, #cd7f32);
+  color: #fff;
 }
 
 .company-card.expanded {
@@ -1110,7 +1175,7 @@ body {
 
 .company-card-name {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -1135,6 +1200,18 @@ body {
   height: 100%;
   border-radius: 100px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.company-card-bar {
+  position: relative;
+}
+
+.company-card.rank-1 .company-card-bar-fill,
+.company-card.rank-2 .company-card-bar-fill,
+.company-card.rank-3 .company-card-bar-fill {
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.3), 0 0 8px rgba(34, 197, 94, 0.2);
 }
 
 /* Right - Value */
@@ -1149,8 +1226,8 @@ body {
 
 .company-card-value {
   font-family: 'Geist Mono', monospace;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .company-card-expand {
@@ -2390,6 +2467,24 @@ body {
   color: #93c5fd;
 }
 
+[data-theme="dark"] .company-card.rank-1 {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.06) 0%, var(--bg) 20%);
+}
+[data-theme="dark"] .company-card.rank-2 {
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.06) 0%, var(--bg) 20%);
+}
+[data-theme="dark"] .company-card.rank-3 {
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.06) 0%, var(--bg) 20%);
+}
+
+[data-theme="dark"] .scatter-tooltip {
+  background: rgba(10, 10, 11, 0.85);
+}
+
+[data-theme="dark"] .scatter-dot-label-outside {
+  stroke: var(--bg);
+}
+
 [data-theme="dark"] .recent-raises-title {
   color: #93c5fd;
 }
@@ -2445,6 +2540,7 @@ body {
   background: var(--bg);
   color: var(--text-primary);
   box-shadow: var(--shadow-sm);
+  border-bottom: 2px solid var(--accent);
 }
 
 .export-btn {
@@ -2481,10 +2577,11 @@ body {
 }
 
 .scatter-header h2 {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 4px;
+  letter-spacing: -0.01em;
 }
 
 .scatter-subtitle {
@@ -2501,7 +2598,7 @@ body {
 
 .scatter-container {
   position: relative;
-  background: var(--bg);
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-subtle) 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 16px;
@@ -2518,14 +2615,15 @@ body {
   stroke: var(--border);
   stroke-width: 0.5;
   stroke-dasharray: 4 4;
+  opacity: 0.6;
 }
 
 .scatter-eff-line {
   stroke: var(--text-tertiary);
-  stroke-width: 1;
-  stroke-dasharray: 6 3;
+  stroke-width: 1.5;
+  stroke-dasharray: 8 4;
   fill: none;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .scatter-eff-label {
@@ -2536,22 +2634,24 @@ body {
 
 .scatter-axis-label {
   font-size: 14px;
-  fill: var(--text-tertiary);
+  fill: var(--text-secondary);
   font-family: 'Geist Mono', monospace;
+  font-weight: 500;
 }
 
 .scatter-axis-title {
   font-size: 15px;
-  fill: var(--text-secondary);
-  font-weight: 500;
+  fill: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .scatter-dot {
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .scatter-dot:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.3) drop-shadow(0 0 6px currentColor);
 }
 
 .scatter-dot-label-inside {
@@ -2559,6 +2659,7 @@ body {
   fill: #fff;
   font-weight: 600;
   pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
 .scatter-dot-label-outside {
@@ -2567,6 +2668,11 @@ body {
   font-weight: 500;
   pointer-events: none;
   font-family: 'Geist', sans-serif;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .scatter-tooltip {
@@ -2574,27 +2680,29 @@ body {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 10px 14px;
+  padding: 12px 16px;
   box-shadow: var(--shadow-lg);
   pointer-events: none;
   z-index: 10;
-  min-width: 160px;
+  min-width: 180px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .scatter-tooltip-name {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .scatter-tooltip-row {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .scatter-tooltip-row span:last-child {
@@ -2607,14 +2715,31 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--text-tertiary);
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.scatter-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scatter-legend-item::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
 }
 
 .scatter-legend-divider {
   color: var(--border-strong);
+  opacity: 0.5;
 }
 
 /* ============================================
