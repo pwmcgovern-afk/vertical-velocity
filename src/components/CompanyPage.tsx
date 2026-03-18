@@ -267,7 +267,7 @@ export function CompanyPage() {
 
         {similarCompanies.length > 0 && (
           <div className="cp-similar">
-            <h3>Other {category?.name} Companies</h3>
+            <h3>Other {category?.name} Companies <span className="cp-similar-metric">ARR / Employee</span></h3>
             <div className="cp-similar-list">
               {similarCompanies.map(c => {
                 const cSlug = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
