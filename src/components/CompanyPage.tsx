@@ -304,6 +304,20 @@ export function CompanyPage() {
             <a href={company.website} target="_blank" rel="noopener noreferrer" className="cp-website-btn">
               Visit Website
             </a>
+            <button
+              className="cp-share-btn"
+              onClick={() => {
+                const s = company.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                navigate(`/compare/${s}`);
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+              </svg>
+              Compare
+            </button>
           </div>
         </div>
 

@@ -117,6 +117,7 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
     return true;
   });
   const [foundedFilter, setFoundedFilter] = useState<string>('all');
+  const [compareList, setCompareList] = useState<string[]>([]);
   const [stageFilter, setStageFilter] = useState<StageFilter>('all');
 
   // Dark mode toggle
@@ -745,6 +746,26 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
                             <span className="company-card-value" style={{ color: barColor }}>
                               {formatBarValue(company)}
                             </span>
+                            <button
+                              className={`company-compare-btn${compareList.includes(company.name) ? ' active' : ''}`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCompareList(prev =>
+                                  prev.includes(company.name)
+                                    ? prev.filter(n => n !== company.name)
+                                    : prev.length < 3
+                                      ? [...prev, company.name]
+                                      : prev
+                                );
+                              }}
+                              title={compareList.includes(company.name) ? 'Remove from comparison' : 'Add to comparison'}
+                            >
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                              </svg>
+                            </button>
                             <span className={`company-card-expand ${isExpanded ? 'expanded' : ''}`}>
                               ▼
                             </span>
@@ -977,6 +998,35 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
             </form>
           </div>
         </div>
+      )}
+
+      {/* Floating Compare Bar */}
+      {compareList.length >= 2 && (
+        <motion.div
+          className="compare-floating-bar"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+        >
+          <span className="compare-floating-text">
+            {compareList.length} companies selected
+          </span>
+          <button
+            className="compare-floating-btn"
+            onClick={() => {
+              const slugs = compareList.map(name => getCompanySlug(name)).join('-vs-');
+              navigate(`/compare/${slugs}`);
+            }}
+          >
+            Compare Now
+          </button>
+          <button
+            className="compare-floating-clear"
+            onClick={() => setCompareList([])}
+          >
+            Clear
+          </button>
+        </motion.div>
       )}
     </div>
   );

@@ -3378,3 +3378,591 @@ body {
     width: 100%;
   }
 }
+
+/* ============================================
+   Compare Page
+   ============================================ */
+.cmp-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.cmp-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.cmp-top-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cmp-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+/* Company Cards Row */
+.cmp-companies-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.cmp-company-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.cmp-company-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.cmp-remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: var(--bg-muted);
+  border-radius: 50%;
+  font-size: 14px;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.cmp-remove-btn:hover {
+  background: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.cmp-logo-wrapper {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+
+.cmp-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.cmp-logo-wrapper .cmp-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cmp-logo.loading {
+  opacity: 0;
+}
+
+.cmp-logo.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cmp-company-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.cmp-company-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cmp-company-rank {
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Add Company Card */
+.cmp-add-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 16px;
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.cmp-add-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-subtle);
+}
+
+.cmp-add-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text-tertiary);
+  font-weight: 300;
+}
+
+.cmp-add-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Company Selector */
+.cmp-selector {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.cmp-selector-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 15px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.cmp-selector-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.cmp-selector-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+}
+
+.cmp-selector-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 20;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.cmp-selector-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.cmp-selector-item:hover {
+  background: var(--bg-subtle);
+}
+
+.cmp-selector-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cmp-selector-item-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.cmp-selector-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+/* Metrics Table */
+.cmp-metrics-table {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.cmp-metric-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition-fast);
+}
+
+.cmp-metric-row:last-child {
+  border-bottom: none;
+}
+
+.cmp-metric-row:hover {
+  background: var(--bg-subtle);
+}
+
+.cmp-metric-label {
+  width: 160px;
+  flex-shrink: 0;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+}
+
+.cmp-metric-value {
+  flex: 1;
+  padding: 14px 20px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid var(--border);
+}
+
+.cmp-metric-value.winner {
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.cmp-winner-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+/* Visual Bar Comparison */
+.cmp-bars-section {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.cmp-bars-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.cmp-bar-group {
+  margin-bottom: 24px;
+}
+
+.cmp-bar-group:last-child {
+  margin-bottom: 0;
+}
+
+.cmp-bar-group-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.cmp-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.cmp-bar-company {
+  width: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+
+.cmp-bar-track {
+  flex: 1;
+  height: 10px;
+  background: var(--bg-muted);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.cmp-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.cmp-bar-value {
+  width: 80px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+/* Empty State */
+.cmp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.cmp-empty-icon {
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+.cmp-empty h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.cmp-empty p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Compare Button on Company Cards
+   ============================================ */
+.company-compare-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.company-compare-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.company-compare-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ============================================
+   Floating Compare Bar
+   ============================================ */
+.compare-floating-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+}
+
+[data-theme="dark"] .compare-floating-bar {
+  background: #1a1a1e;
+  border-color: #3f3f46;
+}
+
+.compare-floating-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.compare-floating-btn {
+  padding: 8px 18px;
+  background: #1e3a5f;
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.compare-floating-btn:hover {
+  background: #2d4a6f;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .compare-floating-btn {
+  background: #3b82f6;
+}
+
+[data-theme="dark"] .compare-floating-btn:hover {
+  background: #2563eb;
+}
+
+.compare-floating-clear {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.compare-floating-clear:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   Compare Page Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .cmp-container {
+    padding: 20px 16px 48px;
+  }
+
+  .cmp-title {
+    font-size: 22px;
+  }
+
+  .cmp-top-bar {
+    flex-wrap: wrap;
+  }
+
+  .cmp-companies-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cmp-company-card {
+    min-width: calc(50% - 6px);
+    flex: 0 0 calc(50% - 6px);
+  }
+
+  .cmp-add-card {
+    min-width: calc(50% - 6px);
+    flex: 0 0 calc(50% - 6px);
+  }
+
+  .cmp-metric-label {
+    width: 120px;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .cmp-metric-value {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .cmp-bar-company {
+    width: 70px;
+    font-size: 12px;
+  }
+
+  .compare-floating-bar {
+    left: 16px;
+    right: 16px;
+    transform: none;
+    bottom: 16px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cmp-company-card {
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .cmp-add-card {
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .cmp-metric-label {
+    width: 100px;
+    font-size: 11px;
+  }
+
+  .cmp-metric-value {
+    font-size: 13px;
+  }
+}
