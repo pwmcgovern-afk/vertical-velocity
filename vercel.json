@@ -1,7 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/company/:slug", "destination": "/api/company/:slug" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/company/([^/]+)", "dest": "/api/company/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
