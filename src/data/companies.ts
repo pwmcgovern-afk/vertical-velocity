@@ -957,22 +957,6 @@ export const companies: Company[] = [
     website: 'https://www.palantir.com',
     headquarters: 'Miami, FL',
   },
-  {
-    name: 'Rebellion Defense',
-    domain: 'rebelliondefense.com',
-    category: 'defense',
-    color: '#1e3a5f',
-    headcount: 66,
-    arr: 50,
-    arrPerEmployee: 758,
-    valuation: 0.8,
-    lastFunding: '$150M Series B (2022)',
-    source: 'Crunchbase, PitchBook',
-    founded: 2019,
-    founders: ['Nicole Eagan', 'Oliver Lewis', 'Chris Lynch'],
-    website: 'https://www.rebelliondefense.com',
-    headquarters: 'Washington, DC',
-  },
 
   // Other - Voice/Media
   {
