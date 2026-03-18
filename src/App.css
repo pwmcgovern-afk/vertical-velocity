@@ -2719,30 +2719,21 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  background: #1e3a5f;
-  border: none;
+  padding: 8px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  color: #fff;
+  color: var(--text-secondary);
   font-family: inherit;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: var(--transition-fast);
 }
 
 .cp-random-btn:hover {
-  background: #2d4a6f;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-[data-theme="dark"] .cp-random-btn {
-  background: #3b82f6;
-}
-
-[data-theme="dark"] .cp-random-btn:hover {
-  background: #2563eb;
+  border-color: var(--border-strong);
+  color: var(--text-primary);
 }
 
 .cp-back-btn {
@@ -2760,7 +2751,6 @@ body {
   cursor: pointer;
   transition: var(--transition-fast);
   text-decoration: none;
-  margin-bottom: 24px;
 }
 
 .cp-back-btn:hover {
