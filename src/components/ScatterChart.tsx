@@ -42,8 +42,8 @@ export function ScatterChart() {
   const plotH = height - margin.top - margin.bottom;
 
   // Scales (log for better distribution)
-  const maxHeadcount = Math.max(...filteredCompanies.map(c => c.headcount));
-  const maxARR = Math.max(...filteredCompanies.map(c => c.arr || 0));
+  const maxHeadcount = filteredCompanies.length > 0 ? Math.max(...filteredCompanies.map(c => c.headcount)) : 100;
+  const maxARR = filteredCompanies.length > 0 ? Math.max(...filteredCompanies.map(c => c.arr || 0)) : 100;
 
   const xScale = useCallback((val: number) => {
     const logMin = Math.log10(10);
@@ -60,7 +60,7 @@ export function ScatterChart() {
   }, [maxARR, plotH, margin.top]);
 
   // Bubble size based on valuation
-  const maxVal = Math.max(...filteredCompanies.map(c => c.valuation || 0));
+  const maxVal = Math.max(1, ...filteredCompanies.map(c => c.valuation || 0));
   const bubbleScale = (val: number | null) => {
     if (!val) return 6;
     return Math.max(6, Math.min(28, 6 + (val / maxVal) * 22));

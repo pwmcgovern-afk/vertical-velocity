@@ -283,8 +283,10 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
       'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
     };
 
-    const cutoffYear = 2025;
-    const cutoffMonth = 10;
+    const now = new Date();
+    const cutoff = new Date(now.getFullYear(), now.getMonth() - 6, 1);
+    const cutoffYear = cutoff.getFullYear();
+    const cutoffMonth = cutoff.getMonth() + 1;
 
     return companies
       .map(c => {
