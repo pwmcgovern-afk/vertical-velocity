@@ -575,7 +575,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  animation: ticker-scroll 25s linear infinite;
+  animation: ticker-scroll 40s linear infinite;
 }
 
 .recent-raises-ticker:hover .recent-raises-ticker-track {
