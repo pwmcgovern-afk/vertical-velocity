@@ -130,23 +130,7 @@ export const companies: Company[] = [
     website: 'https://www.getfreed.ai',
     headquarters: 'Santa Rosa, CA',
   },
-  {
-    name: 'Viz.ai',
-    domain: 'viz.ai',
-    category: 'healthcare',
-    color: '#22c55e',
-    headcount: 133,
-    arr: 65,
-    arrPerEmployee: 489,
-    valuation: 1.2,
-    lastFunding: '$100M Series D (2022)',
-    source: 'Sacra, Tracxn',
-    founded: 2016,
-    founders: ['Chris Mansi', 'David Golan'],
-    website: 'https://www.viz.ai',
-    headquarters: 'San Francisco, CA',
-  },
-  {
+{
     name: 'Nabla',
     domain: 'nabla.com',
     category: 'healthcare',
@@ -784,24 +768,6 @@ export const companies: Company[] = [
     founders: ['Sarosh Waghmar', 'Steve Singh'],
     website: 'https://www.spotnana.com',
     headquarters: 'New York, NY',
-  },
-
-  // Other - Search
-  {
-    name: 'Perplexity',
-    domain: 'perplexity.ai',
-    category: 'other',
-    color: '#71717a',
-    headcount: 250,
-    arr: 200,
-    arrPerEmployee: 800,
-    valuation: 20.0,
-    lastFunding: '$200M (Sep 2025)',
-    source: 'TechCrunch, The Information',
-    founded: 2022,
-    founders: ['Aravind Srinivas', 'Denis Yarats', 'Johnny Ho', 'Michael Jang'],
-    website: 'https://www.perplexity.ai',
-    headquarters: 'San Francisco, CA',
   },
 
   // Real Estate
