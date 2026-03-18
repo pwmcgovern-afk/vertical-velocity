@@ -171,7 +171,7 @@ const barMetrics: BarMetric[] = [
 export function ComparePage() {
   const { slugs } = useParams<{ slugs: string }>();
   const navigate = useNavigate();
-  const [selectorOpen, setSelectorOpen] = useState(false);
+  const [selectorOpen, setSelectorOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -209,6 +209,16 @@ export function ComparePage() {
       )
       .slice(0, 8);
   }, [searchQuery, uniqueCompanies]);
+
+  const suggestedCompanies = useMemo(() => {
+    if (uniqueCompanies.length === 0) return [];
+    const selectedCategories = new Set(uniqueCompanies.map(c => c.category));
+    const selectedNames = new Set(uniqueCompanies.map(c => c.name));
+    return companies
+      .filter(c => selectedCategories.has(c.category) && !selectedNames.has(c.name) && c.arr !== null)
+      .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0))
+      .slice(0, 6);
+  }, [uniqueCompanies]);
 
   useEffect(() => {
     if (selectorOpen && searchRef.current) {
@@ -374,6 +384,33 @@ export function ComparePage() {
             )}
             {searchQuery && searchResults.length === 0 && (
               <div className="cmp-selector-empty">No companies found</div>
+            )}
+            {suggestedCompanies.length > 0 && (
+              <div className="cmp-suggestions">
+                <div className="cmp-suggestions-label">
+                  Same vertical
+                </div>
+                <div className="cmp-suggestions-chips">
+                  {suggestedCompanies.map(c => {
+                    return (
+                      <button
+                        key={c.name}
+                        className="cmp-suggestion-chip"
+                        onClick={() => addCompany(c)}
+                      >
+                        <img
+                          src={`https://img.logo.dev/${c.domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=40`}
+                          alt=""
+                          className="cmp-suggestion-logo"
+                          onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                        <span className="cmp-suggestion-name">{c.name}</span>
+                        <span className="cmp-suggestion-meta">{formatARRPerEmployee(c.arrPerEmployee || 0)}/emp</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             )}
           </div>
         )}
