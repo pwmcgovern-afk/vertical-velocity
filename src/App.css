@@ -2708,6 +2708,43 @@ body {
   padding: 32px 24px 64px;
 }
 
+.cp-top-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.cp-random-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #1e3a5f;
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.cp-random-btn:hover {
+  background: #2d4a6f;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .cp-random-btn {
+  background: #3b82f6;
+}
+
+[data-theme="dark"] .cp-random-btn:hover {
+  background: #2563eb;
+}
+
 .cp-back-btn {
   display: inline-flex;
   align-items: center;

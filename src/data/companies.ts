@@ -50,7 +50,7 @@ export const companies: Company[] = [
     founders: ['Shiv Rao'],
     website: 'https://www.abridge.com',
     headquarters: 'Pittsburgh, PA',
-    description: 'AI-powered clinical documentation platform that automatically generates medical notes from patient-doctor conversations. Used by major health systems to reduce physician burnout and improve note accuracy.',
+    description: 'Abridge is an AI-powered clinical documentation platform that automatically generates structured medical notes from patient-doctor conversations in real time. The platform is used by physicians, nurses, and other clinicians across major health systems to reduce the hours spent on documentation after patient visits. Abridge\'s models are trained specifically on medical dialogue, enabling high-accuracy capture of diagnoses, treatment plans, and follow-up instructions. The company has partnered with health systems including UPMC and Epic to integrate directly into EHR workflows, positioning itself as a core infrastructure layer for clinical AI.',
   },
   {
     name: 'OpenEvidence',
@@ -67,7 +67,7 @@ export const companies: Company[] = [
     founders: ['Daniel Nadler', 'Zack Ziegler'],
     website: 'https://www.openevidence.com',
     headquarters: 'Miami, FL',
-    description: 'AI platform providing evidence-based clinical decision support for physicians. Synthesizes medical literature and clinical data to deliver real-time treatment recommendations at the point of care.',
+    description: 'OpenEvidence is an AI platform providing evidence-based clinical decision support for physicians at the point of care. The system synthesizes medical literature, clinical guidelines, and real-world patient data to deliver real-time treatment recommendations tailored to specific patient scenarios. It is used by clinicians across specialties to quickly surface the most relevant research and consensus guidelines during consultations. OpenEvidence differentiates through its emphasis on cited, verifiable medical evidence rather than generalized AI outputs, making it a trusted resource for clinical decision-making at scale.',
   },
   {
     name: 'Hippocratic AI',
@@ -84,7 +84,7 @@ export const companies: Company[] = [
     founders: ['Munjal Shah'],
     website: 'https://www.hippocraticai.com',
     headquarters: 'Palo Alto, CA',
-    description: 'AI agents for healthcare operations including patient outreach, scheduling, and pre-visit navigation. Focused on non-diagnostic staffing tasks.',
+    description: 'Hippocratic AI builds AI-powered voice agents designed specifically for non-diagnostic healthcare staffing tasks such as patient outreach, appointment scheduling, pre-visit navigation, and post-discharge follow-up. The platform targets health systems and payer organizations struggling with chronic staffing shortages in administrative and care coordination roles. Hippocratic\'s models are safety-tuned for healthcare through extensive clinician testing and benchmarking, ensuring they operate within strict guardrails for patient-facing communication. The company focuses exclusively on low-risk, high-volume operational workflows rather than clinical diagnosis, differentiating it from clinical AI documentation tools.',
   },
   {
     name: 'Ambience',
@@ -101,7 +101,7 @@ export const companies: Company[] = [
     founders: ['Mike Ng', 'Nikhil Rajaram'],
     website: 'https://www.ambiencehealthcare.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI-powered ambient clinical documentation that listens to patient encounters and generates notes, referrals, and orders in real time.',
+    description: 'Ambience Healthcare provides an AI-powered ambient clinical documentation platform that passively listens to patient-provider encounters and generates complete medical notes, referral letters, and clinical orders in real time. The platform is designed for physicians and clinical staff across specialties in both hospital and ambulatory settings. Ambience integrates directly into EHR systems to eliminate manual documentation, enabling clinicians to focus on patient interaction rather than screen time. The company\'s approach combines ambient listening with structured clinical output, reducing documentation time by hours per day for adopting providers.',
   },
   {
     name: 'Tennr',
@@ -118,7 +118,7 @@ export const companies: Company[] = [
     founders: ['Diego Miralles', 'Graham Galka'],
     website: 'https://www.tennr.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered healthcare referral and fax processing platform that automates intake workflows, extracting and routing patient data from unstructured documents.',
+    description: 'Tennr is an AI-powered healthcare referral and fax processing platform that automates intake workflows by extracting, structuring, and routing patient data from unstructured documents like faxes, referrals, and prior authorizations. The platform serves specialty practices, health systems, and large provider groups that process thousands of inbound referral documents daily. Tennr uses document AI and NLP to parse handwritten and typed medical records, automatically populating EHR fields and reducing manual data entry. By digitizing one of healthcare\'s most analog bottlenecks, the company helps practices accelerate patient onboarding and reduce referral leakage.',
   },
   {
     name: 'Freed',
@@ -135,7 +135,7 @@ export const companies: Company[] = [
     founders: ['Erez Druk', 'Andrey Bannikov'],
     website: 'https://www.getfreed.ai',
     headquarters: 'Santa Rosa, CA',
-    description: 'AI medical scribe for clinicians that automatically generates clinical notes from patient conversations, designed for independent practices and small clinics.',
+    description: 'Freed is an AI medical scribe designed for independent practices and small clinics that automatically generates clinical notes from patient-provider conversations. The platform listens during patient encounters and produces structured SOAP notes, visit summaries, and follow-up instructions without requiring manual input from the clinician. Freed targets solo practitioners and small group practices that lack the resources for dedicated medical scribes or expensive enterprise documentation systems. Its lightweight, consumer-friendly design and rapid onboarding differentiate it from enterprise-focused competitors in the ambient documentation space.',
   },
 {
     name: 'Nabla',
@@ -152,7 +152,7 @@ export const companies: Company[] = [
     founders: ['Alexandre Lebrun', 'Delphine Groll', 'Martin Raison'],
     website: 'https://www.nabla.com',
     headquarters: 'Paris, France',
-    description: 'AI copilot for healthcare documentation that generates clinical notes and handles administrative tasks, helping physicians spend more time with patients.',
+    description: 'Nabla is an AI copilot for healthcare documentation that generates clinical notes and handles administrative tasks such as letter drafting and coding suggestions, enabling physicians to spend more time with patients. The platform is designed for clinicians across primary care and specialty settings in both the US and European markets. Nabla differentiates through its multilingual capabilities and compliance with EU healthcare data regulations, making it one of the few ambient documentation platforms with strong European traction. The company was founded by former Facebook AI researchers and applies proprietary medical language models trained on clinical dialogue.',
   },
   {
     name: 'Eleos Health',
@@ -169,7 +169,7 @@ export const companies: Company[] = [
     founders: ['Alon Joffe', 'Dror Ayalon'],
     website: 'https://www.eleos.health',
     headquarters: 'Cambridge, MA',
-    description: 'AI platform for behavioral health that automates clinical documentation, tracks patient progress, and surfaces insights from therapy sessions.',
+    description: 'Eleos Health is an AI platform purpose-built for behavioral health that automates clinical documentation, tracks patient progress over time, and surfaces actionable insights from therapy sessions. The platform serves behavioral health providers, community mental health centers, and large payer-provider organizations looking to improve outcomes measurement and reduce therapist administrative burden. Eleos uses session analysis to generate structured notes and identify clinical trends such as symptom changes and treatment adherence. Its focus exclusively on behavioral health distinguishes it from general clinical documentation tools and allows for deeper domain-specific modeling.',
   },
   {
     name: 'Commure',
@@ -186,7 +186,7 @@ export const companies: Company[] = [
     founders: ['Tanay Tandon'],
     website: 'https://www.commure.com',
     headquarters: 'San Francisco, CA',
-    description: 'Healthcare operating system that connects clinical and operational data across health systems. Acquired Athelas to combine AI ambient documentation with device-level patient monitoring.',
+    description: 'Commure is a healthcare operating system that connects clinical and operational data across fragmented health system IT environments into a unified platform. The company serves large hospital systems and provider networks, offering tools for interoperability, workflow automation, and AI-powered documentation. Through its acquisition of Athelas, Commure combines ambient clinical documentation with device-level patient monitoring including remote vital sign tracking and automated lab diagnostics. This integrated approach positions Commure as a broad infrastructure layer for health system digital transformation, spanning both software and connected hardware.',
   },
 
   // Legal
@@ -205,7 +205,7 @@ export const companies: Company[] = [
     founders: ['Jason Boehmig', 'Cai GoGwilt'],
     website: 'https://www.ironcladapp.com',
     headquarters: 'San Francisco, CA',
-    description: 'Digital contracting platform that helps legal teams create, manage, and store contracts with AI-powered workflow automation and analytics.',
+    description: 'Ironclad is a digital contracting platform that helps legal and business teams create, negotiate, manage, and store contracts with AI-powered workflow automation and analytics. The platform is used by in-house legal departments at mid-market and enterprise companies to standardize contract processes and reduce cycle times. Ironclad integrates with tools like Salesforce and DocuSign to embed contract workflows into existing business processes. Its AI capabilities include clause detection, risk flagging, and automated metadata extraction, enabling legal teams to move from reactive contract review to proactive contract intelligence.',
   },
   {
     name: 'Harvey',
@@ -222,7 +222,7 @@ export const companies: Company[] = [
     founders: ['Winston Weinberg', 'Gabriel Pereyra'],
     website: 'https://www.harvey.ai',
     headquarters: 'San Francisco, CA',
-    description: 'AI assistant for legal professionals that handles research, drafting, and analysis across litigation, corporate, and regulatory work for Am Law firms.',
+    description: 'Harvey is an AI assistant for legal professionals that handles research, drafting, document review, and analysis across litigation, corporate, and regulatory practice areas. The platform is primarily adopted by Am Law 100 and Global 100 law firms seeking to augment attorney productivity on complex legal work. Harvey\'s models are fine-tuned on legal data and integrated with firm-specific knowledge bases, enabling accurate, context-aware outputs grounded in relevant precedent and statutes. The company has secured partnerships with firms including Allen & Overy and PwC, establishing itself as one of the highest-valued AI legal platforms.',
   },
   {
     name: 'Clio',
@@ -239,7 +239,7 @@ export const companies: Company[] = [
     founders: ['Jack Newton', 'Rian Gauvreau'],
     website: 'https://www.clio.com',
     headquarters: 'Burnaby, Canada',
-    description: 'Cloud-based legal practice management software for law firms of all sizes, covering case management, billing, payments, and client intake.',
+    description: 'Clio is a cloud-based legal practice management platform serving law firms of all sizes, from solo practitioners to mid-size firms, covering case management, time tracking, billing, payments, and client intake. The platform has become the operating system for tens of thousands of law firms, with deep integrations across legal research, document management, and accounting tools. Clio has expanded into AI-powered features including document drafting and workflow automation to help attorneys reduce administrative overhead. Its scale and data network across the legal industry give it a unique advantage in building AI features trained on real firm usage patterns.',
   },
   {
     name: 'Luminance',
@@ -256,7 +256,7 @@ export const companies: Company[] = [
     founders: ['Eleanor Lightbody', 'Emily Foges'],
     website: 'https://www.luminance.com',
     headquarters: 'London, UK',
-    description: 'AI platform for contract review, negotiation, and lifecycle management that reads and understands legal documents to accelerate deal execution.',
+    description: 'Luminance is an AI platform for contract review, negotiation, and lifecycle management that reads and understands legal documents to accelerate deal execution. The platform is used by corporate legal teams and law firms to automate due diligence, redlining, and contract analysis across M&A, procurement, and commercial transactions. Luminance\'s proprietary legal AI models are trained on hundreds of millions of legal documents, enabling the system to identify non-standard clauses, flag risks, and suggest edits autonomously. The London-based company has expanded globally with particular strength in European and APAC markets.',
   },
   {
     name: 'Eudia',
@@ -273,7 +273,7 @@ export const companies: Company[] = [
     founders: ['Yolanda Lau', 'David Mou'],
     website: 'https://www.eudia.ai',
     headquarters: 'Palo Alto, CA',
-    description: 'AI research and analysis platform for law firms that automates deep legal research, document review, and knowledge synthesis across large case files.',
+    description: 'Eudia is an AI research and analysis platform for law firms that automates deep legal research, document review, and knowledge synthesis across large case files and deal rooms. The platform targets Am Law firms and elite litigation practices that need to process thousands of documents for complex matters. Eudia\'s AI agents can perform multi-step legal analysis, cross-referencing case law, statutes, and internal firm precedent to produce attorney-ready work product. The company raised one of the largest Series A rounds in legal AI, reflecting demand for tools that go beyond basic search to deliver substantive legal reasoning.',
   },
   {
     name: 'Eve',
@@ -290,7 +290,7 @@ export const companies: Company[] = [
     founders: ['Sara Itucas', 'Marissa Louie'],
     website: 'https://www.eve.legal',
     headquarters: 'San Mateo, CA',
-    description: 'AI-powered legal research and drafting platform that helps attorneys find relevant case law and generate legal documents faster.',
+    description: 'Eve is an AI-powered legal research and drafting platform that helps attorneys find relevant case law, statutes, and regulations and generate legal documents faster. The platform serves litigation and transactional attorneys at law firms and corporate legal departments who need to produce briefs, motions, and memos under time pressure. Eve combines natural language search with generative AI drafting capabilities, enabling attorneys to move from research to finished document in a fraction of the traditional time. The company has focused on accuracy and citation verification to address the hallucination concerns that have limited legal AI adoption.',
   },
   {
     name: 'EvenUp',
@@ -307,7 +307,7 @@ export const companies: Company[] = [
     founders: ['Rami Karabibar', 'Saam Mashhad', 'Ray Mieszaniec'],
     website: 'https://www.evenuplaw.com',
     headquarters: 'San Francisco, CA',
-    description: 'AI platform that generates demand packages for personal injury attorneys by synthesizing medical records, bills, and case details into settlement documents.',
+    description: 'EvenUp is an AI platform that generates demand packages for personal injury attorneys by synthesizing medical records, billing data, and case details into comprehensive settlement documents. The platform serves plaintiff-side personal injury law firms that typically spend hours manually assembling demand letters for insurance negotiations. EvenUp\'s AI ingests and organizes medical records, calculates damages, and produces attorney-reviewed demand packages that are ready for submission to insurance adjusters. The company has processed hundreds of thousands of cases and built proprietary models trained on settlement outcomes, giving it a data advantage in predicting case valuations.',
   },
   {
     name: 'Norm AI',
@@ -324,7 +324,7 @@ export const companies: Company[] = [
     founders: ['Mohammad Naghi', 'Brittany Justice'],
     website: 'https://www.norm.ai',
     headquarters: 'New York, NY',
-    description: 'AI regulatory compliance platform that automates the monitoring and enforcement of rules, policies, and regulations across financial services and other regulated industries.',
+    description: 'Norm AI is a regulatory compliance platform that uses AI to automate the monitoring and enforcement of rules, policies, and regulations across financial services and other regulated industries. The platform serves compliance teams at banks, insurance companies, and asset managers that must continuously track evolving regulatory requirements. Norm AI translates complex regulatory text into machine-readable rules that can be automatically checked against company policies and operations. This approach reduces the manual effort of regulatory mapping and helps organizations identify compliance gaps before they become enforcement issues.',
   },
   {
     name: 'Legora',
@@ -341,7 +341,7 @@ export const companies: Company[] = [
     founders: ['Kenji Yoshida'],
     website: 'https://www.legora.com',
     headquarters: 'New York, NY',
-    description: 'AI legal research platform that enables attorneys to search case law, statutes, and regulations using natural language queries with cited, verifiable results.',
+    description: 'Legora is an AI legal research platform that enables attorneys to search case law, statutes, and regulations using natural language queries and receive cited, verifiable results. The platform targets law firms and corporate legal departments seeking faster alternatives to traditional legal databases like Westlaw and LexisNexis. Legora emphasizes citation accuracy and source transparency, allowing attorneys to verify every claim the AI makes against original legal documents. The company has grown rapidly to a multi-billion dollar valuation, reflecting strong demand for AI-native legal research tools that combine speed with the reliability standards the legal profession demands.',
   },
   {
     name: 'Spellbook',
@@ -358,7 +358,7 @@ export const companies: Company[] = [
     founders: ['Scott Chicken', 'Dan Rabinowitz'],
     website: 'https://www.spellbook.legal',
     headquarters: 'Toronto, Canada',
-    description: 'AI contract drafting assistant for lawyers that reviews, suggests edits, and generates contract language directly inside Microsoft Word.',
+    description: 'Spellbook is an AI contract drafting assistant for lawyers that reviews, suggests edits, and generates contract language directly inside Microsoft Word where attorneys already work. The platform is used by transactional lawyers at firms and in-house legal teams to accelerate contract creation, identify missing clauses, and flag unusual terms. Spellbook\'s models are trained on millions of legal agreements, enabling it to suggest contextually relevant language based on deal type, jurisdiction, and negotiation position. The company\'s Microsoft Word-native approach reduces adoption friction compared to platforms that require lawyers to switch to a separate interface.',
   },
   {
     name: 'Solve Intelligence',
@@ -375,7 +375,7 @@ export const companies: Company[] = [
     founders: ['Roy Glasberg', 'Tal Shrestha'],
     website: 'https://www.solveintelligence.com',
     headquarters: 'London, UK',
-    description: 'AI patent drafting platform that helps patent attorneys and agents write and prosecute patent applications faster with automated claim generation.',
+    description: 'Solve Intelligence is an AI patent drafting platform that helps patent attorneys and agents write and prosecute patent applications faster through automated claim generation, specification drafting, and prior art analysis. The platform targets patent law firms and corporate IP departments that handle high volumes of patent filings across technical domains. Solve Intelligence\'s models understand patent-specific language structures and USPTO formatting requirements, producing prosecution-ready drafts that reduce attorney drafting time significantly. The London-based company addresses a niche but high-value segment of legal AI where domain expertise and technical precision are critical.',
   },
 
   // Finance
@@ -394,7 +394,7 @@ export const companies: Company[] = [
     founders: ['Eric Glyman', 'Karim Atiyeh', 'Gene Lee'],
     website: 'https://www.ramp.com',
     headquarters: 'New York, NY',
-    description: 'Corporate card and spend management platform with AI-powered expense automation, bill pay, and procurement tools that help businesses control costs.',
+    description: 'Ramp is a corporate card and spend management platform that uses AI to automate expense reporting, bill payments, procurement, and financial controls for businesses of all sizes. The platform serves finance teams at companies ranging from startups to enterprises, providing real-time visibility into spending and automated policy enforcement. Ramp\'s AI capabilities include automatic receipt matching, duplicate payment detection, and vendor price benchmarking that proactively identifies cost-saving opportunities. The company has grown rapidly by combining the corporate card revenue model with a software platform that replaces multiple point solutions across accounts payable and expense management.',
   },
   {
     name: 'Hebbia',
@@ -411,7 +411,7 @@ export const companies: Company[] = [
     founders: ['George Sivulka'],
     website: 'https://www.hebbia.com',
     headquarters: 'New York, NY',
-    description: 'AI-powered knowledge work platform for finance that lets analysts search, synthesize, and analyze large document sets for due diligence, deal sourcing, and research.',
+    description: 'Hebbia is an AI-powered knowledge work platform for finance that enables analysts to search, synthesize, and analyze large document sets for due diligence, deal sourcing, and investment research. The platform serves investment banks, private equity firms, asset managers, and law firms that routinely process hundreds of documents per deal. Hebbia\'s Matrix product allows users to run structured queries across entire document collections simultaneously, extracting and comparing data points at a scale impossible through manual review. The company\'s approach to multi-document reasoning differentiates it from simpler search tools by enabling complex analytical workflows natively within the platform.',
   },
   {
     name: 'Rogo',
@@ -428,7 +428,7 @@ export const companies: Company[] = [
     founders: ['Gabriel Stengel', 'Andy Lee'],
     website: 'https://www.rogo.ai',
     headquarters: 'New York, NY',
-    description: 'AI research assistant for investment professionals that automates financial analysis, data gathering, and report generation across banking and asset management.',
+    description: 'Rogo is an AI research assistant for investment professionals that automates financial analysis, data gathering, and report generation across investment banking and asset management. The platform is used by analysts and associates at bulge bracket banks and buy-side firms to accelerate tasks like comparable company analysis, market sizing, and earnings summaries. Rogo connects to financial data sources including SEC filings, earnings transcripts, and market databases to produce structured, sourced research outputs. The company positions itself as an AI copilot for junior finance professionals, targeting the most time-intensive analytical workflows in capital markets.',
   },
   {
     name: '9fin',
@@ -445,7 +445,7 @@ export const companies: Company[] = [
     founders: ['Steven Hunter', 'Hussam Hammo'],
     website: 'https://www.9fin.com',
     headquarters: 'London, UK',
-    description: 'AI-powered debt capital markets intelligence platform that provides leveraged finance and high-yield bond data, analytics, and news for credit professionals.',
+    description: '9fin is an AI-powered debt capital markets intelligence platform that provides leveraged finance, high-yield bond, and private credit data, analytics, and news for credit professionals. The platform serves buy-side and sell-side credit analysts, distressed debt investors, and CLO managers who need real-time insight into leveraged lending markets. 9fin uses AI to parse and structure complex credit documents including indentures, credit agreements, and offering memoranda, making covenant and structural details instantly searchable. The company has built a strong editorial team alongside its technology, combining human-curated market intelligence with automated document analysis.',
   },
   {
     name: 'Brightwave',
@@ -462,7 +462,7 @@ export const companies: Company[] = [
     founders: ['Mike Conover'],
     website: 'https://www.brightwave.io',
     headquarters: 'Boulder, CO',
-    description: 'AI investment research platform that synthesizes financial documents, earnings calls, and market data to generate analyst-grade research reports.',
+    description: 'Brightwave is an AI investment research platform that synthesizes financial documents, earnings calls, SEC filings, and market data to generate analyst-grade research reports and investment insights. The platform targets asset managers, hedge funds, and equity research teams that need to process large volumes of financial information to identify investment signals. Brightwave\'s AI can analyze hundreds of documents simultaneously and produce structured research memos with sourced citations, significantly reducing the time analysts spend on information gathering. The company was founded by a former ML engineer and focuses on depth of financial reasoning rather than general-purpose AI capabilities.',
   },
   {
     name: 'Zest AI',
@@ -479,7 +479,7 @@ export const companies: Company[] = [
     founders: ['Douglas Merrill', 'Shawn Budde'],
     website: 'https://www.zest.ai',
     headquarters: 'Burbank, CA',
-    description: 'AI-powered credit underwriting platform that helps lenders make more accurate and inclusive lending decisions using machine learning models.',
+    description: 'Zest AI is a credit underwriting platform that uses machine learning models to help lenders make more accurate, fair, and inclusive lending decisions. The platform serves banks, credit unions, and auto lenders seeking to expand credit access while maintaining or improving default rates. Zest AI\'s models incorporate thousands of data features beyond traditional credit scores to assess borrower risk, enabling lenders to approve more applicants without increasing portfolio losses. The company has a strong focus on model explainability and fair lending compliance, providing tools that help lenders demonstrate regulatory adherence for their AI-driven underwriting decisions.',
   },
 
   // Other - HR
@@ -498,7 +498,7 @@ export const companies: Company[] = [
     founders: ['Ashutosh Garg', 'Varun Kacholia'],
     website: 'https://www.eightfold.ai',
     headquarters: 'Santa Clara, CA',
-    description: 'AI talent intelligence platform that helps enterprises recruit, retain, and develop talent using deep learning models applied to workforce data.',
+    description: 'Eightfold is an AI talent intelligence platform that helps enterprises recruit, retain, and develop talent using deep learning models applied to workforce data and skills graphs. The platform serves large enterprise HR departments seeking to optimize hiring pipelines, internal mobility, and workforce planning. Eightfold\'s AI maps employee and candidate skills to create a talent graph that identifies qualified candidates, predicts attrition risk, and recommends career development paths. The company\'s data advantage comes from processing billions of talent data points across its customer base, improving model accuracy for skills matching and talent market insights.',
   },
 
   // Other - Security

@@ -115,12 +115,25 @@ export function CompanyPage() {
   return (
     <div className="company-page">
       <div className="cp-container">
-        <button className="cp-back-btn" onClick={() => navigate('/')}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m15 18-6-6 6-6"/>
-          </svg>
-          Back to Rankings
-        </button>
+        <div className="cp-top-buttons">
+          <button className="cp-back-btn" onClick={() => navigate('/')}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Back to Rankings
+          </button>
+          <button
+            className="cp-random-btn"
+            onClick={() => {
+              const pool = companies.filter(c => c.arr !== null && c.name !== company.name);
+              const random = pool[Math.floor(Math.random() * pool.length)];
+              const slug = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+              navigate(`/company/${slug}`);
+            }}
+          >
+            Discover Another Company
+          </button>
+        </div>
 
         <div className="cp-header">
           <CompanyLogo domain={company.domain} name={company.name} color={company.color} />
