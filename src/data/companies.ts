@@ -22,6 +22,10 @@ export interface Company {
   milestones?: Milestone[];
 }
 
+export function getCompanySlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 export const categories = [
   { id: 'finance', name: 'Finance', color: '#f59e0b' },
   { id: 'sales', name: 'Sales', color: '#14b8a6' },

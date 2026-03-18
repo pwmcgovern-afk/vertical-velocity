@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { companies, categories } from '../src/data/companies.js';
 
+// Mirrors getCompanySlug() in src/data/companies.ts — keep in sync
 function getSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }

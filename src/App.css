@@ -80,6 +80,10 @@
   --accent-light: #dbeafe;
   --accent-hover: #1d4ed8;
 
+  /* Brand navy — buttons, nav pills, title accents */
+  --brand: #1e3a5f;
+  --brand-hover: #2d4a6f;
+
   /* Status Colors */
   --success: #16a34a;
   --success-light: #dcfce7;
@@ -221,8 +225,8 @@ body {
   left: 0;
   width: 20px;
   height: 20px;
-  border-top: 3px solid #1e3a5f;
-  border-left: 3px solid #1e3a5f;
+  border-top: 3px solid var(--brand);
+  border-left: 3px solid var(--brand);
 }
 
 .title-container::after {
@@ -232,15 +236,15 @@ body {
   right: 0;
   width: 20px;
   height: 20px;
-  border-bottom: 3px solid #1e3a5f;
-  border-right: 3px solid #1e3a5f;
+  border-bottom: 3px solid var(--brand);
+  border-right: 3px solid var(--brand);
 }
 
 .chart-header-left h1 {
   font-size: 42px;
   font-weight: 800;
   letter-spacing: 0.02em;
-  color: #1e3a5f;
+  color: var(--brand);
   margin: 0;
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -276,7 +280,7 @@ body {
 }
 
 .made-by-btn span {
-  color: #1e3a5f;
+  color: var(--brand);
   font-weight: 600;
 }
 
@@ -290,7 +294,7 @@ body {
   align-items: center;
   gap: 6px;
   padding: 10px 18px;
-  background: #1e3a5f;
+  background: var(--brand);
   border: none;
   border-radius: var(--radius-md);
   color: #fff;
@@ -302,7 +306,7 @@ body {
 }
 
 .submit-btn-header:hover {
-  background: #2d4a6f;
+  background: var(--brand-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -365,7 +369,7 @@ body {
   display: inline-flex;
   align-items: center;
   padding: 10px 18px;
-  background: #1e3a5f;
+  background: var(--brand);
   border: none;
   border-radius: var(--radius-md);
   color: #fff;
@@ -378,7 +382,7 @@ body {
 }
 
 .nav-pill:hover {
-  background: #2d4a6f;
+  background: var(--brand-hover);
   transform: translateY(-1px);
 }
 
@@ -542,15 +546,15 @@ body {
 
 .chart-stat-value.green { color: var(--success); }
 .chart-stat-value.amber { color: var(--warning); }
-.chart-stat-value.blue { color: #1e3a5f; }
+.chart-stat-value.blue { color: var(--brand); }
 
 /* Stat card colored top borders */
 .chart-stat:has(.chart-stat-value.green) { border-top-color: var(--success); }
 .chart-stat:has(.chart-stat-value.green)::before { background: var(--success); }
 .chart-stat:has(.chart-stat-value.amber) { border-top-color: var(--warning); }
 .chart-stat:has(.chart-stat-value.amber)::before { background: var(--warning); }
-.chart-stat:has(.chart-stat-value.blue) { border-top-color: #1e3a5f; }
-.chart-stat:has(.chart-stat-value.blue)::before { background: #1e3a5f; }
+.chart-stat:has(.chart-stat-value.blue) { border-top-color: var(--brand); }
+.chart-stat:has(.chart-stat-value.blue)::before { background: var(--brand); }
 
 .chart-stat-label {
   font-size: 11px;
@@ -590,7 +594,7 @@ body {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: #1e3a5f;
+  color: var(--brand);
 }
 
 .recent-raises-ticker {
@@ -1019,8 +1023,8 @@ body {
 }
 
 .category-btn.active {
-  background: #1e3a5f;
-  border-color: #1e3a5f;
+  background: var(--brand);
+  border-color: var(--brand);
   color: var(--text-inverted);
   box-shadow: 0 2px 8px rgba(30, 58, 95, 0.25);
 }
@@ -1031,8 +1035,8 @@ body {
 }
 
 .category-btn.all-btn.active {
-  background: #1e3a5f;
-  border-color: #1e3a5f;
+  background: var(--brand);
+  border-color: var(--brand);
   color: var(--text-inverted);
   box-shadow: 0 2px 8px rgba(30, 58, 95, 0.25);
 }
@@ -1359,7 +1363,7 @@ body {
   align-items: center;
   gap: 4px;
   padding: 8px 18px;
-  background: #1e3a5f;
+  background: var(--brand);
   border: none;
   border-radius: var(--radius-md);
   color: #fff;
@@ -1372,7 +1376,7 @@ body {
 }
 
 .view-profile-btn:hover {
-  background: #2d4a6f;
+  background: var(--brand-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -2089,55 +2093,6 @@ body {
   color: var(--accent);
 }
 
-/* Legacy support */
-.filter-actions,
-.filter-action-btn,
-.category-row,
-.chart-bar-row,
-.chart-bar-info,
-.chart-bar-rank,
-.chart-bar-details,
-.chart-bar-name,
-.chart-bar-category,
-.chart-bar-track,
-.chart-bar-fill,
-.chart-bar-value,
-.chart-bar-meta,
-.chart-bar-employees,
-.chart-hover-card,
-.hover-card-row,
-.hover-card-label,
-.hover-card-value,
-.bars-container,
-.chart-sort,
-.sort-label,
-.sort-btn,
-.efficiency-legend,
-.contact-btn,
-.contact-icon,
-.contact-text,
-.sidebar-contact,
-.vertical-selector,
-.selector-header,
-.selector-prompt,
-.vertical-grid,
-.vertical-card,
-.vertical-card-header,
-.vertical-card-dot,
-.vertical-card-name,
-.vertical-card-stats,
-.vertical-card-stat,
-.vertical-card-stat-value,
-.vertical-card-stat-label,
-.view-all-btn,
-.selector-footer,
-.logo-attribution,
-.footer-contact,
-.hot-companies-columns,
-.hot-col-header {
-  /* Kept for backwards compatibility */
-}
-
 /* ============================================
    Empty State
    ============================================ */
@@ -2390,6 +2345,9 @@ body {
   --accent-light: #1e3a5f;
   --accent-hover: #2563eb;
 
+  --brand: #3b82f6;
+  --brand-hover: #2563eb;
+
   --success: #22c55e;
   --success-light: #14532d;
   --warning: #eab308;
@@ -2405,6 +2363,11 @@ body {
 [data-theme="dark"] body {
   color-scheme: dark;
 }
+
+/* Dark mode logo containers — avoid jarring white boxes */
+[data-theme="dark"] .company-logo { background: #27272a; }
+[data-theme="dark"] .cp-logo { background: #27272a; }
+[data-theme="dark"] .cmp-logo { background: #27272a; }
 
 /* Dark mode category tags - muted backgrounds with lighter text */
 [data-theme="dark"] .category-tag.healthcare { background: #14532d; color: #86efac; }
@@ -2442,12 +2405,12 @@ body {
 
 [data-theme="dark"] .submit-btn-header,
 [data-theme="dark"] .nav-pill {
-  background: #1e3a5f;
+  background: var(--brand);
 }
 
 [data-theme="dark"] .submit-btn-header:hover,
 [data-theme="dark"] .nav-pill:hover {
-  background: #2d4a6f;
+  background: var(--brand-hover);
 }
 
 [data-theme="dark"] .category-btn.active,
@@ -3932,7 +3895,7 @@ body {
 
 .compare-floating-btn {
   padding: 8px 18px;
-  background: #1e3a5f;
+  background: var(--brand);
   border: none;
   border-radius: var(--radius-md);
   color: #fff;
@@ -3944,7 +3907,7 @@ body {
 }
 
 .compare-floating-btn:hover:not(:disabled) {
-  background: #2d4a6f;
+  background: var(--brand-hover);
   transform: translateY(-1px);
 }
 
@@ -4053,5 +4016,32 @@ body {
 
   .cmp-metric-value {
     font-size: 13px;
+  }
+
+  .cmp-bar-company {
+    width: 60px;
+    font-size: 11px;
+  }
+
+  .cp-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 375px) {
+  .cmp-metric-row {
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+  }
+
+  .cmp-metric-label {
+    width: 100%;
+    font-size: 11px;
+  }
+
+  .cmp-metric-value {
+    font-size: 13px;
+    padding: 0;
   }
 }

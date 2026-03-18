@@ -4,6 +4,7 @@ export const config = {
   runtime: 'edge',
 };
 
+// Duplicated from src/data/companies.ts — keep in sync (can't import in edge runtime)
 const categories: Record<string, { name: string; color: string }> = {
   finance: { name: 'Finance', color: '#f59e0b' },
   sales: { name: 'Sales', color: '#14b8a6' },
@@ -33,6 +34,7 @@ interface CompanyOgData {
   founded: number;
 }
 
+// Mirrors getCompanySlug() in src/data/companies.ts — keep in sync
 function getSlug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }

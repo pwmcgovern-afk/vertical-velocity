@@ -8,14 +8,10 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
-import { companies, categories } from '../src/data/companies';
+import { companies, categories, getCompanySlug } from '../src/data/companies';
 
 const distDir = join(import.meta.dirname, '..', 'dist');
 const template = readFileSync(join(distDir, 'index.html'), 'utf-8');
-
-function getSlug(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
 
 function formatARRPerEmp(v: number): string {
   if (v >= 1000) return `$${(v / 1000).toFixed(1)}M`;
@@ -29,7 +25,7 @@ const ranked = [...companies]
 for (const company of companies) {
   if (company.arr === null) continue;
 
-  const slug = getSlug(company.name);
+  const slug = getCompanySlug(company.name);
   const cat = categories.find(c => c.id === company.category);
   const rank = ranked.findIndex(c => c.name === company.name) + 1;
   const arrPerEmp = formatARRPerEmp(company.arrPerEmployee || 0);

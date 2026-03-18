@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { companies, categories, type Company } from '../data/companies';
+import { companies, categories, getCompanySlug, type Company } from '../data/companies';
 
 function formatARR(arrInMillions: number): string {
   if (arrInMillions >= 1000) return `$${(arrInMillions / 1000).toFixed(1)}B`;
@@ -10,10 +10,6 @@ function formatARR(arrInMillions: number): string {
 function formatARRPerEmployee(arrInThousands: number): string {
   if (arrInThousands >= 1000) return `$${(arrInThousands / 1000).toFixed(1)}M`;
   return `$${arrInThousands}K`;
-}
-
-function getCompanySlug(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
 export function ScatterChart() {
@@ -132,6 +128,7 @@ export function ScatterChart() {
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
           className="scatter-svg"
+          onClick={() => setHoveredCompany(null)}
         >
           {/* SVG Defs for glow effects */}
           <defs>
@@ -262,7 +259,14 @@ export function ScatterChart() {
                   filter={(company.arrPerEmployee || 0) >= 300 ? (isHovered ? 'url(#bubble-glow-strong)' : 'url(#bubble-glow)') : undefined}
                   onMouseEnter={() => handleMouseEnter(company, cx, cy)}
                   onMouseLeave={() => setHoveredCompany(null)}
-                  onClick={() => navigate(`/company/${getCompanySlug(company.name)}`)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (isHovered) {
+                      navigate(`/company/${getCompanySlug(company.name)}`);
+                    } else {
+                      handleMouseEnter(company, cx, cy);
+                    }
+                  }}
                   style={{ cursor: 'pointer' }}
                 />
                 {/* Label: inside bubble if large, outside if small */}

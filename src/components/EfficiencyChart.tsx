@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { companies, categories, type Company } from '../data/companies';
+import { companies, categories, getCompanySlug, type Company } from '../data/companies';
 import { ScatterChart } from './ScatterChart';
 
 function formatNumber(num: number): string {
@@ -89,10 +89,6 @@ function Tooltip({ text }: { text: string }) {
       <span className="info-tooltip-text">{text}</span>
     </span>
   );
-}
-
-function getCompanySlug(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
 type SortOption = 'arrPerEmployee' | 'arr' | 'headcount' | 'revenueMultiple';
@@ -448,7 +444,7 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
             </div>
           </div>
         </div>
-        <div className="last-updated">Last updated: Mar 17, 2026</div>
+        <div className="last-updated">Tracking {companies.filter(c => c.arr !== null).length} companies</div>
       </header>
 
       {/* View Toggle */}
