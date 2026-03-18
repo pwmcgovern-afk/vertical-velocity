@@ -2565,6 +2565,34 @@ body {
   background: var(--bg-muted);
 }
 
+.compare-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.compare-mode-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.compare-mode-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
 /* ============================================
    Scatter Chart
    ============================================ */
@@ -3859,9 +3887,14 @@ body {
   transition: var(--transition-fast);
 }
 
-.compare-floating-btn:hover {
+.compare-floating-btn:hover:not(:disabled) {
   background: #2d4a6f;
   transform: translateY(-1px);
+}
+
+.compare-floating-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 [data-theme="dark"] .compare-floating-btn {
