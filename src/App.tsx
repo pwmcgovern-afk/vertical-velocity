@@ -9,6 +9,7 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<EfficiencyChart />} />
+          <Route path="/charts" element={<EfficiencyChart defaultView="scatter" />} />
           <Route path="/company/:slug" element={<CompanyPage />} />
         </Routes>
       </div>

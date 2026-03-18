@@ -99,7 +99,7 @@ type SortOption = 'arrPerEmployee' | 'arr' | 'headcount' | 'revenueMultiple';
 type ViewMode = 'ranking' | 'scatter';
 type StageFilter = 'all' | 'Seed' | 'Series A-B' | 'Series C+' | 'Public';
 
-export function EfficiencyChart() {
+export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: ViewMode }) {
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
@@ -110,7 +110,7 @@ export function EfficiencyChart() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [locationFilter, setLocationFilter] = useState<'all' | 'ny' | 'sf'>('all');
-  const [viewMode, setViewMode] = useState<ViewMode>('ranking');
+  const [viewMode, setViewMode] = useState<ViewMode>(defaultView);
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('vv-dark-mode');
     if (saved !== null) return saved === 'true';
