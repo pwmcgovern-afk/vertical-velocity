@@ -183,9 +183,9 @@ export function EfficiencyChart() {
       'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
     };
 
-    // Current date is Jan 2026, so last 6 months = Aug 2025 - Jan 2026
+    // Current date is Mar 2026, so last 6 months = Oct 2025 - Mar 2026
     const cutoffYear = 2025;
-    const cutoffMonth = 7; // July 2025 and later
+    const cutoffMonth = 10; // October 2025 and later
 
     return companies
       .map(c => {
@@ -285,7 +285,7 @@ export function EfficiencyChart() {
             </div>
           </div>
         </div>
-        <div className="last-updated">Last updated: Jan 13, 2026</div>
+        <div className="last-updated">Last updated: Mar 17, 2026</div>
       </header>
 
       {/* Category buttons */}

@@ -98,7 +98,7 @@ export function Dashboard({ initialCategory }: DashboardProps) {
           </div>
         </div>
         <div className="header-right">
-          <div className="last-updated">Last updated: Jan 13, 2026</div>
+          <div className="last-updated">Last updated: Mar 17, 2026</div>
           <div className="data-source">Sacra, PitchBook, Tracxn, CB Insights</div>
         </div>
       </header>
