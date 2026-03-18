@@ -897,6 +897,13 @@ body {
   margin-top: 8px;
 }
 
+.location-buttons .category-btn.active {
+  background: #71717a;
+  border-color: #71717a;
+  color: var(--text-inverted);
+  box-shadow: 0 2px 8px rgba(113, 113, 122, 0.25);
+}
+
 .category-btn {
   display: inline-flex;
   align-items: center;
