@@ -341,8 +341,13 @@ export function ComparePage() {
                 >
                   x
                 </button>
-                <CompanyLogo domain={company.domain} name={company.name} color={company.color} />
-                <span className="cmp-company-name">{company.name}</span>
+                <div
+                  className="cmp-company-link"
+                  onClick={() => navigate(`/company/${getCompanySlug(company.name)}`)}
+                >
+                  <CompanyLogo domain={company.domain} name={company.name} color={company.color} />
+                  <span className="cmp-company-name">{company.name}</span>
+                </div>
                 <div className="cmp-company-meta">
                   <span className={`category-tag ${company.category}`}>{category?.name}</span>
                   <span className="cmp-company-rank" style={{ color: getEfficiencyColor(company.arrPerEmployee || 0) }}>

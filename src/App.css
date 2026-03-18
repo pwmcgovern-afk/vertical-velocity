@@ -3449,6 +3449,23 @@ body {
   color: var(--text-primary);
 }
 
+.cmp-company-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.cmp-company-link:hover .cmp-company-name {
+  color: var(--accent);
+}
+
+.cmp-company-link:hover .cmp-logo {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
 .cmp-logo-wrapper {
   position: relative;
   width: 56px;
