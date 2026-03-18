@@ -166,6 +166,47 @@ export function CompanyPage() {
           </div>
         </div>
 
+        {/* What It Does */}
+        <div className="cp-box">
+          <h3>What It Does</h3>
+          <p className="cp-box-text">
+            {company.description || `${company.name} is a ${category?.name?.toLowerCase() || 'vertical AI'} company headquartered in ${company.headquarters}, founded in ${company.founded}.`}
+          </p>
+        </div>
+
+        {/* Company History */}
+        <div className="cp-box">
+          <h3>Company History</h3>
+          <div className="cp-timeline">
+            <div className="cp-timeline-item">
+              <div className="cp-timeline-dot" />
+              <div className="cp-timeline-content">
+                <span className="cp-timeline-year">{company.founded}</span>
+                <span className="cp-timeline-text">Founded by {company.founders.join(' & ')} in {company.headquarters}</span>
+              </div>
+            </div>
+            <div className="cp-timeline-item">
+              <div className="cp-timeline-dot" />
+              <div className="cp-timeline-content">
+                <span className="cp-timeline-year">{company.lastFunding.match(/\(([^)]+)\)/)?.[1] || 'Latest'}</span>
+                <span className="cp-timeline-text">{company.lastFunding.replace(/\s*\([^)]+\)/, '')}</span>
+              </div>
+            </div>
+            {company.arr && (
+              <div className="cp-timeline-item">
+                <div className="cp-timeline-dot current" />
+                <div className="cp-timeline-content">
+                  <span className="cp-timeline-year">Today</span>
+                  <span className="cp-timeline-text">
+                    {formatARR(company.arr)} ARR, {company.headcount.toLocaleString()} employees
+                    {company.valuation ? `, valued at ${formatValuation(company.valuation)}` : ''}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="cp-details">
           <div className="cp-detail-section">
             <h3>Company Details</h3>

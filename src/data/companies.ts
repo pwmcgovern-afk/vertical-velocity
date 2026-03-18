@@ -13,6 +13,7 @@ export interface Company {
   founders: string[];
   website: string;
   headquarters: string;
+  description?: string;
 }
 
 export const categories = [
@@ -49,6 +50,7 @@ export const companies: Company[] = [
     founders: ['Shiv Rao'],
     website: 'https://www.abridge.com',
     headquarters: 'Pittsburgh, PA',
+    description: 'AI-powered clinical documentation platform that automatically generates medical notes from patient-doctor conversations. Used by major health systems to reduce physician burnout and improve note accuracy.',
   },
   {
     name: 'OpenEvidence',
@@ -65,6 +67,7 @@ export const companies: Company[] = [
     founders: ['Daniel Nadler', 'Zack Ziegler'],
     website: 'https://www.openevidence.com',
     headquarters: 'Miami, FL',
+    description: 'AI platform providing evidence-based clinical decision support for physicians. Synthesizes medical literature and clinical data to deliver real-time treatment recommendations at the point of care.',
   },
   {
     name: 'Hippocratic AI',
@@ -81,6 +84,7 @@ export const companies: Company[] = [
     founders: ['Munjal Shah'],
     website: 'https://www.hippocraticai.com',
     headquarters: 'Palo Alto, CA',
+    description: 'AI agents for healthcare operations including patient outreach, scheduling, and pre-visit navigation. Focused on non-diagnostic staffing tasks.',
   },
   {
     name: 'Ambience',
@@ -97,6 +101,7 @@ export const companies: Company[] = [
     founders: ['Mike Ng', 'Nikhil Rajaram'],
     website: 'https://www.ambiencehealthcare.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered ambient clinical documentation that listens to patient encounters and generates notes, referrals, and orders in real time.',
   },
   {
     name: 'Tennr',
@@ -113,6 +118,7 @@ export const companies: Company[] = [
     founders: ['Diego Miralles', 'Graham Galka'],
     website: 'https://www.tennr.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered healthcare referral and fax processing platform that automates intake workflows, extracting and routing patient data from unstructured documents.',
   },
   {
     name: 'Freed',
@@ -129,6 +135,7 @@ export const companies: Company[] = [
     founders: ['Erez Druk', 'Andrey Bannikov'],
     website: 'https://www.getfreed.ai',
     headquarters: 'Santa Rosa, CA',
+    description: 'AI medical scribe for clinicians that automatically generates clinical notes from patient conversations, designed for independent practices and small clinics.',
   },
 {
     name: 'Nabla',
@@ -145,6 +152,7 @@ export const companies: Company[] = [
     founders: ['Alexandre Lebrun', 'Delphine Groll', 'Martin Raison'],
     website: 'https://www.nabla.com',
     headquarters: 'Paris, France',
+    description: 'AI copilot for healthcare documentation that generates clinical notes and handles administrative tasks, helping physicians spend more time with patients.',
   },
   {
     name: 'Eleos Health',
@@ -161,6 +169,7 @@ export const companies: Company[] = [
     founders: ['Alon Joffe', 'Dror Ayalon'],
     website: 'https://www.eleos.health',
     headquarters: 'Cambridge, MA',
+    description: 'AI platform for behavioral health that automates clinical documentation, tracks patient progress, and surfaces insights from therapy sessions.',
   },
   {
     name: 'Commure',
@@ -177,6 +186,7 @@ export const companies: Company[] = [
     founders: ['Tanay Tandon'],
     website: 'https://www.commure.com',
     headquarters: 'San Francisco, CA',
+    description: 'Healthcare operating system that connects clinical and operational data across health systems. Acquired Athelas to combine AI ambient documentation with device-level patient monitoring.',
   },
 
   // Legal
@@ -195,6 +205,7 @@ export const companies: Company[] = [
     founders: ['Jason Boehmig', 'Cai GoGwilt'],
     website: 'https://www.ironcladapp.com',
     headquarters: 'San Francisco, CA',
+    description: 'Digital contracting platform that helps legal teams create, manage, and store contracts with AI-powered workflow automation and analytics.',
   },
   {
     name: 'Harvey',
@@ -211,6 +222,7 @@ export const companies: Company[] = [
     founders: ['Winston Weinberg', 'Gabriel Pereyra'],
     website: 'https://www.harvey.ai',
     headquarters: 'San Francisco, CA',
+    description: 'AI assistant for legal professionals that handles research, drafting, and analysis across litigation, corporate, and regulatory work for Am Law firms.',
   },
   {
     name: 'Clio',
@@ -227,6 +239,7 @@ export const companies: Company[] = [
     founders: ['Jack Newton', 'Rian Gauvreau'],
     website: 'https://www.clio.com',
     headquarters: 'Burnaby, Canada',
+    description: 'Cloud-based legal practice management software for law firms of all sizes, covering case management, billing, payments, and client intake.',
   },
   {
     name: 'Luminance',
@@ -243,6 +256,7 @@ export const companies: Company[] = [
     founders: ['Eleanor Lightbody', 'Emily Foges'],
     website: 'https://www.luminance.com',
     headquarters: 'London, UK',
+    description: 'AI platform for contract review, negotiation, and lifecycle management that reads and understands legal documents to accelerate deal execution.',
   },
   {
     name: 'Eudia',
@@ -259,6 +273,7 @@ export const companies: Company[] = [
     founders: ['Yolanda Lau', 'David Mou'],
     website: 'https://www.eudia.ai',
     headquarters: 'Palo Alto, CA',
+    description: 'AI research and analysis platform for law firms that automates deep legal research, document review, and knowledge synthesis across large case files.',
   },
   {
     name: 'Eve',
@@ -275,6 +290,7 @@ export const companies: Company[] = [
     founders: ['Sara Itucas', 'Marissa Louie'],
     website: 'https://www.eve.legal',
     headquarters: 'San Mateo, CA',
+    description: 'AI-powered legal research and drafting platform that helps attorneys find relevant case law and generate legal documents faster.',
   },
   {
     name: 'EvenUp',
@@ -291,6 +307,7 @@ export const companies: Company[] = [
     founders: ['Rami Karabibar', 'Saam Mashhad', 'Ray Mieszaniec'],
     website: 'https://www.evenuplaw.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI platform that generates demand packages for personal injury attorneys by synthesizing medical records, bills, and case details into settlement documents.',
   },
   {
     name: 'Norm AI',
@@ -307,6 +324,7 @@ export const companies: Company[] = [
     founders: ['Mohammad Naghi', 'Brittany Justice'],
     website: 'https://www.norm.ai',
     headquarters: 'New York, NY',
+    description: 'AI regulatory compliance platform that automates the monitoring and enforcement of rules, policies, and regulations across financial services and other regulated industries.',
   },
   {
     name: 'Legora',
@@ -323,6 +341,7 @@ export const companies: Company[] = [
     founders: ['Kenji Yoshida'],
     website: 'https://www.legora.com',
     headquarters: 'New York, NY',
+    description: 'AI legal research platform that enables attorneys to search case law, statutes, and regulations using natural language queries with cited, verifiable results.',
   },
   {
     name: 'Spellbook',
@@ -339,6 +358,7 @@ export const companies: Company[] = [
     founders: ['Scott Chicken', 'Dan Rabinowitz'],
     website: 'https://www.spellbook.legal',
     headquarters: 'Toronto, Canada',
+    description: 'AI contract drafting assistant for lawyers that reviews, suggests edits, and generates contract language directly inside Microsoft Word.',
   },
   {
     name: 'Solve Intelligence',
@@ -355,6 +375,7 @@ export const companies: Company[] = [
     founders: ['Roy Glasberg', 'Tal Shrestha'],
     website: 'https://www.solveintelligence.com',
     headquarters: 'London, UK',
+    description: 'AI patent drafting platform that helps patent attorneys and agents write and prosecute patent applications faster with automated claim generation.',
   },
 
   // Finance
@@ -373,6 +394,7 @@ export const companies: Company[] = [
     founders: ['Eric Glyman', 'Karim Atiyeh', 'Gene Lee'],
     website: 'https://www.ramp.com',
     headquarters: 'New York, NY',
+    description: 'Corporate card and spend management platform with AI-powered expense automation, bill pay, and procurement tools that help businesses control costs.',
   },
   {
     name: 'Hebbia',
@@ -389,6 +411,7 @@ export const companies: Company[] = [
     founders: ['George Sivulka'],
     website: 'https://www.hebbia.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered knowledge work platform for finance that lets analysts search, synthesize, and analyze large document sets for due diligence, deal sourcing, and research.',
   },
   {
     name: 'Rogo',
@@ -405,6 +428,7 @@ export const companies: Company[] = [
     founders: ['Gabriel Stengel', 'Andy Lee'],
     website: 'https://www.rogo.ai',
     headquarters: 'New York, NY',
+    description: 'AI research assistant for investment professionals that automates financial analysis, data gathering, and report generation across banking and asset management.',
   },
   {
     name: '9fin',
@@ -421,6 +445,7 @@ export const companies: Company[] = [
     founders: ['Steven Hunter', 'Hussam Hammo'],
     website: 'https://www.9fin.com',
     headquarters: 'London, UK',
+    description: 'AI-powered debt capital markets intelligence platform that provides leveraged finance and high-yield bond data, analytics, and news for credit professionals.',
   },
   {
     name: 'Brightwave',
@@ -437,6 +462,7 @@ export const companies: Company[] = [
     founders: ['Mike Conover'],
     website: 'https://www.brightwave.io',
     headquarters: 'Boulder, CO',
+    description: 'AI investment research platform that synthesizes financial documents, earnings calls, and market data to generate analyst-grade research reports.',
   },
   {
     name: 'Zest AI',
@@ -453,6 +479,7 @@ export const companies: Company[] = [
     founders: ['Douglas Merrill', 'Shawn Budde'],
     website: 'https://www.zest.ai',
     headquarters: 'Burbank, CA',
+    description: 'AI-powered credit underwriting platform that helps lenders make more accurate and inclusive lending decisions using machine learning models.',
   },
 
   // Other - HR
@@ -471,6 +498,7 @@ export const companies: Company[] = [
     founders: ['Ashutosh Garg', 'Varun Kacholia'],
     website: 'https://www.eightfold.ai',
     headquarters: 'Santa Clara, CA',
+    description: 'AI talent intelligence platform that helps enterprises recruit, retain, and develop talent using deep learning models applied to workforce data.',
   },
 
   // Other - Security
@@ -489,6 +517,7 @@ export const companies: Company[] = [
     founders: ['Hitesh Sheth', 'Mark Abene'],
     website: 'https://www.vectra.ai',
     headquarters: 'San Jose, CA',
+    description: 'AI-powered cybersecurity platform that detects and responds to network threats in real time using behavioral analysis across cloud, data center, and IoT environments.',
   },
   {
     name: 'Abnormal',
@@ -505,6 +534,7 @@ export const companies: Company[] = [
     founders: ['Evan Reiser', 'Sanjay Jeyakumar'],
     website: 'https://www.abnormal.ai',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered email security platform that detects and prevents socially engineered attacks like phishing, business email compromise, and account takeovers.',
   },
 
   // Other - Support
@@ -523,6 +553,7 @@ export const companies: Company[] = [
     founders: ['Bret Taylor', 'Clay Bavor'],
     website: 'https://www.sierra.ai',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered customer experience agents that handle conversations across voice, chat, and digital channels for consumer brands.',
   },
   {
     name: 'Decagon',
@@ -539,6 +570,7 @@ export const companies: Company[] = [
     founders: ['Jesse Zhang', 'Ashwin Sreenivas'],
     website: 'https://www.decagon.ai',
     headquarters: 'San Francisco, CA',
+    description: 'AI customer support agents for enterprises that autonomously resolve complex tickets across chat, email, and voice with full context awareness.',
   },
   {
     name: 'Cresta',
@@ -555,6 +587,7 @@ export const companies: Company[] = [
     founders: ['Zayd Enam', 'Tim Shi', 'Sebastian Thrun'],
     website: 'https://www.cresta.com',
     headquarters: 'Palo Alto, CA',
+    description: 'AI platform for contact center performance optimization that provides real-time coaching, quality management, and conversation intelligence for agents and managers.',
   },
   {
     name: 'Forethought',
@@ -571,6 +604,7 @@ export const companies: Company[] = [
     founders: ['Deon Nicholas', 'Sami Ghoche'],
     website: 'https://www.forethought.ai',
     headquarters: 'San Francisco, CA',
+    description: 'AI customer support automation platform that triages, prioritizes, and resolves support tickets using natural language understanding.',
   },
   {
     name: 'Observe.AI',
@@ -587,6 +621,7 @@ export const companies: Company[] = [
     founders: ['Swapnil Jain', 'Akash Singh'],
     website: 'https://www.observe.ai',
     headquarters: 'Redwood City, CA',
+    description: 'AI-powered contact center intelligence platform that analyzes customer interactions to surface insights, automate QA, and improve agent performance.',
   },
   {
     name: 'Uniphore',
@@ -603,6 +638,7 @@ export const companies: Company[] = [
     founders: ['Umesh Sachdev', 'Ravi Saraogi'],
     website: 'https://www.uniphore.com',
     headquarters: 'Palo Alto, CA',
+    description: 'Conversational AI and automation platform for enterprises that combines speech recognition, NLP, and emotion AI to transform customer and employee experiences.',
   },
 
   // Enterprise
@@ -621,6 +657,7 @@ export const companies: Company[] = [
     founders: ['Arvind Jain', 'T.R. Vishwanath', 'Tony Gentilcore'],
     website: 'https://www.glean.com',
     headquarters: 'Palo Alto, CA',
+    description: 'AI-powered enterprise search and knowledge management platform that connects all company data sources into a single searchable interface with generative AI answers.',
   },
   {
     name: 'Cohere',
@@ -637,6 +674,7 @@ export const companies: Company[] = [
     founders: ['Aidan Gomez', 'Ivan Zhang', 'Nick Frosst'],
     website: 'https://www.cohere.com',
     headquarters: 'Toronto, Canada',
+    description: 'Enterprise AI platform providing large language models optimized for business applications, with a focus on data privacy, security, and deployment flexibility.',
   },
   {
     name: 'Writer',
@@ -653,6 +691,7 @@ export const companies: Company[] = [
     founders: ['May Habib', 'Waseem AlShikh'],
     website: 'https://www.writer.com',
     headquarters: 'San Francisco, CA',
+    description: 'Enterprise AI platform for content generation and governance that helps teams produce on-brand marketing, sales, and HR content at scale.',
   },
   {
     name: 'Instabase',
@@ -669,6 +708,7 @@ export const companies: Company[] = [
     founders: ['Anant Bhardwaj'],
     website: 'https://www.instabase.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI platform for automating complex document workflows that extracts, classifies, and processes unstructured data from documents at enterprise scale.',
   },
   // Sales
   {
@@ -686,6 +726,7 @@ export const companies: Company[] = [
     founders: ['Amit Bendov', 'Eilon Reshef'],
     website: 'https://www.gong.io',
     headquarters: 'San Francisco, CA',
+    description: 'Revenue intelligence platform that uses AI to record, transcribe, and analyze sales conversations, surfacing deal insights and coaching opportunities.',
   },
   {
     name: 'People.ai',
@@ -702,6 +743,7 @@ export const companies: Company[] = [
     founders: ['Oleg Rogynskyy'],
     website: 'https://www.people.ai',
     headquarters: 'San Francisco, CA',
+    description: 'AI revenue operations platform that automatically captures sales activity data and matches it to CRM records to improve pipeline visibility and forecasting.',
   },
   {
     name: 'Clari',
@@ -718,6 +760,7 @@ export const companies: Company[] = [
     founders: ['Andy Byrne', 'Venkat Rangan'],
     website: 'https://www.clari.com',
     headquarters: 'Sunnyvale, CA',
+    description: 'AI-powered revenue operations and forecasting platform that provides full pipeline visibility. Acquired Salesloft to combine revenue intelligence with sales engagement.',
   },
   {
     name: 'Highspot',
@@ -734,6 +777,7 @@ export const companies: Company[] = [
     founders: ['Robert Wahbe', 'Oliver Sharp', 'David Wortendyke'],
     website: 'https://www.highspot.com',
     headquarters: 'Seattle, WA',
+    description: 'AI-powered sales enablement platform that helps reps find the right content, training, and guidance to engage buyers and close deals more effectively.',
   },
 
   // Travel
@@ -752,6 +796,7 @@ export const companies: Company[] = [
     founders: ['Ariel Cohen', 'Ilan Twig'],
     website: 'https://www.navan.com',
     headquarters: 'Palo Alto, CA',
+    description: 'AI-powered corporate travel and expense management platform that combines booking, payments, and spend control into a single automated system.',
   },
   {
     name: 'Spotnana',
@@ -768,6 +813,7 @@ export const companies: Company[] = [
     founders: ['Sarosh Waghmar', 'Steve Singh'],
     website: 'https://www.spotnana.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered travel management platform built on modern infrastructure that provides booking, policy compliance, and reporting for corporations and TMCs.',
   },
 
   // Real Estate
@@ -786,6 +832,7 @@ export const companies: Company[] = [
     founders: ['Minna Song', 'Tony Yun'],
     website: 'https://www.eliseai.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered leasing and property management assistant for multifamily real estate that automates prospect communication, scheduling, and resident services across channels.',
   },
   {
     name: 'Lessen',
@@ -802,6 +849,7 @@ export const companies: Company[] = [
     founders: ['Jay McKee', 'John Bryant'],
     website: 'https://www.lessen.com',
     headquarters: 'Scottsdale, AZ',
+    description: 'AI-powered property maintenance and renovation management platform that connects property owners with vetted service providers for turns, repairs, and capital projects.',
   },
   {
     name: 'Opendoor',
@@ -818,6 +866,7 @@ export const companies: Company[] = [
     founders: ['Eric Wu', 'Ian Wong', 'JD Ross', 'Keith Rabois'],
     website: 'https://www.opendoor.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered iBuying platform for residential real estate that uses machine learning to make instant cash offers on homes, simplifying the selling process.',
   },
 
   // Insurance
@@ -836,6 +885,7 @@ export const companies: Company[] = [
     founders: ['Jason Xi', 'Suresh Agrawal'],
     website: 'https://www.nirvanatech.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered commercial trucking insurance that uses telematics and driver behavior data to price risk more accurately and reward safer fleets.',
   },
   {
     name: 'Tractable',
@@ -852,6 +902,7 @@ export const companies: Company[] = [
     founders: ['Alex Dalyac', 'Razvan Ranca', 'Adrien Cohen'],
     website: 'https://www.tractable.ai',
     headquarters: 'London, UK',
+    description: 'AI for auto insurance claims processing that uses computer vision to assess vehicle damage from photos, speeding up appraisals and settlements.',
   },
 
   // Other - Media
@@ -870,6 +921,7 @@ export const companies: Company[] = [
     founders: ['Victor Riparbelli', 'Steffen Tjerrild', 'Matthias Niessner', 'Lourdes Agapito'],
     website: 'https://www.synthesia.io',
     headquarters: 'London, UK',
+    description: 'AI video generation platform that creates professional videos from text using AI avatars and voiceovers, used for corporate training, marketing, and internal communications.',
   },
 
   // Other - Accounting
@@ -888,6 +940,7 @@ export const companies: Company[] = [
     founders: ['Parker Gilbert', 'Arjun Ravi'],
     website: 'https://www.numeric.io',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered accounting close and reconciliation platform that automates month-end workflows, flux analysis, and financial reporting for accounting teams.',
   },
 
   // Other - Marketing
@@ -906,6 +959,7 @@ export const companies: Company[] = [
     founders: ['Dave Rogenmoser', 'John Philip Morgan', 'Chris Hull'],
     website: 'https://www.jasper.ai',
     headquarters: 'Austin, TX',
+    description: 'AI content creation platform for marketing teams that generates on-brand copy, images, and campaigns across channels using custom brand voice models.',
   },
 
   // Defense
@@ -924,6 +978,7 @@ export const companies: Company[] = [
     founders: ['Brandon Tseng', 'Ryan Tseng', 'Andrew Reiter'],
     website: 'https://www.shield.ai',
     headquarters: 'San Diego, CA',
+    description: 'Autonomous AI systems for defense that develops AI pilots for drones and fighter jets, enabling autonomous flight in GPS-denied and contested environments.',
   },
   {
     name: 'Anduril',
@@ -940,6 +995,7 @@ export const companies: Company[] = [
     founders: ['Palmer Luckey', 'Trae Stephens', 'Brian Schimpf', 'Matt Grimm'],
     website: 'https://www.anduril.com',
     headquarters: 'Costa Mesa, CA',
+    description: 'AI-powered defense technology company building autonomous systems, sensors, and software for national security including counter-drone, surveillance, and command-and-control platforms.',
   },
   {
     name: 'Palantir',
@@ -956,6 +1012,7 @@ export const companies: Company[] = [
     founders: ['Peter Thiel', 'Alex Karp', 'Joe Lonsdale', 'Stephen Cohen', 'Nathan Gettings'],
     website: 'https://www.palantir.com',
     headquarters: 'Miami, FL',
+    description: 'Data analytics and AI platform serving defense and intelligence agencies as well as commercial enterprises, with products for data integration, operational planning, and decision-making.',
   },
 
   // Other - Voice/Media
@@ -974,6 +1031,7 @@ export const companies: Company[] = [
     founders: ['Piotr Dabkowski', 'Mati Staniszewski'],
     website: 'https://www.elevenlabs.io',
     headquarters: 'London, UK',
+    description: 'AI voice synthesis and audio generation platform that creates ultra-realistic speech, sound effects, and voice clones for media, gaming, and enterprise applications.',
   },
   {
     name: 'Runway',
@@ -990,6 +1048,7 @@ export const companies: Company[] = [
     founders: ['Cristóbal Valenzuela', 'Alejandro Matamala', 'Anastasis Germanidis'],
     website: 'https://www.runwayml.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered video editing and generation platform that enables creators to produce and manipulate video content using generative AI models.',
   },
 
   // Construction
@@ -1008,6 +1067,7 @@ export const companies: Company[] = [
     founders: ['Tooey Courtemanche'],
     website: 'https://www.procore.com',
     headquarters: 'Carpinteria, CA',
+    description: 'Cloud-based construction management software for project planning, scheduling, financials, and field collaboration used by general contractors and owners.',
   },
   {
     name: 'Trunk Tools',
@@ -1024,6 +1084,7 @@ export const companies: Company[] = [
     founders: ['Eddie Dixon', 'Shahriar Malek'],
     website: 'https://www.trunktools.com',
     headquarters: 'New York, NY',
+    description: 'AI assistant for construction project management that helps general contractors find answers across project documents, RFIs, submittals, and specs.',
   },
   {
     name: 'PermitFlow',
@@ -1040,6 +1101,7 @@ export const companies: Company[] = [
     founders: ['Clem Jalonen', 'Francis Dinha'],
     website: 'https://www.permitflow.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered building permit management platform that automates permit applications, jurisdiction research, and approval tracking for construction projects.',
   },
   {
     name: 'Buildr',
@@ -1056,6 +1118,7 @@ export const companies: Company[] = [
     founders: ['David Mitchell'],
     website: 'https://www.buildr.com',
     headquarters: 'Long Beach, CA',
+    description: 'AI-powered preconstruction and bid management platform that helps general contractors manage relationships, track opportunities, and streamline the bidding process.',
   },
 
   // Other - Restaurant/Hospitality
@@ -1074,6 +1137,7 @@ export const companies: Company[] = [
     founders: ['Steve Fredette', 'Aman Narang', 'Jonathan Grimm'],
     website: 'https://www.toasttab.com',
     headquarters: 'Boston, MA',
+    description: 'All-in-one restaurant management and POS platform covering ordering, payments, payroll, marketing, and operations for food service businesses.',
   },
 
   // Home Services
@@ -1092,6 +1156,7 @@ export const companies: Company[] = [
     founders: ['Ara Mahdessian', 'Vahe Kuzoyan'],
     website: 'https://www.servicetitan.com',
     headquarters: 'Glendale, CA',
+    description: 'End-to-end software platform for home and commercial service businesses covering dispatch, scheduling, invoicing, marketing, and customer management.',
   },
   {
     name: 'Siro',
@@ -1108,6 +1173,7 @@ export const companies: Company[] = [
     founders: ['Jake Darmody', 'Stuart Macgregor'],
     website: 'https://www.siro.ai',
     headquarters: 'New York, NY',
+    description: 'AI sales coaching platform for field service teams that records in-home sales conversations and provides actionable feedback to improve close rates.',
   },
   {
     name: 'Topline Pro',
@@ -1124,6 +1190,7 @@ export const companies: Company[] = [
     founders: ['Nick Meitz', 'Shannon Quinn'],
     website: 'https://www.toplinepro.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered marketing platform for home service businesses that automates website creation, review management, and lead generation.',
   },
   {
     name: 'Rilla',
@@ -1140,6 +1207,7 @@ export const companies: Company[] = [
     founders: ['Sebastian Gabler'],
     website: 'https://www.rilla.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered virtual ride-along platform for home service sales reps that records field visits and provides coaching insights to boost conversion rates.',
   },
   {
     name: 'Avoca',
@@ -1156,6 +1224,7 @@ export const companies: Company[] = [
     founders: ['Quinn Purcell', 'Jared Burns'],
     website: 'https://www.avoca.ai',
     headquarters: 'New York, NY',
+    description: 'AI receptionist and call handling platform for home service businesses that answers calls, books appointments, and dispatches technicians automatically.',
   },
 
   // Insurance
@@ -1174,6 +1243,7 @@ export const companies: Company[] = [
     founders: ['Diego May', 'Jorge Barro'],
     website: 'https://www.sixfold.ai',
     headquarters: 'New York, NY',
+    description: 'AI-powered commercial insurance underwriting platform that automates submission intake, risk assessment, and quote generation for carriers.',
   },
   {
     name: 'Comulate',
@@ -1190,6 +1260,7 @@ export const companies: Company[] = [
     founders: ['Colby Tunick', 'Madeline Bess'],
     website: 'https://www.comulate.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered insurance commission reconciliation platform that automates the matching of commission statements to policies for brokerages and agencies.',
   },
   {
     name: 'Strala',
@@ -1206,6 +1277,7 @@ export const companies: Company[] = [
     founders: ['Jeff Chen'],
     website: 'https://www.strala.io',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered insurance policy analysis platform that extracts and compares coverage details across policies to help brokers identify gaps and optimize placements.',
   },
 
   // Manufacturing
@@ -1224,6 +1296,7 @@ export const companies: Company[] = [
     founders: ['Saar Yoskovitz', 'Gal Shaul'],
     website: 'https://www.augury.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered predictive maintenance platform for manufacturing equipment that uses vibration and temperature sensors to detect machine failures before they happen.',
   },
   {
     name: 'Instrumental',
@@ -1240,6 +1313,7 @@ export const companies: Company[] = [
     founders: ['Anna-Katrina Shedletsky'],
     website: 'https://www.instrumental.com',
     headquarters: 'Palo Alto, CA',
+    description: 'AI-powered visual quality inspection platform for manufacturing that uses computer vision to detect product defects on assembly lines in real time.',
   },
   {
     name: 'Landing AI',
@@ -1256,6 +1330,7 @@ export const companies: Company[] = [
     founders: ['Andrew Ng'],
     website: 'https://www.landing.ai',
     headquarters: 'Palo Alto, CA',
+    description: 'AI visual inspection platform for manufacturing founded by Andrew Ng that enables factories to build and deploy computer vision models with small datasets.',
   },
 
   // Other - Education
@@ -1274,6 +1349,7 @@ export const companies: Company[] = [
     founders: ['Adeel Khan', 'David Kennedy'],
     website: 'https://www.magicschool.ai',
     headquarters: 'Denver, CO',
+    description: 'AI teaching assistant platform for K-12 educators that helps teachers generate lesson plans, assessments, rubrics, and differentiated learning materials.',
   },
   {
     name: 'Preply',
@@ -1290,6 +1366,7 @@ export const companies: Company[] = [
     founders: ['Kirill Bigai', 'Dmytro Voloshyn', 'Serge Lukyanov'],
     website: 'https://www.preply.com',
     headquarters: 'Brookline, MA',
+    description: 'AI-powered online language tutoring marketplace that connects learners with human tutors, enhanced by AI-driven lesson personalization and practice tools.',
   },
 
   // Logistics
@@ -1308,6 +1385,7 @@ export const companies: Company[] = [
     founders: ['Ryan Petersen', 'David Petersen'],
     website: 'https://www.flexport.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered global freight forwarding and logistics platform that combines technology with supply chain operations to manage ocean, air, trucking, and rail shipments.',
   },
   {
     name: 'FourKites',
@@ -1324,6 +1402,7 @@ export const companies: Company[] = [
     founders: ['Mathew Elenjickal'],
     website: 'https://www.fourkites.com',
     headquarters: 'Chicago, IL',
+    description: 'AI-powered supply chain visibility platform that provides real-time tracking of shipments across road, rail, ocean, and air for shippers and logistics providers.',
   },
   {
     name: 'project44',
@@ -1340,6 +1419,7 @@ export const companies: Company[] = [
     founders: ['Jett McCandless', 'Tommy Barnes'],
     website: 'https://www.project44.com',
     headquarters: 'Chicago, IL',
+    description: 'AI-powered supply chain visibility and tracking platform that connects shippers, carriers, and LSPs with predictive ETAs and exception management.',
   },
   {
     name: 'Pallet',
@@ -1356,6 +1436,7 @@ export const companies: Company[] = [
     founders: ['Sushanth Raman', 'Andrew Spencer'],
     website: 'https://www.pallet.com',
     headquarters: 'San Francisco, CA',
+    description: 'AI-powered warehouse automation platform for food distribution that uses robotics and software to optimize order fulfillment and reduce labor costs.',
   },
 
   // Other - Public Safety
@@ -1374,6 +1455,7 @@ export const companies: Company[] = [
     founders: ['Gabriel Mays'],
     website: 'https://www.prepared911.com',
     headquarters: 'New York, NY',
+    description: 'AI-powered platform for 911 dispatch centers that provides real-time transcription, translation, and situational awareness tools to help dispatchers respond faster.',
   },
 ];
 

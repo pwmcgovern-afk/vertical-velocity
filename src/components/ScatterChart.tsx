@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { companies, categories, type Company } from '../data/companies';
 
@@ -18,6 +18,7 @@ function getCompanySlug(name: string): string {
 
 export function ScatterChart() {
   const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredCompany, setHoveredCompany] = useState<Company | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
@@ -33,10 +34,10 @@ export function ScatterChart() {
     [companiesWithData, selectedCategories]
   );
 
-  // Chart dimensions
-  const width = 900;
-  const height = 500;
-  const margin = { top: 30, right: 40, bottom: 60, left: 70 };
+  // Chart dimensions - extra right margin for labels
+  const width = 960;
+  const height = 540;
+  const margin = { top: 40, right: 60, bottom: 60, left: 70 };
   const plotW = width - margin.left - margin.right;
   const plotH = height - margin.top - margin.bottom;
 
@@ -44,26 +45,25 @@ export function ScatterChart() {
   const maxHeadcount = Math.max(...filteredCompanies.map(c => c.headcount));
   const maxARR = Math.max(...filteredCompanies.map(c => c.arr || 0));
 
-  // Use log scales for better distribution
-  const xScale = (val: number) => {
+  const xScale = useCallback((val: number) => {
     const logMin = Math.log10(10);
-    const logMax = Math.log10(Math.max(maxHeadcount * 1.2, 100));
+    const logMax = Math.log10(Math.max(maxHeadcount * 1.3, 100));
     const logVal = Math.log10(Math.max(val, 10));
     return margin.left + ((logVal - logMin) / (logMax - logMin)) * plotW;
-  };
+  }, [maxHeadcount, plotW, margin.left]);
 
-  const yScale = (val: number) => {
+  const yScale = useCallback((val: number) => {
     const logMin = Math.log10(1);
-    const logMax = Math.log10(Math.max(maxARR * 1.3, 10));
+    const logMax = Math.log10(Math.max(maxARR * 1.5, 10));
     const logVal = Math.log10(Math.max(val, 1));
     return margin.top + plotH - ((logVal - logMin) / (logMax - logMin)) * plotH;
-  };
+  }, [maxARR, plotH, margin.top]);
 
   // Bubble size based on valuation
   const maxVal = Math.max(...filteredCompanies.map(c => c.valuation || 0));
   const bubbleScale = (val: number | null) => {
     if (!val) return 6;
-    return Math.max(6, Math.min(30, 6 + (val / maxVal) * 24));
+    return Math.max(6, Math.min(28, 6 + (val / maxVal) * 22));
   };
 
   // Grid lines
@@ -80,6 +80,27 @@ export function ScatterChart() {
       setSelectedCategories([catId]);
     }
   };
+
+  // Position tooltip relative to the container, clamped to stay in bounds
+  const handleMouseEnter = useCallback((company: Company, cx: number, cy: number) => {
+    setHoveredCompany(company);
+    const svg = svgRef.current;
+    const container = containerRef.current;
+    if (svg && container) {
+      const rect = svg.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const svgX = (cx / width) * rect.width + (rect.left - containerRect.left);
+      const svgY = (cy / height) * rect.height + (rect.top - containerRect.top);
+
+      // Clamp so tooltip doesn't overflow right edge
+      const tooltipW = 200;
+      const tooltipH = 120;
+      const clampedX = Math.min(svgX + 16, containerRect.width - tooltipW - 8);
+      const clampedY = Math.max(8, Math.min(svgY - 10, containerRect.height - tooltipH - 8));
+
+      setTooltipPos({ x: clampedX, y: clampedY });
+    }
+  }, [width, height]);
 
   return (
     <div className="scatter-chart">
@@ -106,7 +127,7 @@ export function ScatterChart() {
         ))}
       </div>
 
-      <div className="scatter-container">
+      <div className="scatter-container" ref={containerRef}>
         <svg
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
@@ -136,7 +157,6 @@ export function ScatterChart() {
 
           {/* Efficiency reference lines (diagonal) */}
           {efficiencyLines.map(eff => {
-            // ARR/emp = eff (in $K), so ARR ($M) = eff * headcount / 1000
             const points: [number, number][] = [];
             for (let h = 10; h <= maxHeadcount * 2; h *= 1.5) {
               const arr = (eff * h) / 1000;
@@ -221,31 +241,33 @@ export function ScatterChart() {
                   stroke={isHovered ? company.color : 'transparent'}
                   strokeWidth={2}
                   className="scatter-dot"
-                  onMouseEnter={() => {
-                    setHoveredCompany(company);
-                    const svg = svgRef.current;
-                    if (svg) {
-                      const rect = svg.getBoundingClientRect();
-                      const svgX = (cx / width) * rect.width;
-                      const svgY = (cy / height) * rect.height;
-                      setTooltipPos({ x: svgX, y: svgY });
-                    }
-                  }}
+                  onMouseEnter={() => handleMouseEnter(company, cx, cy)}
                   onMouseLeave={() => setHoveredCompany(null)}
                   onClick={() => navigate(`/company/${getCompanySlug(company.name)}`)}
                   style={{ cursor: 'pointer' }}
                 />
-                {/* Label for larger bubbles */}
-                {r > 12 && !isHovered && (
+                {/* Label: inside bubble if large, outside if small */}
+                {r > 14 && !isHovered ? (
                   <text
                     x={cx}
                     y={cy + 1}
-                    className="scatter-dot-label"
+                    className="scatter-dot-label-inside"
                     textAnchor="middle"
                     dominantBaseline="middle"
                     pointerEvents="none"
                   >
-                    {company.name.length > 8 ? company.name.slice(0, 7) + '...' : company.name}
+                    {company.name.length > 10 ? company.name.slice(0, 9) + '..' : company.name}
+                  </text>
+                ) : (
+                  <text
+                    x={cx + r + 4}
+                    y={cy + 3}
+                    className="scatter-dot-label-outside"
+                    textAnchor="start"
+                    dominantBaseline="middle"
+                    pointerEvents="none"
+                  >
+                    {company.name}
                   </text>
                 )}
               </g>
@@ -253,13 +275,13 @@ export function ScatterChart() {
           })}
         </svg>
 
-        {/* Tooltip */}
+        {/* Tooltip - positioned within container but not clipped */}
         {hoveredCompany && (
           <div
             className="scatter-tooltip"
             style={{
-              left: tooltipPos.x + 16,
-              top: tooltipPos.y - 10,
+              left: tooltipPos.x,
+              top: tooltipPos.y,
             }}
           >
             <div className="scatter-tooltip-name">{hoveredCompany.name}</div>

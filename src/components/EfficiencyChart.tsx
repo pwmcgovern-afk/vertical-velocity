@@ -388,6 +388,16 @@ export function EfficiencyChart() {
               >
                 + Submit Company
               </button>
+              <button
+                className="random-btn-header"
+                onClick={() => {
+                  const pool = companies.filter(c => c.arr !== null);
+                  const random = pool[Math.floor(Math.random() * pool.length)];
+                  navigate(`/company/${getCompanySlug(random.name)}`);
+                }}
+              >
+                Discover a Company
+              </button>
             </div>
           </div>
           <div className="chart-header-right">
@@ -639,6 +649,7 @@ export function EfficiencyChart() {
                 <div className="hot-companies-ticker-track">
                   {[...topCompanies, ...topCompanies].map((company, i) => (
                     <div key={`${company.name}-${i}`} className="hot-company-row">
+                      <span className="hot-company-rank">#{(i % topCompanies.length) + 1}</span>
                       <div className="hot-company-info">
                         <span className="hot-company-name">{company.name}</span>
                         <span className="hot-company-category">
@@ -816,7 +827,7 @@ export function EfficiencyChart() {
                                     Share on X
                                   </button>
                                   <button
-                                    className="company-website-link"
+                                    className="view-profile-btn"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       navigate(`/company/${slug}`);
