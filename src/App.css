@@ -2500,19 +2500,19 @@ body {
 }
 
 .scatter-eff-label {
-  font-size: 10px;
+  font-size: 13px;
   fill: var(--text-tertiary);
   font-family: 'Geist Mono', monospace;
 }
 
 .scatter-axis-label {
-  font-size: 11px;
+  font-size: 14px;
   fill: var(--text-tertiary);
   font-family: 'Geist Mono', monospace;
 }
 
 .scatter-axis-title {
-  font-size: 12px;
+  font-size: 15px;
   fill: var(--text-secondary);
   font-weight: 500;
 }
@@ -2526,14 +2526,14 @@ body {
 }
 
 .scatter-dot-label-inside {
-  font-size: 8px;
+  font-size: 10px;
   fill: #fff;
   font-weight: 600;
   pointer-events: none;
 }
 
 .scatter-dot-label-outside {
-  font-size: 9px;
+  font-size: 12px;
   fill: var(--text-secondary);
   font-weight: 500;
   pointer-events: none;
