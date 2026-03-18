@@ -72,6 +72,11 @@ export function CompanyPage() {
     c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug
   );
 
+  // Scroll to top on navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   // Set document title for SEO
   useEffect(() => {
     if (company) {
