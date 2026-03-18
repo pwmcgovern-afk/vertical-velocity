@@ -12,6 +12,7 @@ export interface Company {
   founded: number;
   founders: string[];
   website: string;
+  headquarters: string;
 }
 
 export const categories = [
@@ -47,6 +48,7 @@ export const companies: Company[] = [
     founded: 2018,
     founders: ['Shiv Rao'],
     website: 'https://www.abridge.com',
+    headquarters: 'Pittsburgh, PA',
   },
   {
     name: 'OpenEvidence',
@@ -57,11 +59,12 @@ export const companies: Company[] = [
     arr: 150,
     arrPerEmployee: 3000,
     valuation: 12.0,
-    lastFunding: '$250M (Dec 2025)',
+    lastFunding: '$250M Series D at $12B (Jan 2026)',
     source: 'TechCrunch, The Information',
     founded: 2022,
     founders: ['Daniel Nadler', 'Zack Ziegler'],
     website: 'https://www.openevidence.com',
+    headquarters: 'Miami, FL',
   },
   {
     name: 'Hippocratic AI',
@@ -77,6 +80,7 @@ export const companies: Company[] = [
     founded: 2022,
     founders: ['Munjal Shah'],
     website: 'https://www.hippocraticai.com',
+    headquarters: 'Palo Alto, CA',
   },
   {
     name: 'Ambience',
@@ -92,6 +96,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Mike Ng', 'Nikhil Rajaram'],
     website: 'https://www.ambiencehealthcare.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Tennr',
@@ -107,6 +112,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Diego Miralles', 'Graham Galka'],
     website: 'https://www.tennr.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Freed',
@@ -122,6 +128,7 @@ export const companies: Company[] = [
     founded: 2022,
     founders: ['Erez Druk', 'Andrey Bannikov'],
     website: 'https://www.getfreed.ai',
+    headquarters: 'Santa Rosa, CA',
   },
   {
     name: 'Viz.ai',
@@ -137,6 +144,7 @@ export const companies: Company[] = [
     founded: 2016,
     founders: ['Chris Mansi', 'David Golan'],
     website: 'https://www.viz.ai',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Nabla',
@@ -152,6 +160,7 @@ export const companies: Company[] = [
     founded: 2018,
     founders: ['Alexandre Lebrun', 'Delphine Groll', 'Martin Raison'],
     website: 'https://www.nabla.com',
+    headquarters: 'Paris, France',
   },
   {
     name: 'Eleos Health',
@@ -167,6 +176,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Alon Joffe', 'Dror Ayalon'],
     website: 'https://www.eleos.health',
+    headquarters: 'Cambridge, MA',
   },
   {
     name: 'Commure',
@@ -182,6 +192,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Tanay Tandon'],
     website: 'https://www.commure.com',
+    headquarters: 'San Francisco, CA',
   },
 
   // Legal
@@ -199,6 +210,7 @@ export const companies: Company[] = [
     founded: 2014,
     founders: ['Jason Boehmig', 'Cai GoGwilt'],
     website: 'https://www.ironcladapp.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Harvey',
@@ -208,12 +220,13 @@ export const companies: Company[] = [
     headcount: 500,
     arr: 190,
     arrPerEmployee: 380,
-    valuation: 8.0,
-    lastFunding: '$150M Series F (Oct 2025)',
+    valuation: 11.0,
+    lastFunding: '$200M raise at $11B (Feb 2026)',
     source: 'TechCrunch, CNBC, Sacra',
     founded: 2022,
     founders: ['Winston Weinberg', 'Gabriel Pereyra'],
     website: 'https://www.harvey.ai',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Clio',
@@ -229,6 +242,7 @@ export const companies: Company[] = [
     founded: 2008,
     founders: ['Jack Newton', 'Rian Gauvreau'],
     website: 'https://www.clio.com',
+    headquarters: 'Burnaby, Canada',
   },
   {
     name: 'Luminance',
@@ -244,6 +258,7 @@ export const companies: Company[] = [
     founded: 2015,
     founders: ['Eleanor Lightbody', 'Emily Foges'],
     website: 'https://www.luminance.com',
+    headquarters: 'London, UK',
   },
   {
     name: 'Eudia',
@@ -259,6 +274,7 @@ export const companies: Company[] = [
     founded: 2023,
     founders: ['Yolanda Lau', 'David Mou'],
     website: 'https://www.eudia.ai',
+    headquarters: 'Palo Alto, CA',
   },
   {
     name: 'Eve',
@@ -274,6 +290,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Sara Itucas', 'Marissa Louie'],
     website: 'https://www.eve.legal',
+    headquarters: 'San Mateo, CA',
   },
   {
     name: 'EvenUp',
@@ -289,6 +306,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Rami Karabibar', 'Saam Mashhad', 'Ray Mieszaniec'],
     website: 'https://www.evenuplaw.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Norm AI',
@@ -304,6 +322,7 @@ export const companies: Company[] = [
     founded: 2022,
     founders: ['Mohammad Naghi', 'Brittany Justice'],
     website: 'https://www.norm.ai',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Legora',
@@ -311,14 +330,15 @@ export const companies: Company[] = [
     category: 'legal',
     color: '#8b5cf6',
     headcount: 150,
-    arr: 40,
-    arrPerEmployee: 267,
-    valuation: 1.8,
+    arr: 30,
+    arrPerEmployee: 200,
+    valuation: 6.0,
     lastFunding: '$150M Series C (Oct 2025)',
     source: 'Bloomberg, Bessemer',
     founded: 2023,
     founders: ['Kenji Yoshida'],
     website: 'https://www.legora.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Spellbook',
@@ -334,6 +354,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Scott Chicken', 'Dan Rabinowitz'],
     website: 'https://www.spellbook.legal',
+    headquarters: 'Toronto, Canada',
   },
   {
     name: 'Solve Intelligence',
@@ -349,6 +370,7 @@ export const companies: Company[] = [
     founded: 2023,
     founders: ['Roy Glasberg', 'Tal Shrestha'],
     website: 'https://www.solveintelligence.com',
+    headquarters: 'London, UK',
   },
 
   // Finance
@@ -366,6 +388,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Eric Glyman', 'Karim Atiyeh', 'Gene Lee'],
     website: 'https://www.ramp.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Hebbia',
@@ -381,6 +404,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['George Sivulka'],
     website: 'https://www.hebbia.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Rogo',
@@ -396,6 +420,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Gabriel Stengel', 'Andy Lee'],
     website: 'https://www.rogo.ai',
+    headquarters: 'New York, NY',
   },
   {
     name: '9fin',
@@ -411,6 +436,7 @@ export const companies: Company[] = [
     founded: 2016,
     founders: ['Steven Hunter', 'Hussam Hammo'],
     website: 'https://www.9fin.com',
+    headquarters: 'London, UK',
   },
   {
     name: 'Brightwave',
@@ -426,6 +452,7 @@ export const companies: Company[] = [
     founded: 2023,
     founders: ['Mike Conover'],
     website: 'https://www.brightwave.io',
+    headquarters: 'Boulder, CO',
   },
   {
     name: 'Zest AI',
@@ -441,6 +468,7 @@ export const companies: Company[] = [
     founded: 2009,
     founders: ['Douglas Merrill', 'Shawn Budde'],
     website: 'https://www.zest.ai',
+    headquarters: 'Burbank, CA',
   },
 
   // Other - HR
@@ -458,6 +486,7 @@ export const companies: Company[] = [
     founded: 2016,
     founders: ['Ashutosh Garg', 'Varun Kacholia'],
     website: 'https://www.eightfold.ai',
+    headquarters: 'Santa Clara, CA',
   },
 
   // Other - Security
@@ -475,6 +504,7 @@ export const companies: Company[] = [
     founded: 2011,
     founders: ['Hitesh Sheth', 'Mark Abene'],
     website: 'https://www.vectra.ai',
+    headquarters: 'San Jose, CA',
   },
   {
     name: 'Abnormal',
@@ -490,6 +520,7 @@ export const companies: Company[] = [
     founded: 2018,
     founders: ['Evan Reiser', 'Sanjay Jeyakumar'],
     website: 'https://www.abnormal.ai',
+    headquarters: 'San Francisco, CA',
   },
 
   // Other - Support
@@ -499,14 +530,15 @@ export const companies: Company[] = [
     category: 'other',
     color: '#71717a',
     headcount: 200,
-    arr: 100,
-    arrPerEmployee: 500,
+    arr: 150,
+    arrPerEmployee: 750,
     valuation: 10.0,
     lastFunding: '$350M Series C (Sep 2025)',
     source: 'TechCrunch, CNBC',
     founded: 2023,
     founders: ['Bret Taylor', 'Clay Bavor'],
     website: 'https://www.sierra.ai',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Decagon',
@@ -516,12 +548,13 @@ export const companies: Company[] = [
     headcount: 102,
     arr: 17,
     arrPerEmployee: 167,
-    valuation: 1.5,
-    lastFunding: '$131M Series C (Jun 2025)',
+    valuation: 4.5,
+    lastFunding: '$250M Series D (Jan 2026)',
     source: 'Sacra',
     founded: 2023,
     founders: ['Jesse Zhang', 'Ashwin Sreenivas'],
     website: 'https://www.decagon.ai',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Cresta',
@@ -537,6 +570,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Zayd Enam', 'Tim Shi', 'Sebastian Thrun'],
     website: 'https://www.cresta.com',
+    headquarters: 'Palo Alto, CA',
   },
   {
     name: 'Forethought',
@@ -552,6 +586,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Deon Nicholas', 'Sami Ghoche'],
     website: 'https://www.forethought.ai',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Observe.AI',
@@ -567,6 +602,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Swapnil Jain', 'Akash Singh'],
     website: 'https://www.observe.ai',
+    headquarters: 'Redwood City, CA',
   },
   {
     name: 'Uniphore',
@@ -582,6 +618,7 @@ export const companies: Company[] = [
     founded: 2008,
     founders: ['Umesh Sachdev', 'Ravi Saraogi'],
     website: 'https://www.uniphore.com',
+    headquarters: 'Palo Alto, CA',
   },
 
   // Enterprise
@@ -599,6 +636,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Arvind Jain', 'T.R. Vishwanath', 'Tony Gentilcore'],
     website: 'https://www.glean.com',
+    headquarters: 'Palo Alto, CA',
   },
   {
     name: 'Cohere',
@@ -614,6 +652,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Aidan Gomez', 'Ivan Zhang', 'Nick Frosst'],
     website: 'https://www.cohere.com',
+    headquarters: 'Toronto, Canada',
   },
   {
     name: 'Writer',
@@ -629,6 +668,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['May Habib', 'Waseem AlShikh'],
     website: 'https://www.writer.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Instabase',
@@ -644,6 +684,7 @@ export const companies: Company[] = [
     founded: 2015,
     founders: ['Anant Bhardwaj'],
     website: 'https://www.instabase.com',
+    headquarters: 'San Francisco, CA',
   },
   // Sales
   {
@@ -660,6 +701,7 @@ export const companies: Company[] = [
     founded: 2015,
     founders: ['Amit Bendov', 'Eilon Reshef'],
     website: 'https://www.gong.io',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'People.ai',
@@ -675,6 +717,7 @@ export const companies: Company[] = [
     founded: 2016,
     founders: ['Oleg Rogynskyy'],
     website: 'https://www.people.ai',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Clari',
@@ -690,6 +733,7 @@ export const companies: Company[] = [
     founded: 2012,
     founders: ['Andy Byrne', 'Venkat Rangan'],
     website: 'https://www.clari.com',
+    headquarters: 'Sunnyvale, CA',
   },
   {
     name: 'Highspot',
@@ -705,6 +749,7 @@ export const companies: Company[] = [
     founded: 2012,
     founders: ['Robert Wahbe', 'Oliver Sharp', 'David Wortendyke'],
     website: 'https://www.highspot.com',
+    headquarters: 'Seattle, WA',
   },
 
   // Travel
@@ -722,6 +767,7 @@ export const companies: Company[] = [
     founded: 2015,
     founders: ['Ariel Cohen', 'Ilan Twig'],
     website: 'https://www.navan.com',
+    headquarters: 'Palo Alto, CA',
   },
   {
     name: 'Spotnana',
@@ -737,6 +783,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Sarosh Waghmar', 'Steve Singh'],
     website: 'https://www.spotnana.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'TripActions',
@@ -752,6 +799,7 @@ export const companies: Company[] = [
     founded: 2015,
     founders: ['Ariel Cohen', 'Ilan Twig'],
     website: 'https://www.tripactions.com',
+    headquarters: 'Palo Alto, CA',
   },
 
   // Other - Search
@@ -760,15 +808,16 @@ export const companies: Company[] = [
     domain: 'perplexity.ai',
     category: 'other',
     color: '#71717a',
-    headcount: 247,
+    headcount: 250,
     arr: 200,
-    arrPerEmployee: 810,
+    arrPerEmployee: 800,
     valuation: 20.0,
     lastFunding: '$200M (Sep 2025)',
     source: 'TechCrunch, The Information',
     founded: 2022,
     founders: ['Aravind Srinivas', 'Denis Yarats', 'Johnny Ho', 'Michael Jang'],
     website: 'https://www.perplexity.ai',
+    headquarters: 'San Francisco, CA',
   },
 
   // Real Estate
@@ -777,15 +826,16 @@ export const companies: Company[] = [
     domain: 'eliseai.com',
     category: 'realestate',
     color: '#059669',
-    headcount: 337,
+    headcount: 515,
     arr: 100,
-    arrPerEmployee: 297,
+    arrPerEmployee: 194,
     valuation: 2.2,
     lastFunding: '$250M Series E (Aug 2025)',
     source: 'Business Wire, VentureBeat',
     founded: 2017,
     founders: ['Minna Song', 'Tony Yun'],
     website: 'https://www.eliseai.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Lessen',
@@ -801,6 +851,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Jay McKee', 'John Bryant'],
     website: 'https://www.lessen.com',
+    headquarters: 'Scottsdale, AZ',
   },
   {
     name: 'Opendoor',
@@ -816,6 +867,7 @@ export const companies: Company[] = [
     founded: 2014,
     founders: ['Eric Wu', 'Ian Wong', 'JD Ross', 'Keith Rabois'],
     website: 'https://www.opendoor.com',
+    headquarters: 'San Francisco, CA',
   },
 
   // Insurance
@@ -833,6 +885,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Jason Xi', 'Suresh Agrawal'],
     website: 'https://www.nirvanatech.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Tractable',
@@ -848,6 +901,7 @@ export const companies: Company[] = [
     founded: 2014,
     founders: ['Alex Dalyac', 'Razvan Ranca', 'Adrien Cohen'],
     website: 'https://www.tractable.ai',
+    headquarters: 'London, UK',
   },
 
   // Other - Media
@@ -860,11 +914,12 @@ export const companies: Company[] = [
     arr: 150,
     arrPerEmployee: 273,
     valuation: 4.0,
-    lastFunding: '$200M Series E (Oct 2025)',
+    lastFunding: '$200M Series E (Jan 2026)',
     source: 'Sifted, TechCrunch',
     founded: 2017,
     founders: ['Victor Riparbelli', 'Steffen Tjerrild', 'Matthias Niessner', 'Lourdes Agapito'],
     website: 'https://www.synthesia.io',
+    headquarters: 'London, UK',
   },
 
   // Other - Accounting
@@ -882,6 +937,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Parker Gilbert', 'Arjun Ravi'],
     website: 'https://www.numeric.io',
+    headquarters: 'San Francisco, CA',
   },
 
   // Other - Marketing
@@ -899,6 +955,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Dave Rogenmoser', 'John Philip Morgan', 'Chris Hull'],
     website: 'https://www.jasper.ai',
+    headquarters: 'Austin, TX',
   },
 
   // Defense
@@ -910,12 +967,13 @@ export const companies: Company[] = [
     headcount: 1200,
     arr: 300,
     arrPerEmployee: 250,
-    valuation: 5.6,
-    lastFunding: '$240M Series F-1 (Mar 2025)',
+    valuation: 11.0,
+    lastFunding: '$1B raise at $11B (Feb 2026)',
     source: 'TechCrunch, Fortune, Sacra',
     founded: 2015,
     founders: ['Brandon Tseng', 'Ryan Tseng', 'Andrew Reiter'],
     website: 'https://www.shield.ai',
+    headquarters: 'San Diego, CA',
   },
   {
     name: 'Anduril',
@@ -931,6 +989,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Palmer Luckey', 'Trae Stephens', 'Brian Schimpf', 'Matt Grimm'],
     website: 'https://www.anduril.com',
+    headquarters: 'Costa Mesa, CA',
   },
   {
     name: 'Palantir',
@@ -946,6 +1005,7 @@ export const companies: Company[] = [
     founded: 2003,
     founders: ['Peter Thiel', 'Alex Karp', 'Joe Lonsdale', 'Stephen Cohen', 'Nathan Gettings'],
     website: 'https://www.palantir.com',
+    headquarters: 'Miami, FL',
   },
   {
     name: 'Rebellion Defense',
@@ -961,6 +1021,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Nicole Eagan', 'Oliver Lewis', 'Chris Lynch'],
     website: 'https://www.rebelliondefense.com',
+    headquarters: 'Washington, DC',
   },
 
   // Other - Voice/Media
@@ -972,12 +1033,13 @@ export const companies: Company[] = [
     headcount: 330,
     arr: 330,
     arrPerEmployee: 1000,
-    valuation: 6.6,
-    lastFunding: '$100M Tender (Jan 2026)',
+    valuation: 11.0,
+    lastFunding: '$500M Series D (Feb 2026)',
     source: 'TechCrunch, PitchBook',
     founded: 2022,
     founders: ['Piotr Dabkowski', 'Mati Staniszewski'],
     website: 'https://www.elevenlabs.io',
+    headquarters: 'London, UK',
   },
   {
     name: 'Runway',
@@ -987,12 +1049,13 @@ export const companies: Company[] = [
     headcount: 120,
     arr: 90,
     arrPerEmployee: 750,
-    valuation: 5.0,
-    lastFunding: '$500M Series E (Aug 2025)',
+    valuation: 5.3,
+    lastFunding: '$315M Series E (Feb 2026)',
     source: 'TechCrunch, Sacra',
     founded: 2018,
     founders: ['Cristóbal Valenzuela', 'Alejandro Matamala', 'Anastasis Germanidis'],
     website: 'https://www.runwayml.com',
+    headquarters: 'New York, NY',
   },
 
   // Construction
@@ -1010,6 +1073,7 @@ export const companies: Company[] = [
     founded: 2002,
     founders: ['Tooey Courtemanche'],
     website: 'https://www.procore.com',
+    headquarters: 'Carpinteria, CA',
   },
   {
     name: 'Trunk Tools',
@@ -1025,6 +1089,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Eddie Dixon', 'Shahriar Malek'],
     website: 'https://www.trunktools.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'PermitFlow',
@@ -1040,6 +1105,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Clem Jalonen', 'Francis Dinha'],
     website: 'https://www.permitflow.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Buildr',
@@ -1055,6 +1121,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['David Mitchell'],
     website: 'https://www.buildr.com',
+    headquarters: 'Long Beach, CA',
   },
 
   // Other - Restaurant/Hospitality
@@ -1072,6 +1139,7 @@ export const companies: Company[] = [
     founded: 2012,
     founders: ['Steve Fredette', 'Aman Narang', 'Jonathan Grimm'],
     website: 'https://www.toasttab.com',
+    headquarters: 'Boston, MA',
   },
 
   // Home Services
@@ -1089,6 +1157,7 @@ export const companies: Company[] = [
     founded: 2012,
     founders: ['Ara Mahdessian', 'Vahe Kuzoyan'],
     website: 'https://www.servicetitan.com',
+    headquarters: 'Glendale, CA',
   },
   {
     name: 'Siro',
@@ -1104,6 +1173,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Jake Darmody', 'Stuart Macgregor'],
     website: 'https://www.siro.ai',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Topline Pro',
@@ -1119,6 +1189,7 @@ export const companies: Company[] = [
     founded: 2020,
     founders: ['Nick Meitz', 'Shannon Quinn'],
     website: 'https://www.toplinepro.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Rilla',
@@ -1134,6 +1205,7 @@ export const companies: Company[] = [
     founded: 2019,
     founders: ['Sebastian Gabler'],
     website: 'https://www.rilla.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Avoca',
@@ -1149,6 +1221,7 @@ export const companies: Company[] = [
     founded: 2022,
     founders: ['Quinn Purcell', 'Jared Burns'],
     website: 'https://www.avoca.ai',
+    headquarters: 'New York, NY',
   },
 
   // Insurance
@@ -1166,6 +1239,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Diego May', 'Jorge Barro'],
     website: 'https://www.sixfold.ai',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Comulate',
@@ -1181,6 +1255,7 @@ export const companies: Company[] = [
     founded: 2022,
     founders: ['Colby Tunick', 'Madeline Bess'],
     website: 'https://www.comulate.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Strala',
@@ -1196,6 +1271,7 @@ export const companies: Company[] = [
     founded: 2024,
     founders: ['Jeff Chen'],
     website: 'https://www.strala.io',
+    headquarters: 'San Francisco, CA',
   },
 
   // Manufacturing
@@ -1213,6 +1289,7 @@ export const companies: Company[] = [
     founded: 2011,
     founders: ['Saar Yoskovitz', 'Gal Shaul'],
     website: 'https://www.augury.com',
+    headquarters: 'New York, NY',
   },
   {
     name: 'Sight Machine',
@@ -1228,6 +1305,7 @@ export const companies: Company[] = [
     founded: 2011,
     founders: ['Jon Sobel', 'Nathan Oostendorp'],
     website: 'https://www.sightmachine.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'Drishti',
@@ -1243,6 +1321,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Prasad Akella'],
     website: 'https://www.drishti.com',
+    headquarters: 'Mountain View, CA',
   },
   {
     name: 'Instrumental',
@@ -1258,6 +1337,7 @@ export const companies: Company[] = [
     founded: 2015,
     founders: ['Anna-Katrina Shedletsky'],
     website: 'https://www.instrumental.com',
+    headquarters: 'Palo Alto, CA',
   },
   {
     name: 'Landing AI',
@@ -1273,6 +1353,7 @@ export const companies: Company[] = [
     founded: 2017,
     founders: ['Andrew Ng'],
     website: 'https://www.landing.ai',
+    headquarters: 'Palo Alto, CA',
   },
 
   // Other - Education
@@ -1290,6 +1371,7 @@ export const companies: Company[] = [
     founded: 2023,
     founders: ['Adeel Khan', 'David Kennedy'],
     website: 'https://www.magicschool.ai',
+    headquarters: 'Denver, CO',
   },
   {
     name: 'Squirrel AI',
@@ -1305,6 +1387,7 @@ export const companies: Company[] = [
     founded: 2014,
     founders: ['Derek Li'],
     website: 'https://www.squirrelai.com',
+    headquarters: 'Shanghai, China',
   },
   {
     name: 'Preply',
@@ -1320,6 +1403,7 @@ export const companies: Company[] = [
     founded: 2012,
     founders: ['Kirill Bigai', 'Dmytro Voloshyn', 'Serge Lukyanov'],
     website: 'https://www.preply.com',
+    headquarters: 'Brookline, MA',
   },
 
   // Logistics
@@ -1337,6 +1421,7 @@ export const companies: Company[] = [
     founded: 2013,
     founders: ['Ryan Petersen', 'David Petersen'],
     website: 'https://www.flexport.com',
+    headquarters: 'San Francisco, CA',
   },
   {
     name: 'FourKites',
@@ -1352,6 +1437,7 @@ export const companies: Company[] = [
     founded: 2014,
     founders: ['Mathew Elenjickal'],
     website: 'https://www.fourkites.com',
+    headquarters: 'Chicago, IL',
   },
   {
     name: 'project44',
@@ -1367,6 +1453,23 @@ export const companies: Company[] = [
     founded: 2014,
     founders: ['Jett McCandless', 'Tommy Barnes'],
     website: 'https://www.project44.com',
+    headquarters: 'Chicago, IL',
+  },
+  {
+    name: 'Pallet',
+    domain: 'pallet.com',
+    category: 'logistics',
+    color: '#7c3aed',
+    headcount: 101,
+    arr: 3,
+    arrPerEmployee: 30,
+    valuation: 0.15,
+    lastFunding: '$27M Series B (May 2025)',
+    source: 'BusinessWire, General Catalyst',
+    founded: 2021,
+    founders: ['Sushanth Raman', 'Andrew Spencer'],
+    website: 'https://www.pallet.com',
+    headquarters: 'San Francisco, CA',
   },
 
   // Other - Public Safety
@@ -1384,6 +1487,7 @@ export const companies: Company[] = [
     founded: 2021,
     founders: ['Gabriel Mays'],
     website: 'https://www.prepared911.com',
+    headquarters: 'New York, NY',
   },
 ];
 

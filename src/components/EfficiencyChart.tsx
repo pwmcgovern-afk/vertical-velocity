@@ -70,9 +70,17 @@ export function EfficiencyChart() {
   const [sortBy, setSortBy] = useState<SortOption>('arrPerEmployee');
   const [searchQuery, setSearchQuery] = useState('');
   const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [locationFilter, setLocationFilter] = useState<'all' | 'ny' | 'sf'>('all');
 
   const filteredCompanies = useMemo(() => {
     let filtered = companies.filter(c => selectedCategories.includes(c.category));
+
+    // Filter by location
+    if (locationFilter === 'ny') {
+      filtered = filtered.filter(c => c.headquarters.includes('New York'));
+    } else if (locationFilter === 'sf') {
+      filtered = filtered.filter(c => c.headquarters.includes('San Francisco'));
+    }
 
     // Filter by search query
     if (searchQuery.trim()) {
@@ -100,7 +108,7 @@ export function EfficiencyChart() {
           return 0;
       }
     });
-  }, [selectedCategories, sortBy, searchQuery]);
+  }, [selectedCategories, sortBy, searchQuery, locationFilter]);
 
   const maxValue = useMemo(() => {
     switch (sortBy) {
@@ -282,22 +290,44 @@ export function EfficiencyChart() {
 
       {/* Category buttons */}
       <div className="category-buttons-wrapper">
-        <button
-          className={`category-btn all-btn ${selectedCategories.length === categories.length ? 'active' : ''}`}
-          onClick={selectAll}
-        >
-          <span className="category-btn-label">All Sectors</span>
-        </button>
-        <div className="category-buttons">
-          {categories.map(cat => (
-            <button
-              key={cat.id}
-              className={`category-btn ${selectedCategories.includes(cat.id) && selectedCategories.length !== categories.length ? 'active' : ''}`}
-              onClick={() => toggleCategory(cat.id)}
-            >
-              <span className="category-btn-label">{cat.name}</span>
-            </button>
-          ))}
+        <div className="category-buttons-row">
+          <button
+            className={`category-btn all-btn ${selectedCategories.length === categories.length ? 'active' : ''}`}
+            onClick={selectAll}
+          >
+            <span className="category-btn-label">All Sectors</span>
+          </button>
+          <div className="category-buttons">
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                className={`category-btn ${selectedCategories.includes(cat.id) && selectedCategories.length !== categories.length ? 'active' : ''}`}
+                onClick={() => toggleCategory(cat.id)}
+              >
+                <span className="category-btn-label">{cat.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="location-buttons">
+          <button
+            className={`category-btn location-btn ${locationFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setLocationFilter('all')}
+          >
+            <span className="category-btn-label">All Locations</span>
+          </button>
+          <button
+            className={`category-btn location-btn ${locationFilter === 'ny' ? 'active' : ''}`}
+            onClick={() => setLocationFilter('ny')}
+          >
+            <span className="category-btn-label">NYC</span>
+          </button>
+          <button
+            className={`category-btn location-btn ${locationFilter === 'sf' ? 'active' : ''}`}
+            onClick={() => setLocationFilter('sf')}
+          >
+            <span className="category-btn-label">SF</span>
+          </button>
         </div>
       </div>
 
@@ -516,6 +546,10 @@ export function EfficiencyChart() {
                             <div className="company-detail">
                               <span className="company-detail-label">Founded</span>
                               <span className="company-detail-value">{company.founded}</span>
+                            </div>
+                            <div className="company-detail">
+                              <span className="company-detail-label">HQ</span>
+                              <span className="company-detail-value">{company.headquarters}</span>
                             </div>
                             <div className="company-detail">
                               <span className="company-detail-label">Last Funding</span>

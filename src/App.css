@@ -877,6 +877,10 @@ body {
   margin-bottom: 20px;
 }
 
+.category-buttons-row {
+  margin-bottom: 8px;
+}
+
 .category-btn.all-btn {
   margin-bottom: 8px;
 }
@@ -885,6 +889,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.location-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
 }
 
 .category-btn {
