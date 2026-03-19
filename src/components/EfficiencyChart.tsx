@@ -115,6 +115,29 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
   const [foundedFilter, setFoundedFilter] = useState<string>('all');
 
   const [stageFilter, setStageFilter] = useState<StageFilter>('all');
+  const [compareList, setCompareList] = useState<string[]>([]);
+
+  const toggleCompare = (companyName: string) => {
+    setCompareList(prev =>
+      prev.includes(companyName)
+        ? prev.filter(n => n !== companyName)
+        : prev.length < 3 ? [...prev, companyName] : prev
+    );
+  };
+
+  const hasActiveFilters = searchQuery.trim() !== '' ||
+    selectedCategories.length !== categories.length ||
+    locationFilter !== 'all' ||
+    foundedFilter !== 'all' ||
+    stageFilter !== 'all';
+
+  const clearAllFilters = () => {
+    setSearchQuery('');
+    setSelectedCategories(categories.map(c => c.id));
+    setLocationFilter('all');
+    setFoundedFilter('all');
+    setStageFilter('all');
+  };
 
   // Dark mode toggle
   useEffect(() => {
@@ -549,6 +572,11 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
             <div className="filters-box">
               <div className="filters-box-header">
                 <span className="filters-title">Filters</span>
+                {hasActiveFilters && (
+                  <button className="clear-filters-btn" onClick={clearAllFilters}>
+                    Clear all
+                  </button>
+                )}
                 <span className="keyboard-hint" title="Press / to focus search">/</span>
               </div>
               <div className="filters-box-content">
@@ -733,7 +761,7 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
                           className="company-card-header"
                           onClick={() => toggleExpand(company.name)}
                         >
-                          <div className="company-card-left">
+                          <div className="company-card-left" onClick={(e) => { e.stopPropagation(); navigate(`/company/${slug}`); }}>
                             <span className={`company-card-rank${index < 10 ? ' rank-badge' : ''}`}>{index + 1}</span>
                             <CompanyLogo domain={company.domain} name={company.name} color={barColor} />
                             <div className="company-card-info">
@@ -741,6 +769,15 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
                               <span className="company-card-category">{categories.find(c => c.id === company.category)?.name}</span>
                             </div>
                           </div>
+                          <button
+                            className={`company-card-compare${compareList.includes(company.name) ? ' active' : ''}`}
+                            onClick={(e) => { e.stopPropagation(); toggleCompare(company.name); }}
+                            title="Add to compare"
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
+                            </svg>
+                          </button>
 
                           <div className="company-card-bar">
                             <motion.div
@@ -893,6 +930,33 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
             </div>
           </div>
         </>
+      )}
+
+      {/* Floating Compare Bar */}
+      {compareList.length > 0 && (
+        <div className="compare-floating-bar">
+          <div className="compare-floating-companies">
+            {compareList.map(name => (
+              <span key={name} className="compare-floating-chip">
+                {name}
+                <button onClick={() => toggleCompare(name)}>&times;</button>
+              </span>
+            ))}
+          </div>
+          <button
+            className="compare-floating-go"
+            disabled={compareList.length < 2}
+            onClick={() => {
+              const slugs = compareList.map(n => {
+                const c = companies.find(co => co.name === n);
+                return c ? getCompanySlug(c.name) : '';
+              }).filter(Boolean).join('-vs-');
+              navigate(`/compare/${slugs}`);
+            }}
+          >
+            Compare {compareList.length}/3
+          </button>
+        </div>
       )}
 
       {/* Submit Company Modal */}

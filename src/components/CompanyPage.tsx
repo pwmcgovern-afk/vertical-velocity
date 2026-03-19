@@ -139,13 +139,15 @@ export function CompanyPage() {
           <button
             className="cp-random-btn"
             onClick={() => {
-              const pool = companies.filter(c => c.arr !== null && c.name !== company.name);
+              // Prefer same-vertical companies, fall back to any
+              const sameVertical = companies.filter(c => c.category === company.category && c.arr !== null && c.name !== company.name);
+              const pool = sameVertical.length > 0 ? sameVertical : companies.filter(c => c.arr !== null && c.name !== company.name);
               const random = pool[Math.floor(Math.random() * pool.length)];
               const slug = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
               navigate(`/company/${slug}`);
             }}
           >
-            Discover Another Company
+            Discover {category?.name || 'Another'} Company
           </button>
         </div>
 

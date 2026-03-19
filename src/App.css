@@ -163,6 +163,13 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Accessibility: visible focus rings */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 body {
@@ -3957,6 +3964,158 @@ body {
 .compare-floating-clear:hover {
   border-color: var(--border-strong);
   color: var(--text-primary);
+}
+
+/* ============================================
+   Clear Filters Button
+   ============================================ */
+.clear-filters-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.clear-filters-btn:hover {
+  background: var(--accent-light);
+}
+
+/* ============================================
+   Compare Button on Cards
+   ============================================ */
+.company-card-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.company-card-compare:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.company-card-compare.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ============================================
+   Floating Compare Bar - Chips
+   ============================================ */
+.compare-floating-companies {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compare-floating-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--bg-muted);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.compare-floating-chip button {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.compare-floating-chip button:hover {
+  color: var(--text-primary);
+}
+
+.compare-floating-go {
+  padding: 8px 18px;
+  background: var(--brand);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.compare-floating-go:hover:not(:disabled) {
+  background: var(--brand-hover);
+}
+
+.compare-floating-go:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+[data-theme="dark"] .compare-floating-go {
+  background: #3b82f6;
+}
+
+[data-theme="dark"] .compare-floating-go:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+/* ============================================
+   Clickable Company Card Left
+   ============================================ */
+.company-card-left {
+  cursor: pointer;
+}
+
+.company-card-left:hover .company-card-name {
+  color: var(--accent);
+}
+
+/* ============================================
+   Active Press Feedback
+   ============================================ */
+.nav-pill:active,
+.category-btn:active,
+.view-toggle-btn:active,
+.cp-share-btn:active,
+.compare-mode-btn:active,
+.export-btn:active,
+.submit-btn-header:active,
+.random-btn-header:active {
+  transform: scale(0.97);
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ============================================
