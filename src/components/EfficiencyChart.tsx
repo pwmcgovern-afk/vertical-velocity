@@ -1,82 +1,13 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { companies, categories, getCompanySlug, type Company } from '../data/companies';
+import { CompanyLogo } from './CompanyLogo';
 import { ScatterChart } from './ScatterChart';
-
-function formatNumber(num: number): string {
-  if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
-  return num.toString();
-}
-
-function formatARR(arrInMillions: number): string {
-  if (arrInMillions >= 1000) {
-    return `$${(arrInMillions / 1000).toFixed(1)}B`;
-  }
-  return `$${arrInMillions}M`;
-}
-
-function formatARRPerEmployee(arrInThousands: number): string {
-  if (arrInThousands >= 1000) {
-    return `$${(arrInThousands / 1000).toFixed(1)}M`;
-  }
-  return `$${arrInThousands}K`;
-}
-
-function formatValuation(valuationInBillions: number): string {
-  if (valuationInBillions >= 1) {
-    return `$${valuationInBillions}B`;
-  }
-  const millions = Math.round(valuationInBillions * 1000);
-  return `$${millions}M`;
-}
-
-function getEfficiencyColor(value: number): string {
-  if (value >= 300) return '#22c55e';
-  if (value >= 200) return '#f59e0b';
-  return '#71717a';
-}
-
-function getFundingStage(lastFunding: string): string {
-  if (/public|ipo|nasdaq|nyse/i.test(lastFunding)) return 'Public';
-  if (/acquired/i.test(lastFunding)) return 'Acquired';
-  if (/seed/i.test(lastFunding)) return 'Seed';
-  const seriesMatch = lastFunding.match(/Series\s+([A-Z])/i);
-  if (seriesMatch) {
-    const letter = seriesMatch[1].toUpperCase();
-    if (letter <= 'B') return `Series A-B`;
-    return `Series C+`;
-  }
-  return 'Other';
-}
-
-function getRevenueMultiple(company: Company): string | null {
-  if (!company.valuation || !company.arr) return null;
-  const multiple = company.valuation * 1000 / company.arr;
-  return `${multiple.toFixed(1)}x`;
-}
-
-function CompanyLogo({ domain, name, color }: { domain: string; name: string; color: string }) {
-  const [error, setError] = useState(false);
-  const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-
-  if (error) {
-    return (
-      <div className="company-logo fallback" style={{ background: `${color}30`, color }}>
-        {initials}
-      </div>
-    );
-  }
-
-  return (
-    <img
-      src={`https://img.logo.dev/${domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=64`}
-      alt={name}
-      className="company-logo"
-      onError={() => setError(true)}
-    />
-  );
-}
+import {
+  formatNumber, formatARR, formatARRPerEmployee, formatValuation,
+  getEfficiencyColor, getFundingStage, getRevenueMultiple, DATA_LAST_UPDATED,
+} from '../utils';
 
 function Tooltip({ text }: { text: string }) {
   return (
@@ -95,27 +26,74 @@ type SortOption = 'arrPerEmployee' | 'arr' | 'headcount' | 'revenueMultiple';
 type ViewMode = 'ranking' | 'scatter';
 type StageFilter = 'all' | 'Seed' | 'Series A-B' | 'Series C+' | 'Public';
 
+const LOCATION_OPTIONS = [
+  { value: 'all', label: 'All Locations' },
+  { value: 'ny', label: 'NYC', match: 'New York' },
+  { value: 'sf', label: 'SF', match: 'San Francisco' },
+  { value: 'boston', label: 'Boston', match: 'Boston' },
+  { value: 'la', label: 'LA', match: 'Los Angeles' },
+  { value: 'austin', label: 'Austin', match: 'Austin' },
+  { value: 'seattle', label: 'Seattle', match: 'Seattle' },
+  { value: 'chicago', label: 'Chicago', match: 'Chicago' },
+  { value: 'dc', label: 'DC', match: 'Washington' },
+  { value: 'denver', label: 'Denver', match: 'Denver' },
+] as const;
+
+type LocationFilter = typeof LOCATION_OPTIONS[number]['value'];
+
 export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { defaultView?: ViewMode; defaultCategory?: string }) {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const searchRef = useRef<HTMLInputElement>(null);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    defaultCategory ? [defaultCategory] : categories.map(c => c.id)
-  );
+
+  // Initialize state from URL params
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
+    const cat = searchParams.get('category');
+    if (defaultCategory) return [defaultCategory];
+    if (cat) return cat.split(',').filter(c => categories.some(x => x.id === c));
+    return categories.map(c => c.id);
+  });
   const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<SortOption>('arrPerEmployee');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<SortOption>(() =>
+    (searchParams.get('sort') as SortOption) || 'arrPerEmployee'
+  );
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') || '');
   const [showSubmitModal, setShowSubmitModal] = useState(false);
-  const [locationFilter, setLocationFilter] = useState<'all' | 'ny' | 'sf'>('all');
+  const [locationFilter, setLocationFilter] = useState<LocationFilter>(() =>
+    (searchParams.get('location') as LocationFilter) || 'all'
+  );
   const [viewMode, setViewMode] = useState<ViewMode>(defaultView);
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('vv-dark-mode');
     if (saved !== null) return saved === 'true';
     return true;
   });
-  const [foundedFilter, setFoundedFilter] = useState<string>('all');
-
-  const [stageFilter, setStageFilter] = useState<StageFilter>('all');
+  const [foundedFilter, setFoundedFilter] = useState<string>(() =>
+    searchParams.get('founded') || 'all'
+  );
+  const [stageFilter, setStageFilter] = useState<StageFilter>(() =>
+    (searchParams.get('stage') as StageFilter) || 'all'
+  );
   const [compareList, setCompareList] = useState<string[]>([]);
+
+  // Sync filters to URL params
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchQuery.trim()) params.set('q', searchQuery.trim());
+    if (selectedCategories.length !== categories.length && !defaultCategory) {
+      params.set('category', selectedCategories.join(','));
+    }
+    if (sortBy !== 'arrPerEmployee') params.set('sort', sortBy);
+    if (locationFilter !== 'all') params.set('location', locationFilter);
+    if (foundedFilter !== 'all') params.set('founded', foundedFilter);
+    if (stageFilter !== 'all') params.set('stage', stageFilter);
+
+    const newSearch = params.toString();
+    const currentSearch = searchParams.toString();
+    if (newSearch !== currentSearch) {
+      setSearchParams(params, { replace: true });
+    }
+  }, [searchQuery, selectedCategories, sortBy, locationFilter, foundedFilter, stageFilter, defaultCategory, searchParams, setSearchParams]);
 
   const toggleCompare = (companyName: string) => {
     setCompareList(prev =>
@@ -148,7 +126,6 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't trigger shortcuts when typing in inputs
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) {
         if (e.key === 'Escape') {
           (e.target as HTMLElement).blur();
@@ -172,10 +149,11 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     let filtered = companies.filter(c => selectedCategories.includes(c.category));
 
     // Filter by location
-    if (locationFilter === 'ny') {
-      filtered = filtered.filter(c => c.headquarters.includes('New York'));
-    } else if (locationFilter === 'sf') {
-      filtered = filtered.filter(c => c.headquarters.includes('San Francisco'));
+    if (locationFilter !== 'all') {
+      const loc = LOCATION_OPTIONS.find(l => l.value === locationFilter);
+      if (loc && 'match' in loc) {
+        filtered = filtered.filter(c => c.headquarters.includes(loc.match));
+      }
     }
 
     // Filter by search query
@@ -296,7 +274,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
       .slice(0, 10);
   }, [filteredCompanies]);
 
-  // Recent raises (last 6 months) - parse lastFunding field
+  // Recent raises (last 6 months)
   const recentRaises = useMemo(() => {
     const monthOrder: Record<string, number> = {
       'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
@@ -402,6 +380,18 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     };
   }, [defaultCategoryObj]);
 
+  // Compare search state
+  const [compareSearch, setCompareSearch] = useState('');
+  const [compareSearchOpen, setCompareSearchOpen] = useState(false);
+  const compareSearchRef = useRef<HTMLInputElement>(null);
+  const compareResults = useMemo(() => {
+    if (!compareSearch.trim()) return [];
+    const q = compareSearch.toLowerCase();
+    return companies
+      .filter(c => c.arr !== null && (c.name.toLowerCase().includes(q) || c.domain.toLowerCase().includes(q)))
+      .slice(0, 6);
+  }, [compareSearch]);
+
   return (
     <div className="efficiency-chart">
       <header className="chart-header">
@@ -433,7 +423,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                   navigate(`/company/${getCompanySlug(random.name)}`);
                 }}
               >
-                Discover a Company
+                Random Company
               </button>
             </div>
           </div>
@@ -476,13 +466,17 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
               </svg>
             </button>
             <div className="header-nav-pills">
+              <button className="nav-pill" onClick={() => navigate('/about')}>About</button>
               <a href="mailto:patrick.mcgovern@bowerycap.com" className="nav-pill">Contact</a>
               <a href="https://capitalefficient.substack.com" target="_blank" rel="noopener noreferrer" className="nav-pill">Substack</a>
               <a href="https://linkedin.com/in/pwmcgovern" target="_blank" rel="noopener noreferrer" className="nav-pill">LinkedIn</a>
             </div>
           </div>
         </div>
-        <div className="last-updated">Tracking {companies.filter(c => c.arr !== null).length} companies</div>
+        <div className="last-updated">
+          Tracking {companies.filter(c => c.arr !== null).length} companies
+          <span className="last-updated-date"> · Updated {new Date(DATA_LAST_UPDATED).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+        </div>
       </header>
 
       {/* View Toggle */}
@@ -508,21 +502,56 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
             Scatter Plot
           </button>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button
-            className="compare-mode-btn"
-            onClick={() => {
-              const withARR = companies.filter(c => c.arr !== null);
-              const random = withARR[Math.floor(Math.random() * withARR.length)];
-              navigate(`/compare/${getCompanySlug(random.name)}`);
-            }}
-            title="Compare companies side-by-side"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
-            </svg>
-            Compare
-          </button>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', position: 'relative' }}>
+          <div className="compare-search-wrapper">
+            <button
+              className="compare-mode-btn"
+              onClick={() => {
+                setCompareSearchOpen(prev => !prev);
+                setTimeout(() => compareSearchRef.current?.focus(), 100);
+              }}
+              title="Compare companies side-by-side"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+              </svg>
+              Compare
+            </button>
+            {compareSearchOpen && (
+              <div className="compare-search-dropdown">
+                <input
+                  ref={compareSearchRef}
+                  type="text"
+                  className="compare-search-input"
+                  placeholder="Search a company to compare..."
+                  value={compareSearch}
+                  onChange={e => setCompareSearch(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Escape') { setCompareSearchOpen(false); setCompareSearch(''); } }}
+                />
+                {compareResults.map(c => (
+                  <div
+                    key={c.name}
+                    className="compare-search-item"
+                    onClick={() => {
+                      navigate(`/compare/${getCompanySlug(c.name)}`);
+                      setCompareSearchOpen(false);
+                      setCompareSearch('');
+                    }}
+                  >
+                    <span>{c.name}</span>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>
+                      {categories.find(cat => cat.id === c.category)?.name}
+                    </span>
+                  </div>
+                ))}
+                {compareSearch && compareResults.length === 0 && (
+                  <div className="compare-search-item" style={{ color: 'var(--text-tertiary)', cursor: 'default' }}>
+                    No results
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           <button className="export-btn" onClick={exportCSV} title="Export filtered data as CSV">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -535,7 +564,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
       </div>
 
       {viewMode === 'scatter' ? (
-        <ScatterChart />
+        <ScatterChart selectedCategories={selectedCategories} onCategoryChange={setSelectedCategories} />
       ) : (
         <>
           {/* Category buttons */}
@@ -560,24 +589,15 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
               </div>
             </div>
             <div className="location-buttons">
-              <button
-                className={`category-btn location-btn ${locationFilter === 'all' ? 'active' : ''}`}
-                onClick={() => setLocationFilter('all')}
-              >
-                <span className="category-btn-label">All Locations</span>
-              </button>
-              <button
-                className={`category-btn location-btn ${locationFilter === 'ny' ? 'active' : ''}`}
-                onClick={() => setLocationFilter('ny')}
-              >
-                <span className="category-btn-label">NYC</span>
-              </button>
-              <button
-                className={`category-btn location-btn ${locationFilter === 'sf' ? 'active' : ''}`}
-                onClick={() => setLocationFilter('sf')}
-              >
-                <span className="category-btn-label">SF</span>
-              </button>
+              {LOCATION_OPTIONS.map(loc => (
+                <button
+                  key={loc.value}
+                  className={`category-btn location-btn ${locationFilter === loc.value ? 'active' : ''}`}
+                  onClick={() => setLocationFilter(loc.value)}
+                >
+                  <span className="category-btn-label">{loc.label}</span>
+                </button>
+              ))}
             </div>
           </div>
 
@@ -743,12 +763,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                     </p>
                     <button
                       className="empty-state-btn"
-                      onClick={() => {
-                        setSearchQuery('');
-                        setSelectedCategories(categories.map(c => c.id));
-                        setFoundedFilter('all');
-                        setStageFilter('all');
-                      }}
+                      onClick={clearAllFilters}
                     >
                       Clear filters
                     </button>
@@ -778,7 +793,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                         >
                           <div className="company-card-left" onClick={(e) => { e.stopPropagation(); navigate(`/company/${slug}`); }}>
                             <span className={`company-card-rank${index < 10 ? ' rank-badge' : ''}`}>{index + 1}</span>
-                            <CompanyLogo domain={company.domain} name={company.name} color={barColor} />
+                            <CompanyLogo domain={company.domain} name={company.name} color={barColor} className="company-logo" />
                             <div className="company-card-info">
                               <span className="company-card-name">{company.name}</span>
                               <span className="company-card-category">{categories.find(c => c.id === company.category)?.name}</span>
@@ -986,25 +1001,29 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
 
             <form
               className="submit-form"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.target as HTMLFormElement;
                 const formData = new FormData(form);
-                const subject = encodeURIComponent('Vertical Velocity - New Company Submission');
-                const body = encodeURIComponent(
-                  `Company Name: ${formData.get('companyName')}\n` +
-                  `Website: ${formData.get('website')}\n` +
-                  `Sector: ${formData.get('sector')}\n` +
-                  `Headcount: ${formData.get('headcount')}\n` +
-                  `ARR (if comfortable sharing): ${formData.get('arr')}\n` +
-                  `Last Funding Round: ${formData.get('funding')}\n` +
-                  `Founded Year: ${formData.get('founded')}\n` +
-                  `Founders: ${formData.get('founders')}\n` +
-                  `Your Email: ${formData.get('email')}\n` +
-                  `Additional Notes: ${formData.get('notes')}`
-                );
-                window.location.href = `mailto:patrick.mcgovern@bowerycap.com?subject=${subject}&body=${body}`;
-                setShowSubmitModal(false);
+                const data: Record<string, string> = {};
+                formData.forEach((v, k) => { data[k] = v.toString(); });
+
+                try {
+                  const res = await fetch('https://formspree.io/f/xeogqwrz', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data),
+                  });
+                  if (res.ok) {
+                    setShowSubmitModal(false);
+                    form.reset();
+                    alert('Submitted! We\'ll review your company within 48 hours.');
+                  } else {
+                    alert('Something went wrong. Please email patrick.mcgovern@bowerycap.com instead.');
+                  }
+                } catch {
+                  alert('Something went wrong. Please email patrick.mcgovern@bowerycap.com instead.');
+                }
               }}
             >
               <div className="form-row">

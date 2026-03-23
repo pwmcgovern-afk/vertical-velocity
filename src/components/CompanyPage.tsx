@@ -2,95 +2,47 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { companies, categories, type Company } from '../data/companies';
 import { useState, useEffect } from 'react';
 import { ShareCard } from './ShareCard';
+import { CompanyLogo } from './CompanyLogo';
+import {
+  formatARR, formatARRPerEmployee, formatValuation,
+  getEfficiencyColor, getFundingStage, getRevenueMultiple,
+} from '../utils';
 
-function formatARR(arrInMillions: number): string {
-  if (arrInMillions >= 1000) return `$${(arrInMillions / 1000).toFixed(1)}B`;
-  return `$${arrInMillions}M`;
-}
-
-function formatARRPerEmployee(arrInThousands: number): string {
-  if (arrInThousands >= 1000) return `$${(arrInThousands / 1000).toFixed(1)}M`;
-  return `$${arrInThousands}K`;
-}
-
-function formatValuation(valuationInBillions: number): string {
-  if (valuationInBillions >= 1) return `$${valuationInBillions}B`;
-  return `$${Math.round(valuationInBillions * 1000)}M`;
-}
-
-function getEfficiencyColor(value: number): string {
-  if (value >= 300) return '#22c55e';
-  if (value >= 200) return '#f59e0b';
-  return '#71717a';
-}
-
-function getRevenueMultiple(company: Company): string {
-  if (!company.valuation || !company.arr) return '—';
-  const multiple = company.valuation * 1000 / company.arr;
-  return `${multiple.toFixed(1)}x`;
-}
-
-function getFundingStage(lastFunding: string): string {
-  if (/public|ipo|nasdaq|nyse/i.test(lastFunding)) return 'Public';
-  if (/acquired/i.test(lastFunding)) return 'Acquired';
-  if (/seed/i.test(lastFunding)) return 'Seed';
-  const seriesMatch = lastFunding.match(/Series\s+([A-Z])/i);
-  if (seriesMatch) {
-    const letter = seriesMatch[1].toUpperCase();
-    if (letter <= 'B') return `Series ${letter}`;
-    return `Series ${letter}`;
+function updateMetaTag(property: string, content: string) {
+  let el = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
+  if (el) {
+    el.setAttribute('content', content);
+  } else {
+    el = document.createElement('meta');
+    el.setAttribute(property.startsWith('og:') || property.startsWith('twitter:') ? 'property' : 'name', property);
+    el.setAttribute('content', content);
+    document.head.appendChild(el);
   }
-  return 'Other';
-}
-
-function CompanyLogo({ domain, name, color }: { domain: string; name: string; color: string }) {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-  const initials = name.split(' ').filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-
-  // Reset state when company changes
-  useEffect(() => {
-    setLoaded(false);
-    setError(false);
-  }, [domain]);
-
-  return (
-    <div className="cp-logo-wrapper">
-      {(!loaded || error) && (
-        <div className="cp-logo fallback" style={{ background: `${color}30`, color }}>
-          {initials}
-        </div>
-      )}
-      {!error && (
-        <img
-          src={`https://img.logo.dev/${domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=128`}
-          alt={name}
-          className={`cp-logo${loaded ? '' : ' loading'}`}
-          onLoad={() => setLoaded(true)}
-          onError={() => setError(true)}
-        />
-      )}
-    </div>
-  );
 }
 
 export function CompanyPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const [showShareCard, setShowShareCard] = useState(false);
 
   const company = companies.find(c =>
     c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug
   );
 
-  // Scroll to top on navigation
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  // Set document title for SEO
+  // SEO: document title and meta description
   useEffect(() => {
     if (company) {
+      const desc = `${company.name} does ${company.arrPerEmployee ? formatARRPerEmployee(company.arrPerEmployee) : 'N/A'} ARR per employee. See how ${company.name} ranks against ${companies.length}+ vertical AI companies.`;
       document.title = `${company.name} - ARR per Employee | Vertical Velocity`;
+      updateMetaTag('description', desc);
+      updateMetaTag('og:title', `${company.name} - ARR per Employee | Vertical Velocity`);
+      updateMetaTag('og:description', desc);
+      updateMetaTag('twitter:title', `${company.name} - ARR per Employee | Vertical Velocity`);
+      updateMetaTag('twitter:description', desc);
     }
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';
@@ -119,11 +71,9 @@ export function CompanyPage() {
   const rank = ranked.findIndex(c => c.name === company.name) + 1;
   const totalRanked = ranked.length;
 
-  // Category rank
   const categoryCompanies = ranked.filter(c => c.category === company.category);
   const categoryRank = categoryCompanies.findIndex(c => c.name === company.name) + 1;
 
-  // Find similar companies (same category, sorted by ARR/emp)
   const similarCompanies = companies
     .filter(c => c.category === company.category && c.name !== company.name && c.arr !== null)
     .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0))
@@ -147,20 +97,19 @@ export function CompanyPage() {
           <button
             className="cp-random-btn"
             onClick={() => {
-              // Prefer same-vertical companies, fall back to any
               const sameVertical = companies.filter(c => c.category === company.category && c.arr !== null && c.name !== company.name);
               const pool = sameVertical.length > 0 ? sameVertical : companies.filter(c => c.arr !== null && c.name !== company.name);
               const random = pool[Math.floor(Math.random() * pool.length)];
-              const slug = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-              navigate(`/company/${slug}`);
+              const s = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+              navigate(`/company/${s}`);
             }}
           >
-            Discover {category?.name || 'Another'} Company
+            Random {category?.name || ''} Company
           </button>
         </div>
 
         <div className="cp-header">
-          <CompanyLogo domain={company.domain} name={company.name} color={company.color} />
+          <CompanyLogo domain={company.domain} name={company.name} color={company.color} size={128} className="cp-logo" wrapperClassName="cp-logo-wrapper" />
           <div className="cp-header-info">
             <div className="cp-header-top">
               <h1>{company.name}</h1>
@@ -194,7 +143,7 @@ export function CompanyPage() {
             <span className="cp-metric-label">Valuation</span>
           </div>
           <div className="cp-metric">
-            <span className="cp-metric-value">{getRevenueMultiple(company)}</span>
+            <span className="cp-metric-value">{getRevenueMultiple(company) || '—'}</span>
             <span className="cp-metric-label">Rev Multiple</span>
           </div>
           <div className="cp-metric">
@@ -203,13 +152,23 @@ export function CompanyPage() {
           </div>
         </div>
 
-        <ShareCard
-          company={company}
-          rank={rank}
-          totalRanked={totalRanked}
-          categoryRank={categoryRank}
-          categoryName={category?.name || 'Other'}
-        />
+        {/* Collapsible ShareCard */}
+        <button
+          className="cp-share-toggle"
+          onClick={() => setShowShareCard(prev => !prev)}
+        >
+          {showShareCard ? 'Hide Share Card' : 'Show Share Card'}
+          <span className={`cp-share-toggle-arrow ${showShareCard ? 'open' : ''}`}>▼</span>
+        </button>
+        {showShareCard && (
+          <ShareCard
+            company={company}
+            rank={rank}
+            totalRanked={totalRanked}
+            categoryRank={categoryRank}
+            categoryName={category?.name || 'Other'}
+          />
+        )}
 
         {/* What It Does */}
         <div className="cp-box">

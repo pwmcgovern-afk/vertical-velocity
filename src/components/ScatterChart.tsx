@@ -1,24 +1,19 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { companies, categories, getCompanySlug, type Company } from '../data/companies';
+import { formatARR, formatARRPerEmployee, formatValuation } from '../utils';
 
-function formatARR(arrInMillions: number): string {
-  if (arrInMillions >= 1000) return `$${(arrInMillions / 1000).toFixed(1)}B`;
-  return `$${arrInMillions}M`;
+interface ScatterChartProps {
+  selectedCategories: string[];
+  onCategoryChange: (cats: string[]) => void;
 }
 
-function formatARRPerEmployee(arrInThousands: number): string {
-  if (arrInThousands >= 1000) return `$${(arrInThousands / 1000).toFixed(1)}M`;
-  return `$${arrInThousands}K`;
-}
-
-export function ScatterChart() {
+export function ScatterChart({ selectedCategories, onCategoryChange }: ScatterChartProps) {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredCompany, setHoveredCompany] = useState<Company | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(categories.map(c => c.id));
 
   const companiesWithData = useMemo(() =>
     companies.filter(c => c.arr !== null && c.headcount > 0),
@@ -30,7 +25,7 @@ export function ScatterChart() {
     [companiesWithData, selectedCategories]
   );
 
-  // Chart dimensions - extra right margin for labels
+  // Chart dimensions
   const width = 960;
   const height = 540;
   const margin = { top: 40, right: 60, bottom: 60, left: 70 };
@@ -71,13 +66,13 @@ export function ScatterChart() {
 
   const toggleCategory = (catId: string) => {
     if (selectedCategories.length === 1 && selectedCategories[0] === catId) {
-      setSelectedCategories(categories.map(c => c.id));
+      onCategoryChange(categories.map(c => c.id));
     } else {
-      setSelectedCategories([catId]);
+      onCategoryChange([catId]);
     }
   };
 
-  // Position tooltip relative to the container, clamped to stay in bounds
+  // Position tooltip relative to the container
   const handleMouseEnter = useCallback((company: Company, cx: number, cy: number) => {
     setHoveredCompany(company);
     const svg = svgRef.current;
@@ -88,7 +83,6 @@ export function ScatterChart() {
       const svgX = (cx / width) * rect.width + (rect.left - containerRect.left);
       const svgY = (cy / height) * rect.height + (rect.top - containerRect.top);
 
-      // Clamp so tooltip doesn't overflow right edge
       const tooltipW = 200;
       const tooltipH = 120;
       const clampedX = Math.min(svgX + 16, containerRect.width - tooltipW - 8);
@@ -108,7 +102,7 @@ export function ScatterChart() {
       <div className="scatter-filters">
         <button
           className={`category-btn all-btn ${selectedCategories.length === categories.length ? 'active' : ''}`}
-          onClick={() => setSelectedCategories(categories.map(c => c.id))}
+          onClick={() => onCategoryChange(categories.map(c => c.id))}
         >
           <span className="category-btn-label">All</span>
         </button>
@@ -130,7 +124,6 @@ export function ScatterChart() {
           className="scatter-svg"
           onClick={() => setHoveredCompany(null)}
         >
-          {/* SVG Defs for glow effects */}
           <defs>
             <filter id="bubble-glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="3" result="blur" />
@@ -269,7 +262,6 @@ export function ScatterChart() {
                   }}
                   style={{ cursor: 'pointer' }}
                 />
-                {/* Label: inside bubble if large, outside if small */}
                 {r > 14 && !isHovered ? (
                   <text
                     x={cx}
@@ -298,7 +290,7 @@ export function ScatterChart() {
           })}
         </svg>
 
-        {/* Tooltip - positioned within container but not clipped */}
+        {/* Tooltip */}
         {hoveredCompany && (
           <div
             className="scatter-tooltip"
@@ -324,7 +316,7 @@ export function ScatterChart() {
             {hoveredCompany.valuation && (
               <div className="scatter-tooltip-row">
                 <span>Valuation:</span>
-                <span>{hoveredCompany.valuation >= 1 ? `$${hoveredCompany.valuation}B` : `$${Math.round(hoveredCompany.valuation * 1000)}M`}</span>
+                <span>{formatValuation(hoveredCompany.valuation)}</span>
               </div>
             )}
           </div>

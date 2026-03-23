@@ -4373,6 +4373,98 @@ body {
   color: #fafafa;
 }
 
+/* ============================================
+   Compare Search Dropdown
+   ============================================ */
+.compare-search-wrapper {
+  position: relative;
+}
+
+.compare-search-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  width: 300px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.compare-search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.compare-search-item {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: background 0.1s;
+}
+
+.compare-search-item:hover {
+  background: var(--bg-muted);
+}
+
+/* ============================================
+   Share Card Toggle (Company Page)
+   ============================================ */
+.cp-share-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin: 16px 0;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: fit-content;
+}
+
+.cp-share-toggle:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.cp-share-toggle-arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.cp-share-toggle-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   Last Updated Date
+   ============================================ */
+.last-updated-date {
+  color: var(--text-tertiary);
+}
+
+/* ============================================
+   Mobile Responsiveness
+   ============================================ */
 @media (max-width: 640px) {
   .share-card {
     padding: 20px 20px;
@@ -4388,5 +4480,187 @@ body {
 
   .share-card-rank-badge {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Header */
+  .chart-header-top {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .chart-header-right {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .header-nav-pills {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .header-buttons-left {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* View toggle row */
+  .view-toggle-row {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .view-toggle-row > div {
+    justify-content: flex-start;
+  }
+
+  /* Category buttons */
+  .category-buttons-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-buttons-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .category-buttons {
+    flex-wrap: nowrap;
+  }
+
+  .location-buttons {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Stats row */
+  .chart-stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stats-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .filters-box {
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Company cards */
+  .company-card-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .company-card-bar {
+    min-width: 80px;
+    flex: 1;
+  }
+
+  .company-card-left {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .company-card-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .company-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Compare floating bar */
+  .compare-floating-bar {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  /* Scatter chart */
+  .scatter-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scatter-svg {
+    min-width: 600px;
+  }
+
+  .scatter-filters {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Company Page */
+  .cp-top-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cp-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cp-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cp-actions {
+    flex-direction: column;
+  }
+
+  .cp-similar-list {
+    flex-direction: column;
+  }
+
+  /* Compare Page */
+  .cmp-companies-row {
+    flex-direction: column;
+  }
+
+  .cmp-metrics-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cmp-bar-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cmp-top-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Compare search dropdown */
+  .compare-search-dropdown {
+    width: calc(100vw - 32px);
+    right: -8px;
+  }
+
+  /* Modal */
+  .modal-content {
+    margin: 16px;
+    max-height: 90vh;
+  }
+
+  .form-row {
+    flex-direction: column;
   }
 }

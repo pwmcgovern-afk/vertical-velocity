@@ -3,6 +3,7 @@ import { EfficiencyChart } from './components/EfficiencyChart';
 import { CompanyPage } from './components/CompanyPage';
 import { ComparePage } from './components/ComparePage';
 import { CardPage } from './components/CardPage';
+import { AboutPage } from './components/AboutPage';
 import { categories } from './data/companies';
 import './App.css';
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/company/:slug" element={<CompanyPage />} />
           <Route path="/compare/:slugs" element={<ComparePage />} />
           <Route path="/card/:slug" element={<CardPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/vertical/:categoryId" element={<VerticalPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

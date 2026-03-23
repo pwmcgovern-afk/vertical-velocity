@@ -1,15 +1,5 @@
 import { categories, type Company } from '../data/companies';
-
-function formatARRPerEmployee(arrInThousands: number): string {
-  if (arrInThousands >= 1000) return `$${(arrInThousands / 1000).toFixed(1)}M`;
-  return `$${arrInThousands}K`;
-}
-
-function getEfficiencyColor(value: number): string {
-  if (value >= 300) return '#22c55e';
-  if (value >= 200) return '#f59e0b';
-  return '#71717a';
-}
+import { formatARRPerEmployee, getEfficiencyColor, getLogoUrl } from '../utils';
 
 interface ShareCardProps {
   company: Company;
@@ -31,13 +21,15 @@ export function ShareCard({ company, rank, totalRanked, categoryRank, categoryNa
   else if (percentile <= 15) percentileLabel = 'Top 15%';
   else if (percentile <= 25) percentileLabel = 'Top 25%';
   else if (percentile <= 50) percentileLabel = 'Top 50%';
+  else if (percentile <= 75) percentileLabel = 'Top 75%';
+  else percentileLabel = `Top ${percentile}%`;
 
   return (
     <div className="share-card">
       <div className="share-card-header">
         <div className="share-card-company">
           <img
-            src={`https://img.logo.dev/${company.domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=128`}
+            src={getLogoUrl(company.domain, 128)}
             alt={company.name}
             className="share-card-logo"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
@@ -59,11 +51,9 @@ export function ShareCard({ company, rank, totalRanked, categoryRank, categoryNa
       </div>
 
       <div className="share-card-badges">
-        {percentileLabel && (
-          <span className="share-card-percentile" style={{ background: `${effColor}20`, color: effColor }}>
-            {percentileLabel}
-          </span>
-        )}
+        <span className="share-card-percentile" style={{ background: `${effColor}20`, color: effColor }}>
+          {percentileLabel}
+        </span>
         <span className="share-card-category-rank" style={{ background: `${catColor}20`, color: catColor }}>
           #{categoryRank} in {categoryName}
         </span>

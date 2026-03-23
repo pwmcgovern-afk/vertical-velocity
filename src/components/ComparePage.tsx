@@ -2,81 +2,11 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { companies, categories, getCompanySlug, type Company } from '../data/companies';
-
-function formatARR(arrInMillions: number): string {
-  if (arrInMillions >= 1000) return `$${(arrInMillions / 1000).toFixed(1)}B`;
-  return `$${arrInMillions}M`;
-}
-
-function formatARRPerEmployee(arrInThousands: number): string {
-  if (arrInThousands >= 1000) return `$${(arrInThousands / 1000).toFixed(1)}M`;
-  return `$${arrInThousands}K`;
-}
-
-function formatValuation(valuationInBillions: number): string {
-  if (valuationInBillions >= 1) return `$${valuationInBillions}B`;
-  return `$${Math.round(valuationInBillions * 1000)}M`;
-}
-
-function getEfficiencyColor(value: number): string {
-  if (value >= 300) return '#22c55e';
-  if (value >= 200) return '#f59e0b';
-  return '#71717a';
-}
-
-function getRevenueMultiple(company: Company): string {
-  if (!company.valuation || !company.arr) return '—';
-  const multiple = (company.valuation * 1000) / company.arr;
-  return `${multiple.toFixed(1)}x`;
-}
-
-function getFundingStage(lastFunding: string): string {
-  if (/public|ipo|nasdaq|nyse/i.test(lastFunding)) return 'Public';
-  if (/acquired/i.test(lastFunding)) return 'Acquired';
-  if (/seed/i.test(lastFunding)) return 'Seed';
-  const seriesMatch = lastFunding.match(/Series\s+([A-Z])/i);
-  if (seriesMatch) return `Series ${seriesMatch[1].toUpperCase()}`;
-  return 'Other';
-}
-
-function getRank(company: Company): number {
-  return (
-    [...companies]
-      .filter(c => c.arr !== null)
-      .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0))
-      .findIndex(c => c.name === company.name) + 1
-  );
-}
-
-function CompanyLogo({ domain, name, color }: { domain: string; name: string; color: string }) {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-  const initials = name.split(' ').filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-
-  useEffect(() => {
-    setLoaded(false);
-    setError(false);
-  }, [domain]);
-
-  return (
-    <div className="cmp-logo-wrapper">
-      {(!loaded || error) && (
-        <div className="cmp-logo fallback" style={{ background: `${color}30`, color }}>
-          {initials}
-        </div>
-      )}
-      {!error && (
-        <img
-          src={`https://img.logo.dev/${domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=128`}
-          alt={name}
-          className={`cmp-logo${loaded ? '' : ' loading'}`}
-          onLoad={() => setLoaded(true)}
-          onError={() => setError(true)}
-        />
-      )}
-    </div>
-  );
-}
+import { CompanyLogo } from './CompanyLogo';
+import {
+  formatARR, formatARRPerEmployee, formatValuation,
+  getEfficiencyColor, getRevenueMultiple, getFundingStage, getRank,
+} from '../utils';
 
 type MetricDef = {
   label: string;
@@ -114,7 +44,7 @@ const metrics: MetricDef[] = [
   },
   {
     label: 'Rev Multiple',
-    getValue: c => getRevenueMultiple(c),
+    getValue: c => getRevenueMultiple(c) || '—',
     getNumeric: c => (c.valuation && c.arr ? (c.valuation * 1000) / c.arr : null),
     higherIsBetter: false,
   },
@@ -184,7 +114,6 @@ export function ComparePage() {
       .filter((c): c is Company => c !== undefined);
   }, [slugs]);
 
-  // Deduplicate
   const uniqueCompanies = useMemo(() => {
     const seen = new Set<string>();
     return selectedCompanies.filter(c => {
@@ -223,7 +152,6 @@ export function ComparePage() {
     }
   }, [selectorOpen]);
 
-  // Set document title
   useEffect(() => {
     if (uniqueCompanies.length >= 2) {
       document.title = `${uniqueCompanies.map(c => c.name).join(' vs ')} | Vertical Velocity`;
@@ -272,7 +200,6 @@ export function ComparePage() {
   return (
     <div className="company-page">
       <div className="cmp-container">
-        {/* Header */}
         <div className="cmp-top-bar">
           <button className="cp-back-btn" onClick={() => navigate('/')}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -327,11 +254,10 @@ export function ComparePage() {
             : 'Compare Companies'}
         </h1>
 
-        {/* Company columns header */}
         <div className="cmp-companies-row">
           {uniqueCompanies.map(company => {
             const category = categories.find(c => c.id === company.category);
-            const rank = getRank(company);
+            const rank = getRank(company, companies);
             return (
               <div key={company.name} className="cmp-company-card">
                 <button
@@ -345,7 +271,7 @@ export function ComparePage() {
                   className="cmp-company-link"
                   onClick={() => navigate(`/company/${getCompanySlug(company.name)}`)}
                 >
-                  <CompanyLogo domain={company.domain} name={company.name} color={company.color} />
+                  <CompanyLogo domain={company.domain} name={company.name} color={company.color} size={128} className="cmp-logo" wrapperClassName="cmp-logo-wrapper" />
                   <span className="cmp-company-name">{company.name}</span>
                 </div>
                 <div className="cmp-company-meta">
@@ -366,7 +292,6 @@ export function ComparePage() {
           )}
         </div>
 
-        {/* Company Selector */}
         {selectorOpen && (
           <div className="cmp-selector">
             <input
@@ -397,38 +322,32 @@ export function ComparePage() {
             )}
             {suggestedCompanies.length > 0 && (
               <div className="cmp-suggestions">
-                <div className="cmp-suggestions-label">
-                  Same vertical
-                </div>
+                <div className="cmp-suggestions-label">Same vertical</div>
                 <div className="cmp-suggestions-chips">
-                  {suggestedCompanies.map(c => {
-                    return (
-                      <button
-                        key={c.name}
-                        className="cmp-suggestion-chip"
-                        onClick={() => addCompany(c)}
-                      >
-                        <img
-                          src={`https://img.logo.dev/${c.domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=40`}
-                          alt=""
-                          className="cmp-suggestion-logo"
-                          onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                        />
-                        <span className="cmp-suggestion-name">{c.name}</span>
-                        <span className="cmp-suggestion-meta">{formatARRPerEmployee(c.arrPerEmployee || 0)}/emp</span>
-                      </button>
-                    );
-                  })}
+                  {suggestedCompanies.map(c => (
+                    <button
+                      key={c.name}
+                      className="cmp-suggestion-chip"
+                      onClick={() => addCompany(c)}
+                    >
+                      <img
+                        src={`https://img.logo.dev/${c.domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=40`}
+                        alt=""
+                        className="cmp-suggestion-logo"
+                        onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
+                      <span className="cmp-suggestion-name">{c.name}</span>
+                      <span className="cmp-suggestion-meta">{formatARRPerEmployee(c.arrPerEmployee || 0)}/emp</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
           </div>
         )}
 
-        {/* Comparison content */}
         {uniqueCompanies.length >= 2 && (
           <>
-            {/* Metrics Table */}
             <div className="cmp-metrics-table">
               {metrics.map(metric => {
                 const winner = getWinner(metric);
@@ -461,7 +380,6 @@ export function ComparePage() {
               })}
             </div>
 
-            {/* Visual Bar Comparison */}
             <div className="cmp-bars-section">
               <h3 className="cmp-bars-title">Visual Comparison</h3>
               {barMetrics.map(bm => {
