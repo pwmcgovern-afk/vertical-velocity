@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { track } from '@vercel/analytics';
-import { companies, categories, type Company } from '../data/companies';
+import { companies, categories } from '../data/companies';
 import { useState, useEffect } from 'react';
 import { ShareCard } from './ShareCard';
 import { CompanyLogo } from './CompanyLogo';

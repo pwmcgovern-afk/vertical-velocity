@@ -138,43 +138,6 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     }
   }, [focusedIndex]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) {
-        if (e.key === 'Escape') {
-          (e.target as HTMLElement).blur();
-        }
-        return;
-      }
-
-      if (e.key === '/') {
-        e.preventDefault();
-        searchRef.current?.focus();
-      } else if (e.key === 'Escape') {
-        setExpandedCompany(null);
-        setShowSubmitModal(false);
-        setFocusedIndex(-1);
-      } else if (e.key === 'ArrowDown' || e.key === 'j') {
-        e.preventDefault();
-        setFocusedIndex(prev => Math.min(prev + 1, filteredCompanies.length - 1));
-      } else if (e.key === 'ArrowUp' || e.key === 'k') {
-        e.preventDefault();
-        setFocusedIndex(prev => Math.max(prev - 1, -1));
-      } else if (e.key === 'Enter' && focusedIndex >= 0) {
-        e.preventDefault();
-        const company = filteredCompanies[focusedIndex];
-        if (company) toggleExpand(company.name);
-      } else if (e.key === 'o' && focusedIndex >= 0) {
-        e.preventDefault();
-        const company = filteredCompanies[focusedIndex];
-        if (company) navigate(`/company/${getCompanySlug(company.name)}`);
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [focusedIndex, filteredCompanies, navigate]);
-
   const filteredCompanies = useMemo(() => {
     let filtered = companies.filter(c => selectedCategories.includes(c.category));
 
@@ -347,6 +310,43 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   const toggleExpand = (companyName: string) => {
     setExpandedCompany(prev => prev === companyName ? null : companyName);
   };
+
+  // Keyboard shortcuts (must be after filteredCompanies declaration)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) {
+        if (e.key === 'Escape') {
+          (e.target as HTMLElement).blur();
+        }
+        return;
+      }
+
+      if (e.key === '/') {
+        e.preventDefault();
+        searchRef.current?.focus();
+      } else if (e.key === 'Escape') {
+        setExpandedCompany(null);
+        setShowSubmitModal(false);
+        setFocusedIndex(-1);
+      } else if (e.key === 'ArrowDown' || e.key === 'j') {
+        e.preventDefault();
+        setFocusedIndex(prev => Math.min(prev + 1, filteredCompanies.length - 1));
+      } else if (e.key === 'ArrowUp' || e.key === 'k') {
+        e.preventDefault();
+        setFocusedIndex(prev => Math.max(prev - 1, -1));
+      } else if (e.key === 'Enter' && focusedIndex >= 0) {
+        e.preventDefault();
+        const company = filteredCompanies[focusedIndex];
+        if (company) toggleExpand(company.name);
+      } else if (e.key === 'o' && focusedIndex >= 0) {
+        e.preventDefault();
+        const company = filteredCompanies[focusedIndex];
+        if (company) navigate(`/company/${getCompanySlug(company.name)}`);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [focusedIndex, filteredCompanies, navigate]);
 
   const toggleCategory = (categoryId: string) => {
     if (selectedCategories.length === 1 && selectedCategories[0] === categoryId) {

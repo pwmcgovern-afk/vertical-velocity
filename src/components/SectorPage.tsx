@@ -4,7 +4,7 @@ import { companies, categories } from '../data/companies';
 import { EfficiencyChart } from './EfficiencyChart';
 import {
   formatARR, formatARRPerEmployee, getEfficiencyColor,
-  getFundingStage, DATA_LAST_UPDATED,
+  getFundingStage,
 } from '../utils';
 
 export function SectorPage() {
