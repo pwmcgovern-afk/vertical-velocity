@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { companies, categories, getCompanySlug, type Company } from '../data/companies';
 import { CompanyLogo } from './CompanyLogo';
 import { ScatterChart } from './ScatterChart';
@@ -75,6 +76,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     (searchParams.get('stage') as StageFilter) || 'all'
   );
   const [compareList, setCompareList] = useState<string[]>([]);
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 
   // Sync filters to URL params
   useEffect(() => {
@@ -123,6 +125,19 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     localStorage.setItem('vv-dark-mode', String(darkMode));
   }, [darkMode]);
 
+  // Reset focused index when filters change
+  useEffect(() => {
+    setFocusedIndex(-1);
+  }, [selectedCategories, sortBy, searchQuery, locationFilter, foundedFilter, stageFilter]);
+
+  // Scroll focused card into view
+  useEffect(() => {
+    if (focusedIndex >= 0) {
+      const el = document.querySelector('.company-card.keyboard-focused');
+      el?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [focusedIndex]);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -139,11 +154,26 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
       } else if (e.key === 'Escape') {
         setExpandedCompany(null);
         setShowSubmitModal(false);
+        setFocusedIndex(-1);
+      } else if (e.key === 'ArrowDown' || e.key === 'j') {
+        e.preventDefault();
+        setFocusedIndex(prev => Math.min(prev + 1, filteredCompanies.length - 1));
+      } else if (e.key === 'ArrowUp' || e.key === 'k') {
+        e.preventDefault();
+        setFocusedIndex(prev => Math.max(prev - 1, -1));
+      } else if (e.key === 'Enter' && focusedIndex >= 0) {
+        e.preventDefault();
+        const company = filteredCompanies[focusedIndex];
+        if (company) toggleExpand(company.name);
+      } else if (e.key === 'o' && focusedIndex >= 0) {
+        e.preventDefault();
+        const company = filteredCompanies[focusedIndex];
+        if (company) navigate(`/company/${getCompanySlug(company.name)}`);
       }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [focusedIndex, filteredCompanies, navigate]);
 
   const filteredCompanies = useMemo(() => {
     let filtered = companies.filter(c => selectedCategories.includes(c.category));
@@ -365,6 +395,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     link.download = `vertical-velocity-${new Date().toISOString().split('T')[0]}.csv`;
     link.click();
     URL.revokeObjectURL(url);
+    track('csv_export', { count: filteredCompanies.length });
   }, [filteredCompanies]);
 
   const defaultCategoryObj = defaultCategory ? categories.find(c => c.id === defaultCategory) : null;
@@ -457,6 +488,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                   : `Check out the Vertical Velocity dashboard - ${companies.length}+ vertical AI companies ranked by ARR per employee\n\nvia @pw_mcgovern`;
                 const url = encodeURIComponent(window.location.href);
                 const text = encodeURIComponent(tweetText);
+                track('share_twitter', { context: 'header' });
                 window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=550,height=420');
               }}
               aria-label="Share on X"
@@ -777,7 +809,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                     return (
                       <motion.div
                         key={company.name}
-                        className={`company-card ${isExpanded ? 'expanded' : ''}${index < 3 ? ` rank-${index + 1}` : ''}${index < 10 ? ' top-10' : ''}`}
+                        className={`company-card ${isExpanded ? 'expanded' : ''}${index < 3 ? ` rank-${index + 1}` : ''}${index < 10 ? ' top-10' : ''}${focusedIndex === index ? ' keyboard-focused' : ''}`}
                         layout
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -941,6 +973,27 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 )}
               </div>
 
+              {/* Newsletter Signup */}
+              <div className="newsletter-signup">
+                <div className="newsletter-text">
+                  <span className="newsletter-title">Get Monthly Efficiency Rankings</span>
+                  <span className="newsletter-subtitle">New companies, biggest movers, and sector analysis delivered monthly.</span>
+                </div>
+                <form
+                  className="newsletter-form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const email = (e.target as HTMLFormElement).email.value;
+                    track('newsletter_signup', { email });
+                    window.open(`https://capitalefficient.substack.com/subscribe?email=${encodeURIComponent(email)}`, '_blank');
+                    (e.target as HTMLFormElement).reset();
+                  }}
+                >
+                  <input type="email" name="email" placeholder="your@email.com" required className="newsletter-input" />
+                  <button type="submit" className="newsletter-btn">Subscribe</button>
+                </form>
+              </div>
+
               <footer className="chart-footer">
                 <div className="chart-footer-top">
                   <span className="footer-count">{filteredCompanies.length} companies</span>
@@ -954,6 +1007,9 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 <span>Disclaimer: Revenue figures sourced from public mentions in tech press (TechCrunch, Forbes, Bloomberg, etc.), research firms (Sacra, CB Insights), SEC filings, and press releases. Headcount cross-referenced against LinkedIn and media reports. Companies where we couldn't find sufficient data to calculate ARR/FTE were not included. These numbers are for illustrative purposes only—treat them as directional estimates, not audited financials. To update company data, use the Submit Company button above.</span>
                 <div className="chart-footer-shortcuts">
                   <span className="shortcut-hint"><kbd>/</kbd> Search</span>
+                  <span className="shortcut-hint"><kbd>↑↓</kbd> Navigate</span>
+                  <span className="shortcut-hint"><kbd>Enter</kbd> Expand</span>
+                  <span className="shortcut-hint"><kbd>o</kbd> Open Profile</span>
                   <span className="shortcut-hint"><kbd>Esc</kbd> Close</span>
                 </div>
               </footer>
@@ -1015,6 +1071,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                     body: JSON.stringify(data),
                   });
                   if (res.ok) {
+                    track('submit_company', { company: data.companyName || '' });
                     setShowSubmitModal(false);
                     form.reset();
                     alert('Submitted! We\'ll review your company within 48 hours.');

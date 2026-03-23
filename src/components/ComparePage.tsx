@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { companies, categories, getCompanySlug, type Company } from '../data/companies';
 import { CompanyLogo } from './CompanyLogo';
 import {
@@ -155,6 +156,7 @@ export function ComparePage() {
   useEffect(() => {
     if (uniqueCompanies.length >= 2) {
       document.title = `${uniqueCompanies.map(c => c.name).join(' vs ')} | Vertical Velocity`;
+      track('compare_view', { companies: uniqueCompanies.map(c => c.name).join(',') });
     } else {
       document.title = 'Compare Companies | Vertical Velocity';
     }

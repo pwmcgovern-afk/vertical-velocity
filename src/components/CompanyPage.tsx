@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { track } from '@vercel/analytics';
 import { companies, categories, type Company } from '../data/companies';
 import { useState, useEffect } from 'react';
 import { ShareCard } from './ShareCard';
@@ -24,6 +25,7 @@ export function CompanyPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [showShareCard, setShowShareCard] = useState(false);
+  const [copiedStats, setCopiedStats] = useState(false);
 
   const company = companies.find(c =>
     c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug
@@ -31,6 +33,10 @@ export function CompanyPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (slug) {
+      const c = companies.find(co => co.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug);
+      if (c) track('company_view', { slug: slug, category: c.category });
+    }
   }, [slug]);
 
   // SEO: document title and meta description
@@ -281,6 +287,7 @@ export function CompanyPage() {
             <button
               className="cp-share-btn"
               onClick={() => {
+                track('share_twitter', { context: 'company', slug: companySlug });
                 const url = encodeURIComponent(shareUrl);
                 const text = encodeURIComponent(tweetText);
                 window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=550,height=420');
@@ -290,6 +297,28 @@ export function CompanyPage() {
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
               Share on X
+            </button>
+            <button
+              className="cp-share-btn"
+              onClick={() => {
+                const statsText = `${company.name}: ${company.arrPerEmployee ? formatARRPerEmployee(company.arrPerEmployee) : 'N/A'} ARR/emp, ${company.arr ? formatARR(company.arr) : 'N/A'} ARR, ${company.headcount.toLocaleString()} employees, #${rank} ranked — verticalvelocity.co/company/${companySlug}`;
+                navigator.clipboard.writeText(statsText);
+                setCopiedStats(true);
+                track('copy_stats', { slug: companySlug });
+                setTimeout(() => setCopiedStats(false), 2000);
+              }}
+            >
+              {copiedStats ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+              )}
+              {copiedStats ? 'Copied!' : 'Copy Stats'}
             </button>
             <a href={company.website} target="_blank" rel="noopener noreferrer" className="cp-website-btn">
               Visit Website

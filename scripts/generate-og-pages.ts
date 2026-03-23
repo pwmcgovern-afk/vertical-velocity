@@ -83,3 +83,50 @@ for (const cat of categories) {
 }
 
 console.log(`Generated vertical pages for ${categories.length} categories`);
+
+// Generate about page
+{
+  const html = replaceMeta(template, {
+    title: 'About & Methodology | Vertical Velocity',
+    description: `How Vertical Velocity ranks ${ranked.length}+ vertical AI companies by ARR per employee. Data sources, methodology, and update frequency.`,
+    ogImage: 'https://verticalvelocity.co/og-image.jpg',
+    pageUrl: 'https://verticalvelocity.co/about',
+  });
+  const outDir = join(distDir, 'about');
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+  console.log('Generated about page');
+}
+
+// Generate compare landing page
+{
+  const html = replaceMeta(template, {
+    title: 'Compare Vertical AI Companies | Vertical Velocity',
+    description: `Compare ${ranked.length}+ vertical AI companies side-by-side on ARR per employee, valuation, headcount, and more.`,
+    ogImage: 'https://verticalvelocity.co/og-image.jpg',
+    pageUrl: 'https://verticalvelocity.co/compare',
+  });
+  const outDir = join(distDir, 'compare');
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+  console.log('Generated compare page');
+}
+
+// Generate card pages for each company
+for (const company of companies) {
+  if (company.arr === null) continue;
+  const slug = getCompanySlug(company.name);
+  const rank = ranked.findIndex(c => c.name === company.name) + 1;
+  const arrPerEmp = formatARRPerEmp(company.arrPerEmployee || 0);
+
+  const html = replaceMeta(template, {
+    title: `${company.name} - #${rank} Most Efficient | Vertical Velocity`,
+    description: `${company.name} does ${arrPerEmp} ARR per employee, ranking #${rank} among ${ranked.length}+ vertical AI companies.`,
+    ogImage: `https://verticalvelocity.co/api/og?slug=${slug}`,
+    pageUrl: `https://verticalvelocity.co/card/${slug}`,
+  });
+  const outDir = join(distDir, 'card', slug);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+}
+console.log(`Generated card pages for ${companies.filter(c => c.arr !== null).length} companies`);
