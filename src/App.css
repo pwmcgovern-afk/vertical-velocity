@@ -4221,3 +4221,172 @@ body {
     padding: 0;
   }
 }
+
+/* ─── Share Card ─── */
+.share-card {
+  width: 100%;
+  max-width: 560px;
+  background: #0a0a0b;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin: 0 auto 24px;
+  border: 1px solid #27272a;
+  position: relative;
+  overflow: hidden;
+}
+
+.share-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8, #3b82f6);
+}
+
+.share-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.share-card-company {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.share-card-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.share-card-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fafafa;
+}
+
+.share-card-rank-badge {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.share-card-title {
+  font-size: 14px;
+  color: #a1a1aa;
+  font-weight: 500;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.share-card-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #18181b;
+  border-radius: 12px;
+  border: 2px solid;
+  margin-bottom: 16px;
+}
+
+.share-card-hero-value {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.share-card-hero-label {
+  font-size: 13px;
+  color: #71717a;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.share-card-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.share-card-percentile,
+.share-card-category-rank {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.share-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #27272a;
+}
+
+.share-card-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e7ff;
+}
+
+.share-card-url {
+  font-size: 13px;
+  color: #71717a;
+}
+
+/* ─── Card Page (standalone /card/:slug) ─── */
+.card-page {
+  min-height: 100vh;
+  background: #0a0a0b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card-page .share-card {
+  border: 1px solid #3f3f46;
+}
+
+.card-page-link {
+  margin-top: 16px;
+  color: #a1a1aa;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.card-page-link:hover {
+  color: #fafafa;
+}
+
+@media (max-width: 640px) {
+  .share-card {
+    padding: 20px 20px;
+  }
+
+  .share-card-hero-value {
+    font-size: 32px;
+  }
+
+  .share-card-name {
+    font-size: 16px;
+  }
+
+  .share-card-rank-badge {
+    font-size: 20px;
+  }
+}

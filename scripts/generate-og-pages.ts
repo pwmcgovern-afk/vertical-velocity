@@ -1,5 +1,5 @@
 /**
- * Build script: generates /company/:slug/index.html for each company
+ * Build script: generates /company/:slug/index.html and /vertical/:categoryId/index.html
  * with correct OG meta tags. Vercel serves these static files to crawlers
  * before the SPA catch-all rewrite kicks in.
  *
@@ -18,10 +18,28 @@ function formatARRPerEmp(v: number): string {
   return `$${v}K`;
 }
 
+function replaceMeta(html: string, opts: { title: string; description: string; ogImage: string; pageUrl: string }): string {
+  let out = html;
+  out = out.replace(/<title>[^<]*<\/title>/, `<title>${opts.title}</title>`);
+  out = out.replace(/<meta name="title" content="[^"]*" \/>/, `<meta name="title" content="${opts.title}" />`);
+  out = out.replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${opts.description}" />`);
+  out = out.replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${opts.pageUrl}" />`);
+  out = out.replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${opts.title}" />`);
+  out = out.replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${opts.description}" />`);
+  out = out.replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${opts.ogImage}" />`);
+  out = out.replace(/<meta property="twitter:url" content="[^"]*" \/>/, `<meta property="twitter:url" content="${opts.pageUrl}" />`);
+  out = out.replace(/<meta property="twitter:title" content="[^"]*" \/>/, `<meta property="twitter:title" content="${opts.title}" />`);
+  out = out.replace(/<meta property="twitter:description" content="[^"]*" \/>/, `<meta property="twitter:description" content="${opts.description}" />`);
+  out = out.replace(/<meta property="twitter:image" content="[^"]*" \/>/, `<meta property="twitter:image" content="${opts.ogImage}" />`);
+  out = out.replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${opts.pageUrl}" />`);
+  return out;
+}
+
 const ranked = [...companies]
   .filter(c => c.arr !== null)
   .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0));
 
+// Generate company pages
 for (const company of companies) {
   if (company.arr === null) continue;
 
@@ -30,78 +48,38 @@ for (const company of companies) {
   const rank = ranked.findIndex(c => c.name === company.name) + 1;
   const arrPerEmp = formatARRPerEmp(company.arrPerEmployee || 0);
 
-  const title = `${company.name} - ${arrPerEmp}/emp (#${rank}) | Vertical Velocity`;
-  const description = `${company.name} ranks #${rank} with ${arrPerEmp} ARR per employee. ${cat?.name || 'Vertical AI'} company, ${company.headcount} employees. See how they compare.`;
-  const ogImage = `https://verticalvelocity.co/api/og?slug=${slug}`;
-  const pageUrl = `https://verticalvelocity.co/company/${slug}`;
+  const html = replaceMeta(template, {
+    title: `${company.name} - ${arrPerEmp}/emp (#${rank}) | Vertical Velocity`,
+    description: `${company.name} ranks #${rank} with ${arrPerEmp} ARR per employee. ${cat?.name || 'Vertical AI'} company, ${company.headcount} employees. See how they compare.`,
+    ogImage: `https://verticalvelocity.co/api/og?slug=${slug}`,
+    pageUrl: `https://verticalvelocity.co/company/${slug}`,
+  });
 
-  // Replace the generic meta tags with company-specific ones
-  let html = template;
-
-  // Replace title
-  html = html.replace(
-    /<title>[^<]*<\/title>/,
-    `<title>${title}</title>`
-  );
-
-  // Replace meta name="title"
-  html = html.replace(
-    /<meta name="title" content="[^"]*" \/>/,
-    `<meta name="title" content="${title}" />`
-  );
-
-  // Replace meta name="description"
-  html = html.replace(
-    /<meta name="description" content="[^"]*" \/>/,
-    `<meta name="description" content="${description}" />`
-  );
-
-  // Replace OG tags
-  html = html.replace(
-    /<meta property="og:url" content="[^"]*" \/>/,
-    `<meta property="og:url" content="${pageUrl}" />`
-  );
-  html = html.replace(
-    /<meta property="og:title" content="[^"]*" \/>/,
-    `<meta property="og:title" content="${title}" />`
-  );
-  html = html.replace(
-    /<meta property="og:description" content="[^"]*" \/>/,
-    `<meta property="og:description" content="${description}" />`
-  );
-  html = html.replace(
-    /<meta property="og:image" content="[^"]*" \/>/,
-    `<meta property="og:image" content="${ogImage}" />`
-  );
-
-  // Replace Twitter tags
-  html = html.replace(
-    /<meta property="twitter:url" content="[^"]*" \/>/,
-    `<meta property="twitter:url" content="${pageUrl}" />`
-  );
-  html = html.replace(
-    /<meta property="twitter:title" content="[^"]*" \/>/,
-    `<meta property="twitter:title" content="${title}" />`
-  );
-  html = html.replace(
-    /<meta property="twitter:description" content="[^"]*" \/>/,
-    `<meta property="twitter:description" content="${description}" />`
-  );
-  html = html.replace(
-    /<meta property="twitter:image" content="[^"]*" \/>/,
-    `<meta property="twitter:image" content="${ogImage}" />`
-  );
-
-  // Replace canonical
-  html = html.replace(
-    /<link rel="canonical" href="[^"]*" \/>/,
-    `<link rel="canonical" href="${pageUrl}" />`
-  );
-
-  // Write to dist/company/:slug/index.html
   const outDir = join(distDir, 'company', slug);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, 'index.html'), html);
 }
 
 console.log(`Generated OG pages for ${companies.filter(c => c.arr !== null).length} companies`);
+
+// Generate vertical/category pages
+for (const cat of categories) {
+  const categoryCompanies = ranked.filter(c => c.category === cat.id);
+  if (categoryCompanies.length === 0) continue;
+
+  const topCompany = categoryCompanies[0];
+  const topArrPerEmp = formatARRPerEmp(topCompany.arrPerEmployee || 0);
+
+  const html = replaceMeta(template, {
+    title: `Top ${cat.name} AI Companies by Efficiency | Vertical Velocity`,
+    description: `${categoryCompanies.length} ${cat.name.toLowerCase()} AI companies ranked by ARR per employee. #1: ${topCompany.name} at ${topArrPerEmp}/emp. See the full leaderboard.`,
+    ogImage: `https://verticalvelocity.co/api/og?category=${cat.id}`,
+    pageUrl: `https://verticalvelocity.co/vertical/${cat.id}`,
+  });
+
+  const outDir = join(distDir, 'vertical', cat.id);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+}
+
+console.log(`Generated vertical pages for ${categories.length} categories`);

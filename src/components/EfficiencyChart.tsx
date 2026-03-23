@@ -95,11 +95,11 @@ type SortOption = 'arrPerEmployee' | 'arr' | 'headcount' | 'revenueMultiple';
 type ViewMode = 'ranking' | 'scatter';
 type StageFilter = 'all' | 'Seed' | 'Series A-B' | 'Series C+' | 'Public';
 
-export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: ViewMode }) {
+export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { defaultView?: ViewMode; defaultCategory?: string }) {
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    categories.map(c => c.id)
+    defaultCategory ? [defaultCategory] : categories.map(c => c.id)
   );
   const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>('arrPerEmployee');
@@ -389,16 +389,31 @@ export function EfficiencyChart({ defaultView = 'ranking' }: { defaultView?: Vie
     URL.revokeObjectURL(url);
   }, [filteredCompanies]);
 
+  const defaultCategoryObj = defaultCategory ? categories.find(c => c.id === defaultCategory) : null;
+
+  useEffect(() => {
+    if (defaultCategoryObj) {
+      document.title = `Top ${defaultCategoryObj.name} AI Companies by Efficiency | Vertical Velocity`;
+    }
+    return () => {
+      if (defaultCategoryObj) {
+        document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';
+      }
+    };
+  }, [defaultCategoryObj]);
+
   return (
     <div className="efficiency-chart">
       <header className="chart-header">
         <div className="chart-header-top">
           <div className="chart-header-left">
             <div className="title-container">
-              <h1>VERTICAL VELOCITY</h1>
+              <h1>{defaultCategoryObj ? `${defaultCategoryObj.name.toUpperCase()} AI RANKINGS` : 'VERTICAL VELOCITY'}</h1>
             </div>
             <p className="chart-subtitle">
-              A curated ranking of vertical AI companies by efficiency.
+              {defaultCategoryObj
+                ? `The most efficient ${defaultCategoryObj.name.toLowerCase()} AI companies, ranked by ARR per employee.`
+                : 'A curated ranking of vertical AI companies by efficiency.'}
             </p>
             <div className="header-buttons-left">
               <a href="https://twitter.com/pw_mcgovern" target="_blank" rel="noopener noreferrer" className="made-by-btn">

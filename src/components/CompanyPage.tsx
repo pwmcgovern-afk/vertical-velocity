@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { companies, categories, type Company } from '../data/companies';
 import { useState, useEffect } from 'react';
+import { ShareCard } from './ShareCard';
 
 function formatARR(arrInMillions: number): string {
   if (arrInMillions >= 1000) return `$${(arrInMillions / 1000).toFixed(1)}B`;
@@ -112,10 +113,15 @@ export function CompanyPage() {
 
   const category = categories.find(c => c.id === company.category);
   const efficiencyColor = getEfficiencyColor(company.arrPerEmployee || 0);
-  const rank = [...companies]
+  const ranked = [...companies]
     .filter(c => c.arr !== null)
-    .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0))
-    .findIndex(c => c.name === company.name) + 1;
+    .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0));
+  const rank = ranked.findIndex(c => c.name === company.name) + 1;
+  const totalRanked = ranked.length;
+
+  // Category rank
+  const categoryCompanies = ranked.filter(c => c.category === company.category);
+  const categoryRank = categoryCompanies.findIndex(c => c.name === company.name) + 1;
 
   // Find similar companies (same category, sorted by ARR/emp)
   const similarCompanies = companies
@@ -123,8 +129,10 @@ export function CompanyPage() {
     .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0))
     .slice(0, 5);
 
-  const tweetText = `${company.name} is doing ${company.arrPerEmployee ? formatARRPerEmployee(company.arrPerEmployee) : 'N/A'} ARR per employee\n\nSee how they rank against ${companies.length}+ vertical AI companies:\n\nvia @pw_mcgovern`;
-  const shareUrl = window.location.href;
+  const companySlug = company.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const cardUrl = `https://verticalvelocity.co/card/${companySlug}`;
+  const tweetText = `${company.name} is doing ${company.arrPerEmployee ? formatARRPerEmployee(company.arrPerEmployee) : 'N/A'} ARR per employee — #${rank} most efficient vertical AI company\n\nSee how they rank against ${companies.length}+ vertical AI companies:\n\nvia @pw_mcgovern`;
+  const shareUrl = cardUrl;
 
   return (
     <div className="company-page">
@@ -194,6 +202,14 @@ export function CompanyPage() {
             <span className="cp-metric-label">Stage</span>
           </div>
         </div>
+
+        <ShareCard
+          company={company}
+          rank={rank}
+          totalRanked={totalRanked}
+          categoryRank={categoryRank}
+          categoryName={category?.name || 'Other'}
+        />
 
         {/* What It Does */}
         <div className="cp-box">
