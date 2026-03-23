@@ -94,18 +94,31 @@ export function CompanyPage() {
             </svg>
             Back to Rankings
           </button>
-          <button
-            className="cp-random-btn"
-            onClick={() => {
-              const sameVertical = companies.filter(c => c.category === company.category && c.arr !== null && c.name !== company.name);
-              const pool = sameVertical.length > 0 ? sameVertical : companies.filter(c => c.arr !== null && c.name !== company.name);
-              const random = pool[Math.floor(Math.random() * pool.length)];
-              const s = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-              navigate(`/company/${s}`);
-            }}
-          >
-            Random {category?.name || ''} Company
-          </button>
+          <div className="cp-random-buttons">
+            <button
+              className="cp-random-btn"
+              onClick={() => {
+                const pool = companies.filter(c => c.arr !== null && c.name !== company.name);
+                const random = pool[Math.floor(Math.random() * pool.length)];
+                const s = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                navigate(`/company/${s}`);
+              }}
+            >
+              Random Company
+            </button>
+            <button
+              className="cp-random-btn"
+              onClick={() => {
+                const sameVertical = companies.filter(c => c.category === company.category && c.arr !== null && c.name !== company.name);
+                if (sameVertical.length === 0) return;
+                const random = sameVertical[Math.floor(Math.random() * sameVertical.length)];
+                const s = random.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                navigate(`/company/${s}`);
+              }}
+            >
+              Discover {category?.name || 'Another'} Company
+            </button>
+          </div>
         </div>
 
         <div className="cp-header">
