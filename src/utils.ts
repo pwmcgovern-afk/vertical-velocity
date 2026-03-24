@@ -60,4 +60,4 @@ export function getLogoUrl(domain: string, size: number = 64): string {
   return `https://img.logo.dev/${domain}?token=${LOGO_TOKEN}&format=png&size=${size}`;
 }
 
-export const DATA_LAST_UPDATED = '2026-03-18';
+export const DATA_LAST_UPDATED = '2026-03-23';
