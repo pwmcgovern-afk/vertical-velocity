@@ -1065,7 +1065,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 formData.forEach((v, k) => { data[k] = v.toString(); });
 
                 try {
-                  const res = await fetch('https://formspree.io/f/xeogqwrz', {
+                  const res = await fetch('https://formspree.io/f/mgopwvdv', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(data),
