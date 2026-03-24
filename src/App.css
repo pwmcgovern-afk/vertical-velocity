@@ -2372,7 +2372,7 @@ body {
 }
 
 /* Dark mode logo containers — avoid jarring white boxes */
-[data-theme="dark"] .company-logo { background: #27272a; }
+[data-theme="dark"] .company-logo { background: #f0f0f0; }
 [data-theme="dark"] .cp-logo { background: #27272a; }
 [data-theme="dark"] .cmp-logo { background: #27272a; }
 
