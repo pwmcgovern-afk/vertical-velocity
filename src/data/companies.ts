@@ -299,8 +299,8 @@ export const companies: Company[] = [
     arr: 195,
     arrPerEmployee: 227,
     valuation: 11.0,
-    lastFunding: '$200M raise at $11B (Feb 2026)',
-    source: 'TechCrunch, CNBC, Sacra, PitchBook',
+    lastFunding: '$200M at $11B co-led by GIC & Sequoia (Mar 2026)',
+    source: 'TechCrunch, CNBC, Bloomberg, Sacra, PitchBook',
     founded: 2022,
     founders: ['Winston Weinberg', 'Gabriel Pereyra'],
     website: 'https://www.harvey.ai',
@@ -315,6 +315,7 @@ export const companies: Company[] = [
       { year: 'Feb 2025', text: 'Raised $300M Series D led by Sequoia at $3B valuation' },
       { year: 'Jun 2025', text: 'Raised $300M Series E at $5B valuation' },
       { year: 'Dec 2025', text: 'Raised $160M Series F at $8B valuation; $195M ARR' },
+      { year: 'Mar 2026', text: 'Raised $200M at $11B co-led by GIC and Sequoia; 1,000+ clients, 25,000+ AI agents on platform' },
     ],
   },
   {
