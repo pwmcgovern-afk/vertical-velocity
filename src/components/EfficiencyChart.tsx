@@ -428,7 +428,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
       <header className="chart-header">
         <div className="chart-header-top">
           <div className="chart-header-left">
-            <div className="title-container">
+            <div className="title-container" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
               <h1>{defaultCategoryObj ? `${defaultCategoryObj.name.toUpperCase()} AI RANKINGS` : 'VERTICAL VELOCITY'}</h1>
             </div>
             <p className="chart-subtitle">
