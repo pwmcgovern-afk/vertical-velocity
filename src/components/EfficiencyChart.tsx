@@ -823,7 +823,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                           className="company-card-header"
                           onClick={() => toggleExpand(company.name)}
                         >
-                          <div className="company-card-left" onClick={(e) => { e.stopPropagation(); navigate(`/company/${slug}`); }}>
+                          <div className="company-card-left">
                             <span className={`company-card-rank${index < 10 ? ' rank-badge' : ''}`}>{index + 1}</span>
                             <CompanyLogo domain={company.domain} name={company.name} color={barColor} className="company-logo" />
                             <div className="company-card-info">
