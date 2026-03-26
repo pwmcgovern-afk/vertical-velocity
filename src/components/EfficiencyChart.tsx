@@ -456,6 +456,12 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
               >
                 Random Company
               </button>
+              <button
+                className="random-btn-header"
+                onClick={() => navigate('/calculator')}
+              >
+                Calculator
+              </button>
             </div>
           </div>
           <div className="chart-header-right">
@@ -599,6 +605,45 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
         <ScatterChart selectedCategories={selectedCategories} onCategoryChange={setSelectedCategories} />
       ) : (
         <>
+          {/* New This Month */}
+          {(() => {
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            const newCompanies = companies.filter(c => {
+              if (!c.dateAdded) return false;
+              return new Date(c.dateAdded) >= thirtyDaysAgo;
+            });
+            if (newCompanies.length === 0) return null;
+            return (
+              <div className="new-this-month">
+                <div className="new-this-month-header">
+                  <span className="new-this-month-title">New This Month</span>
+                  <button className="new-this-month-report" onClick={() => navigate('/report')}>
+                    Monthly Report →
+                  </button>
+                </div>
+                <div className="new-this-month-list">
+                  {newCompanies.map(c => {
+                    const slug = getCompanySlug(c.name);
+                    const cat = categories.find(cat => cat.id === c.category);
+                    return (
+                      <div key={c.name} className="new-this-month-card" onClick={() => navigate(`/company/${slug}`)}>
+                        <CompanyLogo domain={c.domain} name={c.name} color={c.color} className="company-logo" />
+                        <div className="new-this-month-info">
+                          <span className="new-this-month-name">{c.name}</span>
+                          <span className="new-this-month-cat">{cat?.name}</span>
+                        </div>
+                        <span className="new-this-month-value" style={{ color: getEfficiencyColor(c.arrPerEmployee || 0) }}>
+                          {formatARRPerEmployee(c.arrPerEmployee || 0)}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* Category buttons */}
           <div className="category-buttons-wrapper">
             <div className="category-buttons-row">

@@ -4489,6 +4489,470 @@ body {
 }
 
 /* ============================================
+   New This Month
+   ============================================ */
+.new-this-month {
+  margin: 16px 0;
+  padding: 16px 20px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.new-this-month-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.new-this-month-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.new-this-month-report {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.new-this-month-report:hover {
+  color: var(--accent);
+}
+
+.new-this-month-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.new-this-month-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.new-this-month-card:hover {
+  border-color: var(--accent);
+}
+
+.new-this-month-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-this-month-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.new-this-month-cat {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.new-this-month-value {
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ============================================
+   Calculator Page
+   ============================================ */
+.calc-form {
+  margin-bottom: 24px;
+}
+
+.calc-inputs {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.calc-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc-input-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.calc-input {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: 'Geist Mono', monospace;
+  width: 180px;
+  outline: none;
+}
+
+.calc-input:focus {
+  border-color: var(--accent);
+}
+
+.calc-btn {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  height: fit-content;
+}
+
+.calc-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.calc-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.calc-results {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.calc-hero {
+  text-align: center;
+  padding: 24px;
+  border: 2px solid;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background: var(--bg-muted);
+}
+
+.calc-hero-value {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Geist Mono', monospace;
+  display: block;
+}
+
+.calc-hero-label {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.calc-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.calc-stat {
+  flex: 1;
+  min-width: 150px;
+  padding: 16px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.calc-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Geist Mono', monospace;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.calc-stat-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+.calc-nearby h3 {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+
+.calc-nearby-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc-nearby-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.calc-nearby-item:hover {
+  background: var(--bg-muted);
+}
+
+.calc-nearby-you {
+  border: 2px solid;
+  background: var(--bg-muted);
+  cursor: default;
+}
+
+.calc-nearby-rank {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Geist Mono', monospace;
+  min-width: 32px;
+  color: var(--text-tertiary);
+}
+
+.calc-nearby-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.calc-nearby-cat {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.calc-nearby-value {
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calc-cta {
+  text-align: center;
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.calc-cta p {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+}
+
+.calc-cta-btn {
+  padding: 10px 24px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ============================================
+   Report Page
+   ============================================ */
+.report-summary {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.report-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: opacity 0.1s;
+}
+
+.report-entry:hover {
+  opacity: 0.8;
+}
+
+.report-entry:last-child {
+  border-bottom: none;
+}
+
+.report-entry-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.report-entry-badge.new {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.report-entry-badge.update {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.report-entry-company {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  min-width: 100px;
+}
+
+.report-entry-detail {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.report-sectors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.report-sector-card {
+  padding: 14px 16px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.report-sector-card:hover {
+  border-color: var(--accent);
+}
+
+.report-sector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.report-sector-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.report-sector-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.report-sector-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Claim This Company
+   ============================================ */
+.cp-claim {
+  margin: 24px 0;
+  text-align: center;
+}
+
+.cp-claim-btn {
+  background: none;
+  border: 1px dashed var(--border);
+  color: var(--text-tertiary);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cp-claim-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cp-claim-form {
+  max-width: 360px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.cp-claim-form h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.cp-claim-input {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+}
+
+.cp-claim-input:focus {
+  border-color: var(--accent);
+}
+
+.cp-claim-submit {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.cp-claim-success {
+  color: var(--success);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ============================================
    Loading Spinner (Code Split)
    ============================================ */
 .loading-spinner-container {

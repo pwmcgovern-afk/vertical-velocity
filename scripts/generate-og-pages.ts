@@ -130,3 +130,113 @@ for (const company of companies) {
   writeFileSync(join(outDir, 'index.html'), html);
 }
 console.log(`Generated card pages for ${companies.filter(c => c.arr !== null).length} companies`);
+
+// Generate programmatic SEO pages: /best-[vertical]-ai-companies
+for (const cat of categories) {
+  const categoryCompanies = ranked.filter(c => c.category === cat.id);
+  if (categoryCompanies.length === 0) continue;
+
+  const slug = `best-${cat.name.toLowerCase().replace(/\s+/g, '-')}-ai-companies`;
+  const top5 = categoryCompanies.slice(0, 5).map(c => c.name).join(', ');
+  const topCompany = categoryCompanies[0];
+  const topArrPerEmp = formatARRPerEmp(topCompany.arrPerEmployee || 0);
+
+  const html = replaceMeta(template, {
+    title: `Best ${cat.name} AI Companies (${new Date().getFullYear()}) | Vertical Velocity`,
+    description: `Top ${categoryCompanies.length} ${cat.name.toLowerCase()} AI companies ranked by efficiency. #1: ${topCompany.name} at ${topArrPerEmp}/emp. Full list: ${top5}.`,
+    ogImage: `https://verticalvelocity.co/api/og?category=${cat.id}`,
+    pageUrl: `https://verticalvelocity.co/${slug}`,
+  });
+
+  const outDir = join(distDir, slug);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+}
+console.log(`Generated ${categories.length} SEO landing pages`);
+
+// Generate calculator page
+{
+  const html = replaceMeta(template, {
+    title: 'Efficiency Calculator | Vertical Velocity',
+    description: `See how your company ranks against ${ranked.length}+ vertical AI companies. Enter your ARR and headcount to calculate your efficiency score.`,
+    ogImage: 'https://verticalvelocity.co/og-image.jpg',
+    pageUrl: 'https://verticalvelocity.co/calculator',
+  });
+  const outDir = join(distDir, 'calculator');
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+  console.log('Generated calculator page');
+}
+
+// Generate report page
+{
+  const html = replaceMeta(template, {
+    title: 'Monthly Report | Vertical Velocity',
+    description: `Monthly vertical AI market report: new companies, data updates, and sector analysis across ${ranked.length}+ companies.`,
+    ogImage: 'https://verticalvelocity.co/og-image.jpg',
+    pageUrl: 'https://verticalvelocity.co/report',
+  });
+  const outDir = join(distDir, 'report');
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+  console.log('Generated report page');
+}
+
+// Inject JSON-LD structured data into homepage
+{
+  const homepagePath = join(distDir, 'index.html');
+  let homepage = readFileSync(homepagePath, 'utf-8');
+
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Most Efficient Vertical AI Companies',
+    description: `${ranked.length}+ vertical AI companies ranked by ARR per employee`,
+    url: 'https://verticalvelocity.co',
+    numberOfItems: ranked.length,
+    itemListElement: ranked.slice(0, 20).map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Organization',
+        name: c.name,
+        url: c.website,
+        description: c.description?.slice(0, 200),
+      },
+    })),
+  };
+
+  const scriptTag = `<script type="application/ld+json">${JSON.stringify(itemListSchema)}</script>`;
+  homepage = homepage.replace('</head>', `${scriptTag}\n</head>`);
+  writeFileSync(homepagePath, homepage);
+  console.log('Injected JSON-LD into homepage');
+}
+
+// Inject JSON-LD Organization schema into company pages
+for (const company of companies) {
+  if (company.arr === null) continue;
+  const slug = getCompanySlug(company.name);
+  const pagePath = join(distDir, 'company', slug, 'index.html');
+
+  try {
+    let html = readFileSync(pagePath, 'utf-8');
+    const rank = ranked.findIndex(c => c.name === company.name) + 1;
+
+    const orgSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: company.name,
+      url: company.website,
+      description: company.description,
+      foundingDate: String(company.founded),
+      founder: company.founders.map(f => ({ '@type': 'Person', name: f })),
+      address: { '@type': 'PostalAddress', addressLocality: company.headquarters },
+      numberOfEmployees: { '@type': 'QuantitativeValue', value: company.headcount },
+    };
+
+    const scriptTag = `<script type="application/ld+json">${JSON.stringify(orgSchema)}</script>`;
+    html = html.replace('</head>', `${scriptTag}\n</head>`);
+    writeFileSync(pagePath, html);
+  } catch { /* page may not exist */ }
+}
+console.log('Injected JSON-LD into company pages');

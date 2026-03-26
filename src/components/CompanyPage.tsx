@@ -26,6 +26,9 @@ export function CompanyPage() {
   const navigate = useNavigate();
   const [showShareCard, setShowShareCard] = useState(false);
   const [copiedStats, setCopiedStats] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [showClaimForm, setShowClaimForm] = useState(false);
+  const [claimSubmitted, setClaimSubmitted] = useState(false);
 
   const company = companies.find(c =>
     c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug
@@ -337,6 +340,27 @@ export function CompanyPage() {
               </svg>
               Compare
             </button>
+            <button
+              className="cp-share-btn"
+              onClick={() => {
+                navigator.clipboard.writeText(window.location.href);
+                setCopiedLink(true);
+                track('copy_link', { slug: companySlug });
+                setTimeout(() => setCopiedLink(false), 2000);
+              }}
+            >
+              {copiedLink ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+              )}
+              {copiedLink ? 'Copied!' : 'Copy Link'}
+            </button>
           </div>
         </div>
 
@@ -365,6 +389,45 @@ export function CompanyPage() {
             </div>
           </div>
         )}
+
+        {/* Claim This Company */}
+        <div className="cp-claim">
+          {claimSubmitted ? (
+            <p className="cp-claim-success">Thanks! We'll verify and add a badge to your page within 48 hours.</p>
+          ) : showClaimForm ? (
+            <form
+              className="cp-claim-form"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                const formData = new FormData(form);
+                const data: Record<string, string> = { company: company.name };
+                formData.forEach((v, k) => { data[k] = v.toString(); });
+                try {
+                  const res = await fetch('https://formspree.io/f/mgopwvdv', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ ...data, _subject: `[VV Claim] ${company.name} — ${data.name}` }),
+                  });
+                  if (res.ok) {
+                    setClaimSubmitted(true);
+                    track('claim_company', { slug: companySlug });
+                  }
+                } catch { /* silent */ }
+              }}
+            >
+              <h4>Claim This Page</h4>
+              <input type="text" name="name" required placeholder="Your name" className="cp-claim-input" />
+              <input type="email" name="email" required placeholder="Work email" className="cp-claim-input" />
+              <input type="text" name="role" required placeholder="Your role (e.g., CEO, Co-founder)" className="cp-claim-input" />
+              <button type="submit" className="cp-claim-submit">Submit Claim</button>
+            </form>
+          ) : (
+            <button className="cp-claim-btn" onClick={() => setShowClaimForm(true)}>
+              Are you the founder? Claim this page
+            </button>
+          )}
+        </div>
 
         <div className="cp-disclaimer">
           Revenue figures sourced from public mentions in tech press. These numbers are for illustrative purposes only — treat them as directional estimates, not audited financials.

@@ -20,6 +20,8 @@ export interface Company {
   headquarters: string;
   description?: string;
   milestones?: Milestone[];
+  dateAdded?: string;
+  verified?: boolean;
 }
 
 export function getCompanySlug(name: string): string {
@@ -993,6 +995,7 @@ export const companies: Company[] = [
     category: 'enterprise',
     color: '#06b6d4',
     headcount: 260,
+    dateAdded: '2026-03-23',
     arr: 22,
     arrPerEmployee: 85,
     valuation: 1.3,
