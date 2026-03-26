@@ -18,8 +18,8 @@ export function CalculatorPage() {
     };
   }, []);
 
-  const arrNum = parseFloat(arr) || 0;
-  const hcNum = parseInt(headcount) || 0;
+  const arrNum = Math.max(0, parseFloat(arr) || 0);
+  const hcNum = Math.max(0, parseInt(headcount) || 0);
   const arrPerEmp = hcNum > 0 && arrNum > 0 ? Math.round((arrNum * 1000000) / hcNum / 1000) : 0;
   const effColor = getEfficiencyColor(arrPerEmp);
 
@@ -92,6 +92,7 @@ export function CalculatorPage() {
               <label>Annual Recurring Revenue ($M)</label>
               <input
                 type="number"
+                inputMode="decimal"
                 value={arr}
                 onChange={(e) => { setArr(e.target.value); setCalculated(false); }}
                 placeholder="e.g., 50"
@@ -104,6 +105,7 @@ export function CalculatorPage() {
               <label>Number of Employees</label>
               <input
                 type="number"
+                inputMode="numeric"
                 value={headcount}
                 onChange={(e) => { setHeadcount(e.target.value); setCalculated(false); }}
                 placeholder="e.g., 200"
@@ -145,35 +147,49 @@ export function CalculatorPage() {
               <div className="calc-nearby">
                 <h3>Companies Near Your Rank</h3>
                 <div className="calc-nearby-list">
-                  {nearbyCompanies.map(c => (
-                    <div
-                      key={c.name}
-                      className="calc-nearby-item"
-                      onClick={() => navigate(`/company/${c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`)}
-                    >
-                      <span className="calc-nearby-rank">#{c.displayRank}</span>
-                      <span className="calc-nearby-name">{c.name}</span>
-                      <span className="calc-nearby-cat">{categories.find(cat => cat.id === c.category)?.name}</span>
-                      <span className="calc-nearby-value" style={{ color: getEfficiencyColor(c.arrPerEmployee || 0) }}>
-                        {formatARRPerEmployee(c.arrPerEmployee || 0)}
-                      </span>
-                    </div>
-                  ))}
-                  <div className="calc-nearby-item calc-nearby-you" style={{ borderColor: effColor }}>
-                    <span className="calc-nearby-rank" style={{ color: effColor }}>#{rank}</span>
-                    <span className="calc-nearby-name" style={{ color: effColor }}>Your Company</span>
-                    <span className="calc-nearby-cat">-</span>
-                    <span className="calc-nearby-value" style={{ color: effColor }}>
-                      {formatARRPerEmployee(arrPerEmp)}
-                    </span>
-                  </div>
+                  {(() => {
+                    const yourRow = (
+                      <div key="your-company" className="calc-nearby-item calc-nearby-you" style={{ borderColor: effColor }}>
+                        <span className="calc-nearby-rank" style={{ color: effColor }}>#{rank}</span>
+                        <span className="calc-nearby-name" style={{ color: effColor }}>Your Company</span>
+                        <span className="calc-nearby-cat">-</span>
+                        <span className="calc-nearby-value" style={{ color: effColor }}>
+                          {formatARRPerEmployee(arrPerEmp)}
+                        </span>
+                      </div>
+                    );
+                    let inserted = false;
+                    const rows: React.ReactNode[] = [];
+                    for (const c of nearbyCompanies) {
+                      if (!inserted && c.displayRank >= rank) {
+                        rows.push(yourRow);
+                        inserted = true;
+                      }
+                      rows.push(
+                        <div
+                          key={c.name}
+                          className="calc-nearby-item"
+                          onClick={() => navigate(`/company/${c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`)}
+                        >
+                          <span className="calc-nearby-rank">#{c.displayRank}</span>
+                          <span className="calc-nearby-name">{c.name}</span>
+                          <span className="calc-nearby-cat">{categories.find(cat => cat.id === c.category)?.name}</span>
+                          <span className="calc-nearby-value" style={{ color: getEfficiencyColor(c.arrPerEmployee || 0) }}>
+                            {formatARRPerEmployee(c.arrPerEmployee || 0)}
+                          </span>
+                        </div>
+                      );
+                    }
+                    if (!inserted) rows.push(yourRow);
+                    return rows;
+                  })()}
                 </div>
               </div>
             )}
 
             <div className="calc-cta">
               <p>Want to be listed on Vertical Velocity?</p>
-              <button className="calc-cta-btn" onClick={() => navigate('/')}>
+              <button className="calc-cta-btn" onClick={() => navigate('/?submit=1')}>
                 Submit Your Company
               </button>
             </div>

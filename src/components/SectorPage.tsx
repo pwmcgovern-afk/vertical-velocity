@@ -16,10 +16,6 @@ export function SectorPage() {
     window.scrollTo(0, 0);
   }, [categoryId]);
 
-  if (!category) {
-    return <Navigate to="/" replace />;
-  }
-
   const sectorCompanies = useMemo(() =>
     companies.filter(c => c.category === categoryId && c.arr !== null),
     [categoryId]
@@ -92,6 +88,10 @@ export function SectorPage() {
       .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0));
     return allRanked.findIndex(c => c.name === topCompany.name) + 1;
   }, [topCompany]);
+
+  if (!category) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="sector-page">

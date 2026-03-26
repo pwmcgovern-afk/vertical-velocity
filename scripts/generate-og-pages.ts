@@ -220,8 +220,6 @@ for (const company of companies) {
 
   try {
     let html = readFileSync(pagePath, 'utf-8');
-    const rank = ranked.findIndex(c => c.name === company.name) + 1;
-
     const orgSchema = {
       '@context': 'https://schema.org',
       '@type': 'Organization',

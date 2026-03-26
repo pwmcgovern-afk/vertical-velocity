@@ -60,6 +60,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   );
   const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') || '');
   const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [locationFilter, setLocationFilter] = useState<LocationFilter>(() =>
     (searchParams.get('location') as LocationFilter) || 'all'
   );
@@ -77,6 +78,16 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   );
   const [compareList, setCompareList] = useState<string[]>([]);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+
+  // Auto-open submit modal from URL param
+  useEffect(() => {
+    if (searchParams.get('submit') === '1') {
+      setShowSubmitModal(true);
+      const params = new URLSearchParams(searchParams);
+      params.delete('submit');
+      setSearchParams(params, { replace: true });
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Sync filters to URL params
   useEffect(() => {
@@ -412,6 +423,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   }, [defaultCategoryObj]);
 
   // Compare search state
+  const [copiedLink, setCopiedLink] = useState(false);
   const [compareSearch, setCompareSearch] = useState('');
   const [compareSearchOpen, setCompareSearchOpen] = useState(false);
   const compareSearchRef = useRef<HTMLInputElement>(null);
@@ -503,7 +515,32 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </button>
+            <button
+              className="header-icon-btn"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(window.location.href);
+                  setCopiedLink(true);
+                  track('copy_link', { context: 'header' });
+                  setTimeout(() => setCopiedLink(false), 2000);
+                } catch { /* clipboard not available */ }
+              }}
+              aria-label="Copy link"
+              title={copiedLink ? 'Copied!' : 'Copy link'}
+            >
+              {copiedLink ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+              )}
+            </button>
             <div className="header-nav-pills">
+              <button className="nav-pill" onClick={() => navigate('/report')}>Report</button>
               <button className="nav-pill" onClick={() => navigate('/about')}>About</button>
               <a href="mailto:patrick.mcgovern@bowerycap.com" className="nav-pill">Contact</a>
               <a href="https://capitalefficient.substack.com" target="_blank" rel="noopener noreferrer" className="nav-pill">Substack</a>
@@ -1104,6 +1141,8 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
               className="submit-form"
               onSubmit={async (e) => {
                 e.preventDefault();
+                if (submitting) return;
+                setSubmitting(true);
                 const form = e.target as HTMLFormElement;
                 const formData = new FormData(form);
                 const data: Record<string, string> = {};
@@ -1126,6 +1165,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 } catch {
                   alert('Something went wrong. Please email patrick.mcgovern@bowerycap.com instead.');
                 }
+                setSubmitting(false);
               }}
             >
               <div className="form-row">
@@ -1151,18 +1191,18 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 </div>
                 <div className="form-group">
                   <label>Founded Year *</label>
-                  <input type="number" name="founded" required placeholder="2023" min="1990" max="2026" />
+                  <input type="number" inputMode="numeric" name="founded" required placeholder="2023" min="1990" max="2026" />
                 </div>
               </div>
 
               <div className="form-row">
                 <div className="form-group">
                   <label>Headcount *</label>
-                  <input type="number" name="headcount" required placeholder="50" min="1" />
+                  <input type="number" inputMode="numeric" name="headcount" required placeholder="50" min="1" />
                 </div>
                 <div className="form-group">
                   <label>ARR ($M) - Optional</label>
-                  <input type="number" name="arr" placeholder="10" min="0" step="0.1" />
+                  <input type="number" inputMode="decimal" name="arr" placeholder="10" min="0" step="0.1" />
                 </div>
               </div>
 
@@ -1178,7 +1218,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
 
               <div className="form-group full-width">
                 <label>Your Email *</label>
-                <input type="email" name="email" required placeholder="founder@acme.ai" />
+                <input type="email" inputMode="email" name="email" required placeholder="founder@acme.ai" />
               </div>
 
               <div className="form-group full-width">
@@ -1186,7 +1226,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 <textarea name="notes" placeholder="Any additional context about your company..." rows={3} />
               </div>
 
-              <button type="submit" className="submit-btn">Submit for Review</button>
+              <button type="submit" className="submit-btn" disabled={submitting}>{submitting ? 'Submitting...' : 'Submit for Review'}</button>
             </form>
           </div>
         </div>

@@ -29,6 +29,7 @@ export function CompanyPage() {
   const [copiedLink, setCopiedLink] = useState(false);
   const [showClaimForm, setShowClaimForm] = useState(false);
   const [claimSubmitted, setClaimSubmitted] = useState(false);
+  const [claimSubmitting, setClaimSubmitting] = useState(false);
 
   const company = companies.find(c =>
     c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug
@@ -303,12 +304,14 @@ export function CompanyPage() {
             </button>
             <button
               className="cp-share-btn"
-              onClick={() => {
+              onClick={async () => {
                 const statsText = `${company.name}: ${company.arrPerEmployee ? formatARRPerEmployee(company.arrPerEmployee) : 'N/A'} ARR/emp, ${company.arr ? formatARR(company.arr) : 'N/A'} ARR, ${company.headcount.toLocaleString()} employees, #${rank} ranked — verticalvelocity.co/company/${companySlug}`;
-                navigator.clipboard.writeText(statsText);
-                setCopiedStats(true);
-                track('copy_stats', { slug: companySlug });
-                setTimeout(() => setCopiedStats(false), 2000);
+                try {
+                  await navigator.clipboard.writeText(statsText);
+                  setCopiedStats(true);
+                  track('copy_stats', { slug: companySlug });
+                  setTimeout(() => setCopiedStats(false), 2000);
+                } catch { /* clipboard not available */ }
               }}
             >
               {copiedStats ? (
@@ -342,11 +345,13 @@ export function CompanyPage() {
             </button>
             <button
               className="cp-share-btn"
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                setCopiedLink(true);
-                track('copy_link', { slug: companySlug });
-                setTimeout(() => setCopiedLink(false), 2000);
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(window.location.href);
+                  setCopiedLink(true);
+                  track('copy_link', { slug: companySlug });
+                  setTimeout(() => setCopiedLink(false), 2000);
+                } catch { /* clipboard not available */ }
               }}
             >
               {copiedLink ? (
@@ -393,12 +398,14 @@ export function CompanyPage() {
         {/* Claim This Company */}
         <div className="cp-claim">
           {claimSubmitted ? (
-            <p className="cp-claim-success">Thanks! We'll verify and add a badge to your page within 48 hours.</p>
+            <p className="cp-claim-success">Thanks! We'll review your claim within 48 hours.</p>
           ) : showClaimForm ? (
             <form
               className="cp-claim-form"
               onSubmit={async (e) => {
                 e.preventDefault();
+                if (claimSubmitting) return;
+                setClaimSubmitting(true);
                 const form = e.target as HTMLFormElement;
                 const formData = new FormData(form);
                 const data: Record<string, string> = { company: company.name };
@@ -414,13 +421,14 @@ export function CompanyPage() {
                     track('claim_company', { slug: companySlug });
                   }
                 } catch { /* silent */ }
+                setClaimSubmitting(false);
               }}
             >
               <h4>Claim This Page</h4>
               <input type="text" name="name" required placeholder="Your name" className="cp-claim-input" />
-              <input type="email" name="email" required placeholder="Work email" className="cp-claim-input" />
+              <input type="email" inputMode="email" name="email" required placeholder="Work email" className="cp-claim-input" />
               <input type="text" name="role" required placeholder="Your role (e.g., CEO, Co-founder)" className="cp-claim-input" />
-              <button type="submit" className="cp-claim-submit">Submit Claim</button>
+              <button type="submit" className="cp-claim-submit" disabled={claimSubmitting}>{claimSubmitting ? 'Submitting...' : 'Submit Claim'}</button>
             </form>
           ) : (
             <button className="cp-claim-btn" onClick={() => setShowClaimForm(true)}>
