@@ -5881,6 +5881,41 @@ body::before {
   border-bottom-left-radius: 4px;
 }
 
+/* Markdown formatting inside assistant bubbles */
+.ask-ai-bubble-assistant .ask-ai-md-h2 {
+  font-weight: 700;
+  font-size: 13px;
+  margin: 8px 0 4px;
+}
+.ask-ai-bubble-assistant .ask-ai-md-h2:first-child {
+  margin-top: 0;
+}
+.ask-ai-bubble-assistant .ask-ai-md-h3 {
+  font-weight: 600;
+  font-size: 13px;
+  margin: 6px 0 2px;
+}
+.ask-ai-bubble-assistant .ask-ai-md-p {
+  margin: 4px 0;
+}
+.ask-ai-bubble-assistant .ask-ai-md-p:first-child {
+  margin-top: 0;
+}
+.ask-ai-bubble-assistant .ask-ai-md-p:last-child {
+  margin-bottom: 0;
+}
+.ask-ai-bubble-assistant .ask-ai-md-list {
+  margin: 4px 0;
+  padding-left: 18px;
+  list-style: disc;
+}
+.ask-ai-bubble-assistant .ask-ai-md-list li {
+  margin: 2px 0;
+}
+.ask-ai-bubble-assistant strong {
+  font-weight: 650;
+}
+
 /* Typing indicator */
 .ask-ai-typing {
   display: inline-flex;

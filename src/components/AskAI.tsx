@@ -5,6 +5,60 @@ interface Message {
   content: string;
 }
 
+/** Lightweight markdown → JSX for assistant messages. Handles **bold**, bullet lists, and ## headings. */
+function renderMarkdown(text: string) {
+  const lines = text.split('\n');
+  const elements: React.ReactNode[] = [];
+  let listItems: React.ReactNode[] = [];
+  let key = 0;
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      elements.push(<ul key={key++} className="ask-ai-md-list">{listItems}</ul>);
+      listItems = [];
+    }
+  };
+
+  const inlineFormat = (line: string): React.ReactNode[] => {
+    // Split on **bold** markers
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i}>{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Headings
+    if (trimmed.startsWith('## ')) {
+      flushList();
+      elements.push(<div key={key++} className="ask-ai-md-h2">{inlineFormat(trimmed.slice(3))}</div>);
+    } else if (trimmed.startsWith('### ')) {
+      flushList();
+      elements.push(<div key={key++} className="ask-ai-md-h3">{inlineFormat(trimmed.slice(4))}</div>);
+    }
+    // Bullet points
+    else if (/^[-*•]\s/.test(trimmed)) {
+      listItems.push(<li key={key++}>{inlineFormat(trimmed.replace(/^[-*•]\s+/, ''))}</li>);
+    }
+    // Empty line
+    else if (trimmed === '') {
+      flushList();
+    }
+    // Regular paragraph
+    else {
+      flushList();
+      elements.push(<p key={key++} className="ask-ai-md-p">{inlineFormat(trimmed)}</p>);
+    }
+  }
+  flushList();
+  return elements;
+}
+
 const SUGGESTED_QUESTIONS = [
   'Which company has the highest ARR per employee?',
   'Compare healthcare AI companies by revenue',
@@ -137,7 +191,7 @@ export function AskAI() {
             {messages.map((msg, i) => (
               <div key={i} className={`ask-ai-msg ask-ai-msg-${msg.role}`}>
                 <div className={`ask-ai-bubble ask-ai-bubble-${msg.role}`}>
-                  {msg.content}
+                  {msg.role === 'assistant' ? renderMarkdown(msg.content) : msg.content}
                 </div>
               </div>
             ))}
