@@ -5753,9 +5753,9 @@ body::before {
   bottom: 24px;
   right: 24px;
   z-index: 60;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 22px;
   border: 1px solid var(--border);
   background: var(--accent);
   color: white;
@@ -5763,6 +5763,10 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
   box-shadow: var(--shadow-lg);
   transition: background var(--transition-fast), transform var(--transition-fast);
 }
