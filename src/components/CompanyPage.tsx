@@ -417,7 +417,10 @@ export function CompanyPage() {
                   <div
                     key={c.name}
                     className="cp-similar-card"
+                    role="button"
+                    tabIndex={0}
                     onClick={() => navigate(`/company/${cSlug}`)}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/company/${cSlug}`); } }}
                   >
                     <div className="cp-similar-info">
                       <span className="cp-similar-name">{c.name}</span>
@@ -463,9 +466,9 @@ export function CompanyPage() {
               }}
             >
               <h4>Claim This Page</h4>
-              <input type="text" name="name" required placeholder="Your name" className="cp-claim-input" />
-              <input type="email" inputMode="email" name="email" required placeholder="Work email" className="cp-claim-input" />
-              <input type="text" name="role" required placeholder="Your role (e.g., CEO, Co-founder)" className="cp-claim-input" />
+              <input type="text" name="name" required placeholder="Your name" aria-label="Your name" className="cp-claim-input" />
+              <input type="email" inputMode="email" name="email" required placeholder="Work email" aria-label="Work email" className="cp-claim-input" />
+              <input type="text" name="role" required placeholder="Your role (e.g., CEO, Co-founder)" aria-label="Your role" className="cp-claim-input" />
               <button type="submit" className="cp-claim-submit" disabled={claimSubmitting}>{claimSubmitting ? 'Submitting...' : 'Submit Claim'}</button>
             </form>
           ) : (

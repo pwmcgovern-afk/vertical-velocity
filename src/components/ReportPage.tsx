@@ -84,7 +84,7 @@ export function ReportPage() {
               const company = companies.find(c => c.name === e.company);
               const slug = company ? getCompanySlug(company.name) : '';
               return (
-                <div key={i} className="report-entry" onClick={() => slug && navigate(`/company/${slug}`)}>
+                <div key={i} className="report-entry" role="button" tabIndex={0} onClick={() => slug && navigate(`/company/${slug}`)} onKeyDown={(e2) => { if ((e2.key === 'Enter' || e2.key === ' ') && slug) { e2.preventDefault(); navigate(`/company/${slug}`); } }}>
                   <span className="report-entry-badge new">NEW</span>
                   <span className="report-entry-company">{e.company}</span>
                   <span className="report-entry-detail">{e.detail}</span>
@@ -101,7 +101,7 @@ export function ReportPage() {
               const company = companies.find(c => c.name === e.company);
               const slug = company ? getCompanySlug(company.name) : '';
               return (
-                <div key={i} className="report-entry" onClick={() => slug && navigate(`/company/${slug}`)}>
+                <div key={i} className="report-entry" role="button" tabIndex={0} onClick={() => slug && navigate(`/company/${slug}`)} onKeyDown={(e2) => { if ((e2.key === 'Enter' || e2.key === ' ') && slug) { e2.preventDefault(); navigate(`/company/${slug}`); } }}>
                   <span className="report-entry-badge update">UPDATED</span>
                   <span className="report-entry-company">{e.company}</span>
                   <span className="report-entry-detail">{e.detail}</span>
@@ -120,7 +120,10 @@ export function ReportPage() {
                 <div
                   key={s.category}
                   className="report-sector-card"
+                  role="button"
+                  tabIndex={0}
                   onClick={() => navigate(`/vertical/${s.category}`)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/vertical/${s.category}`); } }}
                 >
                   <div className="report-sector-header">
                     <span className="report-sector-name" style={{ color: cat?.color }}>{s.categoryName}</span>

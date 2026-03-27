@@ -38,7 +38,7 @@ export function CardPage() {
   if (!company) {
     return (
       <div className="card-page">
-        <p style={{ color: '#a1a1aa' }}>Company not found.</p>
+        <p style={{ color: 'var(--text-tertiary)' }}>Company not found.</p>
       </div>
     );
   }

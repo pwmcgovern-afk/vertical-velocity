@@ -291,7 +291,7 @@ export function ComparePage() {
           })}
 
           {uniqueCompanies.length < 3 && (
-            <div className="cmp-add-card" onClick={() => setSelectorOpen(!selectorOpen)}>
+            <div className="cmp-add-card" role="button" tabIndex={0} onClick={() => setSelectorOpen(!selectorOpen)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectorOpen(!selectorOpen); } }}>
               <div className="cmp-add-icon">+</div>
               <span className="cmp-add-text">Add Company</span>
             </div>
@@ -305,6 +305,7 @@ export function ComparePage() {
               type="text"
               className="cmp-selector-input"
               placeholder="Search companies..."
+              aria-label="Search companies"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
             />
@@ -313,7 +314,7 @@ export function ComparePage() {
                 {searchResults.map(c => {
                   const cat = categories.find(cat => cat.id === c.category);
                   return (
-                    <div key={c.name} className="cmp-selector-item" onClick={() => addCompany(c)}>
+                    <div key={c.name} className="cmp-selector-item" role="button" tabIndex={0} onClick={() => addCompany(c)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); addCompany(c); } }}>
                       <span className="cmp-selector-item-name">{c.name}</span>
                       <span className="cmp-selector-item-meta">
                         {cat?.name} &middot; {formatARRPerEmployee(c.arrPerEmployee || 0)}/emp

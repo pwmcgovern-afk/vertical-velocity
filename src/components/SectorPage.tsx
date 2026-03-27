@@ -135,7 +135,10 @@ export function SectorPage() {
           {topCompany && (
             <div
               className="sector-stat sector-stat-clickable"
+              role="button"
+              tabIndex={0}
               onClick={() => navigate(`/company/${topCompany.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/company/${topCompany.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`); } }}
             >
               <span className="sector-stat-value" style={{ color: getEfficiencyColor(topCompany.arrPerEmployee || 0) }}>
                 {topCompany.name}

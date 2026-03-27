@@ -161,8 +161,8 @@ html {
 
 /* Accessibility: visible focus rings */
 *:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 body {
@@ -3707,6 +3707,7 @@ body::before {
 
 /* Add Company Card */
 .cmp-add-card {
+  cursor: pointer;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -3788,6 +3789,7 @@ body::before {
 }
 
 .cmp-selector-item {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -4885,6 +4887,7 @@ body::before {
 }
 
 .calc-nearby-item {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -4966,6 +4969,7 @@ body::before {
 }
 
 .report-entry {
+  cursor: pointer;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -5557,6 +5561,17 @@ body::before {
 
   .newsletter-input {
     width: 100%;
+  }
+
+  /* Touch targets for action buttons */
+  .cp-share-btn, .cp-website-btn {
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+
+  /* Claim form full-width on small screens */
+  .cp-claim-form {
+    max-width: 100%;
   }
 
   /* Sector page */

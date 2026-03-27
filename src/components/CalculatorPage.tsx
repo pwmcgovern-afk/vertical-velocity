@@ -176,7 +176,10 @@ export function CalculatorPage() {
                         <div
                           key={c.name}
                           className="calc-nearby-item"
+                          role="button"
+                          tabIndex={0}
                           onClick={() => navigate(`/company/${c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`)}
+                          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/company/${c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`); } }}
                         >
                           <span className="calc-nearby-rank">#{c.displayRank}</span>
                           <span className="calc-nearby-name">{c.name}</span>
