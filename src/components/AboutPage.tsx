@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { companies, categories } from '../data/companies';
+import { companies } from '../data/companies';
 import { formatARR, formatARRPerEmployee, DATA_LAST_UPDATED, updateMetaTag } from '../utils';
 
 export function AboutPage() {
@@ -37,34 +37,11 @@ export function AboutPage() {
           Built by <a href="https://twitter.com/pw_mcgovern" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Pat McGovern</a>
         </p>
 
-        {/* Thesis */}
+        {/* What it is */}
         <div className="cp-box">
-          <h3>The Thesis</h3>
+          <h3>What is Vertical Velocity?</h3>
           <p className="cp-box-text">
-            The most interesting trend in AI isn't the foundation model race — it's what happens when AI meets industries with deep, specific workflows. Healthcare billing. Construction permitting. Legal research. Insurance claims.
-          </p>
-          <p className="cp-box-text" style={{ marginTop: '12px' }}>
-            These "vertical AI" companies are building products that require genuine domain expertise to get right, which creates natural moats that horizontal tools can't easily replicate. But not all vertical AI companies are created equal. Some are genuinely AI-native — lean teams generating outsized revenue because the product does the work, not the headcount. Others are services companies with an AI wrapper.
-          </p>
-          <p className="cp-box-text" style={{ marginTop: '12px' }}>
-            ARR per employee is the simplest way to tell them apart. It's not perfect — early-stage companies investing in R&D will look "inefficient" — but across {ranked.length}+ companies, the signal is clear. The best vertical AI companies generate $300K+ per employee. That's the benchmark.
-          </p>
-        </div>
-
-        {/* What I found */}
-        <div className="cp-box">
-          <h3>What Surprised Me</h3>
-          <p className="cp-box-text">
-            Three things stood out after tracking {ranked.length} companies across {categories.length} verticals:
-          </p>
-          <p className="cp-box-text" style={{ marginTop: '12px' }}>
-            <strong>1. Defense is absurdly efficient.</strong> Companies like Palantir and Anduril operate at 2-3x the efficiency of other verticals. Government contracts + AI automation is a powerful combination.
-          </p>
-          <p className="cp-box-text" style={{ marginTop: '8px' }}>
-            <strong>2. Healthcare is the most competitive vertical.</strong> Nine companies, aggressive funding, but wide efficiency variance. The winners (OpenEvidence, Abridge) are 5-10x more efficient than the laggards.
-          </p>
-          <p className="cp-box-text" style={{ marginTop: '8px' }}>
-            <strong>3. Revenue multiples have detached from efficiency.</strong> Some of the least efficient companies carry the highest valuations. The market is pricing growth rate and TAM, not operational leverage. That gap will close.
+            Vertical Velocity ranks {ranked.length}+ vertical AI companies by capital efficiency, measured as ARR (Annual Recurring Revenue) per employee. It's a benchmarking tool for investors, founders, and operators.
           </p>
         </div>
 
@@ -72,15 +49,12 @@ export function AboutPage() {
         <div className="cp-box">
           <h3>Who Built This</h3>
           <p className="cp-box-text">
-            I'm Pat McGovern. I spent the last several years investing in pre-seed and seed vertical AI companies at <a href="https://bowerycap.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Bowery Capital</a> in New York. I built Vertical Velocity because I wanted a tool that didn't exist — a way to benchmark vertical AI companies against each other on the metric that matters most: how efficiently they convert talent into revenue.
+            Built by <a href="https://twitter.com/pw_mcgovern" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Pat McGovern</a>. Previously investing in vertical AI at <a href="https://bowerycap.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Bowery Capital</a> in New York.
           </p>
           <p className="cp-box-text" style={{ marginTop: '12px' }}>
-            The data is sourced from TechCrunch, Forbes, Bloomberg, The Information, Sacra, CB Insights, PitchBook, SEC filings, and press releases. Headcount is cross-referenced against LinkedIn. All figures are directional estimates, not audited financials.
-          </p>
-          <p className="cp-box-text" style={{ marginTop: '12px' }}>
-            I write about vertical AI efficiency on <a href="https://capitalefficient.substack.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Substack</a>. Reach me at{' '}
-            <a href="mailto:patrick.mcgovern@bowerycap.com" style={{ color: 'var(--accent)' }}>patrick.mcgovern@bowerycap.com</a> or{' '}
-            <a href="https://twitter.com/pw_mcgovern" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>@pw_mcgovern</a>.
+            <a href="https://capitalefficient.substack.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Substack</a> &middot;{' '}
+            <a href="mailto:patrick.mcgovern@bowerycap.com" style={{ color: 'var(--accent)' }}>patrick.mcgovern@bowerycap.com</a> &middot;{' '}
+            <a href="https://twitter.com/pw_mcgovern" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>@pw_mcgovern</a>
           </p>
         </div>
 
