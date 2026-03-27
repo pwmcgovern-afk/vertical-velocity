@@ -5,26 +5,37 @@ interface Message {
   content: string;
 }
 
-/** Lightweight markdown → JSX for assistant messages. Handles **bold**, bullet lists, and ## headings. */
+/** Lightweight markdown → JSX for assistant messages. */
 function renderMarkdown(text: string) {
   const lines = text.split('\n');
   const elements: React.ReactNode[] = [];
   let listItems: React.ReactNode[] = [];
+  let listType: 'ul' | 'ol' = 'ul';
   let key = 0;
 
   const flushList = () => {
     if (listItems.length > 0) {
-      elements.push(<ul key={key++} className="ask-ai-md-list">{listItems}</ul>);
+      if (listType === 'ol') {
+        elements.push(<ol key={key++} className="ask-ai-md-list ask-ai-md-ol">{listItems}</ol>);
+      } else {
+        elements.push(<ul key={key++} className="ask-ai-md-list">{listItems}</ul>);
+      }
       listItems = [];
     }
   };
 
   const inlineFormat = (line: string): React.ReactNode[] => {
-    // Split on **bold** markers
-    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    // Split on **bold**, `code`, and *italic* markers
+    const parts = line.split(/(\*\*.*?\*\*|`[^`]+`|\*[^*]+\*)/g);
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return <strong key={i}>{part.slice(2, -2)}</strong>;
+      }
+      if (part.startsWith('`') && part.endsWith('`')) {
+        return <code key={i} className="ask-ai-md-code">{part.slice(1, -1)}</code>;
+      }
+      if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+        return <em key={i} className="ask-ai-md-italic">{part.slice(1, -1)}</em>;
       }
       return part;
     });
@@ -41,8 +52,16 @@ function renderMarkdown(text: string) {
       flushList();
       elements.push(<div key={key++} className="ask-ai-md-h3">{inlineFormat(trimmed.slice(4))}</div>);
     }
+    // Numbered list
+    else if (/^\d+\.\s/.test(trimmed)) {
+      if (listItems.length > 0 && listType !== 'ol') flushList();
+      listType = 'ol';
+      listItems.push(<li key={key++}>{inlineFormat(trimmed.replace(/^\d+\.\s+/, ''))}</li>);
+    }
     // Bullet points
     else if (/^[-*•]\s/.test(trimmed)) {
+      if (listItems.length > 0 && listType !== 'ul') flushList();
+      listType = 'ul';
       listItems.push(<li key={key++}>{inlineFormat(trimmed.replace(/^[-*•]\s+/, ''))}</li>);
     }
     // Empty line
@@ -75,6 +94,7 @@ export function AskAI() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const lastFailedRef = useRef<string | null>(null);
+  const sendingRef = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -84,9 +104,21 @@ export function AskAI() {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
+  const autoGrow = (el: HTMLTextAreaElement) => {
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  };
+
+  const handleClear = () => {
+    setMessages([]);
+    setError(null);
+    lastFailedRef.current = null;
+  };
+
   const sendMessage = useCallback(async (text: string) => {
     const trimmed = text.trim();
-    if (!trimmed || isLoading) return;
+    if (!trimmed || isLoading || sendingRef.current) return;
+    sendingRef.current = true;
 
     setError(null);
     lastFailedRef.current = null;
@@ -96,13 +128,23 @@ export function AskAI() {
     setInput('');
     setIsLoading(true);
 
+    // Reset textarea height
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: updatedMessages }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeout);
       const data = await res.json();
 
       if (!res.ok) {
@@ -112,15 +154,22 @@ export function AskAI() {
         setError(errMsg);
         lastFailedRef.current = trimmed;
         setIsLoading(false);
+        sendingRef.current = false;
         return;
       }
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
-    } catch {
-      setError('Connection failed. Check your network and try again.');
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        setError('Response took too long. Try again.');
+      } else {
+        setError('Connection failed. Check your network and try again.');
+      }
       lastFailedRef.current = trimmed;
     } finally {
+      clearTimeout(timeout);
       setIsLoading(false);
+      sendingRef.current = false;
     }
   }, [messages, isLoading]);
 
@@ -167,7 +216,12 @@ export function AskAI() {
         <div className="ask-ai-popup">
           <div className="ask-ai-header">
             <span className="ask-ai-header-title">Ask AI</span>
-            <span className="ask-ai-header-badge">Powered by Claude</span>
+            <div className="ask-ai-header-right">
+              {messages.length > 0 && (
+                <button className="ask-ai-clear" onClick={handleClear}>Clear</button>
+              )}
+              <span className="ask-ai-header-badge">Powered by Claude</span>
+            </div>
           </div>
 
           <div className="ask-ai-messages">
@@ -224,7 +278,10 @@ export function AskAI() {
               className="ask-ai-input"
               placeholder="Ask about companies, rankings, categories..."
               value={input}
-              onChange={e => setInput(e.target.value)}
+              onChange={e => {
+                setInput(e.target.value);
+                autoGrow(e.target);
+              }}
               onKeyDown={handleKeyDown}
               rows={1}
               disabled={isLoading}

@@ -5804,6 +5804,26 @@ body::before {
   font-size: 14px;
   color: var(--text-primary);
 }
+.ask-ai-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ask-ai-clear {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.ask-ai-clear:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
 .ask-ai-header-badge {
   font-size: 11px;
   color: var(--text-tertiary);
@@ -5884,7 +5904,7 @@ body::before {
 /* Markdown formatting inside assistant bubbles */
 .ask-ai-bubble-assistant .ask-ai-md-h2 {
   font-weight: 700;
-  font-size: 13px;
+  font-size: 14px;
   margin: 8px 0 4px;
 }
 .ask-ai-bubble-assistant .ask-ai-md-h2:first-child {
@@ -5911,6 +5931,20 @@ body::before {
 }
 .ask-ai-bubble-assistant .ask-ai-md-list li {
   margin: 2px 0;
+}
+.ask-ai-bubble-assistant .ask-ai-md-ol {
+  list-style: decimal;
+}
+.ask-ai-bubble-assistant .ask-ai-md-code {
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+.ask-ai-bubble-assistant .ask-ai-md-italic {
+  font-style: italic;
 }
 .ask-ai-bubble-assistant strong {
   font-weight: 650;
