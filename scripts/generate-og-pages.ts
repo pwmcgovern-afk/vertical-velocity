@@ -238,3 +238,87 @@ for (const company of companies) {
   } catch { /* page may not exist */ }
 }
 console.log('Injected JSON-LD into company pages');
+
+// Inject JSON-LD ItemList schema into vertical/category pages
+for (const cat of categories) {
+  const categoryCompanies = ranked.filter(c => c.category === cat.id);
+  if (categoryCompanies.length === 0) continue;
+
+  const pagePath = join(distDir, 'vertical', cat.id, 'index.html');
+  try {
+    let html = readFileSync(pagePath, 'utf-8');
+    const itemListSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: `Top ${cat.name} AI Companies by Efficiency`,
+      description: `${categoryCompanies.length} ${cat.name.toLowerCase()} AI companies ranked by ARR per employee`,
+      url: `https://verticalvelocity.co/vertical/${cat.id}`,
+      numberOfItems: categoryCompanies.length,
+      itemListElement: categoryCompanies.slice(0, 20).map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Organization',
+          name: c.name,
+          url: c.website,
+          description: c.description?.slice(0, 200),
+        },
+      })),
+    };
+
+    const scriptTag = `<script type="application/ld+json">${JSON.stringify(itemListSchema)}</script>`;
+    html = html.replace('</head>', `${scriptTag}\n</head>`);
+    writeFileSync(pagePath, html);
+  } catch { /* page may not exist */ }
+}
+console.log('Injected JSON-LD into category pages');
+
+// Generate complete sitemap.xml
+{
+  const today = new Date().toISOString().split('T')[0];
+  const urls: { loc: string; priority: string; changefreq: string }[] = [];
+
+  // Homepage
+  urls.push({ loc: 'https://verticalvelocity.co/', priority: '1.0', changefreq: 'weekly' });
+
+  // Static pages
+  urls.push({ loc: 'https://verticalvelocity.co/about', priority: '0.6', changefreq: 'monthly' });
+  urls.push({ loc: 'https://verticalvelocity.co/calculator', priority: '0.6', changefreq: 'monthly' });
+  urls.push({ loc: 'https://verticalvelocity.co/report', priority: '0.7', changefreq: 'monthly' });
+  urls.push({ loc: 'https://verticalvelocity.co/compare', priority: '0.5', changefreq: 'monthly' });
+
+  // Company pages
+  for (const company of companies) {
+    if (company.arr === null) continue;
+    const slug = getCompanySlug(company.name);
+    urls.push({ loc: `https://verticalvelocity.co/company/${slug}`, priority: '0.8', changefreq: 'monthly' });
+  }
+
+  // Vertical/category pages
+  for (const cat of categories) {
+    const hasCo = companies.some(c => c.category === cat.id && c.arr !== null);
+    if (!hasCo) continue;
+    urls.push({ loc: `https://verticalvelocity.co/vertical/${cat.id}`, priority: '0.7', changefreq: 'monthly' });
+  }
+
+  // SEO landing pages
+  for (const cat of categories) {
+    const hasCo = companies.some(c => c.category === cat.id && c.arr !== null);
+    if (!hasCo) continue;
+    const slug = `best-${cat.name.toLowerCase().replace(/\s+/g, '-')}-ai-companies`;
+    urls.push({ loc: `https://verticalvelocity.co/${slug}`, priority: '0.6', changefreq: 'monthly' });
+  }
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+  writeFileSync(join(distDir, 'sitemap.xml'), sitemap);
+  console.log(`Generated sitemap.xml with ${urls.length} URLs`);
+}

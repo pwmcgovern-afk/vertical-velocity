@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import { companies, categories } from '../data/companies';
-import { formatARRPerEmployee, getEfficiencyColor } from '../utils';
+import { formatARRPerEmployee, getEfficiencyColor, updateMetaTag } from '../utils';
 
 export function CalculatorPage() {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export function CalculatorPage() {
 
   useEffect(() => {
     document.title = 'Efficiency Calculator | Vertical Velocity';
+    updateMetaTag('description', `See how your company ranks against ${ranked.length}+ vertical AI companies. Enter your ARR and headcount to calculate your efficiency score.`);
     window.scrollTo(0, 0);
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';

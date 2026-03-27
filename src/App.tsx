@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EfficiencyChart } from './components/EfficiencyChart';
+const EfficiencyChart = lazy(() => import('./components/EfficiencyChart').then(m => ({ default: m.EfficiencyChart })));
 import { categories } from './data/companies';
 import './App.css';
 

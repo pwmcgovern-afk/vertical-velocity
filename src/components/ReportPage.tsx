@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getReport, getLatestReport } from '../data/reports';
 import { companies, categories, getCompanySlug } from '../data/companies';
-import { formatARR, formatARRPerEmployee, getEfficiencyColor } from '../utils';
+import { formatARR, formatARRPerEmployee, getEfficiencyColor, updateMetaTag } from '../utils';
 
 export function ReportPage() {
   const { month } = useParams<{ month: string }>();
@@ -14,6 +14,7 @@ export function ReportPage() {
     window.scrollTo(0, 0);
     if (report) {
       document.title = `${report.title} Report | Vertical Velocity`;
+      updateMetaTag('description', `Monthly vertical AI market report: new companies, data updates, and sector analysis across ${report.totalCompanies}+ companies.`);
     }
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';

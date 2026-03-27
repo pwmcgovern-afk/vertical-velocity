@@ -6,7 +6,7 @@ import { companies, categories, getCompanySlug, type Company } from '../data/com
 import { CompanyLogo } from './CompanyLogo';
 import {
   formatARR, formatARRPerEmployee, formatValuation,
-  getEfficiencyColor, getRevenueMultiple, getFundingStage, getRank,
+  getEfficiencyColor, getRevenueMultiple, getFundingStage, getRank, updateMetaTag,
 } from '../utils';
 
 type MetricDef = {
@@ -156,9 +156,11 @@ export function ComparePage() {
   useEffect(() => {
     if (uniqueCompanies.length >= 2) {
       document.title = `${uniqueCompanies.map(c => c.name).join(' vs ')} | Vertical Velocity`;
+      updateMetaTag('description', `Compare ${uniqueCompanies.map(c => c.name).join(' vs ')} on ARR per employee, valuation, headcount, and more.`);
       track('compare_view', { companies: uniqueCompanies.map(c => c.name).join(',') });
     } else {
       document.title = 'Compare Companies | Vertical Velocity';
+      updateMetaTag('description', `Compare ${companies.filter(c => c.arr !== null).length}+ vertical AI companies side-by-side on ARR per employee, valuation, headcount, and more.`);
     }
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';

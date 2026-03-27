@@ -4,7 +4,7 @@ import { companies, categories } from '../data/companies';
 import { EfficiencyChart } from './EfficiencyChart';
 import {
   formatARR, formatARRPerEmployee, getEfficiencyColor,
-  getFundingStage,
+  getFundingStage, updateMetaTag,
 } from '../utils';
 
 export function SectorPage() {
@@ -12,14 +12,21 @@ export function SectorPage() {
   const navigate = useNavigate();
   const category = categories.find(c => c.id === categoryId);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [categoryId]);
-
   const sectorCompanies = useMemo(() =>
     companies.filter(c => c.category === categoryId && c.arr !== null),
     [categoryId]
   );
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (category) {
+      document.title = `Top ${category.name} AI Companies by Efficiency | Vertical Velocity`;
+      updateMetaTag('description', `${sectorCompanies.length} ${category.name.toLowerCase()} AI companies ranked by ARR per employee. See the full leaderboard.`);
+    }
+    return () => {
+      document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';
+    };
+  }, [categoryId, category, sectorCompanies.length]);
 
   const totalARR = useMemo(() =>
     sectorCompanies.reduce((sum, c) => sum + (c.arr || 0), 0),

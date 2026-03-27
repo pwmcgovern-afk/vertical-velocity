@@ -61,3 +61,15 @@ export function getLogoUrl(domain: string, size: number = 64): string {
 }
 
 export const DATA_LAST_UPDATED = '2026-03-23';
+
+export function updateMetaTag(property: string, content: string) {
+  let el = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
+  if (el) {
+    el.setAttribute('content', content);
+  } else {
+    el = document.createElement('meta');
+    el.setAttribute(property.startsWith('og:') || property.startsWith('twitter:') ? 'property' : 'name', property);
+    el.setAttribute('content', content);
+    document.head.appendChild(el);
+  }
+}

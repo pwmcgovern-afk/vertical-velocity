@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { companies } from '../data/companies';
-import { DATA_LAST_UPDATED } from '../utils';
+import { DATA_LAST_UPDATED, updateMetaTag } from '../utils';
 
 export function AboutPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'About & Methodology | Vertical Velocity';
+    updateMetaTag('description', `How Vertical Velocity ranks ${companiesWithARR}+ vertical AI companies by ARR per employee. Data sources, methodology, and update frequency.`);
     window.scrollTo(0, 0);
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';
