@@ -725,22 +725,24 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                     <option value="headcount">Headcount</option>
                     <option value="revenueMultiple">Rev Multiple</option>
                   </select>
-                  <button
-                    className={`filters-toggle-btn${showFilters || hasActiveFilters ? ' active' : ''}`}
-                    onClick={() => setShowFilters(prev => !prev)}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-                    </svg>
-                    Filters
-                    {hasActiveFilters && <span className="filters-active-dot" />}
-                  </button>
-                  {hasActiveFilters && (
-                    <button className="clear-filters-btn" onClick={clearAllFilters}>
-                      Clear
+                  <div className="filters-main-row-actions">
+                    <button
+                      className={`filters-toggle-btn${showFilters || hasActiveFilters ? ' active' : ''}`}
+                      onClick={() => setShowFilters(prev => !prev)}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                      </svg>
+                      Filters
+                      {hasActiveFilters && <span className="filters-active-dot" />}
                     </button>
-                  )}
-                  <span className="keyboard-hint" title="Press / to focus search">/</span>
+                    {hasActiveFilters && (
+                      <button className="clear-filters-btn" onClick={clearAllFilters}>
+                        Clear
+                      </button>
+                    )}
+                    <span className="keyboard-hint" title="Press / to focus search">/</span>
+                  </div>
                 </div>
                 {showFilters && (
                   <div className="filters-expanded">
