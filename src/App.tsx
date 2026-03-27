@@ -20,8 +20,17 @@ categories.forEach(c => {
   SEO_SLUG_MAP[slug] = c.id;
 });
 
+// Cross-cutting SEO slugs → homepage
+const HOMEPAGE_SEO_SLUGS = new Set([
+  'fastest-growing-vertical-ai-companies',
+  'vertical-ai-companies-by-revenue',
+  'vertical-ai-market-map',
+  'ai-companies-arr-per-employee',
+]);
+
 function SEORedirect() {
   const { slug } = useParams<{ slug: string }>();
+  if (slug && HOMEPAGE_SEO_SLUGS.has(slug)) return <Navigate to="/" replace />;
   const categoryId = slug ? SEO_SLUG_MAP[slug] : undefined;
   if (categoryId) return <Navigate to={`/vertical/${categoryId}`} replace />;
   return <Navigate to="/" replace />;

@@ -3,6 +3,12 @@ export interface Milestone {
   text: string;
 }
 
+export interface Trending {
+  direction: 'up' | 'down' | 'new';
+  previousArrPerEmployee?: number;
+  detail?: string;
+}
+
 export interface Company {
   name: string;
   domain: string;
@@ -22,6 +28,7 @@ export interface Company {
   milestones?: Milestone[];
   dateAdded?: string;
   verified?: boolean;
+  trending?: Trending;
 }
 
 export function getCompanySlug(name: string): string {
@@ -84,6 +91,7 @@ export const companies: Company[] = [
     arrPerEmployee: 1515,
     valuation: 12.0,
     lastFunding: '$250M Series D at $12B (Jan 2026)',
+    trending: { direction: 'up', previousArrPerEmployee: 1071, detail: 'ARR surged to $150M after $250M Series D' },
     source: 'TechCrunch, The Information, Tracxn',
     founded: 2022,
     founders: ['Daniel Nadler', 'Zack Ziegler'],
@@ -302,6 +310,7 @@ export const companies: Company[] = [
     arrPerEmployee: 227,
     valuation: 11.0,
     lastFunding: '$200M at $11B co-led by GIC & Sequoia (Mar 2026)',
+    trending: { direction: 'up', previousArrPerEmployee: 175, detail: 'ARR grew to $195M, new $200M round at $11B' },
     source: 'TechCrunch, CNBC, Bloomberg, Sacra, PitchBook',
     founded: 2022,
     founders: ['Winston Weinberg', 'Gabriel Pereyra'],
@@ -469,6 +478,7 @@ export const companies: Company[] = [
     arrPerEmployee: 75,
     valuation: 5.55,
     lastFunding: '$550M Series D at $5.55B (Mar 2026)',
+    trending: { direction: 'up', detail: 'Raised $550M Series D at $5.55B valuation' },
     source: 'TechCrunch',
     founded: 2023,
     founders: ['Kenji Yoshida'],
@@ -1000,6 +1010,7 @@ export const companies: Company[] = [
     arrPerEmployee: 85,
     valuation: 1.3,
     lastFunding: '$130M Series C (Jan 2026)',
+    trending: { direction: 'new', detail: 'Newly added — $130M Series C at $1.3B' },
     source: 'TechCrunch, Sacra, Deepgram Blog',
     founded: 2015,
     founders: ['Scott Stephenson', 'Noah Shutty', 'Adam Sypniewski'],
@@ -1300,6 +1311,7 @@ export const companies: Company[] = [
     arrPerEmployee: 227,
     valuation: 4.0,
     lastFunding: '$200M Series E (Jan 2026)',
+    trending: { direction: 'up', previousArrPerEmployee: 181, detail: 'ARR grew to $150M after $200M Series E' },
     source: 'Sifted, TechCrunch, Synthesia Blog',
     founded: 2017,
     founders: ['Victor Riparbelli', 'Steffen Tjerrild', 'Matthias Niessner', 'Lourdes Agapito'],
@@ -1450,6 +1462,7 @@ export const companies: Company[] = [
     arrPerEmployee: 448,
     valuation: 11.0,
     lastFunding: '$500M Series D (Feb 2026)',
+    trending: { direction: 'up', previousArrPerEmployee: 330, detail: 'ARR surged to $330M, raised $500M Series D' },
     source: 'TechCrunch, PitchBook, Tracxn',
     founded: 2022,
     founders: ['Piotr Dabkowski', 'Mati Staniszewski'],
@@ -1474,6 +1487,7 @@ export const companies: Company[] = [
     arrPerEmployee: 213,
     valuation: 5.3,
     lastFunding: '$315M Series E (Feb 2026)',
+    trending: { direction: 'up', previousArrPerEmployee: 167, detail: 'ARR grew to $90M, raised $315M Series E' },
     source: 'TechCrunch, Sacra, Tracxn',
     founded: 2018,
     founders: ['Cristóbal Valenzuela', 'Alejandro Matamala', 'Anastasis Germanidis'],

@@ -81,6 +81,7 @@ test.describe('Homepage', () => {
   });
 
   test('keyboard shortcut / focuses search', async ({ page }) => {
+    await page.locator('.filters-search').waitFor({ state: 'visible' });
     await page.keyboard.press('/');
     await expect(page.locator('.filters-search')).toBeFocused();
   });

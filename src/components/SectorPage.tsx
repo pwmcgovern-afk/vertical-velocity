@@ -1,5 +1,6 @@
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useMemo, useEffect } from 'react';
+import { track } from '@vercel/analytics';
 import { companies, categories } from '../data/companies';
 import { EfficiencyChart } from './EfficiencyChart';
 import {
@@ -174,6 +175,20 @@ export function SectorPage() {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="sector-newsletter">
+        <span className="cp-newsletter-title">Get {category.name} AI Updates</span>
+        <span className="cp-newsletter-subtitle">Monthly efficiency rankings and funding news for {category.name.toLowerCase()} AI companies.</span>
+        <a
+          href="https://capitalefficient.substack.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cp-newsletter-btn"
+          onClick={() => track('substack_cta', { context: 'sector', category: categoryId })}
+        >
+          Subscribe Free
+        </a>
       </div>
 
       <EfficiencyChart defaultCategory={categoryId} />

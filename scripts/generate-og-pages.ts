@@ -154,6 +154,43 @@ for (const cat of categories) {
 }
 console.log(`Generated ${categories.length} SEO landing pages`);
 
+// Generate cross-cutting SEO pages
+const seoPages = [
+  {
+    slug: 'fastest-growing-vertical-ai-companies',
+    title: `Fastest Growing Vertical AI Companies (${new Date().getFullYear()}) | Vertical Velocity`,
+    description: `Trending vertical AI companies with the biggest ARR growth. ${companies.filter(c => c.trending?.direction === 'up').map(c => c.name).slice(0, 5).join(', ')} and more.`,
+  },
+  {
+    slug: 'vertical-ai-companies-by-revenue',
+    title: `Vertical AI Companies Ranked by Revenue (${new Date().getFullYear()}) | Vertical Velocity`,
+    description: `${ranked.length}+ vertical AI companies ranked by ARR. From ${ranked[0]?.name} to early-stage startups. See revenue data across ${categories.length} sectors.`,
+  },
+  {
+    slug: 'vertical-ai-market-map',
+    title: `Vertical AI Market Map (${new Date().getFullYear()}) — ${categories.length} Sectors | Vertical Velocity`,
+    description: `Complete vertical AI market map across ${categories.length} sectors: ${categories.slice(0, 8).map(c => c.name).join(', ')}. ${ranked.length}+ companies with ARR and efficiency data.`,
+  },
+  {
+    slug: 'ai-companies-arr-per-employee',
+    title: `AI Companies Ranked by ARR per Employee (${new Date().getFullYear()}) | Vertical Velocity`,
+    description: `Which AI companies generate the most revenue per employee? ${ranked[0]?.name} leads at ${formatARRPerEmp(ranked[0]?.arrPerEmployee || 0)}/emp. See ${ranked.length}+ companies ranked.`,
+  },
+];
+
+for (const sp of seoPages) {
+  const html = replaceMeta(template, {
+    title: sp.title,
+    description: sp.description,
+    ogImage: 'https://verticalvelocity.co/og-image.jpg',
+    pageUrl: `https://verticalvelocity.co/${sp.slug}`,
+  });
+  const outDir = join(distDir, sp.slug);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+}
+console.log(`Generated ${seoPages.length} cross-cutting SEO pages`);
+
 // Generate calculator page
 {
   const html = replaceMeta(template, {
@@ -206,10 +243,53 @@ console.log(`Generated ${categories.length} SEO landing pages`);
     })),
   };
 
+  const topCompanyName = ranked[0]?.name || 'N/A';
+  const topArrPerEmpStr = formatARRPerEmp(ranked[0]?.arrPerEmployee || 0);
+  const trendingCompanies = companies.filter(c => c.trending).map(c => c.name);
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is the most efficient vertical AI company?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `${topCompanyName} leads with ${topArrPerEmpStr} ARR per employee. Vertical Velocity ranks ${ranked.length}+ vertical AI companies by capital efficiency.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is ARR per employee?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'ARR per employee divides a company\'s Annual Recurring Revenue by its total headcount. It\'s a measure of capital efficiency — how much revenue each employee generates. Higher values indicate leaner, more efficient companies.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Which vertical AI companies are trending right now?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Companies trending in ${new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}: ${trendingCompanies.join(', ')}. These companies recently raised significant funding or showed strong ARR growth.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How many vertical AI companies does Vertical Velocity track?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Vertical Velocity tracks ${ranked.length}+ vertical AI companies across ${categories.length} sectors including healthcare, legal, finance, defense, and more. Data is updated monthly.`,
+        },
+      },
+    ],
+  };
+
   const scriptTag = `<script type="application/ld+json">${JSON.stringify(itemListSchema)}</script>`;
-  homepage = homepage.replace('</head>', `${scriptTag}\n</head>`);
+  const faqTag = `<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`;
+  homepage = homepage.replace('</head>', `${scriptTag}\n${faqTag}\n</head>`);
   writeFileSync(homepagePath, homepage);
-  console.log('Injected JSON-LD into homepage');
+  console.log('Injected JSON-LD + FAQ schema into homepage');
 }
 
 // Inject JSON-LD Organization schema into company pages
@@ -307,6 +387,11 @@ console.log('Injected JSON-LD into category pages');
     if (!hasCo) continue;
     const slug = `best-${cat.name.toLowerCase().replace(/\s+/g, '-')}-ai-companies`;
     urls.push({ loc: `https://verticalvelocity.co/${slug}`, priority: '0.6', changefreq: 'monthly' });
+  }
+
+  // Cross-cutting SEO pages
+  for (const sp of seoPages) {
+    urls.push({ loc: `https://verticalvelocity.co/${sp.slug}`, priority: '0.7', changefreq: 'monthly' });
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

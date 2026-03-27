@@ -1207,6 +1207,70 @@ body::before {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Trending badges */
+.trending-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.trending-up {
+  color: var(--success);
+  background: var(--success-light);
+}
+
+.trending-down {
+  color: #ef4444;
+  background: #ef44441a;
+}
+
+.trending-new {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* Company page trending */
+.cp-trending {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  width: fit-content;
+  margin-bottom: 4px;
+}
+
+.cp-trending-up {
+  color: var(--success);
+  background: var(--success-light);
+}
+
+.cp-trending-down {
+  color: #ef4444;
+  background: #ef44441a;
+}
+
+.cp-trending-new {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.cp-trending-icon {
+  font-size: 11px;
+}
+
+.cp-trending-text {
+  font-size: 13px;
 }
 
 .company-card-category {
@@ -5134,6 +5198,51 @@ body::before {
   color: var(--success);
   font-size: 14px;
   margin: 0;
+}
+
+/* Company/Sector page newsletter CTA */
+.cp-newsletter, .sector-newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.cp-newsletter-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cp-newsletter-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 400px;
+}
+
+.cp-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  margin-top: 4px;
+}
+
+.cp-newsletter-btn:hover {
+  opacity: 0.9;
 }
 
 /* ============================================

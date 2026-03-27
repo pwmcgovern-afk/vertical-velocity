@@ -127,6 +127,19 @@ export function CompanyPage() {
               <h1>{company.name}</h1>
               <span className="cp-rank" style={{ color: efficiencyColor }}>#{rank}</span>
             </div>
+            {company.trending && (
+              <div className={`cp-trending cp-trending-${company.trending.direction}`}>
+                <span className="cp-trending-icon">
+                  {company.trending.direction === 'up' ? '▲' : company.trending.direction === 'down' ? '▼' : '★'}
+                </span>
+                <span className="cp-trending-text">
+                  {company.trending.direction === 'new' ? 'Newly Added' : company.trending.direction === 'up' ? 'Trending Up' : 'Trending Down'}
+                  {company.trending.previousArrPerEmployee != null && company.trending.direction === 'up' && (
+                    <> — was {formatARRPerEmployee(company.trending.previousArrPerEmployee)}/emp</>
+                  )}
+                </span>
+              </div>
+            )}
             <div className="cp-header-meta">
               <span className={`category-tag ${company.category}`}>{category?.name}</span>
               <span className="cp-hq">{company.headquarters}</span>
@@ -476,6 +489,20 @@ export function CompanyPage() {
               Are you the founder? Claim this page
             </button>
           )}
+        </div>
+
+        <div className="cp-newsletter">
+          <span className="cp-newsletter-title">Track Vertical AI Efficiency</span>
+          <span className="cp-newsletter-subtitle">Monthly rankings, biggest movers, and new companies — straight to your inbox.</span>
+          <a
+            href="https://capitalefficient.substack.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cp-newsletter-btn"
+            onClick={() => track('substack_cta', { context: 'company', slug: companySlug })}
+          >
+            Subscribe Free
+          </a>
         </div>
 
         <div className="cp-disclaimer">

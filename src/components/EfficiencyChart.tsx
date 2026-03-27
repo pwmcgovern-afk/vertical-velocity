@@ -933,7 +933,14 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                             <span className={`company-card-rank${index < 10 ? ' rank-badge' : ''}`}>{index + 1}</span>
                             <CompanyLogo domain={company.domain} name={company.name} color={barColor} className="company-logo" />
                             <div className="company-card-info">
-                              <span className="company-card-name">{company.name}</span>
+                              <span className="company-card-name">
+                                {company.name}
+                                {company.trending && (
+                                  <span className={`trending-badge trending-${company.trending.direction}`} title={company.trending.detail}>
+                                    {company.trending.direction === 'up' ? '▲' : company.trending.direction === 'down' ? '▼' : '★'}
+                                  </span>
+                                )}
+                              </span>
                               <span className="company-card-category">{categories.find(c => c.id === company.category)?.name}</span>
                             </div>
                           </div>
