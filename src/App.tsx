@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 const EfficiencyChart = lazy(() => import('./components/EfficiencyChart').then(m => ({ default: m.EfficiencyChart })));
+const AskAI = lazy(() => import('./components/AskAI'));
 import { categories } from './data/companies';
 import './App.css';
 
@@ -80,6 +81,9 @@ function App() {
       <div className="app">
         <Suspense fallback={<LoadingSpinner />}>
           <AnimatedRoutes />
+        </Suspense>
+        <Suspense fallback={null}>
+          <AskAI />
         </Suspense>
       </div>
     </BrowserRouter>
