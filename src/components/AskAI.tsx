@@ -79,10 +79,10 @@ function renderMarkdown(text: string) {
 }
 
 const SUGGESTED_QUESTIONS = [
-  'Which company has the highest ARR per employee?',
-  'Compare healthcare AI companies by revenue',
-  'What are the fastest-growing companies?',
-  'Which category has the most companies?',
+  'Which legal AI company has the best ARR/employee ratio?',
+  'Compare Ramp, Brex, and Navan on revenue efficiency',
+  'What does the construction AI landscape look like?',
+  'Which vertical has the highest average ARR per FTE?',
 ];
 
 export function AskAI() {
