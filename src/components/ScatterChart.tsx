@@ -248,7 +248,7 @@ export function ScatterChart({ selectedCategories, onCategoryChange }: ScatterCh
                   fillOpacity={isHovered ? 0.9 : 0.7}
                   stroke={isHovered ? company.color : 'transparent'}
                   strokeWidth={2}
-                  className="scatter-dot"
+                  className={`scatter-dot${isHovered ? ' scatter-dot-active' : ''}`}
                   filter={(company.arrPerEmployee || 0) >= 300 ? (isHovered ? 'url(#bubble-glow-strong)' : 'url(#bubble-glow)') : undefined}
                   onMouseEnter={() => handleMouseEnter(company, cx, cy)}
                   onMouseLeave={() => setHoveredCompany(null)}
@@ -260,7 +260,7 @@ export function ScatterChart({ selectedCategories, onCategoryChange }: ScatterCh
                       handleMouseEnter(company, cx, cy);
                     }
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', animationDelay: `${filteredCompanies.indexOf(company) * 15}ms` }}
                 />
                 {r > 14 && !isHovered ? (
                   <text

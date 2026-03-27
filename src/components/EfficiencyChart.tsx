@@ -10,6 +10,36 @@ import {
   getEfficiencyColor, getFundingStage, getRevenueMultiple, DATA_LAST_UPDATED,
 } from '../utils';
 
+function useAnimatedValue(targetValue: number, duration = 400): number {
+  const [displayValue, setDisplayValue] = useState(targetValue);
+  const prevValue = useRef(targetValue);
+
+  useEffect(() => {
+    if (prevValue.current === targetValue) return;
+    const startValue = prevValue.current;
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const current = Math.round(startValue + (targetValue - startValue) * eased);
+      setDisplayValue(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        prevValue.current = targetValue;
+      }
+    };
+
+    requestAnimationFrame(animate);
+    prevValue.current = targetValue;
+  }, [targetValue, duration]);
+
+  return displayValue;
+}
+
 function Tooltip({ text }: { text: string }) {
   return (
     <span className="info-tooltip">
@@ -68,7 +98,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('vv-dark-mode');
     if (saved !== null) return saved === 'true';
-    return true;
+    return false;
   });
   const [foundedFilter, setFoundedFilter] = useState<string>(() =>
     searchParams.get('founded') || 'all'
@@ -78,6 +108,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
   );
   const [compareList, setCompareList] = useState<string[]>([]);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+  const [showFilters, setShowFilters] = useState(false);
 
   // Auto-open submit modal from URL param
   useEffect(() => {
@@ -269,6 +300,10 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
     if (companiesWithARR.length === 0) return 0;
     return Math.round(companiesWithARR.reduce((sum, c) => sum + (c.arrPerEmployee || 0), 0) / companiesWithARR.length);
   }, [filteredCompanies]);
+
+  const animatedARR = useAnimatedValue(filteredARR);
+  const animatedCount = useAnimatedValue(filteredCompanies.length);
+  const animatedAvgARRPerEmp = useAnimatedValue(filteredAvgARRPerEmployee);
 
   // Top 10 companies by ARR/Employee for leaderboard (based on filtered companies)
   const topCompanies = useMemo(() => {
@@ -702,109 +737,121 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
                 ))}
               </div>
             </div>
-            <div className="location-buttons">
-              {LOCATION_OPTIONS.map(loc => (
-                <button
-                  key={loc.value}
-                  className={`category-btn location-btn ${locationFilter === loc.value ? 'active' : ''}`}
-                  onClick={() => setLocationFilter(loc.value)}
-                >
-                  <span className="category-btn-label">{loc.label}</span>
-                </button>
-              ))}
-            </div>
           </div>
 
-          {/* Stats Row - Filters, Stats, Top Performers all flush */}
+          {/* Market Pulse */}
+          <div className="section-label">MARKET PULSE</div>
           <div className="chart-stats">
             {/* Filters */}
             <div className="filters-box">
-              <div className="filters-box-header">
-                <span className="filters-title">Filters</span>
-                {hasActiveFilters && (
-                  <button className="clear-filters-btn" onClick={clearAllFilters}>
-                    Clear all
-                  </button>
-                )}
-                <span className="keyboard-hint" title="Press / to focus search">/</span>
-              </div>
               <div className="filters-box-content">
-                <input
-                  ref={searchRef}
-                  type="text"
-                  className="filters-search"
-                  placeholder="Search... (press /)"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <select
-                  className="filters-select"
-                  value={selectedCategories.length === categories.length ? 'all' : selectedCategories[0] || 'all'}
-                  onChange={(e) => {
-                    if (e.target.value === 'all') {
-                      setSelectedCategories(categories.map(c => c.id));
-                    } else {
-                      setSelectedCategories([e.target.value]);
-                    }
-                  }}
-                >
-                  <option value="all">All Sectors</option>
-                  {categories.map(cat => (
-                    <option key={cat.id} value={cat.id}>{cat.name}</option>
-                  ))}
-                </select>
-                <select
-                  className="filters-select"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as SortOption)}
-                >
-                  <option value="arrPerEmployee">ARR/Employee</option>
-                  <option value="arr">Total ARR</option>
-                  <option value="headcount">Headcount</option>
-                  <option value="revenueMultiple">Rev Multiple</option>
-                </select>
-                <div className="filters-row-extra">
+                <div className="filters-main-row">
+                  <input
+                    ref={searchRef}
+                    type="text"
+                    className="filters-search"
+                    placeholder="Search companies... (press /)"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                   <select
                     className="filters-select"
-                    value={foundedFilter}
-                    onChange={(e) => setFoundedFilter(e.target.value)}
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as SortOption)}
                   >
-                    <option value="all">All Years</option>
-                    <option value="2023">2023+</option>
-                    <option value="2020">2020+</option>
-                    <option value="2015">2015+</option>
-                    <option value="2010">2010+</option>
+                    <option value="arrPerEmployee">ARR/Employee</option>
+                    <option value="arr">Total ARR</option>
+                    <option value="headcount">Headcount</option>
+                    <option value="revenueMultiple">Rev Multiple</option>
                   </select>
-                  <select
-                    className="filters-select"
-                    value={stageFilter}
-                    onChange={(e) => setStageFilter(e.target.value as StageFilter)}
+                  <button
+                    className={`filters-toggle-btn${showFilters || hasActiveFilters ? ' active' : ''}`}
+                    onClick={() => setShowFilters(prev => !prev)}
                   >
-                    <option value="all">All Stages</option>
-                    <option value="Seed">Seed</option>
-                    <option value="Series A-B">Series A-B</option>
-                    <option value="Series C+">Series C+</option>
-                    <option value="Public">Public</option>
-                  </select>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                    </svg>
+                    Filters
+                    {hasActiveFilters && <span className="filters-active-dot" />}
+                  </button>
+                  {hasActiveFilters && (
+                    <button className="clear-filters-btn" onClick={clearAllFilters}>
+                      Clear
+                    </button>
+                  )}
+                  <span className="keyboard-hint" title="Press / to focus search">/</span>
                 </div>
+                {showFilters && (
+                  <div className="filters-expanded">
+                    <select
+                      className="filters-select"
+                      value={selectedCategories.length === categories.length ? 'all' : selectedCategories[0] || 'all'}
+                      onChange={(e) => {
+                        if (e.target.value === 'all') {
+                          setSelectedCategories(categories.map(c => c.id));
+                        } else {
+                          setSelectedCategories([e.target.value]);
+                        }
+                      }}
+                    >
+                      <option value="all">All Sectors</option>
+                      {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
+                    </select>
+                    <select
+                      className="filters-select"
+                      value={foundedFilter}
+                      onChange={(e) => setFoundedFilter(e.target.value)}
+                    >
+                      <option value="all">All Years</option>
+                      <option value="2023">2023+</option>
+                      <option value="2020">2020+</option>
+                      <option value="2015">2015+</option>
+                      <option value="2010">2010+</option>
+                    </select>
+                    <select
+                      className="filters-select"
+                      value={stageFilter}
+                      onChange={(e) => setStageFilter(e.target.value as StageFilter)}
+                    >
+                      <option value="all">All Stages</option>
+                      <option value="Seed">Seed</option>
+                      <option value="Series A-B">Series A-B</option>
+                      <option value="Series C+">Series C+</option>
+                      <option value="Public">Public</option>
+                    </select>
+                    <div className="location-buttons">
+                      {LOCATION_OPTIONS.map(loc => (
+                        <button
+                          key={loc.value}
+                          className={`category-btn location-btn ${locationFilter === loc.value ? 'active' : ''}`}
+                          onClick={() => setLocationFilter(loc.value)}
+                        >
+                          <span className="category-btn-label">{loc.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Stats */}
             <div className="stats-right">
               <div className="chart-stat">
-                <span className="chart-stat-value green">{formatARR(filteredARR)}</span>
+                <span className="chart-stat-value green">{formatARR(animatedARR)}</span>
                 <span className="chart-stat-label">
                   Total ARR
                   <Tooltip text="Annual Recurring Revenue - the yearly revenue from subscriptions" />
                 </span>
               </div>
               <div className="chart-stat">
-                <span className="chart-stat-value blue">{filteredCompanies.length}</span>
+                <span className="chart-stat-value blue">{animatedCount}</span>
                 <span className="chart-stat-label">Companies</span>
               </div>
               <div className="chart-stat">
-                <span className="chart-stat-value amber">{formatARRPerEmployee(filteredAvgARRPerEmployee)}</span>
+                <span className="chart-stat-value amber">{formatARRPerEmployee(animatedAvgARRPerEmp)}</span>
                 <span className="chart-stat-label">
                   Avg ARR/Emp
                   <Tooltip text="Average Annual Revenue per employee - a measure of company efficiency" />
@@ -856,6 +903,7 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
             </div>
           </div>
 
+          <div className="section-label">LEADERBOARD</div>
           <div className="chart-layout">
             {/* Main Content */}
             <div className="chart-main">
@@ -1077,23 +1125,25 @@ export function EfficiencyChart({ defaultView = 'ranking', defaultCategory }: { 
               </div>
 
               <footer className="chart-footer">
-                <div className="chart-footer-top">
+                <div className="chart-footer-row">
                   <span className="footer-count">{filteredCompanies.length} companies</span>
                   <div className="footer-legend">
                     <span className="legend-item"><span className="legend-dot" style={{ background: '#16a34a' }} /> $300K+</span>
-                    <span className="legend-item"><span className="legend-dot" style={{ background: '#ca8a04' }} /> $200-300K</span>
+                    <span className="legend-item"><span className="legend-dot" style={{ background: '#d97706' }} /> $200-300K</span>
                     <span className="legend-item"><span className="legend-dot" style={{ background: '#71717a' }} /> &lt;$200K</span>
+                  </div>
+                </div>
+                <div className="chart-footer-row">
+                  <div className="chart-footer-shortcuts">
+                    <span className="shortcut-hint"><kbd>/</kbd> Search</span>
+                    <span className="shortcut-hint"><kbd>↑↓</kbd> Navigate</span>
+                    <span className="shortcut-hint"><kbd>Enter</kbd> Expand</span>
+                    <span className="shortcut-hint"><kbd>o</kbd> Open Profile</span>
+                    <span className="shortcut-hint"><kbd>Esc</kbd> Close</span>
                   </div>
                   <span className="footer-attribution">logos by <a href="https://logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a></span>
                 </div>
-                <span>Disclaimer: Revenue figures sourced from public mentions in tech press (TechCrunch, Forbes, Bloomberg, etc.), research firms (Sacra, CB Insights), SEC filings, and press releases. Headcount cross-referenced against LinkedIn and media reports. Companies where we couldn't find sufficient data to calculate ARR/FTE were not included. These numbers are for illustrative purposes only—treat them as directional estimates, not audited financials. To update company data, use the Submit Company button above.</span>
-                <div className="chart-footer-shortcuts">
-                  <span className="shortcut-hint"><kbd>/</kbd> Search</span>
-                  <span className="shortcut-hint"><kbd>↑↓</kbd> Navigate</span>
-                  <span className="shortcut-hint"><kbd>Enter</kbd> Expand</span>
-                  <span className="shortcut-hint"><kbd>o</kbd> Open Profile</span>
-                  <span className="shortcut-hint"><kbd>Esc</kbd> Close</span>
-                </div>
+                <p className="chart-footer-disclaimer">Revenue figures sourced from public mentions in tech press (TechCrunch, Forbes, Bloomberg, etc.), research firms (Sacra, CB Insights), SEC filings, and press releases. Headcount cross-referenced against LinkedIn and media reports. These numbers are for illustrative purposes only — treat them as directional estimates, not audited financials.</p>
               </footer>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { EfficiencyChart } from './components/EfficiencyChart';
 import { categories } from './data/companies';
 import './App.css';
@@ -34,25 +35,42 @@ function LoadingSpinner() {
   );
 }
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.15 }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<EfficiencyChart />} />
+          <Route path="/charts" element={<EfficiencyChart defaultView="scatter" />} />
+          <Route path="/company/:slug" element={<CompanyPage />} />
+          <Route path="/compare/:slugs" element={<ComparePage />} />
+          <Route path="/card/:slug" element={<CardPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/calculator" element={<CalculatorPage />} />
+          <Route path="/report" element={<ReportPage />} />
+          <Route path="/report/:month" element={<ReportPage />} />
+          <Route path="/vertical/:categoryId" element={<SectorPage />} />
+          <Route path="/:slug" element={<SEORedirect />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
       <div className="app">
         <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={<EfficiencyChart />} />
-            <Route path="/charts" element={<EfficiencyChart defaultView="scatter" />} />
-            <Route path="/company/:slug" element={<CompanyPage />} />
-            <Route path="/compare/:slugs" element={<ComparePage />} />
-            <Route path="/card/:slug" element={<CardPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/calculator" element={<CalculatorPage />} />
-            <Route path="/report" element={<ReportPage />} />
-            <Route path="/report/:month" element={<ReportPage />} />
-            <Route path="/vertical/:categoryId" element={<SectorPage />} />
-            <Route path="/:slug" element={<SEORedirect />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <AnimatedRoutes />
         </Suspense>
       </div>
     </BrowserRouter>

@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import { companies, categories } from '../data/companies';
 import { formatARRPerEmployee, getEfficiencyColor } from '../utils';
@@ -120,7 +121,12 @@ export function CalculatorPage() {
         </div>
 
         {calculated && arrPerEmp > 0 && (
-          <div className="calc-results">
+          <motion.div
+            className="calc-results"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
             <div className="calc-hero" style={{ borderColor: effColor }}>
               <span className="calc-hero-value" style={{ color: effColor }}>
                 {formatARRPerEmployee(arrPerEmp)}
@@ -193,7 +199,7 @@ export function CalculatorPage() {
                 Submit Your Company
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import { companies, categories } from '../data/companies';
 import { useState, useEffect } from 'react';
@@ -147,32 +148,43 @@ export function CompanyPage() {
         </div>
 
         <div className="cp-metrics">
-          <div className="cp-metric hero" style={{ borderColor: efficiencyColor }}>
-            <span className="cp-metric-value" style={{ color: efficiencyColor }}>
-              {formatARRPerEmployee(company.arrPerEmployee || 0)}
-            </span>
-            <span className="cp-metric-label">ARR / Employee</span>
-          </div>
-          <div className="cp-metric">
-            <span className="cp-metric-value">{company.arr ? formatARR(company.arr) : '—'}</span>
-            <span className="cp-metric-label">Total ARR</span>
-          </div>
-          <div className="cp-metric">
-            <span className="cp-metric-value">{company.headcount.toLocaleString()}</span>
-            <span className="cp-metric-label">Employees</span>
-          </div>
-          <div className="cp-metric">
-            <span className="cp-metric-value">{company.valuation ? formatValuation(company.valuation) : '—'}</span>
-            <span className="cp-metric-label">Valuation</span>
-          </div>
-          <div className="cp-metric">
-            <span className="cp-metric-value">{getRevenueMultiple(company) || '—'}</span>
-            <span className="cp-metric-label">Rev Multiple</span>
-          </div>
-          <div className="cp-metric">
-            <span className="cp-metric-value">{getFundingStage(company.lastFunding)}</span>
-            <span className="cp-metric-label">Stage</span>
-          </div>
+          {[
+            <div key="hero" className="cp-metric hero" style={{ borderColor: efficiencyColor }}>
+              <span className="cp-metric-value" style={{ color: efficiencyColor }}>
+                {formatARRPerEmployee(company.arrPerEmployee || 0)}
+              </span>
+              <span className="cp-metric-label">ARR / Employee</span>
+            </div>,
+            <div key="arr" className="cp-metric">
+              <span className="cp-metric-value">{company.arr ? formatARR(company.arr) : '—'}</span>
+              <span className="cp-metric-label">Total ARR</span>
+            </div>,
+            <div key="hc" className="cp-metric">
+              <span className="cp-metric-value">{company.headcount.toLocaleString()}</span>
+              <span className="cp-metric-label">Employees</span>
+            </div>,
+            <div key="val" className="cp-metric">
+              <span className="cp-metric-value">{company.valuation ? formatValuation(company.valuation) : '—'}</span>
+              <span className="cp-metric-label">Valuation</span>
+            </div>,
+            <div key="rev" className="cp-metric">
+              <span className="cp-metric-value">{getRevenueMultiple(company) || '—'}</span>
+              <span className="cp-metric-label">Rev Multiple</span>
+            </div>,
+            <div key="stage" className="cp-metric">
+              <span className="cp-metric-value">{getFundingStage(company.lastFunding)}</span>
+              <span className="cp-metric-label">Stage</span>
+            </div>,
+          ].map((el, i) => (
+            <motion.div
+              key={el.key}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04, duration: 0.25 }}
+            >
+              {el}
+            </motion.div>
+          ))}
         </div>
 
         {/* Collapsible ShareCard */}
