@@ -112,6 +112,65 @@ console.log(`Generated vertical pages for ${categories.length} categories`);
   console.log('Generated compare page');
 }
 
+// Generate pre-built comparison pages
+const comparisons: { slugs: string; names: [string, string]; desc: string }[] = [];
+
+// Top matchup per vertical (1 vs 2 in each category with 3+ companies)
+for (const cat of categories) {
+  const catCompanies = ranked.filter(c => c.category === cat.id);
+  if (catCompanies.length < 2) continue;
+  const [a, b] = catCompanies;
+  const slugA = getCompanySlug(a.name);
+  const slugB = getCompanySlug(b.name);
+  comparisons.push({
+    slugs: `${slugA}-vs-${slugB}`,
+    names: [a.name, b.name],
+    desc: `${cat.name} AI`,
+  });
+}
+
+// Cross-vertical headline matchups
+const crossMatches: [string, string][] = [
+  ['Palantir', 'Anduril'],
+  ['Harvey', 'Clio'],
+  ['Ramp', 'Navan'],
+  ['ElevenLabs', 'Synthesia'],
+  ['Gong', 'Clari'],
+];
+for (const [nameA, nameB] of crossMatches) {
+  const a = companies.find(c => c.name === nameA);
+  const b = companies.find(c => c.name === nameB);
+  if (!a || !b || a.arr === null || b.arr === null) continue;
+  const slugA = getCompanySlug(a.name);
+  const slugB = getCompanySlug(b.name);
+  const key = `${slugA}-vs-${slugB}`;
+  if (comparisons.some(c => c.slugs === key)) continue;
+  comparisons.push({
+    slugs: key,
+    names: [a.name, b.name],
+    desc: 'vertical AI',
+  });
+}
+
+for (const cmp of comparisons) {
+  const [a, b] = cmp.names;
+  const compA = companies.find(c => c.name === a)!;
+  const compB = companies.find(c => c.name === b)!;
+  const arrA = formatARRPerEmp(compA.arrPerEmployee || 0);
+  const arrB = formatARRPerEmp(compB.arrPerEmployee || 0);
+
+  const html = replaceMeta(template, {
+    title: `${a} vs ${b} — ARR per Employee Comparison | Vertical Velocity`,
+    description: `${a} (${arrA}/emp) vs ${b} (${arrB}/emp). Compare ${cmp.desc} companies on efficiency, revenue, headcount, and valuation.`,
+    ogImage: 'https://verticalvelocity.co/og-image.jpg',
+    pageUrl: `https://verticalvelocity.co/compare/${cmp.slugs}`,
+  });
+  const outDir = join(distDir, 'compare', cmp.slugs);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), html);
+}
+console.log(`Generated ${comparisons.length} pre-built comparison pages`);
+
 // Generate card pages for each company
 for (const company of companies) {
   if (company.arr === null) continue;
@@ -392,6 +451,11 @@ console.log('Injected JSON-LD into category pages');
   // Cross-cutting SEO pages
   for (const sp of seoPages) {
     urls.push({ loc: `https://verticalvelocity.co/${sp.slug}`, priority: '0.7', changefreq: 'monthly' });
+  }
+
+  // Pre-built comparison pages
+  for (const cmp of comparisons) {
+    urls.push({ loc: `https://verticalvelocity.co/compare/${cmp.slugs}`, priority: '0.6', changefreq: 'monthly' });
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

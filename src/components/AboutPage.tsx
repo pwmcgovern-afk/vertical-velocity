@@ -53,7 +53,7 @@ export function AboutPage() {
           </p>
           <p className="cp-box-text" style={{ marginTop: '12px' }}>
             <a href="https://capitalefficient.substack.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>Substack</a> &middot;{' '}
-            <a href="mailto:patrick.mcgovern@bowerycap.com" style={{ color: 'var(--accent)' }}>patrick.mcgovern@bowerycap.com</a> &middot;{' '}
+            <a href="mailto:pwmcgovern@gmail.com" style={{ color: 'var(--accent)' }}>pwmcgovern@gmail.com</a> &middot;{' '}
             <a href="https://twitter.com/pw_mcgovern" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>@pw_mcgovern</a>
           </p>
         </div>
