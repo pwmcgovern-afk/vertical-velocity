@@ -11,6 +11,13 @@ export function CalculatorPage() {
   const [headcount, setHeadcount] = useState('');
   const [calculated, setCalculated] = useState(false);
 
+  const ranked = useMemo(() =>
+    [...companies]
+      .filter(c => c.arr !== null)
+      .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0)),
+    []
+  );
+
   useEffect(() => {
     document.title = 'Efficiency Calculator | Vertical Velocity';
     updateMetaTag('description', `See how your company ranks against ${ranked.length}+ vertical AI companies. Enter your ARR and headcount to calculate your efficiency score.`);
@@ -18,19 +25,12 @@ export function CalculatorPage() {
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';
     };
-  }, []);
+  }, [ranked.length]);
 
   const arrNum = Math.max(0, parseFloat(arr) || 0);
   const hcNum = Math.max(0, parseInt(headcount) || 0);
   const arrPerEmp = hcNum > 0 && arrNum > 0 ? Math.round((arrNum * 1000000) / hcNum / 1000) : 0;
   const effColor = getEfficiencyColor(arrPerEmp);
-
-  const ranked = useMemo(() =>
-    [...companies]
-      .filter(c => c.arr !== null)
-      .sort((a, b) => (b.arrPerEmployee || 0) - (a.arrPerEmployee || 0)),
-    []
-  );
 
   const rank = useMemo(() => {
     if (arrPerEmp <= 0) return 0;

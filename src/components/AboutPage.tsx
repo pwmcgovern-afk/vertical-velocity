@@ -6,6 +6,8 @@ import { DATA_LAST_UPDATED, updateMetaTag } from '../utils';
 export function AboutPage() {
   const navigate = useNavigate();
 
+  const companiesWithARR = companies.filter(c => c.arr !== null).length;
+
   useEffect(() => {
     document.title = 'About & Methodology | Vertical Velocity';
     updateMetaTag('description', `How Vertical Velocity ranks ${companiesWithARR}+ vertical AI companies by ARR per employee. Data sources, methodology, and update frequency.`);
@@ -13,9 +15,7 @@ export function AboutPage() {
     return () => {
       document.title = 'Vertical Velocity | ARR per Employee Rankings for Vertical AI';
     };
-  }, []);
-
-  const companiesWithARR = companies.filter(c => c.arr !== null).length;
+  }, [companiesWithARR]);
 
   return (
     <div className="company-page">

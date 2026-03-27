@@ -229,10 +229,12 @@ export function ComparePage() {
                 </button>
                 <button
                   className="cp-share-btn"
-                  onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 2000);
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(window.location.href);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    } catch { /* clipboard not available */ }
                   }}
                 >
                   {copied ? (
@@ -336,7 +338,7 @@ export function ComparePage() {
                     >
                       <img
                         src={`https://img.logo.dev/${c.domain}?token=pk_Iw_EUyO3SUuLmOI4_D_2_Q&format=png&size=40`}
-                        alt=""
+                        alt={c.name}
                         className="cmp-suggestion-logo"
                         onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                       />

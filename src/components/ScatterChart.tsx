@@ -303,7 +303,7 @@ export function ScatterChart({ selectedCategories, onCategoryChange }: ScatterCh
             <div className="scatter-tooltip-name">{hoveredCompany.name}</div>
             <div className="scatter-tooltip-row">
               <span>ARR/Emp:</span>
-              <span style={{ color: '#22c55e' }}>{formatARRPerEmployee(hoveredCompany.arrPerEmployee || 0)}</span>
+              <span style={{ color: 'var(--success)' }}>{formatARRPerEmployee(hoveredCompany.arrPerEmployee || 0)}</span>
             </div>
             <div className="scatter-tooltip-row">
               <span>ARR:</span>
